@@ -1,5 +1,4 @@
 # tripy
-<br>
 # 팀원 
 2016184005 김의진 rabbit234@naver.com 010-2923-2754<br>
 2017184014 박재홍 justin705@naver.com 010-8835-2987<br>
