@@ -16,5 +16,5 @@ update 예정
 ----------------------
 using by node.js express, mySQL, amazon AWS
 
-http://13.124.191.215:3000/ (21.10.01)
+http://3.34.53.226:3000/ (21.10.14)
  
