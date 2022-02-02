@@ -1,0 +1,25 @@
+1. SQL문 실행. 참고: https://nect2r.tistory.com/47 
+
+2. tripy폴더를 visual studio code로 열기(tripy 폴더 더블클릭하여 하위로 진입하지 말고, tripy폴더만 선택해야 전체 불러옴)
+
+3.package.json
+
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "build" : "cross-env PASSWORD=yourpassword nodemon ./bin/www"
+  },
+qnqns 7번라인에
+    "build" : "cross-env PASSWORD=yourpassword nodemon ./bin/www" 중
+
+PASSWORD=yourpassword 이부분을 자신의 데이터 베이스 비밀번호로 입력후 저장 (Ctrl + s)
+
+4. 터미널 열기 VSCODE 상단에 터미널 실행 - 새터미널
+
+npm run-script build
+입력후
+브라우저에서 http://localhost:3000/ 입력 후 테스트
+
+phaser 관련 폴더는 
+서버 - > routes/phaser.js
+프론트 -> public/phasergame/
+뷰 => views/phaser4thWeek.ejs
