@@ -1,0 +1,226 @@
+/*커버 관련*/
+
+.site-blocks-cover, .site-blocks-cover .row {
+    min-height: 200px;
+    height: calc(50vh);
+    background-position: 50% 0px!important;
+}
+
+.full-cover {
+    min-height: 200px;
+    height: calc(100vh)!important;
+    background-position: 50% 0px!important;
+}
+
+
+.ico {
+    min-height: 200px;
+    height: calc(10vh)!important;
+    background-position: 50% 0px!important;
+}
+
+.cover-h5 {
+    color: white;
+}
+
+
+.ico-a {
+    color: white;
+}
+
+/*커버 프로필 이미지*/
+
+img#profileImage {
+    max-width: 100px;
+    margin-bottom: 1rem;
+    margin-top: 8rem;
+}
+
+h1#title_subject {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+/*커버 일정 등록 버튼 */
+
+a#register_button {
+    background: #34558b;
+    border: #34558b;
+    border-radius: 5rem;
+    padding: 1.5rem!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+    font-weight: 600;
+}
+
+
+
+/*게시판 padding 관련 작업*/
+/*
+div#post {
+    padding-right: 0px;
+}*/
+
+div#boardNameDiv {
+    width: 100%;
+}
+
+a#moreboardText {
+    float: right;
+    font-size: 0.8rem;
+    color: hsla(0, 0%, 0%, 0.51);
+}
+
+div#form-board {
+    width: 100%;
+}
+
+div#boardForm {
+    padding-right: 0px;
+}
+
+div.boardForm {
+    padding-right: 0px;
+}
+
+
+
+/* 보드 관련 CSS */
+a.boardText {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+span#nowBoardDate {
+    background: #4ec5a5;
+    border: #4ec5a5;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span#nextBoardDate {
+    background: #34558b;
+    border: #34558b;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span#prevBoardDate {
+    background: #3b3d4b;
+    border: #3b3d4b;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+hr.lineEvent {
+    border-top: 1px solid #0000012e;
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+}
+
+span#boardHidden {
+    color: white;
+}
+
+span#boardTitle {
+    font-weight: 600;
+}
+
+span#boardArea {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #34558b;
+}
+
+span#boardCategory1 {
+    float: right;
+    color: #117893;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+span#boardCategory2 {
+    float: right;
+    color: #d13b40 ;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+span#boardCategory3 {
+    float: right;
+    color: #4ec5a5 ;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+span#boardCategory4 {
+    float: right;
+    color: #565d47 ;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+span#boardCategory5 {
+    float: right;
+    color: #fd823e ;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+span#boardCategory6 {
+    float: right;
+    color: #72617d ;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* 캘린더 */
+
+span#index-calendar {
+    font-size: 4rem;
+    color: #798fa8;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+a#calendarText {
+    font-size: 1rem;
+    color: #798fa8;
+    font-weight: 300;
+}
+
+a.boardText {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+div#title_img {
+    background: #798fa8;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+div.ajaxboardForm {
+    width: 100%;
+}

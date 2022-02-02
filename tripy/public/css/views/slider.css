@@ -1,0 +1,45 @@
+span.ui-slider-handle.ui-corner-all.ui-state-default {
+    border-radius: 30px;
+    background: #34558b;
+}
+.ui-slider-range.ui-corner-all {
+    background: rgba(0,123,255,.25);
+}
+
+div#slider-range {
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+}
+
+div#custom-handle {
+    border-radius: 30px;
+    background: #34558b;
+    color: white;
+    width: 3rem;
+    height: 1.8rem;
+    text-align: center;
+    font-size: 0.9rem;
+    top: -.6rem;
+    font-weight: 100;
+    border: 2px solid #324667;
+}
+
+div#custom-handle2 {
+    border-radius: 30px;
+    background: #34558b;
+    color: white;
+    width: 3rem;
+    height: 1.8rem;
+    text-align: center;
+    font-size: 0.9rem;
+    top: -.6rem;
+    font-weight: 100;
+    border: 2px solid #324667;
+}
+
+div#ageDiv {
+    padding-right: 50px;
+    padding-left: 20px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}

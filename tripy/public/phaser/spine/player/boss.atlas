@@ -1,0 +1,48 @@
+
+boss.png
+size: 269,214
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 2, 11
+  size: 201, 200
+  orig: 201, 201
+  offset: 0, 1
+  index: -1
+leftEye
+  rotate: false
+  xy: 204, 15
+  size: 39, 44
+  orig: 39, 44
+  offset: 0, 0
+  index: -1
+mouth
+  rotate: true
+  xy: 204, 61
+  size: 44, 63
+  orig: 44, 63
+  offset: 0, 0
+  index: -1
+rightEye
+  rotate: false
+  xy: 204, 107
+  size: 58, 50
+  orig: 58, 50
+  offset: 0, 0
+  index: -1
+shit
+  rotate: false
+  xy: 245, 2
+  size: 22, 57
+  orig: 22, 57
+  offset: 0, 0
+  index: -1
+symbol
+  rotate: false
+  xy: 204, 159
+  size: 59, 53
+  orig: 59, 53
+  offset: 0, 0
+  index: -1

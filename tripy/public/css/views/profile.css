@@ -1,0 +1,79 @@
+img#profileImage {
+    max-width: 100px;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+}
+
+div#nowtext {
+    margin-top: 0.5rem;
+    padding-top: 3rem;
+}
+
+img.profileImage {
+    max-width: 100px;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+}
+
+label#femaleBtn.active, label#femaleBtn:active{
+    color: #fff;
+    background-color: #eaac9d;
+    border-color: #eaac9d;
+}
+
+label#maleBtn {
+    padding: 1.5rem;
+}
+
+label#femaleBtn {
+    padding: 1.5rem;
+}
+
+a#birthdayCetion {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input.birthdayinput {
+    border: 1px solid #e4e4e4;
+    height: 44px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.birthdayYearDiv {
+    padding-right: 0px;
+    padding-left: 15px;
+}
+
+.birthdayMonthDiv {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.birthdayDayDiv {
+    padding-right: 15px;
+    padding-left: 0px;
+}
+
+input#nameText {
+    font-size: 1.4rem;
+}
+
+hr.nameTextHr {
+    margin-top: 0rem;
+    margin-bottom: 3rem;
+}
+
+a#update-button {
+    color: white;
+    background: #34558b;
+    border: #34558b;
+    float: right;
+}
+
+.headCountInputDiv {
+    padding-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+}

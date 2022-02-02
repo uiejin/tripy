@@ -1,0 +1,429 @@
+/* 처음 커버 화면 관련 CSS */
+.site-blocks-cover, .site-blocks-cover .row {
+    min-height: 600px!important;
+    height: calc(100vh)!important;background-position: 50% 0px!important
+}
+
+div#map_canvas {
+    position: inherit!important;
+}
+
+h1#title_subject {
+    font-size: 1.4rem;
+    padding-bottom: 6rem;
+    display: none;
+}
+
+
+#title_content {
+    font-size: 1.1rem;
+    padding-top:  2rem;
+}
+.title_subject_typing {  
+    /*position: absolute;*/ 
+      display: inline-block; 
+      animation-name: cursor; 
+      animation-duration: 0.3s; 
+      animation-iteration-count: infinite; 
+     } 
+     @keyframes cursor{ 
+      0%{border-right: 1px solid #fff} 
+      50%{border-right: 1px solid #000} 
+      100%{border-right: 1px solid #fff} 
+    }
+
+p#footer_content {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+a#register_button {
+    background: #34558b;
+    border: #34558b;
+    border-radius: 5rem;
+    padding: 1.5rem!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+    font-weight: 600;
+}
+
+a#login_button {
+    margin-left: 1rem;
+    color: white;
+}
+
+a#introduce_button {
+    background: #34558b;
+    border: #34558b;
+    color: white;
+    border-radius: 5rem;
+    padding: 1.5rem!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+    font-weight: 600;
+    margin-top: 5rem;
+}
+
+/*게시판 padding 관련 작업*/
+
+div#boardNameDiv {
+    width: 100%;
+}
+
+div#post {
+    padding-right: 0px;
+    width: 100%;
+}
+div.post {
+    padding-right: 0px;
+    width: 100%;
+}
+
+a#moreboardText {
+    float: right;
+    font-size: 0.8rem;
+    color: hsla(0, 0%, 0%, 0.51);
+}
+
+div#form-board {
+    width: 100%;
+}
+
+div#boardForm {
+    padding-right: 0px;
+}
+
+div.form-board {
+    width: 100%;
+}
+
+div.boardForm {
+    padding-right: 0px;
+}
+
+
+/* 보드 관련 CSS */
+a#boardText {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+span#boardHeadCount {
+    float: right;
+}
+
+span#boardDate {
+    background: #a09d9c;
+    border: #a09d9c;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+hr.lineEvent {
+    border-top: 1px solid #0000012e;
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+}
+
+span#boardTitle {
+    font-weight: 300;
+}
+
+span#boardHeadCount {
+    color: #444444;
+    font-size: 0.8rem;
+}
+
+span#boardWriter {
+    color: #444444;
+    font-size: 0.8rem;
+}
+
+/* 카테고리 관련 작업 가로 스크롤 */
+
+div#cateContainer {
+    padding-right: 0px;
+    margin-top: 4rem;
+}
+
+div#categoryForm {
+    margin-top: 5rem;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+div#form-category {
+    white-space: nowrap;
+    overflow-x: auto;
+    /* text-align: center; */
+    display: inline-block;
+    padding-right: 0px;
+    width: -webkit-fill-available;
+}
+
+div#cateSectionFirst {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+div#cateSectionEnd {
+    display: inline-block;
+    width: 15px;
+    height: 150px;
+    float: none;
+    margin-left: 15px;
+    vertical-align: top;
+}
+
+div#cateSection {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+
+button#cateBtn {
+    width: 100%;
+    height: 100%;
+    background: #798fa8;
+    border-color: #798fa8;
+    font-weight: 600;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px;
+}
+
+/* class category */
+div.cateContainer {
+    padding-right: 0px;
+    margin-top: 4rem;
+}
+
+div.categoryForm {
+    margin-top: 5rem;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+div.form-category {
+    white-space: nowrap;
+    overflow-x: auto;
+    /* text-align: center; */
+    display: inline-block;
+    padding-right: 0px;
+    width: -webkit-fill-available;
+}
+
+div.cateSectionFirst {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+div.cateSectionEnd {
+    display: inline-block;
+    width: 15px;
+    height: 150px;
+    float: none;
+    margin-left: 15px;
+    vertical-align: top;
+}
+
+div.cateSection {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+
+button.cateBtn {
+    width: 100%;
+    height: 100%;
+    background: #798fa8;
+    border-color: #798fa8;
+    font-weight: 600;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px;
+}
+
+/* 캘린더 관련 CSS */
+
+span#index-calendar {
+    font-size: 4rem;
+    color: #798fa8;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+a#calendarText {
+    font-size: 1rem;
+    color: #798fa8;
+    font-weight: 300;
+}
+
+/* 로케이션 관련 작업 가로 스크롤 */
+
+div#locationContainer {
+    padding-right: 0px;
+}
+
+div#locationForm {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+div#form-location {
+    white-space: nowrap;
+    overflow-x: auto;
+    /* text-align: center; */
+    display: inline-block;
+    padding-right: 0px;
+    width: -webkit-fill-available;
+}
+
+div#locationSectionFirst {
+    display: inline-block;
+    width: 80%;
+    height: 150px;
+    float: none;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+div#locationSectionEnd {
+    display: inline-block;
+    width: 15px;
+    height: 150px;
+    float: none;
+    margin-left: 15px;
+    vertical-align: top;
+}
+
+div#locationSection {
+    display: inline-block;
+    width: 80%;
+    height: 150px;
+    float: none;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+
+button#locationBtn {
+    width: 100%;
+    height: 100%;
+    background: #798fa8;
+    border-color: #798fa8;
+    font-weight: 600;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px;
+}
+
+div#locationSection2 {
+    padding-right: 0px;
+}
+
+div#form-location2 {
+    padding-right: 15px;
+}
+
+div#locationSection2 {
+    padding-right: 0px;
+    margin-bottom: 10px;
+}
+
+div#locationSection2 {
+    padding-right: 0px;
+    margin-bottom: 10px;
+    height: 80px;
+}
+
+a#locationText {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-left: 15px;
+}
+
+a#locationText2 {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+a#logo-a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+/* 프로필 관련 */
+img#profileImage {
+    width: 100%;
+    max-width: 100px;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+}
+
+div#profileDiv {
+    padding-right: 5px;
+}
+
+span#profileAge {
+    float: right;
+    font-size: 0.8rem;
+}
+
+div#profileDiv2 {
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+span#tagDate {
+    background: #117893;
+    border: #117893;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    /* float: right; */
+    font-size: 0.6rem;
+    /* margin-top: 0.3rem; */
+    width: 100%;
+}
+
+a#tagDiv {
+    max-width: 33%;
+    padding-right: 5px;
+    padding-left: 0px;
+}
+
+a#tagDivStart {
+    max-width: 33%;
+    padding-left: 15px;
+    padding-right: 5px;
+}

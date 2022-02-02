@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <% include ./css/default %> 
+  <link rel="stylesheet" href="/css/views/myplan.css">
+
+
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+    <% include ./head/cover %>
+
+
+<!--커버에 들어갈 버튼 및 텍스트  -->
+
+  <div class="site-blocks-cover overlay" id="title_img" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-12 text-center" data-aos="fade">
+          <img src="" class="rounded-circle" id="profileImage">
+          <h1 class="mb-4" id="title_subject"><%=nameText%></h1>
+          <p class="regular-font-size">
+            <a id="register_button" class="btn btn-primary px-4 py-3 text-uppercase" href="/mytour/registermytour"><%=registerButton%></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--모임글  -->
+<div class="site-section col-md-12" id="nowtext">
+  <div class="container" id=boardForm>
+    <div class="row col-md-12" id="post">
+      <div>
+        <a class="text-uppercase boardText"><%=nowBoard%></a>
+      </div>
+
+
+<!--게시판 커스텀 -->
+      <div class= "ajaxboardForm" id="nowForm">
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!--모임글  -->
+<div class="site-section col-md-12" id="nexttext">
+  <div class="container" id=boardForm>
+    <div class="row col-md-12" id="post">
+      <div>
+        <a class="text-uppercase boardText"><%=nextBoard%></a>
+      </div>
+
+
+<!--게시판 커스텀 -->
+    <div class= "ajaxboardForm" id="nextForm">
+    </div>
+    </div>
+  </div>
+  </div>  
+
+<!--모임글  -->
+  <div class="site-section col-md-12" id="prevtext">
+    <div class="container" id=boardForm>
+      <div class="row col-md-12" id="post">
+        <div>
+          <a class="text-uppercase boardText"><%=prevBoard%></a>
+        </div>
+
+
+<!--게시판 커스텀 -->
+      <div class= "ajaxboardForm" id="prevForm">
+      </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+          <span class="icon-calendar d-block" id="index-calendar"></span>
+          <a id="calendarText"><%=calendarText%></a>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="s_id" data-prodnumber="${sessionScope.id}" />
+    <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+  
+  </div>
+
+
+</body>
+
+<% include ./script/default %>
+
+<script type="text/javascript">   
+  $(document).ready( function() {
+  
+    var loginStatus  = "<%=loginStatus %>";
+    var userId = "<%=userId%>";
+
+    if(loginStatus  == "true"){
+
+      $("#navProfileName").text("<%=username%>");
+      $("#profileImageNav").attr("src", "<%=userImg%>");
+      }else{
+      $("#nav").load("/html/nav_nologin.html");
+      /*  var loginMessage = "<%=loginMessage%>";
+      alert(loginMessage);
+      history.back();
+    */}
+
+    $("#nowtext").hide();$("#prevtext").hide();$("#nexttext").hide();
+
+    $.ajax({
+      url: "/myplan/getuserinfo",
+      data: {"id" : userId},
+      async: false,
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+          $("#title_subject").text(item.NAME);
+          $("#profileImage").attr("src", item.IMG);
+        })
+    },
+      beforeSend: function () {
+    },
+      complete: function () {
+      }
+    });        
+
+
+    $.ajax({
+            url: "/myplan/getmyallplan",
+            data: {"id" : userId},
+            async: false,
+            type: "get",
+            success: function (data) {
+              $.each(data.rows, function (index, item) {
+                var today = new Date();
+                var startdate = new Date(item.START_DATE);
+                var enddate = new Date(item.END_DATE);
+                today.setHours(0,0,0,0);startdate.setHours(0,0,0,0);enddate.setHours(0,0,0,0);
+
+                var areacode = item.AREA_CODE;
+                
+                if (today.getTime() >= startdate.getTime()&& today.getTime() <= enddate.getTime()) {
+                  $("#nowtext").show();
+                  var source = "<div id=\"form-board" +item.SEQ+"\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                  "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nowBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" + 
+                    item.START_DATE + " ~ " + item.END_DATE + "</span></div><hr class=\"lineEvent\"></div>";
+                  $("#nowForm").append(source); 
+
+								} else if (today.getTime() < startdate.getTime()) {
+                    $("#nexttext").show();
+                    var source = "<div id=\"form-board" +item.SEQ+"\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                    "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nextBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" + 
+                      item.START_DATE + " ~ " + item.END_DATE + "</span></div><hr class=\"lineEvent\"></div>";
+                    $("#nextForm").append(source);
+
+								} else if (today.getTime() > enddate.getTime()) {
+                    $("#prevtext").show();
+                    var source = "<div id=\"form-board" +item.SEQ+"\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                    "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"prevBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" + 
+                      item.START_DATE + " ~ " + item.END_DATE + "</span></div><hr class=\"lineEvent\"></div>";
+                    $("#prevForm").append(source);
+                }
+                  $.ajax({
+                    url: "/mytour/getareainfo",
+                    data : {areacode : areacode},
+                    async: false,
+                    type: "get",
+                    success: function (data) {
+                      $.each(data.rows, function (index, item) {
+                        $("#boardTitle"+ areacode).text(item.AREA);
+                      });
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                  });
+
+                $("#form-board"+item.SEQ).click(function(){
+                  location.href = "./mytour?no="+item.SEQ;
+                });
+              });
+              
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+            }
+          });
+  
+  });
+  </script>
+  
+  
+
+</html>

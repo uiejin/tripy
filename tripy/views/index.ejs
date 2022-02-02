@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+  <% include ./css/default %>
+  <link rel="stylesheet" href="/css/views/mytour.css">
+  <link rel="stylesheet" href="/css/views/myplan.css">
+  <link rel="stylesheet" href="/css/views/index.css">
+</head>
+
+<body>
+
+  <div class="site-wrap">
+    <% include ./head/cover %>
+<!--커버에 들어갈 버튼 및 텍스트  -->
+
+  <div class="site-blocks-cover overlay" id="title_img" data-aos="fade" data-stellar-background-ratio="0.5" style="background-image: url(/image/air.jpg);">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-12 text-center" data-aos="fade">
+          <h1 class="mb-4" id="title_subject"><%= bodyFirst %></h1>
+          <h1 class="mb-4 title_subject_typing"></h1>
+          <p class="mb-2" id="title_content"><%= bodySecond %></p>
+          <p class="mb-2" id="title_content"><%= bodyThird %></p>
+          <p class="mb-2" id="footer_content"><%= footerText %></p>
+          <p class="regular-font-size">
+            <a id="register_button" class="btn btn-primary px-4 py-3 text-uppercase" href="/login"><%=registerButton%></a>
+            <a id="login_button"><%=loginButton %></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!--소개 페이지  --> 
+  <div class="site-section">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+          <a id="introduce_button" class="btn btn-primary px-4 py-3 text-uppercase"><%=introduceButton%></a>
+          </h2>
+        </div>
+      </div>
+      <div class="row" id="form-main-board">
+      </div>
+    </div>
+  </div>
+
+
+<!--모임글  -->
+<div class="site-section col-md-12" id="newboardcontainer">
+  <div class="container boardForm">
+    <div class="row col-md-12" id="post">
+      <div id="boardNameDiv">
+        <a class="text-uppercase boardText" id="newBoardText"><%=board1Text%></a><a class="text-right" id="moreboardText"><%=moreBoardText%></a>
+      </div>
+
+
+  <!--게시판 커스텀 -->
+  <div class = "ajaxboardForm" id = "newboardform">
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<!--게시판 커스텀 -->
+        
+      </div>
+    </div>
+
+<!--카테고리-->
+  <div class="site-section col-md-12" id = "cateContainer">
+        <div class="row col-md-12" id="form-category">
+          
+        </div>
+  </div>
+  
+  <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+          <span class="icon-calendar d-block" id="index-calendar"></span>
+          <a id="calendarText"><%=calendarText%></a>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--여행지-->
+  
+  <div class="site-section col-md-12" id = "locationContainer">
+    <div>
+      <a class="text-uppercase" id="locationText"><%=board2Text%></a>
+    </div>
+    <div class="row col-md-12" id="form-location">
+      <div id="locationSectionFirst">
+      <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/bankok.jpg);">시흥시<br>정왕동<br>오이도</button>
+      </div>
+      <div id="locationSection">
+        <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/chiang.jpg);">남양주</button>
+      </div>
+      <div id="locationSection">
+        <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/hochimin.jpg);">홍대</button>
+      </div>
+      <div id="locationSection">
+        <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/tapie.jpg);">이태원</button>
+      </div>
+      <div id="locationSection">
+        <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/laos.jpg);">속초<br>고성</button>
+      </div>
+      <div id="locationSectionEnd">
+      </div>
+    </div>
+</div>
+
+
+<div class="container" id=boardForm>
+  <div class="row col-md-12" id="post">
+    <div class="site-section col-md-12" id = "locationContainer2">
+      <div>
+        <a class="text-uppercase" id="locationText2">서비스 바로가기</a>
+      </div>
+      <div class="row" id="form-location2">
+        <div id="locationSection2" class= "col-6 col-md-4 col-lg-2">
+        <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/bankok.jpg);">모임</button>
+        </div>
+        <div id="locationSection2" class= "col-6 col-md-4 col-lg-2">
+          <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/chiang.jpg);">여행 업적<br>치앙라이<br>빠이</button>
+        </div>
+        <div id="locationSection2" class= "col-6 col-md-4 col-lg-2">
+          <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/hochimin.jpg);">꾸미기</button>
+        </div>
+        <div id="locationSection2" class= "col-6 col-md-4 col-lg-2">
+          <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/tapie.jpg);">내 여행 일정</button>
+        </div>
+        <div id="locationSection2" class= "col-6 col-md-4 col-lg-2">
+          <button class="btn btn-primary" type="submit" id="locationBtn" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/image/laos.jpg);">모임관리</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="container boardForm" id="profileForm">
+    <div class="row col-md-12" id="post">
+      <div class="site-section col-md-12" id = "locationContainer2">
+        <div class="row" id="form-location2">
+          <div id="profileDiv" class= "col-4">
+          <img src="<%=userImg%>" class="rounded-circle" id="profileImage">
+          </div>
+          <div id="profileDiv2" class = "col-8">
+            <div id="boardLine1">
+              <a><span id="profileName"><%=username%></span><span class="text-right" id="profileAge"><%=userAge%></span></span></a>
+            </div>
+            <div id="boardLine2" class="row">
+              <a class="col-4" id="tagDivStart"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">사진찍기</span></a>
+              <a class="col-4" id="tagDiv"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">맛집투어</span></a>
+              <a class="col-4" id="tagDiv"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">애주가</span></a>
+              <a class="col-4" id="tagDivStart"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">현지음식</span></a>
+              <a class="col-4" id="tagDiv"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">현지탐방</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    <% include ./footer/footer %>
+  </div>
+
+
+</body>
+<% include ./script/default %>
+<% include ./indexscript %>
+<script>
+var typingBool = false; 
+var typingIdx=0; 
+
+// 타이핑될 텍스트를 가져온다 
+var typingTxt = $("#title_subject").text(); 
+
+typingTxt=typingTxt.split(""); // 한글자씩 자른다. 
+
+if(typingBool==false){ 
+  // 타이핑이 진행되지 않았다면 
+   typingBool=true;     
+   var tyInt = setInterval(typing,100); // 반복동작 
+} 
+     
+function typing(){ 
+  if(typingIdx<typingTxt.length){ 
+    // 타이핑될 텍스트 길이만큼 반복 
+    $(".title_subject_typing").append(typingTxt[typingIdx]);
+    // 한글자씩 이어준다. 
+    typingIdx++; 
+   } else{ 
+     //끝나면 반복종료 
+    clearInterval(tyInt); 
+   } 
+}  
+</script>
+  
+  
+
+</html>

@@ -1,0 +1,32 @@
+<li>
+<div class="row">
+    <div id="profileDiv" class= "col-4">
+    <img class="rounded-circle" id="profileImageNav">
+    </div>
+    <div id="navProfileDiv" class="col-8">
+      <div id="navProfileLine">
+        <span id="navProfileName"></span>
+      </div>
+      <div id="navProfileLine2">
+       <span id="navProfileLevel">LV. 8</span><div class="progress">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><div>
+            </div>
+      </div>
+        </div>
+        </div>
+    </div>
+</div>
+</li>
+<li id="navMenu1First"><a id ="navMenu1" href="/mytour">내 일정 관리</a></li>
+<li><a id ="navMenu1" href="/mytour">내 게시글 관리</a></li>
+<li><a id ="navMenu1" href="/board/partyboard">동행 찾기</a></li>
+<li id="navMenu2First"><a id ="navMenu2" href="/">공지사항</a></li>
+<li><a id ="navMenu2" href="./spaceChallenge.do">문의하기</a></li>
+<script type="text/javascript">   
+  $(document).ready( function() {
+  
+    $("#navProfileName").text("<%=username%>");
+    $("#profileImageNav").attr("src", "<%=userImg%>");
+  
+  });
+</script>

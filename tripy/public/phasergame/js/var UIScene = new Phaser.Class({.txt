@@ -1,0 +1,44 @@
+var UIScene = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function UIScene ()
+    {
+        Phaser.Scene.call(this, { key: 'UIScene' });
+
+        this.score = 0;
+    },
+
+    preload()
+    {
+        
+    },
+
+    create: function ()
+    {
+        //  Our Text object to display the Score
+        var info = this.add.text(10, 10, 'Score: 0', { font: '48px Arial', fill: '#000000' });
+
+        //  Grab a reference to the Game Scene
+        var ourGame = this.scene.get('GameScene');
+
+        //  Listen for events from it
+        ourGame.events.on('addScore', function () {
+
+            this.score += 10;
+
+            info.setText('Score: ' + this.score);
+
+        }, this);
+    }
+
+});
+  <script type="text/javascript">
+  WebFontConfig = {		google: { families: [ 'Raleway:400,500:latin', 'Rokkitt::latin' ] }	};	
+  (function() {		var wf = document.createElement('script');		
+  wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +			
+  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';		
+  wf.type = 'text/javascript';		wf.async = 'true';		
+  var s = document.getElementsByTagName('script')[0];		s.parentNode.insertBefore(wf, s);	})();</script>

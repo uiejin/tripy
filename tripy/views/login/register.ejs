@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>회원가입</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="icon"  href="/image/favicon.ico">
+  <link rel="shortcut icon"  href="/image/favicon.ico">
+ 
+  <% include ../css/default %>
+  <link rel="stylesheet" href="/css/views/read.css">
+  <link rel="stylesheet" href="/css/views/noncover.css">
+  <link rel="stylesheet" href="/css/views/register.css">
+  <link rel="stylesheet" href="/css/views/ajaxloading.css">
+</head>
+
+<body>
+
+    <div class="site-wrap">
+
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div> <!-- .site-mobile-menu -->
+
+        <!--상단바-->
+        <div class="site-navbar-wrap js-site-navbar bg-white">
+
+            <div class="container">
+                <div class="site-navbar bg-light">
+                    <div class="py-1">
+                        <div class="row align-items-center">
+                            <div class="col-10">
+                                <h2 class="mb-0 site-logo"></h2><a id="nav-title">
+                                    <%= title %>
+                                </a></h2>
+                            </div>
+                            <div class="col-2">
+                                <nav class="site-navigation text-right" role="navigation">
+                                    <div class="container">
+                                        <!-- d-lg-none -->
+                                        <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                                                class="site-menu-toggle js-menu-toggle"><span
+                                                    class="icon-menu h3"></span></a></div>
+                                        <!-- d-lg-block -->
+                                        <ul class="site-menu js-clone-nav d-none" id="nav">
+                                            <% include ../nav/nav_case %>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-loading display-none">
+        <div class="spinner-border text-primary display-none"></div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 col-lg-8 mb-5">
+
+
+
+                    <form action="main.do" class="p-5 bg-white" method="POST">
+
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label class="font-weight-bold" for="fullname">아이디</label> <input type="text"
+                                    id="id_filed" class="form-control" placeholder="Admin ID"">
+							</div>
+							<div class="col-md-6">
+                                <label class="font-weight-bold" for="password">계정 권한</label>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="attend-div">
+                                    <label class="btn btn-danger">
+                                      <input type="radio" name="isadmin" id="re-radio1" value="1">
+                                      관리자
+                                    </label>
+                                    <label class="btn btn-danger">
+                                      <input type="radio" name="isadmin" id="re-radio2" value="0">
+                                      일반
+                                    </label>
+                                  </div>
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label class="font-weight-bold" for="password">비밀번호</label> <input type="password"
+                                    id="change_password_filed" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="font-weight-bold" for="password">비밀번호 확인</label> <input type="password"
+                                    id="change_password_filed2" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label class="font-weight-bold" for="password">이름</label> <input type="text"
+                                    id="name_filed" class="form-control" placeholder="Name">
+                            </div>
+
+                        </div>
+                        <!--
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="font-weight-bold" for="password">등록 IP</label>
+                  <input type="text" id="ip_filed" class="form-control" placeholder="XX.XX.XX.XX">
+                </div>
+              </div>
+              -->
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <a id="login-button" class="btn btn-primary px-4 py-2">가입하기</a>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="p-4 mb-3 bg-white">
+                        <h3 class="h5 text-black mb-3">가입안내</h3>
+                        <p class="mb-0 font-weight-bold">1. 아이디는 영문으로 입력해 주세요.</p>
+                        <p class="mb-0 font-weight-bold" style="margin-top : 1rem;">2. 비밀번호는 9자 이상 13자 이내로 입력해
+                            주세요.</p>
+                        <p class="mb-0 font-weight-bold" style="margin-top : 1rem;">3. 비밀번호는 영문,숫자,특수문자를 혼합하여 주시기
+                            바랍니다.</p>
+                        <p class="mb-0 font-weight-bold" style="margin-top : 1rem;">4. 비밀번호에 아이디를 사용할수 없습니다.</p>
+                        <p class="mb-0 font-weight-bold" style="margin-top : 1rem;">5. 생성한 계정은 일반 관리자로 생성됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<% include ../script/default %>
+<script src="/js/views/ajaxloading.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var loginStatus = "<%=loginStatus%>";
+        
+
+
+        $("#login-button").click(function () {
+
+            var id = $("#id_filed").val();
+            var password = $("#change_password_filed").val();
+            var password2 = $("#change_password_filed2").val();
+            var name = $("#name_filed").val();
+            var base = $("#base_filed").val();
+            
+            var isadmin = $('input[name=isadmin]:checked').val();
+
+            var num = password.search(/[0-9]/g);
+            var eng = password.search(/[a-z]/ig);
+            var spe = password.search(/[`~!@@#$%^&*|\\\`\;:\/?]/gi);
+
+            if(isadmin == null){
+                
+                alert("계정권한을 선택해주세요.");
+                return false;
+            }
+            if (id == "") {
+                alert("아이디가 비어있습니다.");
+                $("#id_filed").focus();
+                return false;
+            }
+
+
+            /*if (checkId == false) {
+                alert("아이디 중복확인을 해주시길 바랍니다.");
+                $("#id_filed").focus();
+                return false;
+            }*/
+            if (password == "") {
+                alert("비밀번호가 비어있습니다.");
+                $("#change_password_filed").focus();
+
+                return false;
+            }
+            if (password2 == "") {
+                alert("비밀번호 확인이 비어있습니다.")
+                $("#change_password_filed2").focus();
+
+                return false;
+            }
+            if (password != password2) {
+                alert(" 비밀번호가 맞지않습니다.")
+                $("#change_password_filed").focus();
+                return false;
+            }
+            if (password.length < 8 || password.length > 14) {
+                alert("비밀번호는 9자 이상 13자 이내로 입력해주십시요.");
+                return false;
+            }
+            if (num < 0 || eng < 0 || spe < 0) {
+                alert("비밀번호는 영문,숫자,특수문자를 혼합하여 주시기 바랍니다.");
+                return false;
+            }
+            if (password.indexOf(id) != -1) {
+                alert("비밀번호에 아이디를 사용할수 없습니다.");
+                return false;
+            }
+            var SamePass_0 = 0;
+            var SamePass_1 = 0;
+            var SamePass_2 = 0;
+
+            var char_pass_0;
+            var char_pass_1;
+            var char_pass_2;
+
+            for (var i = 0; i < password.length; i++) {
+                char_pass_0 = password.charAt(i);
+                char_pass_1 = password.charAt(i + 1);
+
+                if (char_pass_0 == char_pass_1) {
+                    SamePass_0 = SamePass_0 + 1;
+                }
+                char_pass_2 = password.charAt(i + 2);
+
+                if (char_pass_0.charCodeAt(0) - char_pass_1.charCodeAt(0) == 1 &&
+                    char_pass_1.charCodeAt(0) - char_pass_2.charCodeAt(0) == 1) {
+
+                    SamePass_1 = SamePass_1 + 1;
+                }
+
+                if (char_pass_0.charCodeAt(0) - char_pass_1.charCodeAt(0) == -1 &&
+                    char_pass_1.charCodeAt(0) - char_pass_2.charCodeAt(0) == -1) {
+                    SamePass_2 = SamePass_2 + 1;
+                }
+            }
+            
+            if (SamePass_0 > 1) {
+                alert("동일 문자를 3번이상 사용 할 수 없습니다.");
+                return false;
+            }
+            if (SamePass_1 > 1 || SamePass_2 > 1) {
+                alert("연속된 문자열을 3번이상 사용 할 수 없습니다.");
+                return false;
+            }
+            if (name == "") {
+                alert("이름이 비어있습니다.");
+                $("#name_filed").focus();
+                return false;
+            }
+
+
+            if (maxLengthCheck(id, "아이디", "30") && maxLengthCheck(name, "이름", "30")) { } else {
+                return false;
+            }
+
+            
+            var allData = {
+                "id": id,
+                "password": password,
+                "name": name,
+                "isadmin" : isadmin
+            };
+
+            $.ajax({
+                url: "/login/register",
+                data: allData,
+                dataType: "json",
+                async: false,
+                type: "post",
+                success: function (data) { },
+                complete: function (data) {
+                    if (data['result'] == 'false') {
+                        alert("계정등록에 실패했습니다.");
+                    } else {
+                        alert("계정이 등록되었습니다.");
+                                location.href = "/login";
+                    }
+                },
+                beforeSend: function () {
+                }
+            });
+        });
+
+
+        function maxLengthCheck(id, title, maxLength) {
+
+            var obj = id;
+
+            if (maxLength == null) {
+                maxLength = obj.attr("maxLength") != null ? obj.attr("maxLength") : 150;
+            }
+
+            var byteLength = (function (s, b, i, c) {
+                for (b = i = 0; c = s.charCodeAt(i++); b += c >> 11 ? 3 : c >> 7 ? 2 : 1)
+                    ;
+                return b;
+            })(obj);
+
+            if (byteLength <= 0) {
+                alert(title + "를 입력해 주세요.");
+                return false;
+            }
+
+            if (byteLength > Number(maxLength)) {
+                alert(title + "이 입력 가능 문자수(바이트)를 초과했습니다.\n" + maxLength + "이내로 입력해주세요.");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    });
+</script>
+
+
+
+</html>

@@ -1,0 +1,53 @@
+/* 커버기능 사용 안할시 추가하는 CSS */
+
+a#nav-title {
+    color: #34558b;
+}
+a#none-nav-title {
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #34558b;
+    display: none;
+}
+
+div#nav-title {
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #34558b;
+}
+.icon-menu:before {
+    content: "\e5d2";
+    color: #34558b;
+}
+
+
+.icon-arrow_back:before{
+    color: #34558b;
+    content: "\e5c4";
+}
+
+.site-navbar-wrap {
+	background: #fff !important;
+}
+
+.site-navbar.bg-light {
+	background: #fff !important;
+}
+.site-section.bg-light {
+    background: white!important;
+
+}
+
+.site-section {
+    padding: 5em 0;
+}
+
+.site-navbar-wrap.js-site-navbar.bg-white {
+    padding: 0px;
+
+}
+
+table.table-condensed {
+    width: 100%;
+    margin-top: 5rem;
+}

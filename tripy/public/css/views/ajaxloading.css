@@ -1,0 +1,7 @@
+div#general-ajax-load {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: #ffffff;
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+  
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/animate.css">
+  
+    <link rel="stylesheet" href="/css/aos.css">
+  
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+    
+    <link rel="stylesheet" href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+  
+    <link rel="stylesheet" href="/css/views/style.css">
+    <link rel="stylesheet" href="/css/views/main.css">
+    <link rel="stylesheet" href="/css/views/noncover.css">
+    <link rel="stylesheet" href="/css/views/writepost.css">
+    <link rel="stylesheet" href="/css/views/search.css">
+    <link rel="stylesheet" href="/css/views/calendar.css">
+    <link rel="stylesheet" href="/css/views/myplan.css">
+    <link rel="stylesheet" href="/css/views/mytour.css">
+    <link rel="preload" as="font" href="/font/NanumSquare_acL.ttf" type="font/ttf" />
+    <style media='screen' type='text/css'>
+      @font-face {
+        font-family: font1;
+        src : url("/font/NanumSquare_acL.ttf");
+      }
+    </style>
+    <title>TRIPY</title>
+ 
+</head>
+<body>
+
+   <div class="site-wrap">
+
+      <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-settings js-menu-toggle"></span>
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div> <!-- .site-mobile-menu -->
+  
+      <!--상단바-->
+      <div class="site-navbar-wrap js-site-navbar bg-white">
+  
+        <div class="container">
+          <div class="site-navbar bg-light">
+            <div class="py-1">
+              <div class="row align-items-center" id="site-navbar-line">
+                <div class="col-2">
+                  <h2 class="mb-0 site-logo"></h2><a id="nav-title">Phaser</a></h2>
+                </div>
+                <div class="col-10">
+                  <nav class="site-navigation text-right" role="navigation">
+                    <div class="container">
+                      <!-- d-lg-none -->
+                      <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                          class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                      <!-- d-lg-block -->
+                      <ul class="site-menu js-clone-nav d-none" id="nav">
+                        <% include ./nav/nav_case %>
+                      </ul>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+   <div id="phaser-example">
+    <div style="font-family:font1; position:absolute; left:-1000px; visibility:hidden;">.</div>
+   </div>
+
+   <script src="/phasergame/js/phaser.min.js"></script>
+   
+  <script src ="/phasergame/js/givetype.js"></script>
+  <script src="/phasergame/js/game.js"></script>
+  <script src="/phasergame/js/CreateMapScene.js"></script>
+  <script src="/phasergame/js/FixMapScene.js"></script>
+  <script src="/phasergame/js/MainUIScene.js"></script>
+  <script src="/phasergame/js/select.js"></script>
+  <script src="/phasergame/js/MoneyShop.js"></script>
+  <script src="/phasergame/js/Guestbook.js"></script>
+  <script src ="/phasergame/js/variable.js"></script>
+  <script src ="/phasergame/js/Demo.js"></script>
+  <script src ="/phasergame/js/InputBox.js"></script>
+  <script src ="/phasergame/js/config.js"></script>
+ 
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/popper.min.js"></script>
+<script src="/js/lib/owl.carousel.min.js"></script>
+<script src="/js/lib/jquery.stellar.min.js"></script>
+<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+<script src="/js/lib/bootstrap-datepicker.js"></script>
+<script src="/js/lib/timedropper.js"></script>
+<script src="/js/lib/aos.js"></script>
+
+<script src="/js/lib/mediaelement-and-player.min.js"></script>
+
+<script src="/js/views/main.js"></script>
+
+</html>
+
+<script>
+  userImage = "<%=userImg%>";
+  loginStatus  = "<%=loginStatus %>";
+  userId = "<%=userId%>";
+
+  if(loginStatus  == "true"){
+      $("#navProfileName").text("<%=username%>");
+      $("#profileImageNav").attr("src", "<%=userImg%>");
+      
+    }else{
+      $("#profileForm").css("display", "none");
+    }
+  </script>
+</html>

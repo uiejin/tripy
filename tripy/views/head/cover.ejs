@@ -1,0 +1,39 @@
+<div class="site-mobile-menu">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-settings js-menu-toggle"></span>
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div> <!-- .site-mobile-menu -->
+
+<!--상단바-->
+  <div class="site-navbar-wrap js-site-navbar bg-white">
+
+    <div class="container">
+      <div class="site-navbar bg-light">
+        <div class="py-1">
+          <div class="row align-items-center" id ="site-navbar-line">
+            <div class="col-9 col-sm-10 col-md-11 nav-left">
+              <h2 class="mb-0 site-logo"></h2><a id="nav-title"><%= title %></a></h2>
+            </div>
+            <div class="col-3 col-sm-2 col-md-1 nav-right">
+              <nav class="site-navigation text-right" role="navigation">
+                <div class="container">
+                  <!-- d-lg-none -->
+                  <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                      class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                  <!-- d-lg-block -->
+                  <ul class="site-menu js-clone-nav d-none" id="nav">
+                    <% include ../nav/nav_case %>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

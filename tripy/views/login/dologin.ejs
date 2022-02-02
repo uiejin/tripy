@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PARTY</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/read.css">
+  <link rel="stylesheet" href="/css/views/login.css">
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-settings js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+  </div>
+    
+    
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+      
+        <div class="container">
+          <div class="site-navbar bg-light">
+            <div class="py-1">
+              <div class="row align-items-center">
+                <div class="col-2">
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                      class="site-menu-toggle js-menu-toggle"><span class="icon-arrow_back h3" id="nav-back"></span></a></div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+  <div class="site-blocks-cover overlay" id="title_img" style="background-image: url(/image/hochimin.jpg);background-position: 50%;" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-12 text-center" data-aos="fade">
+            <h3 style="color: aliceblue; font-weight: 600; margin-bottom: 3rem;"><%=title%></h3>
+            <div class="col-12"><img src="/image/login/kakao_account_login_btn_medium_narrow.png" id="kakaoBtn"></div>
+            <div class="col-12"></div><img src="/image/login/naver_account_login_btn.png" id="naverBtn"></div>
+            
+</div>
+               
+        </div>
+      </div>
+    </div>  
+
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/popper.min.js"></script>
+<script src="/js/lib/owl.carousel.min.js"></script>
+<script src="/js/lib/jquery.stellar.min.js"></script>
+<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+<script src="/js/lib/bootstrap-datepicker.min.js"></script>
+<script src="/js/lib/aos.js"></script>
+
+<script src="/js/lib/mediaelement-and-player.min.js"></script>
+
+<script src="/js/views/main.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var loginStatus  = "<%=loginStatus %>";
+
+
+    if(loginStatus  == "true"){
+        location.replace("/");
+    }
+    
+
+    $("#kakaoBtn").click(function(){
+      location.replace("/login/kakao");
+    })
+    $("#naverBtn").click(function(){
+      location.replace("/login/naver");
+    })
+
+
+  
+  });
+</script>
+
+
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/myplan.css">
+  <link rel="stylesheet" href="/css/views/mytour.css">
+  <link rel="stylesheet" href="/css/views/mypost.css">
+
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-settings js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+<!--상단바-->
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center" id ="site-navbar-line">
+              <div class="col-10">
+                <h2 class="mb-0 site-logo"></h2><a id="nav-title"><%= title %></a></h2>
+              </div>
+              <div class="col-2">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <!-- d-lg-none -->
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                        class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <!-- d-lg-block -->
+                    <ul class="site-menu js-clone-nav d-none" id="nav">
+                      <% include ./nav/nav_case%>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--커버에 들어갈 버튼 및 텍스트  -->
+
+  <div class="site-blocks-cover overlay" id="title_img" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-12 text-center" data-aos="fade">
+          <img src="<%=userImg%>" class="rounded-circle" id="profileImage">
+          <h1 class="mb-4" id="title_subject"><%=nameText%></h1>
+          <p class="regular-font-size">
+            <a id="register_button" class="btn btn-primary px-4 py-3 text-uppercase" href="writepost"><%=registerButton%></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--모임글  -->
+<div class="site-section col-md-12" id="nowtext">
+  <div class="container" id=boardForm>
+    <div class="row col-md-12" id="post">
+      <div>
+        <a class="text-uppercase boardText"><%=nowBoard%></a>
+      </div>
+
+
+<!--게시판 커스텀 -->
+      <div class= "ajaxboardForm" id="nowForm">
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!--모임글  -->
+<div class="site-section col-md-12" id="nexttext">
+  <div class="container" id=boardForm>
+    <div class="row col-md-12" id="post">
+      <div>
+        <a class="text-uppercase boardText"><%=nextBoard%></a>
+      </div>
+
+
+<!--게시판 커스텀 -->
+    <div class= "ajaxboardForm" id="nextForm">
+    </div>
+    </div>
+  </div>
+  </div>  
+
+<!--모임글  -->
+  <div class="site-section col-md-12" id="prevtext">
+    <div class="container" id=boardForm>
+      <div class="row col-md-12" id="post">
+        <div>
+          <a class="text-uppercase boardText"><%=prevBoard%></a>
+        </div>
+
+
+<!--게시판 커스텀 -->
+      <div class= "ajaxboardForm" id="prevForm">
+      </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="s_id" data-prodnumber="${sessionScope.id}" />
+    <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+  
+  </div>
+
+
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/popper.min.js"></script>
+<script src="/js/lib/owl.carousel.min.js"></script>
+<script src="/js/lib/jquery.stellar.min.js"></script>
+<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+<script src="/js/lib/bootstrap-datepicker.min.js"></script>
+<script src="/js/lib/aos.js"></script>
+
+<script src="/js/lib/mediaelement-and-player.min.js"></script>
+
+<script src="/js/views/main.js"></script>
+
+<script type="text/javascript">   
+  $(document).ready( function() {
+
+    var userId = "<%=userId%>";
+  
+    $("#navProfileName").text("<%=username%>");
+    $("#profileImageNav").attr("src", "<%=userImg%>");  
+
+        $.ajax({
+            url: "/mytour/getallmypost",
+            data: {"writer" : userId},
+            async: false,
+            type: "get",
+            success: function (data) {
+              $.each(data.rows, function (index, item) {
+                var today = new Date();
+                var meetdate = item.MEET_DATE + " " + item.MEET_TIME;
+                meetdate = new Date(meetdate);
+
+                var source = "<div id=\"newform-board" +item.NO+"\">" +
+                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+item.AREA+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
+                  if(item.LIMIT_GENDER == "male"){
+                    source = source + "[<%=maleText%>]";
+                  }else if(item.LIMIT_GENDER == "female"){
+
+                    source = source + "[<%=femaleText%>]";
+                  }
+                  source = source + "["+item.CATEGORY+"]</span></div>" +
+                  "<div id=\"boardLine1\"><span id=\"boardTitle\">"+item.TITLE+"</span>";
+
+                  if(item.HEADCOUNT == item.HEADCOUNT_NOW){
+                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount\">"+"<%=fillHeadCountText%>"+"</span></span></div>";
+                  }else{
+                    source = source + "<span class=\"text-right\" id=\"boardHeadCount\">"+item.HEADCOUNT_NOW+"/"+item.HEADCOUNT+"명</span></span></div>";
+                  }
+                  source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">"+item.NAME+"</span><span id=\"boardDate"+item.SEQ+"\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
+                  item.MEET_DATE + " " + item.MEET_TIME+ "</span></a></div><hr class=\"lineEvent\"></div>";
+
+                  if (today.getTime() <= meetdate.getTime() && item.HEADCOUNT == item.HEADCOUNT_NOW) {
+                    $("#nexttext").show();
+                    $("#nextForm").append(source);
+
+								} else if (today.getTime() <= meetdate.getTime()) {
+                    $("#nowtext").show();
+                    $("#nowForm").append(source); 
+                }else{
+                  $("#prevtext").show();
+                    $("#prevForm").append(source);
+                }
+              
+              $("#newform-board"+item.NO).click(function(){
+                  location.href = "/board/read?no="+item.NO;
+                });
+
+/*
+                if (today.getTime() >= startdate.getTime()&& today.getTime() <= enddate.getTime()) {
+                  $("#nowtext").show();
+                  var source = "<div id=\"form-board\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                  "<hr class=\"lineEvent\"></div>";
+                  $("#nowForm").append(source); 
+
+								} else if (today.getTime() < startdate.getTime()) {
+                    $("#nexttext").show();
+                    var source = "<div id=\"form-board\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + "<hr class=\"lineEvent\"></div>";
+                    $("#nextForm").append(source);
+
+								} else if (today.getTime() > enddate.getTime()) {
+                    $("#prevtext").show();
+                    var source = "<div id=\"form-board\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + "<hr class=\"lineEvent\"></div>";
+                    $("#prevForm").append(source);
+                }
+                  $.ajax({
+                    url: "/mytour/getareainfo",
+                    data : {areacode : areacode},
+                    async: false,
+                    type: "get",
+                    success: function (data) {
+                      $.each(data.rows, function (index, item) {
+                        $("#boardTitle"+ areacode).text(item.AREA);
+                        areaText = item.AREA;
+                      });
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                  });
+                });*/
+              });
+
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+            }
+          });
+  });
+  </script>
+  
+  
+
+</html>

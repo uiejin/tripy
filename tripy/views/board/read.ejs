@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PARTY</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/noncover.css">
+  <link rel="stylesheet" href="/css/views/writepost.css">
+  <link rel="stylesheet" href="/css/views/read.css">
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-settings js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+    <!--상단바-->
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center" id="site-navbar-line">
+              <div class="col-10">
+                <h2 class="mb-0 site-logo"></h2><a id="nav-title">PARTY</a></h2>
+              </div>
+              <div class="col-2">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <!-- d-lg-none -->
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                        class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <!-- d-lg-block -->
+                    <ul class="site-menu js-clone-nav d-none" id="nav">
+                      <% include ../nav/nav_case %>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="s_id" data-prodnumber="${sessionScope.id}" />
+    <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+
+  </div>
+
+  <div class="site-section bg-light">
+    <div class="container" id="readForm">
+      <div class="row" id="readRow">
+        <div id="read-form" class="col-lg-12">
+          <div class="form-group">
+            <!--자동수락 선택 버튼-->
+            <div class="col-12" id="titleItem">
+              <a id="titleText" class="col-12"></a>
+            </div>
+            <!--입력 폼-->
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=cateText%></div>
+              <div class="readDiv2" id="cateText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=dateText%></div>
+              <div class="readDiv2" id="dateText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=timeText%></div>
+              <div class="readDiv2" id="timeText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=headCountText%></div>
+              <div class="readDiv2" id="headCountText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=areaText%></div>
+              <div class="readDiv2" id="areaText"></div>
+            </div>
+
+            <div class="col-12" id="button-div">
+              <a id="headcount-button" class="btn btn-primary px-4 py-2"><%=headCountBtnText%></a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="site-section bg-light" id="contentForm">
+    <div class="container" id="readForm">
+      <div class="row" id="readRow">
+        <div id="read-form" class="col-lg-12">
+          <div class="form-group">
+            <!--자동수락 선택 버튼-->
+            <div class="col-12" id="contentItem">
+
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="site-section bg-light" id="profileForm">
+    <div class="container" id=boardForm>
+      <div class="row col-md-12" id="post">
+        <div class="site-section col-md-12" id="profileContainer">
+          <div class="col-12" id="readItem">
+            <div class="readDiv1"><%=profileText%></div>
+          </div>
+          <div class="row" id="writerDiv">
+            <div id="profileDiv">
+              <img src="../image/ex.jpg" class="rounded-circle" id="profileImage">
+            </div>
+            <div id="profileDiv2">
+              <div id="boardLine1">
+                <a><span id="profileName"></span><span class="text-right" id="profileAge"></span></span></a>
+              </div>
+              <div id="boardLine2" class="row">
+                <a class="col-4" id="tagDivStart"><span id="tagDate"
+                    class="btn btn-primary px-4 py-3 text-uppercase">사진찍기</span></a>
+                <a class="col-4" id="tagDiv"><span id="tagDate"
+                    class="btn btn-primary px-4 py-3 text-uppercase">맛집투어</span></a>
+                <a class="col-4" id="tagDiv"><span id="tagDate"
+                    class="btn btn-primary px-4 py-3 text-uppercase">애주가</span></a>
+                <a class="col-4" id="tagDivStart"><span id="tagDate"
+                    class="btn btn-primary px-4 py-3 text-uppercase">현지음식</span></a>
+                <a class="col-4" id="tagDiv"><span id="tagDate"
+                    class="btn btn-primary px-4 py-3 text-uppercase">현지탐방</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="profileinfo">이 작성자는 5번의 모임과<br> 30명의 동행자를 만났습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section bg-light" id="replyForm">
+    <div class="container" id=boardForm>
+      <div class="row col-md-12" id="replyRow">
+        <!--댓글 작성시 여기 div 추가-->
+        <div class="site-section col-md-12" id="replyContainer">
+          <div class="col-12" id="readItem">
+            <div class="readDiv1"><%=replyText%></div>
+          </div>
+
+          <!--댓글 Form-->
+
+        </div>
+
+
+      </div>
+      <div class="form-group" id="replyBtnForm">
+        <textarea class="form-control" id="myreply" rows="3"></textarea>
+      </div>
+
+      <div class="col-12" id="button-div">
+        <a id="reply-button" class="btn btn-primary px-4 py-2"><%=replyBtnText1%></a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="site-section bg-light">
+    <div class="container" id="readForm">
+      <div class="row" id="readRow">
+        <div class="col-12" id="button-div">
+          <a id="modyfy-button" class="btn btn-primary px-4 py-2"><%=modifyBtnText%></a>
+          <a id="delete-button" class="btn btn-primary px-4 py-2"><%=deleteBtnText%></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/popper.min.js"></script>
+<script src="/js/lib/owl.carousel.min.js"></script>
+<script src="/js/lib/jquery.stellar.min.js"></script>
+<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+<script src="/js/lib/bootstrap-datepicker.min.js"></script>
+<script src="/js/lib/aos.js"></script>
+
+<script src="/js/lib/mediaelement-and-player.min.js"></script>
+
+<script src="/js/views/main.js"></script>
+
+<script type="text/javascript">
+
+var loginuserId = "<%=userId%>";
+var loginStatus  = "<%=loginStatus %>";
+
+  $(document).ready(function () {
+
+    $("#navProfileName").text("<%=username%>");
+        $("#profileImageNav").attr("src", "<%=userImg%>");
+    $("#replyBtnForm").hide();
+
+    replyStatus = false;
+
+   
+
+    var no = location.href
+      .substr(location.href.lastIndexOf('=') + 1);
+    
+    var writer = null;
+    var attendState = null;
+    var userAttendState = null;
+
+    var headCount = null;
+    var headCountMax = null;
+
+    var partyTime = null;
+    var nowDate= new Date();
+
+    var allData = {
+      "no": no,
+    };
+
+    $.ajax({
+      url: "/board/getpostread?no=" + no,
+      async: false,
+      type: "get",
+      dataType: "json",
+      success: function (data) {
+        if (data['result'] == true) {
+          if(data.rows.length == 0){
+            alert("<%=errorMessage%>");
+            history.back();
+          }
+          else{
+            // var boardData = JSON.stringify(data);
+            $.each(data.rows, function (index, item) {
+
+              $("#titleText").text(item.TITLE);
+              $("#dateText").text(item.MEET_DATE);
+              $("#timeText").text(item.MEET_TIME);
+              $("#headCountText").text(item.HEADCOUNT_NOW + " / " + item.HEADCOUNT);
+              $("#contentItem").html(item.CONTENTS);
+              $("#cateText").text(item.CATEGORY)
+              
+              partyTime = item.MEET_DATE + " " + item.MEET_TIME;
+              partyTime = new Date(partyTime);
+              
+              writer = item.WRITER;
+              attendState = item.AUTOPARTION;
+              headCount = item.HEADCOUNT;
+              headCountMax = item.HEADCOUNT_NOW;
+
+              var allData = {
+                "writer" : item.WRITER
+              }
+
+              $.ajax({
+                url: "/board/getwriterinfo",
+                data: allData,
+                async: false,
+                type: "get",
+                success: function (data) {
+                  if(data['result'] == true){
+                    $.each(data.rows, function (index, item) {
+                      $("#profileName").text(item.NAME);
+                      $("#profileImage").attr("src", item.IMG);
+                      $("#profileAge").text(getAge(item.BIRTHDAY) +"세 "+ getGender(item.GENDER));
+
+                      $("#writerDiv").click(function(){
+                          location.href = "../users/profile?id="+item.SEQ;
+                        });
+                    });
+                  };
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
+
+              $.ajax({
+                url: "/board/getpostarea",
+                data: {areacode : item.AREA_CODE},
+                async: false,
+                type: "get",
+                success: function (data) {
+                  if(data['result'] == true){
+                    $.each(data.rows, function (index, item) {
+                      $("#areaText").text(item.COUNTRY + " " + item.AREA);
+                    });
+                  };
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
+
+
+              if (loginuserId == item.WRITER) {
+
+              } else {
+                $("#modyfy-button").remove();
+                $("#delete-button").remove();
+
+                if(loginStatus  == "false"){
+                  $("#headcount-button").remove();
+                }
+                else{
+                  $("#headcount-button").text("<%=headCountBtnState%>");
+                  if(headCount == headCountMax){
+                    $("#headcount-button").text("<%=headCountBtnStateMax%>");
+                  }
+                }
+              }
+            });
+
+
+            $("#headcount-button").click(function () {
+              if (loginuserId == writer || userAttendState == "1") {
+                $(location).attr('href','./managiment?no='+no);
+              }else if(userAttendState == "0"){
+                $("#headcount-button").text("<%=headCountBtnState2%>");
+              }else if(userAttendState == "3"){
+                $("#headcount-button").text("<%=headCountBtnState4%>");
+              }else if(headCount == headCountMax){
+                $("#headcount-button").text("<%=headCountBtnStateMax%>");
+              }
+              else{
+                if(loginStatus  == "false"){
+                  alert("err");
+                }
+                else{
+                  if (confirm("<%=headCountBtnConfirm%>") == true){
+                    if(nowDate.getTime() < partyTime.getTime()){
+                    var allData = {
+                      "boardId" : no,
+                      "userId" : "<%=userId%>",
+                      "attendState" : attendState
+                    }
+
+                  $.ajax({
+                    url: "/board/attendparty",
+                    data: allData,
+                    async: false,
+                    type: "get",
+                    success: function (data) {
+                      if(data['result'] == true){
+                          alert("<%=headCountBtnConfirm2%>");
+                          location.reload();
+                      };
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                  });
+                }else{
+                    alert("모집시간이 초과되었습니다.");
+                  }
+
+
+                  }else{   
+
+                  return false;
+
+                  }
+                }
+              }
+
+            });
+
+            if (loginStatus  == "false") {
+              $("#reply-button").remove();
+            } else {
+
+              var allData = {
+                      "boardId" : no,
+                      "userId" : "<%=userId%>"
+                    }
+
+                  $.ajax({
+                    url: "/board/attenduserstate",
+                    data: allData,
+                    async: false,
+                    type: "get",
+                    success: function (data) {
+                      if(data['result'] == true){
+                        $.each(data.rows, function (index, item) {
+                        userAttendState = item.ATTEND_STATE;
+
+                        if(userAttendState == "0"){
+                          $("#headcount-button").text("<%=headCountBtnState2%>");
+                        }else if(userAttendState == "1"){
+                          $("#headcount-button").text("<%=headCountBtnState3%>");
+                        }else if(userAttendState == "3"){
+                          $("#headcount-button").text("<%=headCountBtnState4%>");
+                        }else {
+                          $("#headcount-button").text("<%=headCountBtnState%>");
+                        }
+
+                        });
+                      }
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                  });
+
+
+
+
+              $.ajax({
+                url: "/board/getreply?no=" + no,
+                async: false,
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                  if (data['result'] == true) {
+                    {
+                      // var boardData = JSON.stringify(data);
+
+                      $.each(data.rows, function (index, item) {
+
+                        if (item.BUNDLE_ID == null) {
+
+                          var replySource = "<div class=\"row\" id=\"form-location2\"><div id=\"replyDiv\">" +
+                            "<img src=\""+item.IMG+"\" class=\"rounded-circle\" id=\"replyImage\">" +
+                            "</div>" +
+                            "<div id=\"replyDiv2\">" +
+                            "<div id=\"replyLine1\">" +
+                            "<a><span id=\"replyName\">" + item.NAME + "</span><span class=\"text-right\" id=\"replayDate\">" + item.REG_DATE + "</span></span></a>" +
+                            "</div>" +
+                            "<div id=\"replyLine2\">" +
+                            item.REPLY +
+                            "</div>" +
+                            "<div class=\"col-12\" id=\"button-div\">" +
+                            "<a id=\"rereply-onclick\" class=\"btn btn-primary px-4 py-2\" onclick = \"rereplyonClick('" + item.REPLY_ID + "')\" ><%=rereplyBtnText1%></a>" +
+                            "</div><div class=\"rereplyForm\" id=\"rereplyForm" + item.REPLY_ID + "\" style= \"display:none\">" +
+                            "<div class=\"form-group\">" +
+                            "<textarea class=\"form-control\" id=\"myreply" + item.REPLY_ID + "\" rows=\"2\"></textarea>" +
+                            "</div>" +
+                            "<div class=\"col-12\" id=\"button-div\">" +
+                            "<a id=\"rereply-button\" class=\"btn btn-primary px-4 py-2\" onclick = \"rereplyBtnOnClick('" + item.REPLY_ID + "')\" ><%=rereplyBtnText1%></a>" +
+                            "</div></div>" +
+                            "</div></div>"
+                          $("#replyContainer").append(replySource);
+
+                        } else {
+                          var replySource = "<div class=\"row\" id=\"form-location2\"><div id=\"rereplyDiv\">" +
+                            "<img src=\""+item.IMG+"\" class=\"rounded-circle\" id=\"replyImage\">" +
+                            "</div>" +
+                            "<div id=\"rereplyDiv2\">" +
+                            "<div id=\"replyLine1\">" +
+                            "<a><span id=\"replyName\">" + item.NAME + "</span><span class=\"text-right\" id=\"replayDate\">" + item.REG_DATE + "</span></span></a>" +
+                            "</div>" +
+                            "<div id=\"replyLine2\">" +
+                            item.REPLY +
+                            "</div>" +
+                            "</div></div>"
+                          $("#replyContainer").append(replySource);
+                        }
+                      });
+
+                    };
+                  };
+
+
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
+            }
+
+
+          };
+        };
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+
+    $("#reply-button").click(function () {
+      if (replyStatus == false) {
+        replyStatus = true;
+        $("#replyBtnForm").show();
+        $("#reply-button").text("<%=replyBtnText2%>");
+
+      } else if (replyStatus == true) {
+        replyStatus = false;
+        $("#replyBtnForm").hide();
+        $("#reply-button").text("<%=replyBtnText1%>");
+
+        var allData = {
+          "reply": $("#myreply").val(),
+          "no": no,
+          "userId": loginuserId
+        };
+
+        $.ajax({
+          url: "/board/sendreply",
+          data: allData,
+          async: false,
+          type: "get",
+          success: function (data) {
+            if (data['result'] == true) {
+              {
+                // var boardData = JSON.stringify(data);
+
+                alert("댓글 작성에 성공하였습니다.");
+                location.reload();
+                $.each(data.rows, function (index, item) {
+
+                });
+
+              };
+            };
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }
+    });
+
+    $("#modyfy-button").click(function () {
+      location.href="/writepost/updatepost?no="+no;
+    });
+
+    $("#delete-button").click(function () {
+      if (confirm("<%=deleteBtnConfirm%>") == true){
+        $.ajax({
+          url: "/writepost/deletepost",
+          data: {"no" : no, "id" : loginuserId},
+          async: false,
+          type: "get",
+          success: function (data) {
+            if (data['result'] == true) {
+              {
+                // var boardData = JSON.stringify(data);
+
+                alert("게시물 삭제에 성공하였습니다.");
+                history.back();
+
+              };
+            };
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }else{
+
+      }
+    });
+
+
+  });
+
+  function getAge(userAge){
+      var nowDay = new Date();
+      var birthday = new Date(userAge);
+    
+    
+      var age = nowDay.getFullYear() - birthday.getFullYear();
+      var month = nowDay.getMonth() - birthday.getMonth();
+    
+      return month < 0 || (month === 0 && nowDay.getDate() < birthday.getDate()) ?
+        age : age +1
+    }
+
+    function getGender(userGender){
+      if(userGender == "male"){
+      return "남";
+      }else if(userGender == "female"){
+        return "여";
+      }
+    }
+
+  function rereplyonClick(board_id) {
+    $(document).ready(function () {
+      // $("#rereplyForm"+board_id).css("display","contents");
+
+
+      $(".rereplyForm").css("display", "none");
+
+      $("#rereplyForm" + board_id).css("display", "contents");
+    });
+  };
+
+  function rereplyBtnOnClick(board_id) {
+    $(document).ready(function () {
+
+      var no = location.href
+        .substr(location.href.lastIndexOf('=') + 1);
+      var allData = {
+        "reply": $("#myreply" + board_id).val(),
+        "no": no,
+        "userId": loginuserId,
+        "boardId": board_id
+      };
+
+      $.ajax({
+        url: "/board/sendrereply",
+        data: allData,
+        async: false,
+        type: "get",
+        success: function (data) {
+          if (data['result'] == true) {
+            {
+              // var boardData = JSON.stringify(data);
+
+              alert("답글 작성에 성공하였습니다.");
+              location.reload();
+              $.each(data.rows, function (index, item) {
+
+              });
+
+            };
+          };
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+      });
+
+    });
+  };
+
+</script>
+
+
+
+</html>

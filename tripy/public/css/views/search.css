@@ -1,0 +1,25 @@
+input#searchform {
+    height: auto;
+    border: 0px;
+    font-size: 1.1rem;
+    padding-left: 0.5rem;
+    padding-right: 0rem;
+    margin-right: 0px!important;
+    width: 90%!important;
+}
+.icon-search:before {
+    content: "\f002";
+    color: #34558b;
+}
+
+div#searchForm {
+    padding: 0px;
+}
+
+div#searchPostForm {
+    padding-top: 5rem;
+}
+
+div#srarchForm {
+    padding-top: 0rem;
+}

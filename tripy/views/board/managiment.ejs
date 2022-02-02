@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PARTY</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/noncover.css">
+  <link rel="stylesheet" href="/css/views/writepost.css">
+  <link rel="stylesheet" href="/css/views/read.css">
+  <link rel="stylesheet" href="/css/views/management.css">
+  <link rel="stylesheet" href="/css/views/calendar.css">
+  <link rel="stylesheet" href="/css/views/slider.css">
+  <link rel="stylesheet" href="/css/views/maps.css">
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-settings js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+    <!--상단바-->
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center" id="site-navbar-line">
+              <div class="col-10">
+                <h2 class="mb-0 site-logo"></h2><a id="nav-title"><%=title%></a></h2>
+              </div>
+              <div class="col-2">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <!-- d-lg-none -->
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                        class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <!-- d-lg-block -->
+                    <ul class="site-menu js-clone-nav d-none" id="nav">
+                      <% include ../nav/nav_case%>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="site-section bg-light">
+    <div class="container" id="readForm">
+      <div class="row" id="readRow">
+        <div id="read-form" class="col-lg-12">
+          <div class="form-group">
+            <!--자동수락 선택 버튼-->
+            <div class="col-12" id="titleItem">
+              <a id="titleText" class="col-12"></a>
+            </div>
+            <!--입력 폼-->
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=dateText%></div>
+              <div class="readDiv2" id="dateText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=timeText%></div>
+              <div class="readDiv2" id="timeText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=headCountText%></div>
+              <div class="readDivRight" id="changeheadCount"><%=changeHeadCountText%></div>
+              <div class="readDiv2" id="headCountText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=placeText%></div>
+              <div class="readDivRight" id="changeplace"><%=changePlaceText%></div>
+              <div class="readDiv2" id="placeText"></div>
+            </div>
+            
+            <div class="col-12" id="readItem">
+              <div class="readDiv1"><%=areaText%></div>
+              <div class="readDiv2" id="areaText"></div>
+            </div>
+
+            <div class="col-12" id="writerprofileContainer">
+                <div class="row" id="writerDiv">
+                  <div id="profileDiv">
+                    <img src="../image/ex.jpg" class="rounded-circle" id="writerprofileImage">
+                  </div>
+                  <div id="profileDiv2">
+                    <div id="boardLine1">
+                      <a><span id="writerprofileName"></span><span class="text-right" id="profileAge"></span></span></a>
+                    </div>
+                    <div id="boardLine2" class="row">
+                      <a class="col-4" id="tagDivStart"><span id="tagDate"
+                          class="btn btn-primary px-4 py-3 text-uppercase">사진찍기</span></a>
+                      <a class="col-4" id="tagDiv"><span id="tagDate"
+                          class="btn btn-primary px-4 py-3 text-uppercase">맛집투어</span></a>
+                      <a class="col-4" id="tagDiv"><span id="tagDate"
+                          class="btn btn-primary px-4 py-3 text-uppercase">애주가</span></a>
+                      <a class="col-4" id="tagDivStart"><span id="tagDate"
+                          class="btn btn-primary px-4 py-3 text-uppercase">현지음식</span></a>
+                      <a class="col-4" id="tagDiv"><span id="tagDate"
+                          class="btn btn-primary px-4 py-3 text-uppercase">현지탐방</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="col-12" id="button-div">
+              <a id="headcount-button" class="btn btn-primary px-4 py-2"><%=modifyBtnText%></a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="site-section bg-light" id="profileForm">
+    <div class="container" id=boardForm>
+      <div class="row col-md-12" id="post">
+        <div class="site-section col-md-12 profileContainer">
+          <div class="col-12" id="readItem">
+            <div class="readDiv3"  id="requestpartyRow"><%=profileText%></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section bg-light" id="profileForm">
+    <div class="container" id=boardForm>
+      <div class="row col-md-12" id="post">
+        <div class="site-section col-md-12 profileContainer" id="partyRow">
+          <div class="col-12" id="readItem">
+            <div class="readDiv3"><%=profileText2%></div>
+          </div>
+         
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content" id="cate-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle2"></h5>
+					<button type="button" class="close" id="close_popup3" data-dimiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>					
+				</div>
+				<div class="row form-group" id="google-modal-form">
+				<div class="form-group" id="modal-info">
+				</div>
+        <div id="map_canvas"></div>
+					</div>
+				</div>								
+			</div>
+		</div>
+
+
+
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/popper.min.js"></script>
+<script src="/js/lib/owl.carousel.min.js"></script>
+<script src="/js/lib/jquery.stellar.min.js"></script>
+<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+<script src="/js/lib/bootstrap-datepicker.min.js"></script>
+<script src="/js/lib/aos.js"></script>
+
+<script src="/js/lib/mediaelement-and-player.min.js"></script>
+
+<script src="/js/views/main.js"></script>
+<script src="/js/views/nav/nav.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr-r448ruHCKvwugrHq9nH2-SXqkj4u9M&libraries=places"async defer></script>
+
+<script type="text/javascript">
+
+var loginuserId = "<%=userId%>";
+var loginStatus  = "<%=loginStatus %>";
+var writer = null;
+
+  $(document).ready(function () {
+
+    $("#navProfileName").text("<%=username%>");
+        $("#profileImageNav").attr("src", "<%=userImg%>");
+    $("#replyBtnForm").hide();
+
+    replyStatus = false;
+
+    var headCount = null;
+    var headCountMax = null;
+    
+    var latX = null;
+    var longY = null;
+
+    var no = location.href
+      .substr(location.href.lastIndexOf('=') + 1);
+
+    var allData = {
+      "no": no,
+    };
+
+    $.ajax({
+      url: "/board/getpost?no=" + no,
+      async: false,
+      type: "get",
+      dataType: "json",
+      success: function (data) {
+        if (data['result'] == true) {
+          if(data.rows.length == 0){
+            alert("<%=errorMessage%>");
+            history.back();
+          }
+          else{
+            // var boardData = JSON.stringify(data);
+
+            $.each(data.rows, function (index, item) {
+
+              $("#titleText").text(item.TITLE);
+              $("#dateText").text(item.MEET_DATE);
+              $("#timeText").text(item.MEET_TIME);
+              $("#headCountText").text(item.HEADCOUNT);
+              $("#placeText").text(item.PLACE);
+              $("#contentItem").html(item.CONTENTS);
+              writer = item.WRITER;
+
+              headCount = item.HEADCOUNT;
+              headCountMax = item.HEADCOUNT_NOW;
+              latX = parseFloat(item.LATITUDE);
+              longY = parseFloat(item.LONGITUDE);
+
+              if(item.PLACE == null && latX != null && longY != null){
+                $("#placeText").text("<%=viewPlaceText%>");
+
+              }
+
+              if(writer != loginuserId){
+                $("#changeheadCount").css("display", "none");
+                $("#changeplace").css("display", "none");
+                $("#headcount-button").css("display","none");
+              }else{ 
+                $("#changeheadCount").click(function(){
+                  location.href = "../board/managiment/changeheadcount?no="+no;
+                });
+                $("#changeplace").click(function(){
+                  location.href = "../board/managiment/changeplace?no="+no;
+                });
+                $("#headcount-button").click(function(){
+                  location.href = "../writepost/updatepost?no="+no;
+                });
+              }
+              $("#headCountText").text(item.HEADCOUNT_NOW + " / " + item.HEADCOUNT);
+
+
+
+              var allData = {
+                "writer" : item.WRITER
+              }
+
+              $.ajax({
+                url: "/board/getwriterinfo",
+                data: allData,
+                async: false,
+                type: "get",
+                success: function (data) {
+                  if(data['result'] == true){
+                    $.each(data.rows, function (index, item) {
+                      $("#writerprofileName").text(item.NAME);
+                      $("#writerprofileImage").attr("src", item.IMG);
+                      $("#profileAge").text(getAge(item.BIRTHDAY) +"세 "+ getGender(item.GENDER));
+
+                      $("#writerDiv").click(function(){
+                          location.href = "../users/profile?id="+item.SEQ;
+                        });
+                    });
+                  };
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
+
+              $.ajax({
+                url: "/board/getallattenduserstate",
+                data: {"boardId" : no},
+                async: false,
+                type: "get",
+                success: function (data) {
+                  if(data['result'] == true){
+                    $.each(data.rows, function (index, item) {
+                      if(item.ATTEND_STATE == 0){
+                        var profileSource = "<div id=\"profileDiv\"><img src="+item.IMG+" class=\"rounded-circle\" id=\"profileImage\">" +
+                        "</div><div id=\"profileDiv3\"><div id=\"boardLine1\"><a><span id=\"profileName\">"+item.NAME+"</span><span class=\"text-right\" id=\"profileAge\">"+
+                              getAge(item.BIRTHDAY)+"세 "+getGender(item.GENDER)+"</span></a></div>" +
+                          "<div id=\"boardLine2\" class=\"row\">"+
+                            "<a class=\"col-8 tagDivStart\" id=\"apply" +item.ATTEND_SEQ+"\"><span class=\"apply-btn btn btn-primary px-4 py-3 text-uppercase\"><%=appyText%></span></a>"+
+                            "<a class=\"col-4 tagDiv\" id=\"refuse"+ item.ATTEND_SEQ+"\"><span class=\"refuse-btn btn btn-primary px-4 py-3 text-uppercase\"><%=refuseText%></span></a>"+
+                          "</div></div>";
+                          
+                          $("#requestpartyRow").append(profileSource);
+                          $("#apply"+item.ATTEND_SEQ).click(function(){
+
+                            if (confirm(item.NAME+"<%=appyConfirmText%>") == true){
+
+                              if(headCount == headCountMax){
+                                alert("<%=maxHeadCountText%>");
+
+                              }else{
+                                
+                              $.ajax({
+                                url: "/board/attenduserparty",
+                                data: {attendSeq : item.ATTEND_SEQ, boardId : item.BOARD_ID},
+                                async: false,
+                                type: "get",
+                                success: function (data) {
+                                  if(data['result'] == true){
+                                      location.reload();
+                                  };
+                                },
+                                beforeSend: function () {
+                                },
+                                complete: function () {
+                                }
+                              }); 
+                            }
+                            }else{
+                              return false;
+                            }
+                            
+                        });
+                        $("#refuse"+item.ATTEND_SEQ).click(function(){
+                          if (confirm(item.NAME+"<%=refuseConfirmText%>") == true){
+                          $.ajax({
+                            url: "/board/refuseuserparty",
+                            data: {attendSeq : item.ATTEND_SEQ},
+                            async: false,
+                            type: "get",
+                            success: function (data) {
+                              if(data['result'] == true){
+                              location.reload();
+                              };
+                            },
+                            beforeSend: function () {
+                            },
+                            complete: function () {
+                            }
+                          });
+                        }else{
+                          return false;
+                        }
+
+                        });
+                      }else if(item.ATTEND_STATE == 1){
+                        
+                        var profileSource = "<div class=\"row miniprofileclass\" id=\"profile"+item.SEQ+"\">" +
+                          "<div class=\"profileDiv\">" +
+                            "<img src="+item.IMG+" class=\"rounded-circle miniprofileImage\">" +
+                          "</div>" +
+                          "<div class=\"miniprofileDiv2\">" +
+                           "<div id=\"boardLine1\">" +
+                              "<a><span class=\"profileName\">"+item.NAME+"</span></a>" +
+                              "<a><span class=\"profileAge\">"+getAge(item.BIRTHDAY)+"세 "+getGender(item.GENDER)+"</span></a>"
+                            "</div></div></div>";
+                        $("#partyRow").append(profileSource);
+
+                        $("#profile"+item.SEQ).click(function(){
+                          location.href = "../users/profile?id="+item.SEQ;
+                        });
+                      }
+                    });
+                  };
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
+              $.ajax({
+                url: "/board/getpostarea",
+                data: {areacode : item.AREA_CODE},
+                async: false,
+                type: "get",
+                success: function (data) {
+                  if(data['result'] == true){
+                    $.each(data.rows, function (index, item) {
+                      $("#areaText").text(item.COUNTRY + " " + item.AREA);
+                    });
+                  };
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
+    $("#placeText").click(function(){
+      $('#myModal3').modal('show');
+    });
+              
+                $("#close_popup3").click(function() {
+                    
+                    $('#myModal3').modal('hide');
+                });
+
+              
+              $("#myModal3").on("shown.bs.modal", function() {
+
+                var myLatLng = {lat: latX, lng: longY};
+
+                if(latX == null || longY == null || latX == "" || longY == ""){
+                  
+                }else{
+                  var map_options = {
+                  center:{lat: latX, lng: longY},
+                  zoom: 17,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                  };
+                  var map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+
+                var defaultBounds = new google.maps.LatLngBounds(
+                  new google.maps.LatLng(myLatLng.lat),
+                  new google.maps.LatLng(myLatLng.longY)
+                );
+
+                var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+                });
+                                      
+                }
+
+                });
+
+                $("#myModal3").on("hidden.bs.modal", function() {$("#googleMap").empty();});
+
+
+            });
+
+          };
+        };
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+
+    function getAge(userAge){
+      var nowDay = new Date();
+      var birthday = new Date(userAge);
+    
+    
+      var age = nowDay.getFullYear() - birthday.getFullYear();
+      var month = nowDay.getMonth() - birthday.getMonth();
+    
+      return month < 0 || (month === 0 && nowDay.getDate() < birthday.getDate()) ?
+        age : age+1
+    }
+
+    function getGender(userGender){
+      if(userGender == "male"){
+      return "남";
+      }else if(userGender == "female"){
+        return "여";
+      }
+    }
+
+  });
+
+
+</script>
+
+
+
+</html>

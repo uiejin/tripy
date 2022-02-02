@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <% include ../css/default %> 
+  
+  <link rel="stylesheet" href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/noncover.css">
+  <link rel="stylesheet" href="/css/views/writepost.css">
+  <link rel="stylesheet" href="/css/views/search.css">
+  <link rel="stylesheet" href="/css/views/calendar.css">
+  <link rel="stylesheet" href="/css/views/myplan.css">
+  <link rel="stylesheet" href="/css/views/mytour.css">
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-settings js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+    <!--상단바-->
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center" id="site-navbar-line">
+              <div class="col-10">
+                <h2 class="mb-0 site-logo"></h2><a id="nav-title"><%= title %></a></h2>
+              </div>
+              <div class="col-2">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <!-- d-lg-none -->
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                        class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <!-- d-lg-block -->
+                    <ul class="site-menu js-clone-nav d-none" id="nav">
+                      <% include ../nav/nav_case %>
+                  </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="site-section bg-light">
+    <div class="container" id="writeForm">
+      <div class="row" id="writeRow">
+        <div id="write-form" class="col-lg-12">
+          <div class="form-group">
+            <!--자동수락 선택 버튼-->
+            
+            <!--입력 폼-->
+
+            <div class="col-12" id="writeItem">
+              <form class="form-inline md-form form-sm">
+                <i class="icon-search" aria-hidden="true"></i>
+                <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="<%=searchText%>" aria-label="Search" id="searchform">
+                
+              </form>
+            </div>
+            <hr>
+            <div class="col-12 dropdownIconDiv" id="infoDiv1">
+              <a id="attendCetion" class="col-12"><%=moreinfoText%></a>
+              <img class="dropdownIcon text-center" id="hide-writeform" src = "<%=dropdown%>">
+            </div>
+            <hr>
+            <div class="form-group" id="write-form-tag">
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1"><%=writeText1%></div>
+                <div class="writeDiv2" id="locationText"><%=locationText%></div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1"><%=writeText2%></div>
+                <div class="writeDiv2" id="cateText"><%=cateText%></div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1"><%=writeText3%></div>
+                <div class="writeDiv2"><input type="text" id="selectdateText1" class="writeInput"></div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1"><%=writeText4%></div>
+                <div class="writeDiv2"><input type="text" id="selectdateText2" class="writeInput"></div>
+              </div>
+              <hr>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section col-md-12" id="searchForm">
+      <div class="container" id=boardForm>
+        <div class="row col-md-12" id="post">
+  
+      <!--게시판 커스텀 -->
+      <div class = "ajaxboardForm" id = "newboardform">
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="s_id" data-prodnumber="${sessionScope.id}" />
+    <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle"><%=locationText%></h5>
+					<button type="button" class="close" id="close_popup" data-dimiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>					
+				</div>
+				<div class="row form-group" id="modal-form">
+				<div class="form-group" id="modal-info">
+				</div>
+        <div class="col-md-12">
+          <div id="areaForm"></div>
+					</div>
+				</div>								
+			</div>
+		</div>
+  </div>
+
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content" id="cate-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle2"><%=modalTitle2%></h5>
+					<button type="button" class="close" id="close_popup2" data-dimiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>					
+				</div>
+				<div class="row form-group" id="modal-form">
+				<div class="form-group" id="modal-info">
+				</div>
+        <div class="col-12 col-md-6 col-lg-3">
+          <div id="cateForm"></div>
+					</div>
+				</div>								
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<% include ../script/default %>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    var loginStatus  = "<%=loginStatus %>";
+    var userId = "<%=userId%>";
+
+    var country =['대한민국'];
+
+    var countrycode = null;
+    var areacode = null;
+    var category = null;
+    var categorycode = null;
+
+
+    var date = new Date();
+    date.setDate(date.getDate()-1);
+
+    if(loginStatus  == "true"){
+
+      $("#navProfileName").text("<%=username%>");
+        $("#profileImageNav").attr("src", "<%=userImg%>");
+    }else{
+      $("#nav").load("/html/nav_nologin.html");
+    /*  var loginMessage = "<%=loginMessage%>";
+      alert(loginMessage);
+      history.back();
+    */}
+
+    $("#infoDiv1").click(function() {
+      if($("#write-form-tag").css("display") == "none"){  
+        $("#write-form-tag").css("display", "block"); 
+        $("#hide-writeform").attr("src", "<%=dropdown%>");
+      }else{
+        $("#write-form-tag").css("display", "none");
+        $("#hide-writeform").attr("src", "<%=dropup%>");
+      }
+    });
+
+    $("#close_popup").click(function() {
+  			
+  		$('#myModal').modal('hide');
+    });
+
+    $("#close_popup2").click(function() {
+  			
+        $('#myModal2').modal('hide');
+    });
+
+    for(i=0; i<country.length; i++){
+
+      var addarea = "<div><a class=\"text-uppercase\" id=\"locationText\">"+country[i]+"</a></div>";
+
+      $("#areaForm").append(addarea);
+
+      var allData = {
+        country : country[i]
+      }
+
+      $.ajax({
+      url: "/writepost/getarea",
+      data: allData,
+			async: false,
+			type: "get",
+			success: function (data) {
+        $.each(data.rows, function (index, item) {
+
+          var addarea = "<div id=\"locationSectionFirst\">" +
+          "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"locationBtn"+item.AREA_CODE+"\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">" 
+           +item.AREA +"</button></div>";
+
+           $("#areaForm").append(addarea);
+
+           $("#locationBtn"+item.AREA_CODE).click(function(){
+              $('#locationText').text(item.AREA);
+              areacode = item.AREA_CODE;
+              countrycode = item.COUNTRY_CODE;
+              $('#myModal').modal('hide');
+              searchParty();
+            });
+
+        });
+        
+			},
+			beforeSend: function () {
+			},
+			complete: function () {
+			}
+    });
+  }
+
+    $.ajax({
+      url: "/writepost/getcategory",
+			async: false,
+			type: "get",
+			success: function (data) {
+        $.each(data.rows, function (index, item) {
+
+          var cate = "<div id=\"catesection\">" +
+          "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"cateBtn"+item.SEQ+"\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">" 
+           +item.CATEGORY +"</button></div>";
+
+           $("#cateForm").append(cate);
+
+           $("#cateBtn"+item.SEQ).click(function(){
+              $('#cateText').text(item.CATEGORY);
+              $('#myModal2').modal('hide');
+              category = item.CATEGORY;
+              categorycode = item.SEQ;
+              if(areacode != null){
+                searchParty();
+              }
+            });
+
+        });
+        
+			},
+			beforeSend: function () {
+			},
+			complete: function () {
+			}
+    });
+
+    $("#locationText").click(function(){
+      $('#myModal').modal('show');
+    });
+    $("#cateText").click(function(){
+      $('#myModal2').modal('show');
+    });
+
+    $("#selectdateText1").trigger("click");$("#selectdateText2").trigger("click");
+
+    $('#selectdateText1').click(function(){
+      $("#nav-title").text("<%=selectdateText%>");
+        $('#selectdateText1').datepicker({
+        startDate: new Date,
+        endDate : new Date(new Date().setDate(new Date().getDate() + 180)),
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        onSelect: function (dateText, inst) {
+        }
+      }).datepicker('show').on('hide', function(ev) { // <-----------
+        $("#nav-title").text("<%=selectdateText2%>");
+        $("#selectdateText2").trigger("click");
+
+    });
+      
+    });
+
+    $('#selectdateText2').click(function(){
+      $("#nav-title").text("<%=selectdateText2%>");
+        $('#selectdateText2').datepicker({
+        startDate: $("#selectdateText1").val(),
+        endDate : new Date(new Date().setDate(new Date().getDate() + 180)),
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        onSelect: function (dateText, inst) {
+        }
+      }).datepicker('show').datepicker('show').on('hide', function(ev) { // <-----------
+        $("#nav-title").text("<%=title%>");
+        if(areacode != null && $("#selectdateText1").val() != ""){
+          searchParty();
+        }
+        
+    });
+      
+    });
+
+    var oldVal = $("#searchform").val();
+    $("#searchform").on("propertychange change keyup paste input", function() {
+    var currentVal = $(this).val();
+    if(currentVal == oldVal) {
+        return;
+    }
+ 
+    oldVal = currentVal;
+    searchParty();
+});
+
+function searchParty(){
+
+  $("#newboardform *").remove();
+
+  var age = "<%=userAge%>";
+  var gender = "<%=userGender%>";
+
+
+  var allData = {"areacode" : areacode,
+    "category" : categorycode,
+    "startdate" : $("#selectdateText1").val(),
+    "enddate" : $("#selectdateText2").val(),
+    "text" : oldVal,
+    "age" : age,
+    "gender" : gender
+    }
+
+    $.ajax({
+      url: "/board/searchparty",
+      data: allData,
+			async: false,
+			type: "get",
+			success: function (data) {
+        $.each(data.rows, function (index, item) {
+          var source = "<div id=\"form-board" +item.NO+"\">" +
+                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+item.AREA+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
+                  if(item.LIMIT_GENDER == "male"){
+                    source = source + "[<%=maleText%>]";
+                  }else if(item.LIMIT_GENDER == "female"){
+
+                    source = source + "[<%=femaleText%>]";
+                  }
+                  source = source + "["+item.CATEGORY+"]</span></div>" +
+                  "<div id=\"boardLine1\"><span id=\"boardTitle\">"+item.TITLE+"</span>";
+
+                  if(item.HEADCOUNT == item.HEADCOUNT_NOW){
+                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount\">"+"<%=fillHeadCountText%>"+"</span></span></div>";
+                  }else{
+                    source = source + "<span class=\"text-right\" id=\"boardHeadCount\">"+item.HEADCOUNT_NOW+"/"+item.HEADCOUNT+"명</span></span></div>";
+                  }
+                  source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">"+item.NAME+"</span><span id=\"boardDate"+item.SEQ+"\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
+                  item.MEET_DATE + " " + item.MEET_TIME+ "</span></a></div><hr class=\"lineEvent\"></div>";
+          $("#newboardform").append(source);
+
+          $("#form-board"+item.NO).click(function(){
+                  location.href = "./read?no="+item.NO;
+                });
+
+        });
+        if(data.rows.length == 0){
+          var source = "<div id=\"nullpartyText\" class = \"text-center\"><%=nullparty%></div>";
+                $("#newboardform").append(source);
+        }
+          
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+    });
+  }
+
+});
+</script>
+
+
+
+</html>

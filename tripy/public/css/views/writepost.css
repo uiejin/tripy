@@ -1,0 +1,362 @@
+
+
+div#writeForm {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+div#writeRow { 
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+div#write-form {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+
+hr {
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+/*자율참가 여부 버튼 */
+
+div#attend-div {
+    width: 100%;
+    font-weight: 600;
+}
+
+a#attendCetion {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+label.btn.btn-danger {
+    background-color: #a09d9c ;
+    border-color: #a09d9c ;
+    opacity: 0.5;
+    font-size: 0.8rem;
+}
+
+.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {
+    color: #fff;
+    background-color: #34558b;
+    border-color: #34558b;
+    opacity: 1;
+}
+
+/* 항목 */
+
+
+div#writeItem {
+    font-size: 0.8rem;
+    position: relative;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+div.writeItem {
+    font-size: 0.8rem;
+    position: relative;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+input.writeInput {
+    width: 100%;
+    border: white;
+    
+}
+
+div.writeDiv1 {
+    display: inline-block;
+    font-weight: 600;
+}
+
+div.writeDiv2 {
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    width: 75%;
+    padding-left: 5px;
+}
+
+div#writeContent {
+    font-size: 0.8rem;
+}
+
+
+textarea#contentText {
+    width: 100%;
+    border: white;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 0.8rem;
+    min-height: 250px;
+}
+
+.icon-plus-square-o:before {
+    content: "\f196";
+    font-size: 1rem;
+    float: right;
+    color: #34558b;
+}
+
+.dropdownIconDiv {
+    text-align: center;
+    line-height: 0px;
+}
+
+img#hide-writeform {
+    width: 16px;
+    height: 16px;
+}
+
+div#write-form-tag {
+    margin-bottom: 0px;
+    display: none;
+}
+
+img#hide-writeform2 {
+    width: 16px;
+    height: 16px;
+}
+
+div#write-form-tag2 {
+    margin-bottom: 0px;
+    display: none;
+}
+
+
+a#write-button {
+    width: 100%;
+    margin-top: 3rem;
+    color: white;
+    background: #34558b;
+    border: #34558b;
+    float: right;
+}
+
+a#write-button2 {
+    width: 45%;
+    color: white;
+    background: #34558b;
+    border: #34558b;
+    float: right;
+}
+
+a#back-button {
+    width: 45%;
+    color: white;
+    background: #a09d9c ;
+    border: #a09d9c ;
+}
+
+/*여행지, modal  */
+
+button.locationBtn {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-color: #ffffff;
+    font-weight: 600;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px;
+    white-space: normal;
+}
+
+div#locationSectionFirst {
+    display: inline-block;
+    width: 31%;
+    height: 100px;
+    float: none;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    vertical-align: top;
+}
+
+div#areaForm2 {
+    white-space: nowrap;
+    overflow-x: auto;
+    /* text-align: center; */
+    display: inline-block;
+    padding-right: 0px;
+    width: -webkit-fill-available;
+}
+
+h5#modalTitle {
+    color: #34558b;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+h5#modalTitle2 {
+    color: #34558b;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+div#areaForm {
+    padding: 1rem;
+}
+
+.modal.show .modal-dialog {
+    -webkit-transform: none;
+    transform: none;
+    max-width: 100%;
+}
+
+a#locationText {
+    font-weight: bold;
+}
+
+div#catesection {
+    width: 100%;
+    height: 96px;
+    margin-bottom: 10px;
+}
+
+div#cateForm {
+    margin: 1rem;
+    height: 100%;
+}
+
+div#genderDiv {
+    margin-top: 1rem;
+    display: none;
+}
+
+div#ageDiv {
+    display: none;
+}
+
+label#femaleBtn.active, label#femaleBtn:active{
+    color: #fff;
+    background-color: #eaac9d;
+    border-color: #eaac9d;
+}
+
+/* timepicker*/
+
+.dtp-content {
+    width: 100%;
+    max-width: 100%!important;
+    height: 100%;
+    max-height: 100%!important;
+    margin-left: 0px!important;
+}
+
+header.dtp-header {
+    height: 60px;
+    background: #ffff!important;
+    padding: 0px;
+}
+
+.dtp-time {
+    background: #fff!important;
+    color: #34558b!important;
+    margin-top: 1rem;
+}
+button.dtp-btn-cancel.btn.btn-flat {
+    display: none;
+}
+.dtp > .dtp-content > .dtp-date-view > header.dtp-header {
+    background: #34558b;
+    color: #000;
+    text-align: center;
+    padding: 0.3em;
+    align-items: center!important;
+    display: flex;
+}
+.dtp-actual-day {
+    color: #34558b;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-align: initial;
+    margin-left: 15px;
+}
+
+
+button.dtp-btn-ok.btn.btn-flat {
+    width: 100%;
+    background: #34558b;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 스위치 toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 24px;
+    vertical-align: middle;
+    margin-bottom: 0px;
+    float: right;
+}
+
+  
+  /* Hide default HTML checkbox */
+  .switch input {display:none;}
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #34558b;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #34558b;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  p {
+      margin:0px;
+      display:inline-block;
+      font-size:15px;
+      font-weight:bold;
+  }

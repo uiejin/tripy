@@ -1,0 +1,55 @@
+form.p-5.bg-white {
+    padding: 0rem!important;
+}
+
+label.font-weight-bold {
+    background: white;
+    color: black;
+}
+
+
+div#attend-div {
+    width: 100%;
+    font-weight: 600;
+}
+
+a#attendCetion {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+label.btn.btn-danger {
+    background-color: #a09d9c ;
+    border-color: #a09d9c ;
+    opacity: 0.5;
+    font-size: 0.8rem;
+}
+
+.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {
+    color: #fff;
+    background-color: #3f629c;
+    border-color: #3f629c;
+    opacity: 1;
+}
+
+
+input#id_filed {
+    border-radius: 0rem;
+}
+
+a#login-button {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+	width: 100%;
+	color: aliceblue;
+}
+
+
+input#password_filed {
+    border-radius: 0rem;
+}
+
+.site-navbar-wrap .site-navbar .site-logo a {
+    color: #3f629c !important;
+    font-weight: 600;
+}

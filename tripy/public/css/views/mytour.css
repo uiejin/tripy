@@ -1,0 +1,373 @@
+
+/* 커버 관련 */
+
+h1#title_subject {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 6rem;
+}
+
+p#coverDate {
+    background: #a09d9c ;
+    border: #a09d9c ;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+video#bgvid {
+    position: fixed; right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto; z-index: -100;
+    /*background: url(polina.jpg) no-repeat;*/
+    background-size: cover;
+}
+
+
+a#find_button {
+    background: #34558b;
+    border: #34558b;
+    border-radius: 5rem;
+    padding: 1.5rem!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+    font-weight: 600;
+}
+
+a#search_button {
+    margin-left: 1rem;
+}
+
+p#coverBottom {
+    margin-top: 4rem;
+}
+
+/* 게시판 관련 */
+span#boardAttend {
+    background: #34558b;
+    border: #34558b;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span#boardNotAttend {
+    background: #d13b40;
+    border: #d13b40;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span#tourboardDate {
+    float: right;
+    color: #444444;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+span#boardWriter {
+    color: #444444;
+    font-size: 0.8rem;
+}
+
+
+div#locationLine {
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+span#boardWatingInvite {
+    background: #ffaf12;
+    border: #ffaf12;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span#boardInvite {
+    background: #d13b40;
+    border: #d13b40;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span#boardfullInvite {
+    background: #34558b;
+    border: #34558b;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+
+span#boardHeadCount {
+    float: right;
+}
+
+span#boardDate {
+    background: #a09d9c;
+    border: #a09d9c;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span.boardDate {
+    background: #a09d9c;
+    border: #a09d9c;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem!important;
+    padding-top: 0.1rem!important;
+    padding-bottom: 0.1rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+span#boardDate1 {
+    background: #fff;
+    color: #117893;
+    border: 1px solid #117893;
+}
+
+span#boardDate2 {
+    background: #fff;
+    color: #d13b40 ;
+    border: 1px solid #d13b40;
+}
+
+span#boardDate3 {
+    background: #fff;
+    color: #4ec5a5 ;
+    border: 1px solid #4ec5a5;
+}
+
+span#boardDate4 {
+    background: #fff;
+    color: #565d47 ;
+    border: 1px solid #565d47;
+}
+
+span#boardDate5 {
+    background: #fff;
+    color: #fd823e ;
+    border: 1px solid #fd823e;
+}
+
+span#boardDate6 {
+    background: #fff;
+    color: #72617d ;
+    border: 1px solid #72617d;
+}
+
+
+span#boardHeadCount {
+    color: #444444;
+    font-size: 0.8rem;
+    font-weight: 600;
+    float: right;
+}
+
+span#boardFillHeadCount {
+    background: #d13b40;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    float: right;
+}
+
+span#boardFillHeadCount0 {
+    background: #b49c73 ;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    float: right;
+}
+
+span#boardFillHeadCount1 {
+    background: #34558b;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    float: right;
+}
+
+span#boardFillHeadCount3 {
+    background: #d13b40;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    float: right;
+}
+
+span#boardWriter {
+    color: #444444;
+    font-size: 0.8rem;
+}
+
+/* 카테고리 관련 작업 가로 스크롤 */
+
+div#cateContainer {
+    padding-right: 0px;
+    margin-top: 4rem;
+}
+
+div#categoryForm {
+    margin-top: 5rem;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+div#form-category {
+    white-space: nowrap;
+    overflow-x: auto;
+    /* text-align: center; */
+    display: inline-block;
+    padding-right: 0px;
+    width: -webkit-fill-available;
+}
+
+div#cateSectionFirst {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 20px;
+    vertical-align: top;
+}
+div.cateSectionFirst {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+div#cateSectionEnd {
+    display: inline-block;
+    width: 15px;
+    height: 150px;
+    float: none;
+    margin-left: 15px;
+    vertical-align: top;
+}
+
+div#cateSection {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+div.cateSection {
+    display: inline-block;
+    width: 35%;
+    height: 150px;
+    float: none;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+
+button#cateBtn {
+    width: 100%;
+    height: 100%;
+    background: #798fa8;
+    border-color: #798fa8;
+    font-weight: 600;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*버튼 관련*/
+
+div#button-div {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+a#delete-button {
+    background-color: #d13b40;
+    border-color: #d13b40;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+a#update-button {
+    background-color: #34558b;
+    border-color: #34558b;;
+    color: white;
+    margin-bottom: 1rem;
+    float: left;
+}
+
+div.ajaxboardForm {
+    width: 100%;
+}
+
+
+@media ( max-width : 768px) {
+    a#delete-button {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    a#update-button {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+}
+

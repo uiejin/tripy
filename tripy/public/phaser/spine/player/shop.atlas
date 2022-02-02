@@ -1,0 +1,83 @@
+
+shop.png
+size: 224,267
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 2, 180
+  size: 85, 146
+  orig: 86, 146
+  offset: 1, 0
+  index: -1
+hair
+  rotate: true
+  xy: 2, 142
+  size: 36, 48
+  orig: 36, 48
+  offset: 0, 0
+  index: -1
+hair2
+  rotate: true
+  xy: 2, 5
+  size: 135, 115
+  orig: 135, 115
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 150, 50
+  size: 90, 72
+  orig: 90, 72
+  offset: 0, 0
+  index: -1
+leftEye
+  rotate: false
+  xy: 149, 14
+  size: 31, 34
+  orig: 31, 34
+  offset: 0, 0
+  index: -1
+lefthand
+  rotate: false
+  xy: 119, 4
+  size: 28, 85
+  orig: 28, 85
+  offset: 0, 0
+  index: -1
+mouse
+  rotate: false
+  xy: 149, 2
+  size: 28, 10
+  orig: 28, 10
+  offset: 0, 0
+  index: -1
+muffle
+  rotate: false
+  xy: 52, 146
+  size: 63, 32
+  orig: 63, 32
+  offset: 0, 0
+  index: -1
+muffle2
+  rotate: false
+  xy: 150, 142
+  size: 72, 123
+  orig: 72, 123
+  offset: 0, 0
+  index: -1
+rightEye
+  rotate: true
+  xy: 182, 20
+  size: 28, 34
+  orig: 28, 34
+  offset: 0, 0
+  index: -1
+righthand
+  rotate: false
+  xy: 119, 91
+  size: 29, 87
+  orig: 29, 90
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,130 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var loginuserId = "<%=userId%>";
+    var loginStatus = "<%=loginStatus %>";
+
+    var nowdate = new Date().format("yyyy-MM-dd");
+    var nowdate2 = new Date();
+
+    if (loginStatus == "true") {
+      $("#navProfileName").text("<%=username%>");
+      $("#profileImageNav").attr("src", "<%=userImg%>");
+      if ("<%=userGender%>" == "" || "<%=userAge%>" == "") {
+      }
+    } else {
+      $("#profileForm").css("display", "none");
+    }
+
+    $.ajax({
+      url: "/writepost/getcategory",
+      async: false,
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+          if (index == 0) {
+            var source = "<div class=\"cateSectionFirst\"\ id=\"cateSection" + item.SEQ + "\"><button class=\"btn btn-primary\" type=\"submit\" id=\"cateBtn\"" +
+              "style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" + item.IMG + ");\">" + item.CATEGORY + "</button></div>";
+            $("#form-category").append(source);
+          } else {
+            var source = "<div class=\"cateSection\"\ id=\"cateSection" + item.SEQ + "\"><button class=\"btn btn-primary\" type=\"submit\" id=\"cateBtn\"" +
+              "style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" + item.IMG + ");\">" + item.CATEGORY + "</button></div>";
+            $("#form-category").append(source);
+          }
+          $("#cateSection" + item.SEQ).click(function () {
+            nowdate2.setMonth(nowdate2.getMonth() + 1);
+            location.href = "/board/searchpost?categorycode=" + item.SEQ + "&enddate=" + nowdate2;
+          });
+        });
+        var source = "<div id=\"cateSectionEnd\"></div>";
+        $("#form-category").append(source);
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+
+    $("#moreboardText").click(function () {
+      nowdate2.setMonth(nowdate2.getMonth() + 1);
+      location.href = "/board/searchpost?enddate=" + nowdate2;
+    })
+
+    $.ajax({
+      url: "/myplan/getmyplannow",
+      data: { "id": "<%=userId%>", "nowDate": nowdate },
+      async: false,
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+
+          var areacode = item.AREA_CODE;
+          $("#title_img").css("background-image", "url(" + item.IMG + ")");
+
+        });
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+
+    $.ajax({
+      url: "/mytour/getnewpostnotarea",
+      data: { "nowdate": nowdate },
+      async: false,
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+          var source = "<div id=\"newform-board" + item.NO + "\">" +
+            "<div id=\"boardLine1\"><a><span id=\"boardArea\">" + "[" + item.COUNTRY + "]" + "[" + item.AREA + "]</span><span class=\"text-right\" id=\"boardCategory" + item.SEQ + "\">";
+          if (item.LIMIT_GENDER == "male") {
+            source = source + "[<%=maleText%>]";
+          } else if (item.LIMIT_GENDER == "female") {
+
+            source = source + "[<%=femaleText%>]";
+          }
+          source = source + "[" + item.CATEGORY + "]</span></div>" +
+            "<div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span>";
+
+          if (item.HEADCOUNT == item.HEADCOUNT_NOW) {
+            source = source + "<span class=\"text-right\" id=\"boardFillHeadCount\">" + "<%=fillHeadCountText%>" + "</span></span></div>";
+          } else {
+            source = source + "<span class=\"text-right\" id=\"boardHeadCount\">" + item.HEADCOUNT_NOW + "/" + item.HEADCOUNT + "명</span></span></div>";
+          }
+          source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">" + item.NAME + "</span><span id=\"boardDate" + item.SEQ + "\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
+            item.MEET_DATE + " " + item.MEET_TIME + "</span></a></div><hr class=\"lineEvent\"></div>";
+          $("#newboardform").append(source);
+
+          $("#newform-board" + item.NO).click(function () {
+            location.href = "/board/read?no=" + item.NO;
+          });
+        });
+        if (data.rows.length == 0) {
+          $("#newboardcontainer").css("display", "none");
+        }
+
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+
+    $.ajax({
+      url: "/tourist/gettourlist",
+      async: false,
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+        });
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+
+
+  });
+</script>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/image/favicon.ico">
+    <link rel="shortcut icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/timedropper.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/bootstrap-material-datetimepicker.css">
+    <link rel="stylesheet" href="/css/aos.css">
+
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+
+    <link rel="stylesheet" href="/css/views/style.css">
+    <link rel="stylesheet" href="/css/views/main.css">
+    <link rel="stylesheet" href="/css/views/noncover.css">
+    <link rel="stylesheet" href="/css/views/writepost.css">
+    <link rel="stylesheet" href="/css/views/read.css">
+    <link rel="stylesheet" href="/css/views/management.css">
+    <link rel="stylesheet" href="/css/views/calendar.css">
+    <link rel="stylesheet" href="/css/views/slider.css">
+    <link rel="stylesheet" href="/css/views/maps.css">
+</head>
+
+<body>
+
+    <div class="site-wrap">
+
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div> <!-- .site-mobile-menu -->
+
+        <!--상단바-->
+        <div class="site-navbar-wrap js-site-navbar bg-white">
+
+            <div class="container">
+                <div class="site-navbar bg-light">
+                    <div class="py-1">
+                        <div class="row align-items-center">
+                            <div class="col-10">
+                                <h2 class="mb-0 site-logo"></h2><a id="nav-title">
+                                    <%= title %>
+                                </a></h2>
+                            </div>
+                            <div class="col-2">
+                                <nav class="site-navigation text-right" role="navigation">
+                                    <div class="container">
+                                        <!-- d-lg-none -->
+                                        <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                                                class="site-menu-toggle js-menu-toggle"><span
+                                                    class="icon-menu h3"></span></a></div>
+                                        <!-- d-lg-block -->
+                                        <ul class="site-menu js-clone-nav d-none" id="nav">
+                                            <% include ../nav/nav_case %>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container" id="writeForm">
+            <div class="row" id="writeRow">
+                <div id="write-form" class="col-lg-12">
+
+
+                    <div class="form-group">
+                        <h3 class="h5 text-black mb-3">사진첨부</h3>
+                        <!--
+                        <video id="webcam" autoplay playsinline width="640" height="480"></video>
+                        <canvas id="canvas" class="d-none"></canvas>
+                        <form id="form" enctype="multipart/form-data">
+                            -->
+                        <h7> *총 1장의 사진을 첨부할 수 있습니다.</h7><br>
+                        <h7> *이미지 파일외 첨부가 불가능 합니다.</h7>
+                        <div class="main-img-div">
+                            <label for="main_img_label">사진 첨부</label>
+                            <input type="file" id="img_main" name="img_main" filestyle input="" type="file"
+                                data-class-button="btn btn-default" data-class-input="form-control" data-button-text=""
+                                data-icon-name="fa fa-upload" class="form-control" tabindex="-1" accept="image/*" />
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12" id="button-div">
+                <a id="placeText" class="col-12 btn btn-primary px-4 py-2">
+                    전송
+                </a>
+            </div>
+
+
+        </div>
+
+        </form>
+        <div class="col-12" id="readItem">
+            <div class="map_wrap" style="width:100%;height:50vh;">
+                <div id="map" style="width:100%;height:100%;"></div>
+                <!-- 지도타입 컨트롤 div 입니다 -->
+                <div class="custom_typecontrol radius_border">
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    </div>
+
+</body>
+
+<% include ../script/default %>
+    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b13823aa27ce3a503c666f8e6d1a6e"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var loginStatus = "<%=loginStatus%>";
+    var userId = "<%=userId%>";
+            const webcamElement = document.getElementById('webcam');
+            const canvasElement = document.getElementById('canvas');
+            const snapSoundElement = document.getElementById('snapSound');
+            /*   const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+   
+               webcam.start()
+                   .then(result => {
+                       console.log("webcam started");
+                   })
+                   .catch(err => {
+                       console.log(err);
+                   });
+   */
+            $("#placeText").click(function () {
+                if ($("#img_main").val() == null || $("#img_main").val() == "") {
+                    alert("사진을 첨부해 주세요");
+                }
+                else {
+                    var formData = new FormData();
+
+                    formData.append("img_main", $("#img_main")[0].files[0]);
+                    var no;
+                    var img_main_url;
+
+                    var img_main_val1 = false;
+
+                    var uploadImgCount = 0;
+                    var imgElem = document.getElementById("img_main").files[0];
+                    imgElem.exifdata = null; // 같은 페이지 안에서 이미지가 바뀌는 경우 이전의 메타데이터 정보를 지워주어야 함.
+                    EXIF.getData(imgElem, function () {
+                        var allMetaData = EXIF.getAllTags(this); //모든 EXIF정보
+                        var exifLong = EXIF.getTag(this, "GPSLongitude");
+                        console.log(exifLong);
+                        var exifLat = EXIF.getTag(this, "GPSLatitude");
+                        var exifLongRef = EXIF.getTag(this, "GPSLongitudeRef");
+                        var exifLatRef = EXIF.getTag(this, "GPSLatitudeRef");
+                        //계산식 적용이유는 해당라이브러리가 위도경도를 도분초 단위로 출력하기 때문
+                        if (exifLatRef == "S") {
+                            var latitude = (exifLat[0] * -1) + (((exifLat[1] * -60) + (exifLat[2] * -1)) / 3600);
+                        } else {
+                            var latitude = exifLat[0] + (((exifLat[1] * 60) + exifLat[2]) / 3600);
+                        }
+
+                        if (exifLongRef == "W") {
+                            var longitude = (exifLong[0] * -1) + (((exifLong[1] * -60) + (exifLong[2] * -1)) / 3600);
+                        } else {
+                            var longitude = exifLong[0] + (((exifLong[1] * 60) + exifLong[2]) / 3600);
+                        }
+
+                        var latX = latitude;
+                        var longY = longitude;
+
+                        var myLatLng = { lat: latX, lng: longY };
+
+                        if (latX == null || longY == null || latX == "" || longY == "") {
+                            alert('사진에 위치 데이터가 없습니다.');
+
+                        } else {
+                            alert("경도 : " + latX + " 위도 : " + longY);
+
+                            var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+                            var options = { //지도를 생성할 때 필요한 기본 옵션
+                                center: new kakao.maps.LatLng(latX, longY), //지도의 중심좌표.
+                                level: 3 //지도의 레벨(확대, 축소 정도)
+                            };
+                            var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: new kakao.maps.LatLng(latX, longY)
+                            });
+                            var overlay = new kakao.maps.CustomOverlay({
+                                map: map,
+                                position: marker.getPosition()
+                            });
+                            kakao.maps.event.addListener(marker, 'click', function () {
+                                overlay.setMap(map);
+                            });
+
+                            var allData = {
+                                "id": userId,
+                                "latX": latX,
+                                "longY": longY 
+                            };
+
+                            $.ajax({
+                                url: "/test/writetestphoto",
+                                data: allData,
+                                async: false,
+                                type: "post",
+                                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                                success: function (data) {
+                                    if (data['result'] == 'null') {
+                                    } else {
+                                        no = data['result'];
+
+                                        $.ajax({
+                                            url: '/upload/uploadcategory',
+                                            type: 'POST',
+                                            contentType: false,
+                                            processData: false,
+                                            cache: false,
+                                            data: formData,
+                                            success: function (res) {
+                                                var allData = {
+                                                    "no": no,
+                                                    "img1": res['result']['img_main'][0].location
+                                                };
+
+                                                $.ajax({
+                                                    url: "/test/uploadphoto",
+                                                    data: allData,
+                                                    async: false,
+                                                    type: "post",
+                                                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                                                    success: function (data) {
+                                                        if (data['result'] == 'null') {
+                                                            alert("false");
+                                                        } else {
+                                                            alert("사진 업로드에 성공하였습니다.");
+                                                        }
+                                                    },
+                                                    beforeSend: function () {
+                                                    },
+                                                    complete: function () {
+                                                    }
+                                                });
+                                            },
+                                            error: function () {
+                                                alert('오류가 발생하였습니다. 관리자에게 문의해 주세요');
+                                            }
+                                        });
+                                    }
+                                },
+                                beforeSend: function () {
+                                },
+                                complete: function () {
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            /*
+                        $("#myModal3").on("shown.bs.modal", function () {
+            
+                            var myLatLng = { lat: latX, lng: longY };
+            
+                            if (latX == null || longY == null || latX == "" || longY == "") {
+            
+                            } else {
+                                var map_options = {
+                                    center: { lat: latX, lng: longY },
+                                    zoom: 17,
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                };
+                                var map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+            
+                                var defaultBounds = new google.maps.LatLngBounds(
+                                    new google.maps.LatLng(myLatLng.lat),
+                                    new google.maps.LatLng(myLatLng.longY)
+                                );
+            
+                                var marker = new google.maps.Marker({
+                                    position: myLatLng,
+                                    map: map,
+                                    title: 'Hello World!'
+                                });
+            
+                            }
+            
+                        });
+            */
+        });
+
+
+    </script>
+
+</html>

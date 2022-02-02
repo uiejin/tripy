@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/noncover.css">
+  <link rel="stylesheet" href="/css/views/myplan.css">
+  <link rel="stylesheet" href="/css/views/read.css">
+  <link rel="stylesheet" href="/css/views/profile.css">
+
+
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-settings js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+<!--상단바-->
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center" id ="site-navbar-line">
+              <div class="col-10">
+                <h2 class="mb-0 site-logo"></h2><a id="nav-title"><%= title %></a></h2>
+              </div>
+              <div class="col-2">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <!-- d-lg-none -->
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                        class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <!-- d-lg-block -->
+                    <ul class="site-menu js-clone-nav d-none" id="nav">
+                      <% include ../nav/nav_case %>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--커버에 들어갈 버튼 및 텍스트  -->
+
+<div class="site-section bg-light">
+    <div class="container" id="readForm">
+      <div class="row" id="readRow">
+        <div id="read-form" class="col-lg-12">
+            <div class="col-md-12 text-center">
+                <img src="" class="rounded-circle" id="profileImage">
+                <h1 class="mb-4" id="title_subject"><%=nameText%></h1>
+              </div>
+          <div class="form-group">
+            <!--자동수락 선택 버튼-->
+            
+            <!--입력 폼-->
+            <div class="col-12" id="readItem">
+              <div class="readDiv1">칭호</div>
+              <div class="readDiv2" id="dateText">선택하기</div>
+            </div>
+            <div class="col-12" id="readItem">
+                <div class="readDiv1">나이</div>
+                <div class="readDiv2" id="ageText"></div>
+            </div>
+            <div class="col-12" id="readItem">
+                <div class="readDiv1">LIKE</div>
+                <div id="readDiv2" class="row">
+                    <a class="col-4" id="tagDivStart"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">사진찍기</span></a>
+                    <a class="col-4" id="tagDiv"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">맛집투어</span></a>
+                    <a class="col-4" id="tagDiv"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">애주가</span></a>
+                    <a class="col-4" id="tagDivStart"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">현지음식</span></a>
+                    <a class="col-4" id="tagDiv"><span id="tagDate" class="btn btn-primary px-4 py-3 text-uppercase">현지탐방</span></a>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+<!--모임글  -->
+<div class="site-section bg-light col-md-12" id="nowtext">
+  <div class="container" id=boardForm>
+    <div class="row col-md-12" id="post">
+      <div>
+        <a class="text-uppercase boardText"><%=nowBoard%></a>
+      </div>
+
+
+<!--게시판 커스텀 -->
+      <div class= "ajaxboardForm" id="nowForm">
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!--모임글  -->
+<div class="site-section bg-light col-md-12" id="nexttext">
+  <div class="container" id=boardForm>
+    <div class="row col-md-12" id="post">
+      <div>
+        <a class="text-uppercase boardText"><%=nextBoard%></a>
+      </div>
+
+
+<!--게시판 커스텀 -->
+    <div class= "ajaxboardForm" id="nextForm">
+    </div>
+    </div>
+  </div>
+</div>  
+
+    <div id="s_id" data-prodnumber="${sessionScope.id}" />
+    <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+  
+  </div>
+
+
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/popper.min.js"></script>
+<script src="/js/lib/owl.carousel.min.js"></script>
+<script src="/js/lib/jquery.stellar.min.js"></script>
+<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+<script src="/js/lib/bootstrap-datepicker.min.js"></script>
+<script src="/js/lib/aos.js"></script>
+
+<script src="/js/lib/mediaelement-and-player.min.js"></script>
+
+<script src="/js/views/main.js"></script>
+
+<script type="text/javascript">   
+  $(document).ready( function() {
+  
+    var loginStatus  = "<%=loginStatus %>";
+    var userId = "<%=userId%>";
+
+
+    if(loginStatus  == "true"){
+
+      $("#navProfileName").text("<%=username%>");
+        $("#profileImageNav").attr("src", "<%=userImg%>");
+      }else{
+      $("#nav").load("/html/nav_nologin.html");
+      /*  var loginMessage = "<%=loginMessage%>";
+      alert(loginMessage);
+      history.back();
+    */}
+
+    var viewUserId = location.href
+      .substr(location.href.lastIndexOf('=') + 1);
+    
+    $("#nowtext").hide();$("#prevtext").hide();$("#nexttext").hide();
+//get으로 사용자 정보 가져오지 않앗을시, 자기 프로필 가져오기
+    if(location.href == viewUserId){
+
+    $.ajax({
+      url: "/myplan/getuserinfo",
+      data: {"id" : userId},
+      async: false,
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+          $("#title_subject").text(item.NAME);
+          $("#nav-title").text(item.NAME + "<%=title%>");
+          $("#profileImage").attr("src", item.IMG);
+          $("#ageText").text("<%=userAge%>" +" "+ getGender("<%=userGender%>"));
+        })
+    },
+      beforeSend: function () {
+    },
+      complete: function () {
+      }
+    });        
+
+
+    $.ajax({
+            url: "/myplan/getmyallplan",
+            data: {"id" : userId},
+            async: false,
+            type: "get",
+            success: function (data) {
+              $.each(data.rows, function (index, item) {
+                var today = new Date();
+                var startdate = new Date(item.START_DATE);
+                var enddate = new Date(item.END_DATE);
+                today.setHours(0,0,0,0);startdate.setHours(0,0,0,0);enddate.setHours(0,0,0,0);
+
+                var areacode = item.AREA_CODE
+
+                if (today.getTime() >= startdate.getTime()&& today.getTime() <= enddate.getTime()) {
+                  $("#nowtext").show();
+                  var source = "<div id=\"form-board" +item.SEQ+"\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                  "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nowBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" + 
+                    item.START_DATE + " ~ " + item.END_DATE + "</span></div><hr class=\"lineEvent\"></div>";
+                  $("#nowForm").append(source); 
+
+								} else if (today.getTime() < startdate.getTime()) {
+                    $("#nexttext").show();
+                    var source = "<div id=\"form-board" +item.SEQ+"\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                    "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nextBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" + 
+                      item.START_DATE + " ~ " + item.END_DATE + "</span></div><hr class=\"lineEvent\"></div>";
+                    $("#nextForm").append(source);
+                }
+                  $.ajax({
+                    url: "/mytour/getareainfo",
+                    data : {areacode : areacode},
+                    async: false,
+                    type: "get",
+                    success: function (data) {
+                      $.each(data.rows, function (index, item) {
+                        $("#boardTitle"+ areacode).text(item.AREA);
+                      });
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                  });
+              });
+              
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+            }
+          });
+//get으로 가져온 사용자 정보 가져오기
+    }else{
+      $.ajax({
+      url: "profile/getuserinfoseq",
+      data: {"id" : viewUserId},
+      async: false,
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+          $("#title_subject").text(item.NAME);
+          $("#nav-title").text(item.NAME + "<%=title%>");
+          $("#profileImage").attr("src", item.IMG);
+          if(item.BIRTHDAY==null ||item.GENDER== null ){
+            $("#ageText").text("<%=notGetAgeTEXT%>");
+          }else{
+            $("#ageText").text(getAge(item.BIRTHDAY) +"세 "+ getGender(item.GENDER));
+          }
+          
+        })
+    },
+      beforeSend: function () {
+    },
+      complete: function () {
+      }
+    });        
+
+
+    $.ajax({
+            url: "/myplan/getuserplan",
+            data: {"id" : viewUserId},
+            async: false,
+            type: "get",
+            success: function (data) {
+              $.each(data.rows, function (index, item) {
+                var today = new Date();
+                var startdate = new Date(item.START_DATE);
+                var enddate = new Date(item.END_DATE);
+                today.setHours(0,0,0,0);startdate.setHours(0,0,0,0);enddate.setHours(0,0,0,0);
+
+                var areacode = item.AREA_CODE
+
+                if (today.getTime() >= startdate.getTime()&& today.getTime() <= enddate.getTime()) {
+                  $("#nowtext").show();
+                  var source = "<div id=\"form-board" +item.SEQ+"\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                  "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nowBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" + 
+                    item.START_DATE + " ~ " + item.END_DATE + "</span></div><hr class=\"lineEvent\"></div>";
+                  $("#nowForm").append(source); 
+
+								} else if (today.getTime() < startdate.getTime()) {
+                    $("#nexttext").show();
+                    var source = "<div id=\"form-board" +item.SEQ+"\"><div id=\"boardLine1\"><span id=\"boardTitle" + item.AREA_CODE + "\"></span></div>" + 
+                    "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nextBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" + 
+                      item.START_DATE + " ~ " + item.END_DATE + "</span></div><hr class=\"lineEvent\"></div>";
+                    $("#nextForm").append(source);
+                }
+                  $.ajax({
+                    url: "/mytour/getareainfo",
+                    data : {areacode : areacode},
+                    async: false,
+                    type: "get",
+                    success: function (data) {
+                      $.each(data.rows, function (index, item) {
+                        $("#boardTitle"+ areacode).text(item.AREA);
+                      });
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                  });
+              });
+              
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+            }
+          });
+    }
+
+    function getAge(userAge){
+      var nowDay = new Date();
+      var birthday = new Date(userAge);
+    
+    
+      var age = nowDay.getFullYear() - birthday.getFullYear();
+      var month = nowDay.getMonth() - birthday.getMonth();
+    
+      return month < 0 || (month === 0 && nowDay.getDate() < birthday.getDate()) ?
+        age : age +1
+    }
+
+    function getGender(userGender){
+      if(userGender == "male"){
+      return "남";
+      }else if(userGender == "female"){
+        return "여";
+      }
+    }
+  
+  });
+  </script>
+  
+  
+
+</html>

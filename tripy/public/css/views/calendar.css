@@ -1,0 +1,71 @@
+
+div#myModal {
+}
+
+.datepicker {
+    width: 100%;
+    top: 0!important;
+    left: 0!important;
+    height: 100%;
+}
+.modal-dialog.modal-lg {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-content {
+    border: 0px;
+    border-radius: 0em;
+}
+
+.datepicker.datepicker-inline {
+    width: 100%;
+}
+
+table.table-condensed {
+    width: 100%;
+}
+
+tr {
+    height: 45px;
+}
+
+.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-right.datepicker-orient-bottom {
+    border: 0px;
+}
+
+.datepicker table tr td.active:active, 
+.datepicker table tr td.active:hover:active, 
+.datepicker table tr td.active.disabled:active, 
+.datepicker table tr td.active.disabled:hover:active, 
+.datepicker table tr td.active.active, 
+.datepicker table tr td.active:hover.active, 
+.datepicker table tr td.active.disabled.active, 
+.datepicker table tr td.active.disabled:hover.active {
+        background-image: linear-gradient(to bottom, #34558b  , #34558b  );
+        border-radius: 5px 20px 5px;
+}
+
+span.month.focused.active {
+    background-image: linear-gradient(to bottom, #34558b  , #34558b  );
+    border-radius: 5px 20px 5px;
+}
+
+span.year.active.focused {
+    background-image: linear-gradient(to bottom, #34558b  , #34558b  );
+    border-radius: 5px 20px 5px;
+}
+
+.datepicker table tr td span.focused {
+    background: #d13b40;
+    border-radius: 5px 20px 5px;
+}
+
+.modal-header {
+    border-bottom: 1px solid #ffffff;
+}
+
+div#cate-content {
+    height: 100%;
+}
