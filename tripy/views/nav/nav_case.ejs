@@ -1,5 +1,5 @@
-<% if (loginStatus ){ %>
-    <% include nav_login %>
+<% if (loginStatus && isAdmin ){ %>
+    <% include nav_login_admin %>
     <% }else if(loginStatus ) { %>
     <% include nav_login %>
     <% }else { %>

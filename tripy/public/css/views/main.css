@@ -69,6 +69,15 @@ a.hideMenu2 {
 a.hideMenu3 {
     font-size: 0.9rem!important;
 }
+
+
+.hideMenu4 {
+    font-size: 1rem;
+	display: none!important;
+}
+a.hideMenu4 {
+    font-size: 0.9rem!important;
+}
 .background-blocks-cover {
 	min-height: 200px;
 }

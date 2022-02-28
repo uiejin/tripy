@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>관리자 페이지</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="icon"  href="/image/favicon.ico">
+  <link rel="shortcut icon"  href="/image/favicon.ico">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/read.css">
+  <link rel="stylesheet" href="/css/views/login.css">
+  <link rel="stylesheet" href="/css/views/notice.css">
+  <link rel="stylesheet" href="/css/views/admin.css">
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+
+
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center">
+              <div class="col-10">
+                <h2 class="mb-0 site-logo"><a>관리자 페이지</a></h2>
+              </div>
+              <div class="col-2">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <!-- d-lg-none -->
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                        class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <!-- d-lg-block -->
+                    <ul class="site-menu js-clone-nav d-none" id="nav">
+                      <% include ../nav/nav_case %>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap-loading display-none">
+    <div class="spinner-border text-primary display-none"></div>
+  </div>
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="button_div">
+          <div>
+         <!--   <a id="update-button" class="btn btn-primary px-4 py-2" href="/admin/register">계정생성하기</a>
+            <a id="update-button" class="btn btn-primary px-4 py-2" href="/admin/category">강의카테고리</a>-->
+            <a id="chage-user-button" class="btn btn-primary px-4 py-2">삭제 유저 보기</a>
+          <!--  <a id="chage-user-button" class="btn btn-primary px-4 py-2" href="/admin/notice">공지사항 관리</a> -->
+          </div>
+        </div>
+        <div class="row col-md-12 mx-auto text-center mb-5 section-heading">
+          <h3 class="col-md-12 text-uppercase"><a id="user-a">사용자 목록</a></h3>
+          <h5 class="col-md-4 text-uppercase"><a id="user-a">총 가입한 사람</a><a class="userCount" id="register-user"></a>
+          </h5>
+          <h5 class="col-md-4 text-uppercase"><a id="user-a">새로 가입한 사람</a><a class="userCount" id="new-user"></a></h5>
+          <h5 class="col-md-4 text-uppercase"><a id="user-a">탈퇴한 사람</a><a class="userCount" id="delete-user"></a></h3>
+
+        </div>
+
+      </div>
+      <div class="row" id="form-board-user">
+        <table class="table table-striped table-hover col-md-12">
+          <thead>
+            <tr id= "paginationTr">
+              <th scope="col">ID</th>
+              <th scope="col">이름</th>
+              <th scope="col">생성일자</th>
+              <th scope="col">계정상태</th>
+              <th scope="col">권한 변경</th>
+              <th scope="col">비밀번호 변경</th>
+              <th scope="col">계정삭제</th>
+            </tr>
+            <tr id= "paginationTr2">
+              <th scope="col">ID</th>
+              <th scope="col">이름</th>
+              <th scope="col">생성일자</th>
+              <th scope="col">계정상태</th>
+              <th scope="col">영구삭제</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+        <!-- modal -->
+        <div class="row col-md-12" id="pagenation-center">
+          <!--게시판 커스텀 -->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination" id="paginationList">
+            </ul>
+            <ul class="pagination" id="paginationList2">
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<% include ../script/default %>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var loginStatus = "<%=loginStatus%>";
+    var loginId = "<%=userId%>";
+    var isAdmin = "<%=isAdmin%>";
+
+    $("#paginationList2").hide();
+    $("#paginationTr2").hide();
+    var userstate = 0;
+
+    if (loginStatus == "true" && isAdmin == '1') {
+      
+      var pageSize = 10;
+      var startNo = 0;
+      var endNo = 10;
+      var allDataSize = 0;
+      var pageNo = 0;
+      
+      var startNo2 = 0;
+      var endNo2 = 10;
+      var allDataSize2 = 0;
+      var pageNo2 = 0;
+      $("#navProfileName").text("<%=username%>");
+      $("#profileImageNav").attr("src", "<%=userImg%>");
+
+      $.ajax({
+        url: "/admin/getuserall",
+        async: false,
+        type: "post",
+        success: function (data) {
+          allDataSize = data.rows[0]['COUNT(*)'];
+          pageNo = allDataSize / pageSize;
+          $("#register-user").text(allDataSize);
+          if (allDataSize != 0) {
+            for (var i = 1; i < pageNo + 1; i++) {
+              var source = "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>";
+
+              $("#paginationList").append(source);
+            }
+          }
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+      });
+
+      $.ajax({
+        url: "/admin/getdeleteuserall",
+        async: false,
+        type: "post",
+        success: function (data) {
+          allDataSize2 = data.rows[0]['COUNT(*)'];
+          pageNo2 = allDataSize2 / pageSize;
+          $("#delete-user").text(allDataSize2);
+          if (allDataSize2 != 0) {
+            for (var i = 1; i < pageNo2 + 1; i++) {
+              var source = "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>";
+
+              $("#paginationList2").append(source);
+            }
+          }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+      });
+
+      loadUser();
+
+      var pageItem = $("#paginationList li").not(".prev,.next");
+
+      pageItem.click(function () {
+        pageItem.removeClass("active");
+        $(this).not(".prev,.next").addClass("active");
+        var no = $(this).text() - 1;
+        startNo = pageSize * no;
+
+        var allData = {
+          "startNo": startNo,
+          "endNo": endNo
+        };
+        loadUser();
+      });
+
+      
+      var pageItem2 = $("#paginationList2 li").not(".prev,.next");
+
+      pageItem2.click(function () {
+        pageItem2.removeClass("active");
+        $(this).not(".prev,.next").addClass("active");
+        var no = $(this).text() - 1;
+        startNo2 = pageSize * no;
+
+        var allData = {
+          "startNo": startNo2,
+          "endNo": endNo2
+        };
+        loadUser();
+      });
+
+      $("#chage-user-button").click(function () {
+        if(userstate == 0)
+        {
+          $("#chage-user-button").text("유저 보기");
+          $("#paginationList").hide();
+          $("#paginationList2").show();
+          
+        $("#paginationTr2").show();
+        $("#paginationTr").hide();
+          userstate = 1;
+        loadUser();
+        }else if(userstate == 1)
+        {
+          $("#chage-user-button").text("삭제 유저 보기");
+          $("#paginationList2").hide();
+          $("#paginationList").show();
+        $("#paginationTr").show();
+        $("#paginationTr2").hide();
+          userstate = 0;
+        loadUser();
+        }
+      });
+
+
+      function loadUser() {
+        if (userstate == 0) {
+          
+      var allData = {
+        "startNo": startNo,
+        "endNo": endNo
+      };
+
+          $("#table-body").empty();
+          $.ajax({
+            url: "/admin/getusers",
+            async: false,
+            data: allData,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            type: "post",
+            success: function (data) {
+              $.each(data.rows, function (index, item) {
+
+                var source = "<tr><td><a href=\"/users/profile?id="+ item.SEQ + "\">" + item.ID + "</a></td>";
+                source = source + "<td>" + item.NAME + "</td>";
+                var substrReg_date = item.REG_DATE.substr(0, 10);
+                source = source + "<td>" + substrReg_date + "</td>";
+                if (item.ISBLOCK == 1) {
+                  source = source + "<td><a id=\"blockuser" + item.SEQ + "\" class=\"btn btn-primary px-4 py-2 table-delete-button\">" + '계정 잠김' + '</a></td>';
+                  source = source + "<td></td>";
+                }
+                else if (item.ISADMIN == 1) {
+                  source = source + "<td>" + '관리자' + "</td>";
+                  source = source + "<td></td>";
+                }
+                else if (item.ISADMIN == 0) {
+                  source = source + "<td>" + '일반' + "</td>";
+
+                  source = source + "<td><a id=\"onlineclass" + item.SEQ + "\" class=\"btn btn-primary px-4 py-2 table-button\">" + '권한 변경' + '</a></td>';
+                }
+                source = source + "<td><a id=\"changepassword" + item.SEQ + "\" class=\"btn btn-primary px-4 py-2 table-button\" onclick=\"changepassword()\">" + '비밀번호변경' + '</a></td>';
+                source = source + "<td><a id=\"deleteuser" + item.SEQ + "\" class=\"btn btn-primary px-4 py-2 table-delete-button\" value=" + item.ID + ">" + '계정 삭제' + '</a></td></tr>';
+
+                $("#table-body").append(source);
+
+                $('#onlineclass' + item.SEQ).click(function () {
+                  // Recover data-bean-id tag value
+                  onlineclass(item.ID);
+                });
+
+                $('#changepassword' + item.SEQ).click(function () {
+                  // Recover data-bean-id tag value
+                  if (item.ISBLOCK == 1) alert("잠긴 계정입니다. 계정 잠김을 먼저 선택해주세요.");
+                  else
+                    changePassword(item.ID);  
+                });
+
+                $('#deleteuser' + item.SEQ).click(function () {
+                  // Recover data-bean-id tag value
+                  var isdelete = prompt('계정을 삭제 하겠습니까? 계정 삭제를 진행시, 계정의 이름을 입력 하세요', "이름");
+
+                  if (item.ID == loginId) {
+                    alert("본인의 계정은 삭제가 불가능합니다.")
+                  }
+                  else if (isdelete == item.NAME) {
+                    deleteUser(item.ID);
+                  }
+                  else {
+                  }
+                });
+
+                $('#blockuser' + item.SEQ).click(function () {
+                  // Recover data-bean-id tag value
+                  var isdelete = prompt('해당 계정을 복구 하겠습니까? 계정 복구를 진행시, 계정의 이름을 입력 하세요', "이름");
+
+                  if (isdelete == item.NAME) {
+                    blockuser(item.ID);
+                  }
+                  else {
+                  }
+                });
+
+              });
+
+              if (data.rows.length == 0) {
+                $("#attendboardcontainer").css("display", "none");
+              }
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+            }
+          });
+        } else if(userstate == 1){
+          $("#table-body").empty();
+          
+      var allData = {
+        "startNo": startNo2,
+        "endNo": endNo2
+      };
+          $.ajax({
+            url: "/admin/getdeleteusers",
+            async: false,
+            data: allData,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            type: "post",
+            success: function (data) {
+              $.each(data.rows, function (index, item) {
+
+                var source = "<tr><td><a href=\"/users/profile?id="+ item.SEQ + "\">" + item.ID + "</a></td>";
+                source = source + "<td>" + item.NAME + "</td>";
+                var substrReg_date = item.REG_DATE.substr(0, 10);
+                source = source + "<td>" + substrReg_date + "</td>";
+                if (item.ISBLOCK == 1) {
+                  source = source + "<td><a id=\"blockuser" + item.SEQ + "\" class=\"btn btn-primary px-4 py-2 table-delete-button\">" + '계정 잠김' + '</a></td>';
+                  source = source + "<td></td>";
+                }
+                else if (item.ISADMIN == 1) {
+                  source = source + "<td>" + '관리자' + "</td>";
+                  source = source + "<td></td>";
+                }
+                else if (item.ISADMIN == 0) {
+                  source = source + "<td>" + '일반' + "</td>";
+                }
+                
+                source = source + "<td><a id=\"emptyuser" + item.SEQ + "\" class=\"btn btn-primary px-4 py-2 table-delete-button\" value=" + item.ID + ">" + '영구 삭제' + '</a></td></tr>';
+                $("#table-body").append(source);
+
+                $('#emptyuser' + item.SEQ).click(function () {
+                  // Recover data-bean-id tag value
+                  var isdelete = prompt('계정을 영구 삭제 하겠습니까? 계정 삭제를 진행시, 계정의 이름을 입력 하세요', "이름");
+
+                  if (item.ID == loginId) {
+                    alert("본인의 계정은 삭제가 불가능합니다.")
+                  }
+                  else if (isdelete == item.NAME) {
+                    emptyuser(item.ID);
+                  }
+                  else {
+                  }
+                });
+
+
+              });
+
+              if (data.rows.length == 0) {
+                $("#attendboardcontainer").css("display", "none");
+              }
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+            }
+          });
+        }
+      }
+
+      function deleteUser(id) {
+        var allData = {
+          "id": id
+        };
+        $.ajax({
+          url: "/login/deleteuser",
+          async: false,
+          data: allData,
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          type: "post",
+          success: function (data) {
+            if (data['result'] == false) {
+              alert("계정을 삭제하지 못했습니다.");
+              loadUser();
+            } else {
+              alert("계정을 삭제했습니다.");
+              loadUser();
+            }
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }
+
+      
+      function emptyuser(id) {
+        var allData = {
+          "id": id
+        };
+        $.ajax({
+          url: "/login/emptyuser",
+          async: false,
+          data: allData,
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          type: "post",
+          success: function (data) {
+            if (data['result'] == false) {
+              alert("계정을 삭제하지 못했습니다.");
+              loadUser();
+            } else {
+              alert("계정을 삭제했습니다.");
+              loadUser();
+            }
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }
+
+      function blockuser(id) {
+        var allData = {
+          "id": id
+        };
+        $.ajax({
+          url: "/login/blockuser",
+          async: false,
+           data: allData,
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          type: "post",
+          success: function (data) {
+            if (data['result'] == false) {
+              alert("계정을 복구하지 못했습니다.");
+              changePassword(id);
+            } else {
+              alert("해당 계정을 복구 하였습니다. 해당 계정 비밀번호를 변경해주세요.");
+              changePassword(id);
+            }
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }
+
+      function onlineclass(id) {
+        var allData = {
+          "id": id
+        };
+        $.ajax({
+          url: "/admin/getusersession",
+          async: false,
+          data: allData,
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          type: "post",
+          success: function (data) {
+            location.replace("/admin/usercategory");
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }
+
+      function changePassword(id) {
+        var allData = {
+          "id": id
+        };
+        $.ajax({
+          url: "/admin/getusersession",
+          async: false,
+          data: allData,
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          type: "post",
+          success: function (data) {
+            location.replace("/admin/password");
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }
+    }
+  });
+
+</script>
+
+
+
+</html>

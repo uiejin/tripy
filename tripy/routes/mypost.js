@@ -23,14 +23,10 @@ router.get('/', function(req, res, next) {
     userImg : req.user.IMG,
     username : req.user.NAME,
     loginStatus  : true,
+    isAdmin : req.user.ISADMIN,
     });
   }else{
-      res.render('login/login', {
-        title: "로그인후 이용이 가능합니다.",
-        kakaoBtn : "카카오 로그인",
-        loginStatus  : false
-
-      });
+    res.redirect('/');
     }
 
 });

@@ -40,6 +40,7 @@ router.get('/partyboard', function(req, res, next) {
       loginStatus  : true,
       userAge : getAge(req.user.BIRTHDAY),
       userGender : req.user.GENDER,
+      isAdmin : req.user.ISADMIN,
       loginMessage : "로그인후 작성해 주시길 바랍니다.",
     });
   }else{
@@ -72,6 +73,7 @@ router.get('/partyboard', function(req, res, next) {
       userGender : null,
       username : null,
       userImg : null,
+      isAdmin : req.user.ISADMIN,
       loginMessage : "로그인후 작성해 주시길 바랍니다.",
     });
   }
@@ -88,6 +90,7 @@ router.get('/searchpost', function(req, res, next) {
       loginStatus  : true,
       userAge : getAge(req.user.BIRTHDAY),
       userGender : req.user.GENDER,
+      isAdmin : req.user.ISADMIN,
       loginMessage : "로그인후 작성해 주시길 바랍니다.",
     });
   }else{
@@ -102,6 +105,7 @@ router.get('/searchpost', function(req, res, next) {
       loginStatus  : false,
       userAge : null,
       userGender : null,
+      isAdmin : false,
       loginMessage : "로그인후 작성해 주시길 바랍니다.",
     });
   }
@@ -141,6 +145,7 @@ router.get('/searchpost', function(req, res, next) {
         userImg : req.user.IMG,
         loginStatus  : true,
         userGender : req.user.GENDER,
+        isAdmin : req.user.ISADMIN,
         userAge : getAge(req.user.BIRTHDAY),
       });
     }else{
@@ -176,8 +181,8 @@ router.get('/searchpost', function(req, res, next) {
         userImg : null,
         loginStatus  : false,
         userGender : "nothing",
-        userAge : null
-
+        userAge : null,
+        isAdmin : false
       });
     }
   });

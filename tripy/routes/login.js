@@ -49,7 +49,7 @@ passport.use(
         const NewUserPassword = crypto.createHash('sha256').update(NewUserId).digest('base64');
         
         //해당 id를 가진 user가 존재하는지 찾아본다.
-        const sql = "select ID,IMG,BIRTHDAY,NAME,GENDER from PT_USER where ID = ?";
+        const sql = "select ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
         const post = [NewUserId];
         con.connection.query(sql, post, (err, results, fields) => {
           if (err) {
@@ -59,15 +59,18 @@ passport.use(
           //만약 해당 유저가 존재하지 않는다면,
           //새로운 아이디를 하나 만들어주고 로그인을 시켜줌.
           if (results.length === 0) {
-            const sql = "INSERT PT_USER(ID, PASSWORD, NAME, IMG) values(?,?,?,?)";
-            const post = [NewUserId, NewUserPassword, NewUserName, img];
+                    
+          var moment = require('moment');
+          var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+            const sql = "INSERT PT_USER(ID, PASSWORD, NAME, IMG, REG_DATE, MODFY_DATE) values(?,?,?,?,?,?)";
+            const post = [NewUserId, NewUserPassword, NewUserName, img, nowTime, nowTime];
             con.connection.query(sql, post, (err, results, fields) => {
               if (err) {
                 console.log(err);
                 done(err);
               }
               //가입이 되었다면 해당 유저로 바로 로그인시켜줌
-              const sql = "SELECT ID, NAME, IMG, GENDER, BIRTHDAY FROM PT_USER where ID =?";
+              const sql = "SELECT ID, NAME, IMG, GENDER, BIRTHDAY, ISADMIN FROM PT_USER where ID =?";
               const post = [NewUserId];
               con.connection.query(sql, post, (err, results, fields) => {
                 if (err) {
@@ -101,7 +104,7 @@ passport.use(
       const NewUserPassword = crypto.createHash('sha256').update(NewUserId).digest('base64');
       
       //해당 id를 가진 user가 존재하는지 찾아본다.
-      const sql = "select ID,IMG,BIRTHDAY,NAME,GENDER from PT_USER where ID = ?";
+      const sql = "select ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
       const post = [NewUserId];
       con.connection.query(sql, post, (err, results, fields) => {
         if (err) {
@@ -111,15 +114,15 @@ passport.use(
         //만약 해당 유저가 존재하지 않는다면,
         //새로운 아이디를 하나 만들어주고 로그인을 시켜줌.
         if (results.length === 0) {
-          const sql = "INSERT PT_USER(ID, PASSWORD, NAME, IMG) values(?,?,?,?)";
-          const post = [NewUserId, NewUserPassword, NewUserName, img];
+          const sql = "INSERT PT_USER(ID, PASSWORD, NAME, IMG, REG_DATE, MODFY_DATE) values(?,?,?,?,?,?)";
+          const post = [NewUserId, NewUserPassword, NewUserName, img, nowTime, nowTime];
           con.connection.query(sql, post, (err, results, fields) => {
             if (err) {
               console.log(err);
               done(err);
             }
             //가입이 되었다면 해당 유저로 바로 로그인시켜줌
-            const sql = "SELECT ID,IMG,BIRTHDAY,NAME,GENDER FROM PT_USER where ID =?";
+            const sql = "SELECT ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN FROM PT_USER where ID =?";
             const post = [NewUserId];
             con.connection.query(sql, post, (err, results, fields) => {
               if (err) {
@@ -149,32 +152,26 @@ passport.serializeUser(function(user, done) {
 
 router.get('/', function(req, res, next) {
   if (req.isAuthenticated()) {
-    res.render('login/login', {
-        title: "로그인",
-        kakaoBtn : "카카오 로그인",
-        loginStatus  : true
-    });
+    res.redirect('/');
   }else{
     res.render('login/login', {
     title: "로그인",
     kakaoBtn : "카카오 로그인",
-    loginStatus  : false
+    loginStatus  : false,
+    isAdmin : false,
     });
   }
 });
 
 router.get('/login', function(req, res, next) {
   if (req.isAuthenticated()) {
-    res.render('login/login', {
-        title: "로그인",
-        kakaoBtn : "카카오 로그인",
-        loginStatus  : true
-    });
+    res.redirect('/');
   }else{
     res.render('login/login', {
     title: "로그인후 이용이 가능합니다.",
     kakaoBtn : "카카오 로그인",
-    loginStatus  : false
+    loginStatus  : false,
+    isAdmin : false,
     
     });
   }
@@ -183,15 +180,12 @@ router.get('/login', function(req, res, next) {
 
 router.get('/register', function(req, res, next) {
   if (req.isAuthenticated()) {
-    res.render('login/login', {
-      title: "회원가입",
-        kakaoBtn : "카카오 로그인",
-        loginStatus  : true
-    });
+    res.redirect('/');
   }else{
     res.render('login/register', {
     title: "회원가입",
-    loginStatus  : false
+    loginStatus  : false,
+    isAdmin : false,
     
     });
   }
@@ -208,9 +202,7 @@ router.get('/password', function(req, res, next) {
         isAdmin : req.user.ISADMIN,
     });
   }else{
-    res.render('login/login', {
-    loginStatus : false
-    });
+    res.redirect('/login/login');
   }
 });
 

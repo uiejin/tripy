@@ -28,7 +28,8 @@ router.get('/phaser3rdweek', function(req, res, next) {
       username : req.user.NAME,
       //userAge : getAge(req.user.BIRTHDAY) + "세",
       //userGender : req.user.GENDER,
-      userImg : req.user.IMG
+      userImg : req.user.IMG,
+      isAdmin : req.user.ISADMIN,
   });
   }else{
     res.render('phaser3rdWeek', {
@@ -37,7 +38,8 @@ router.get('/phaser3rdweek', function(req, res, next) {
         username : "user",
         //userAge : "",
         //userGender : "",
-        userImg : "https://ssl.pstatic.net/static/pwe/address/img_profile.png"
+        userImg : "https://ssl.pstatic.net/static/pwe/address/img_profile.png",
+        isAdmin : false,
       });
   }
 
@@ -47,10 +49,23 @@ router.get('/phaser3rdweek', function(req, res, next) {
 router.get('/phaser4thWeek', function(req, res, next) {
   if (req.isAuthenticated()) {
   res.render('phaser4thWeek', { 
+    userId : req.user.ID,
+      loginStatus  : true,
+      username : req.user.NAME,
+      //userAge : getAge(req.user.BIRTHDAY) + "세",
+      //userGender : req.user.GENDER,
+      userImg : req.user.IMG,
+      isAdmin : req.user.ISADMIN,
   });
   }else{
     res.render('phaser4thWeek', {
-      
+      userId : null,
+        loginStatus  : false,
+        username : "user",
+        //userAge : "",
+        //userGender : "",
+        userImg : "https://ssl.pstatic.net/static/pwe/address/img_profile.png",
+        isAdmin : false,
       });
   }
 

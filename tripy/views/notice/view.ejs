@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+    <link rel="icon" href="/image/favicon.ico">
+    <link rel="shortcut icon" href="/image/favicon.ico">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/animate.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+
+    <link rel="stylesheet" href="/css/views/style.css">
+    <link rel="stylesheet" href="/css/views/main.css">
+    <link rel="stylesheet" href="/css/views/noncover.css">
+    <link rel="stylesheet" href="/css/views/writepost.css">
+    <link rel="stylesheet" href="/css/views/read.css">
+    <link rel="stylesheet" href="/css/views/notice.css">
+</head>
+
+<body>
+
+    <div class="site-wrap">
+
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div> <!-- .site-mobile-menu -->
+
+        <!--상단바-->
+        <div class="site-navbar-wrap js-site-navbar bg-white">
+
+            <div class="container">
+                <div class="site-navbar bg-light">
+                    <div class="py-1">
+                        <div class="row align-items-center" id="site-navbar-line">
+                            <div class="col-10">
+                                <h2 class="mb-0 site-logo"></h2><a id="nav-title">공지사항</a></h2>
+                            </div>
+                            <div class="col-2">
+                                <nav class="site-navigation text-right" role="navigation">
+                                    <div class="container">
+                                        <!-- d-lg-none -->
+                                        <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                                                class="site-menu-toggle js-menu-toggle"><span
+                                                    class="icon-menu h3"></span></a></div>
+                                        <!-- d-lg-block -->
+                                        <ul class="site-menu js-clone-nav d-none" id="nav">
+                                            <% include ../nav/nav_case %>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="s_id" data-prodnumber="${sessionScope.id}" />
+        <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container" id="readForm">
+            <div class="row" id="readRow">
+                <div id="read-form" class="col-lg-12">
+                    <div class="form-group">
+                        <!--자동수락 선택 버튼-->
+                        <div class="col-12" id="titleItem">
+                            <a id="titleText" class="col-12"></a>
+                        </div>
+                        <!--입력 폼-->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="site-section bg-light" id="contentForm">
+        <div class="container" id="readForm">
+            <div class="row" id="readRow">
+                <div id="read-form" class="col-lg-12">
+                    <div class="form-group">
+                        <div class="col-12" id="contentItem">
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="site-section bg-light" id="profileForm">
+        <div class="container" id=boardForm>
+            <div class="row col-md-12" id="post">
+                <div class="site-section col-md-12" id="profileContainer">
+                    <div class="row" id="writerDiv">
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container" id="readForm">
+            <div class="row" id="readRow">
+                <div class="col-12" id="button-div">
+                    <% if(isAdmin){ %>
+                        <a id="modyfy-button" class="btn btn-primary px-4 py-2">수정</a>
+                        <a id="delete-button" class="btn btn-primary px-4 py-2">삭제</a>
+                        <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/popper.min.js"></script>
+<script src="/js/lib/owl.carousel.min.js"></script>
+<script src="/js/lib/jquery.stellar.min.js"></script>
+<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+<script src="/js/lib/bootstrap-datepicker.min.js"></script>
+<script src="/js/lib/aos.js"></script>
+
+<script src="/js/lib/mediaelement-and-player.min.js"></script>
+
+<script src="/js/views/main.js"></script>
+
+<script type="text/javascript">
+
+    var loginuserId = "<%=userId%>";
+    var loginStatus = "<%=loginStatus%>";
+
+    $(document).ready(function () {
+
+
+        replyStatus = false;
+        var no = location.href
+            .substr(location.href.lastIndexOf('=') + 1);
+
+        var writer = null;
+        var nowDate = new Date();
+
+        var allData = {
+            "no": no,
+        };
+
+
+        var loginStatus = "<%=loginStatus%>";
+        var userId = "<%=userId%>";
+        var isAdmin = "<%=isAdmin%>";
+
+        if (loginStatus == "true" && isAdmin == '1') {
+            $("#modyfy-button").click(function () {
+                var allData = {
+                    "no": no
+                };
+                $.ajax({
+                    url: "/notice/getnoticeno",
+                    async: false,
+                    data: allData,
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    type: "post",
+                    success: function (data) {
+                        if (data['result'] == false) {
+                            alert("error.");
+                        } else {
+
+                            location.replace("/notice/update");
+                        }
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                });
+            });
+
+            $("#delete-button").click(function () {
+                if (confirm("<%=deleteBtnConfirm%>") == true) {
+                    $.ajax({
+                        url: "/notice/deletenotice",
+                        data: { "no": no },
+                        async: false,
+                        type: "post",
+                        success: function (data) {
+                            if (data['result'] == true) {
+                                {
+                                    alert("게시물 삭제에 성공하였습니다.");
+                                    location.href = "/notice";
+
+                                };
+                            };
+                        },
+                        beforeSend: function () {
+                        },
+                        complete: function () {
+                        }
+                    });
+                } else {
+
+                }
+            });
+
+        } else {
+
+        }
+
+        $.ajax({
+            url: "/notice/getnoticeview?no=" + no,
+            async: false,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                if (data['result'] == true) {
+                    if (data.rows.length == 0) {
+                        alert("<%=errorMessage%>");
+                        location.href = "/notice";
+                    }
+                    else {
+                        // var boardData = JSON.stringify(data);
+                        $.each(data.rows, function (index, item) {
+
+                            $("#titleText").text(item.TITLE);
+                            $("#contentItem").each(
+                                function () {
+                                    var $this = $(this);
+                                    var t = $this.text();
+                                    $this.html(t.replace('<',
+                                        '&lt;').replace('>',
+                                            '&gt;'));
+                                });
+                            $("#contentItem").html(item.CONTENTS);
+                        });
+                    };
+                };
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+            }
+        });
+    });
+
+</script>
+
+
+
+</html>

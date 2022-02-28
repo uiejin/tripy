@@ -17,6 +17,8 @@ var tourlistRouter = require('./routes/tourlist');
 
 var loginRouter = require('./routes/login');
 var profileRouter = require('./routes/profile');
+var noticeRouter = require('./routes/notice');
+var adminRouter = require('./routes/admin');
 
 var seventeenRouter = require('./routes/seventeen');
 
@@ -88,6 +90,8 @@ app.use('/board', boardRouter);
 app.use('/tourlist', tourlistRouter);
 app.use('/test', testforphotoRouter);
 app.use('/upload', uploadRouter);
+app.use('/notice', noticeRouter);
+app.use('/admin', adminRouter);
 
 //phaser 사용으로 임시 경로 변경
 app.use('/login', loginRouter);
@@ -103,8 +107,6 @@ app.use('/users/profile', profileRouter);
 
 //다비수 디지털 페이저 예제 201221
 app.use('/pharser', phaserRouter);
-
-
 app.use('/seventeen', seventeenRouter);
 
 

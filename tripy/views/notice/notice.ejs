@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="icon"  href="/image/favicon.ico">
+  <link rel="shortcut icon"  href="/image/favicon.ico">
+  <% include ../css/default %> 
+  <link rel="stylesheet" href="/css/views/myplan.css">
+  <link rel="stylesheet" href="/css/views/mytour.css">
+
+  <link rel="stylesheet" href="/css/views/notice.css">
+
+
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    
+    <% include ../head/cover %>
+
+
+  <!--커버에 들어갈 버튼 및 텍스트  -->
+
+  <div class="site-blocks-cover overlay" id="title_img" data-aos="fade" data-stellar-background-ratio="0.5"
+    style="background-image: url(/image/notice.jpg);">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-12 text-center" data-aos="fade">
+          <h1 id="title_subject">
+            <%=title%>
+          </h1>
+          <p class="regular-font-size">
+          <a id="update-button2" class="btn btn-primary px-4 py-3 text-uppercase">
+            <%=updateText%>
+          </a>
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section col-md-12" id="attendboardcontainer">
+    <div class="container boardForm">
+      <div class="row col-md-12" id="post">
+        <table class="table table-striped table-hover col-md-12">
+          <thead>
+            <tr>
+              <th scope="col">no</th>
+              <th scope="col">제목</th>
+              <th scope="col">등록일</th>
+            </tr>
+          </thead>
+          <tbody id="table-body2">
+          </tbody>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+
+
+
+        <div class="row col-md-12" id="pagenation-center">
+          <!--게시판 커스텀 -->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination" id="paginationList">
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="s_id" data-prodnumber="${sessionScope.id}" />
+  <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+
+
+
+</body>
+
+<% include ../script/default %>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var loginStatus = "<%=loginStatus%>";
+    var userId = "<%=userId%>";
+    var isAdmin = "<%=isAdmin%>";
+
+    var pageSize = 10;
+    var startNo = 0;
+    var endNo = 10;
+    var allDataSize = 0;
+    var pageNo = 0;
+
+    var allData = {
+      "startNo": startNo,
+      "endNo": endNo
+    };
+    
+    if (loginStatus == "true") {
+      $("#navProfileName").text("<%=username%>");
+      $("#profileImageNav").attr("src", "<%=userImg%>");
+      if ("<%=userGender%>" == "" || "<%=userAge%>" == "") {
+      }
+    } else {
+      $("#profileForm").css("display", "none");
+    }
+    if (loginStatus == "true" && isAdmin == '1') {
+      
+
+      $("#update-button2").click(function () {
+        location.href = "/notice/write";
+      });
+
+    } else if (loginStatus == "true") {
+      
+      $("#update-button2").remove();
+    }
+    else {
+      
+      $("#update-button2").remove();
+    }
+    $.ajax({
+      url: "/notice/getnoticeall",
+      async: false,
+      type: "get",
+      success: function (data) {
+        allDataSize = data.rows[0]['COUNT(*)'];
+        pageNo = allDataSize / pageSize;
+
+        if (allDataSize != 0) {
+          for (var i = 1; i < pageNo + 1; i++) {
+            var source = "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>";
+
+            $("#paginationList").append(source);
+          }
+        }
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+    $.ajax({
+      url: "/notice/getnoticefavor",
+      async: false,
+      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+          var source = "<tr><th scope = \"row\">" + item.NO + "</th>";
+
+          source = source +
+            "<td>" + item.TITLE + "</td>";
+          var substrReg_date = item.REG_DATE.substr(0, 10);
+          source = source + "<td>" + substrReg_date + "</td></tr>";
+          $("#table-body2").append(source);
+
+        });
+
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+    $.ajax({
+      url: "/notice/getnotice",
+      async: false,
+      data: allData,
+      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+      type: "get",
+      success: function (data) {
+        $.each(data.rows, function (index, item) {
+          var source = "<tr><th scope = \"row\">" + item.NO + "</th>";
+
+          source = source +
+            "<td>" + item.TITLE + "</td>";
+          var substrReg_date = item.REG_DATE.substr(0, 10);
+          source = source + "<td>" + substrReg_date + "</td></tr>";
+          $("#table-body").append(source);
+
+        });
+
+
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+    });
+
+
+    var pageItem = $(".pagination li").not(".prev,.next");
+
+    pageItem.click(function () {
+      pageItem.removeClass("active");
+      $(this).not(".prev,.next").addClass("active");
+      var no = $(this).text() - 1;
+      startNo = pageSize * no;
+
+      var allData = {
+        "startNo": startNo,
+        "endNo": endNo
+      };
+
+      $("#table-body").empty();
+      $.ajax({
+        url: "/notice/getnotice",
+        async: false,
+        data: allData,
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        type: "get",
+        success: function (data) {
+          $.each(data.rows, function (index, item) {
+            var source = "<tr><th scope = \"row\">" + item.NO + "</th>";
+
+            source = source +
+              "<td>" + item.TITLE + "</td>";
+            var substrReg_date = item.REG_DATE.substr(0, 10);
+            source = source + "<td>" + substrReg_date + "</td></tr>";
+            $("#table-body").append(source);
+            $("tr").click(function () {
+              var td = $(this).children();
+              location.href = "/notice/view?no=" + td.eq(0).text();
+            });
+          });
+          if (data.rows.length == 0) {
+            $("#attendboardcontainer").css("display", "none");
+          }
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+      });
+    });
+    $("tr").click(function () {
+      var td = $(this).children();
+      location.href = "/notice/view?no=" + td.eq(0).text();
+    });
+
+
+
+
+  });
+</script>
+
+
+
+</html>

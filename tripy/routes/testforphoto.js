@@ -30,15 +30,11 @@ router.get('/', function (req, res, next) {
             userId: req.user.ID,
             userImg: req.user.IMG,
             username: req.user.NAME,
+            isAdmin : req.user.ISADMIN,
             loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
         });
     } else {
-        res.render('login/login', {
-            title: "로그인후 이용이 가능합니다.",
-            kakaoBtn : "카카오 로그인",
-            loginStatus  : false
-        
-          });
+        res.redirect('/login/login');
     }
 });
 
@@ -57,15 +53,11 @@ router.get('/photolist', function (req, res, next) {
             userId: req.user.ID,
             userImg: req.user.IMG,
             username: req.user.NAME,
+            isAdmin : req.user.ISADMIN,
             loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
         });
     } else {
-        res.render('login/login', {
-            title: "로그인후 이용이 가능합니다.",
-            kakaoBtn : "카카오 로그인",
-            loginStatus  : false
-        
-          });
+        res.redirect('/login/login');
     }
 });
 

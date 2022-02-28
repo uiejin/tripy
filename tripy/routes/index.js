@@ -29,7 +29,8 @@ router.get('/', function(req, res, next) {
       username : req.user.NAME,
       userAge : getAge(req.user.BIRTHDAY) + "세",
       userGender : req.user.GENDER,
-      userImg : req.user.IMG
+      userImg : req.user.IMG,
+      isAdmin : req.user.ISADMIN
      });
     
   } else {
@@ -51,6 +52,7 @@ router.get('/', function(req, res, next) {
       femaleText : "여자만",
       userId : null,
       loginStatus  : false,
+      isAdmin : false,
       username : "user",
       userAge : "",
       userGender : "",

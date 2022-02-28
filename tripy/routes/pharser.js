@@ -55,14 +55,11 @@ router.get('/phaser4thWeek', function (req, res, next) {
       username: req.user.NAME,
       //userAge : getAge(req.user.BIRTHDAY) + "세",
       //userGender : req.user.GENDER,
-      userImg: req.user.IMG
+      userImg: req.user.IMG,
+      isAdmin : req.user.ISADMIN,
     });
   } else {
-    res.render('login/login', {
-      title: "로그인후 이용이 가능합니다.",
-      kakaoBtn : "카카오 로그인",
-      loginStatus  : false
-      });
+    res.redirect('/login/login');
   }
 
 });

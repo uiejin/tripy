@@ -1,0 +1,157 @@
+span#boardTitle {
+    font-weight: 600;
+    color: black;
+    font-size: 1.1rem;
+}
+
+div#boardNo {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-right: 10px;
+    float: left;
+}
+
+span#boardDate {
+    float: right;
+    background: white;
+    color: black;
+    border-radius: 0rem;
+    padding: 0rem!important;
+    padding-top: 0rem!important;
+    padding-bottom: 0rem!important;
+    float: right;
+    font-size: 0.8rem;
+    margin-top: 0rem;
+}
+
+.site-section.bg-light {
+    background: white!important; 
+}
+
+.note-editor.note-airframe, .note-editor.note-frame {
+     border: 0px solid rgba(0,0,0,.2);
+}
+
+.main-img-div2 {
+    display: none;
+}
+
+.main-img-div3 {
+    display: none;
+}
+
+.main-img-div4 {
+    display: none;
+}
+
+
+.modal-header {
+    display: inline;
+}
+
+#pagenation-center {
+    justify-content: center;
+    display: flex;
+}
+
+div#imgItem {
+    text-align: center;
+    /* display: grid; */
+}
+
+img#noticeImage {
+    max-width: 600px;
+}
+
+html, body {
+    background: white;
+}
+/*.site-wrap {
+    background: white;
+}*/
+
+.fade:not(.show) {
+    opacity: 3;
+}
+
+.modal-backdrop.fade.in {
+    background: fixed;
+}
+
+.modal-dialog.modal-lg {
+    margin-top: 5rem;
+}
+
+.catesection {
+    width: 100%;
+    height: 96px;
+    margin-bottom: 10px;
+}
+
+img.img-fluid1 {
+    width: 100%;
+}
+
+a.d-block.mb-3.thumbnail {
+    margin-bottom: 0px!important;
+}
+
+tbody#table-body2 {
+    background: #34558b3b;
+    font-size: 1.1rem;
+    /* color: white; */
+}
+
+a#update-button2 {
+    background: #34558b;
+    border: #34558b;
+    border-radius: 5rem;
+    padding: 1.5rem!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+    font-weight: 600;
+    float: none;
+    width: 130px;
+}
+
+a.delete-button {
+    color: white!important;
+    padding: 0.3rem!important;
+}
+
+
+.playImg1 {
+    position: absolute;
+    
+    filter: brightness(0.6);
+    /* height: 300px; */
+}
+
+.playImg2 {
+    /* position: absolute; */
+    text-align: center;
+    /* z-index: 222; */
+}
+div#onlineclassplayBtn {
+    margin-bottom: 0rem!important;
+    height: 180px;
+}
+img#onlineclassplayImg1 {
+    position: relative;
+}
+img#onlineclassplayImg2 {
+    position: absolute;
+    width: 100px;
+    /* display: block; */
+    /* margin: auto; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media ( max-width : 425px) {
+iframe.note-video-clip {
+    width: 100%;
+}
+
+}
