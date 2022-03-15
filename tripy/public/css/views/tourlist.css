@@ -1,48 +1,42 @@
-
-div#profileDiv2 {
-    padding-left: 5px;
-    padding-right: 0px;
-    margin-left: 150px;
-    font-weight: 100;
-    width: 100%;
-}
 img#profileImage {
-    width: 100%;
-    max-width: 150px;
-    border-radius: 10px;
+  width: 100%;
+  max-width: 150px;
+  border-radius: 10px;
+  max-height: 100px;
+  height: auto;
 }
 div#profileDiv {
-    position: absolute;
+  position: absolute;
 }
 span#profileAge {
-    float: right;
-    font-size: 0.8rem;
-    color: #444444;
+  float: right;
+  font-size: 0.8rem;
+  color: #444444;
 }
 div#profileDiv2 {
-    padding-left: 5px;
-    padding-right: 0px;
-    margin-left: 170px;
-    font-weight: 100;
-    width: 100%;
+  padding-left: 5px;
+  padding-right: 0px;
+  margin-left: 170px;
+  font-weight: 100;
+  width: 100%;
 }
 div#profileDiv3 {
-    padding-left: 5px;
-    padding-right: 0px;
-    margin-left: 95px;
-    font-weight: 100;
+  padding-left: 5px;
+  padding-right: 0px;
+  margin-left: 95px;
+  font-weight: 100;
 }
 div.profileForm {
-    padding: 0px;
-    margin-top: 0.5rem;
-    padding-top: 1.5rem;
+  padding: 0px;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
 }
 
 img.writerprofileImage {
-    width: 100%;
-    max-width: 80px;
+  width: 100%;
+  max-width: 80px;
 }
 
 div.tourlistDiv {
-    height: 100px;
+  height: 100px;
 }

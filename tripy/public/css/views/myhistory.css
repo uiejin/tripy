@@ -1,0 +1,73 @@
+.site-blocks-cover,
+.site-blocks-cover .row {
+  min-height: 200px;
+  height: calc(35vh);
+  background-position: 35% 0px !important;
+}
+
+img#profileImageHistory {
+  max-width: 100px;
+  margin-bottom: 1rem;
+  /* margin-top: 8rem; */
+}
+
+span#boardAchiveType {
+  float: right;
+  color: white;
+  margin-right: 5px;
+}
+
+span#profileDiv3 {
+  padding-left: 5px;
+  padding-right: 0px;
+  margin-left: 95px;
+  font-weight: 100;
+}
+
+a.boardText {
+  width: 100%;
+}
+
+a.boardAchiveText {
+  width: 100%;
+  margin-left: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+div.achievementsItemDiv {
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 5px;
+}
+
+img#achievementsItemImage {
+  width: 100%;
+  max-width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+div#achievementItem {
+  position: absolute;
+  max-width: 100px;
+}
+span#profileAge {
+  float: right;
+  font-size: 0.8rem;
+  color: #444444;
+}
+div#achievementItemDiv2 {
+  padding-left: 5px;
+  padding-right: 0px;
+  margin-left: 120px;
+  font-weight: 100;
+  width: 100%;
+}
+div#profileDiv3 {
+  padding-left: 5px;
+  padding-right: 0px;
+  margin-left: 95px;
+  font-weight: 100;
+}

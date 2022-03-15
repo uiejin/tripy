@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+
+    <% include ../css/default %>
+        <link rel="stylesheet" href="/css/views/noncover.css">
+        <link rel="stylesheet" href="/css/views/writepost.css">
+        <link rel="stylesheet" href="/css/views/search.css">
+        <link rel="stylesheet" href="/css/views/calendar.css">
+        <link rel="stylesheet" href="/css/views/mytour.css">
+        <link rel="stylesheet" href="/css/views/read.css">
+        <link rel="stylesheet" href="/css/views/maps.css">
+        <link rel="stylesheet" href="/css/views/tourlist.css">
+        <link rel="stylesheet" href="/css/views/achievements.css">
+
+
+</head>
+
+<body>
+    <div class="site-wrap">
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div> <!-- .site-mobile-menu -->
+
+
+        <div class="site-navbar-wrap js-site-navbar bg-white">
+
+            <div class="container">
+                <div class="site-navbar bg-light">
+                    <div class="py-1">
+                        <div class="row align-items-center" id="site-navbar-line">
+
+                            <div class="col-10">
+                                <a class="btn btn-primary px-4 py-2" id="status-event"></a>
+                                <h2 class="mb-0 site-logo"></h2><a id="nav-title"></a></h2>
+                            </div>
+                            <div class="col-2">
+                                <nav class="site-navigation text-right" role="navigation">
+                                    <div class="container">
+                                        <!-- d-lg-none -->
+                                        <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                                                class="site-menu-toggle js-menu-toggle"><span
+                                                    class="icon-menu h3"></span></a></div>
+                                        <!-- d-lg-block -->
+                                        <ul class="site-menu js-clone-nav d-none" id="nav">
+                                            <% include ../nav/nav_case %>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <!-- <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:100%" id>11</div> -->
+                    <div class="container text-center" id="statis-event-m"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap-loading display-none">
+        <div class="spinner-border text-primary display-none"></div>
+    </div>
+
+    <div class="site-section bg-light">
+        <div class="container">
+
+            <form class="p-5 bg-white">
+                <div class="row">
+
+                    <div class="form-group-view">
+
+                        <div class="p-4 mb-3 bg-white">
+
+                            <div class="form-img">
+                                <div class="row">
+                                    <div class="form-img">
+                                        <div class="img-f"><img id="AJ_img"></div>
+                                        <div id="img-name"></div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row icos">
+
+                                    <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                                        <div class="ico-m">
+                                            <span class="icon-map text-white h2 d-block"></span>
+                                            <h3 class="table-h3">업적 타입</h3>
+                                            <a id="achievements" class="ico-a"></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                                        <div class="ico-m">
+                                            <span class="icon-map text-white h2 d-block"></span>
+                                            <h3 class="table-h3">획득 포인트</h3>
+                                            <a id="point" class="ico-a"></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                                        <div class="ico-m">
+                                            <span class="icon-map text-white h2 d-block"></span>
+                                            <h3 class="table-h3">획득 경험치</h3>
+                                            <a id="exp" class="ico-a"></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                                        <div class="ico-m">
+                                            <span class="icon-map text-white h2 d-block"></span>
+                                            <h3 class="table-h3">지역</h3>
+                                            <a id="address" class="ico-a"></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                                        <div class="ico-m">
+                                            <span class="icon-map text-white h2 d-block"></span>
+                                            <h3 class="table-h3">획득인원</h3>
+                                            <a id="usertotal" class="ico-a"></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-content">
+
+                                    <div class="text-center form-info">
+                                        <h5 class="mb-5 text-uppercase" id="content-info"><a class="first-a">상</a><a
+                                                class="second-a">세정보</a>
+                                            <hr class="line-event">
+                                        </h5>
+                                    </div>
+
+                                    <div id="content"></div>
+                                </div>
+
+                                <div class="form-content">
+
+                                    <div class="text-center form-info">
+                                        <h5 class="mb-5 text-uppercase" id="content-info"><a class="first-a">가</a><a
+                                                class="second-a">까운 관광지</a>
+                                            <hr class="line-event">
+                                        </h5>
+                                    </div>
+
+                                    <div id="tourboardform"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="submit_div">
+                        <div>
+                            <a id="board-button" class="btn btn-primary px-4 py-2" href="/tourlist/">목록</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="cate-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle2">지도</h5>
+                    <button type="button" class="close" id="close_popup3" data-dimiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row form-group" id="google-modal-form">
+                    <div class="form-group" id="modal-info">
+                    </div>
+                    <div>
+                        <h3 id="location_div"></h3>
+                    </div>
+                    <div>
+                        <h3 id="local_div"></h3>
+                    </div>
+                    <div id="map_canvas"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<% include ../script/default %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr-r448ruHCKvwugrHq9nH2-SXqkj4u9M&libraries=places"
+        async defer></script>
+
+
+    <script type="text/javascript">
+
+        var loginStatus = "<%=loginStatus%>";
+        var userId = "<%=userId%>";
+
+        if (loginStatus == "true") {
+
+            $("#navProfileName").text("<%=username%>");
+            $("#profileImageNav").attr("src", "<%=userImg%>");
+        } else {
+        }
+        var no = "";
+        var content = "";
+        var img_main = null;
+        var img_thumnail = null;
+        var startDate;
+        var endDate;
+        var nowDate;
+        var writer;
+        var today = new Date();
+        var reservation;
+        var title;
+        var id_session;
+        var href_link = null;
+        var latX = null;
+        var longY = null;
+        var restCategoryTitle = [];
+        var restCategoryCode = [];
+
+        var scrapState = 0;
+
+        var startD = "";
+        var endD = "";
+
+        var addressSum = "";
+
+        $(document)
+            .ready(
+                function () {
+                    no = location.href
+                        .substr(location.href.lastIndexOf('=') + 1);
+                    $
+                        .ajax({
+                            url: "/achievements/getachievements",
+                            data: { no: no },
+                            dataType: "json",
+                            type: "get",
+                            success: function (data) {
+                                var add = null;
+                                $
+                                    .each(
+                                        data.rows,
+                                        function (index, item) {
+                                            document
+                                                .getElementById("nav-title").innerHTML = item.TITLE;
+                                            title = item.TITLE;
+                                            document
+                                                .getElementById("address").innerHTML = item.AREA;
+                                            document
+                                                .getElementById("location_div").innerHTML = item.AREA;
+
+                                            add = item.AREA;
+                                            addressSum = item.AREA;
+                                            document
+                                                .getElementById("AJ_img").src = item.MAIN_IMG;
+                                            img_main = item.MAIN_IMG;
+                                            $("#content").text(item.CONTENTS);
+                                            $("#achievements").text(item.TYPE_NAME);
+                                            $("#point").text(item.POINT);
+                                            $("#exp").text(item.EXP);
+                                            $("#usertotal").text(item.USERTOTAL);
+                                            latX = parseFloat(item.LATITUDE);
+                                            longY = parseFloat(item.LONGITUDE);
+                                            if (item.ISCOMPLETE) {
+                                                $("#status-event").css({
+                                                    'background': '#f23a2e',
+                                                    'border-color': '#f23a2e'
+                                                });
+                                                $("#status-event").text("획득완료");
+                                                $("#statis-event-m").css({
+                                                    'background': '#f23a2e',
+                                                    'border-color': '#f23a2e'
+                                                });
+                                                $("#statis-event-m").text("획득한 업적 입니다");
+                                            }
+                                            else {
+                                                var latitude;
+                                                var longitude;
+                                                if (navigator.geolocation) {
+                                                    navigator.geolocation.getCurrentPosition(function (position) {
+                                                        latitude = position.coords.latitude;
+                                                        longitude = position.coords.longitude;
+                                                        var allData = {
+                                                            "userLat": latitude,
+                                                            "userLong": longitude,
+                                                            "no": no
+                                                        }
+                                                        $.ajax({
+                                                            url: "/achievements/isachievementsuccess",
+                                                            data: allData,
+                                                            async: false,
+                                                            type: "get",
+                                                            success: function (data) {
+                                                                if (data.result = true) {
+                                                                    alert("현재 도전과제 위치에 있습니다.");
+                                                                    alert(data.distance + "만큼 차이나는 위치에 있습니다.");
+                                                                    alert("도전과제 업적을 획득했습니다.");
+                                                                };
+                                                            },
+                                                            beforeSend: function () {
+                                                            },
+                                                            complete: function () {
+                                                            }
+                                                        });
+                                                    });
+                                                }
+                                                $("#status-event").css({
+                                                    'background': 'midnightblue',
+                                                    'border-color': 'midnightblue'
+                                                });
+                                                $("#status-event").text("미획득");
+                                                $("#statis-event-m").css({
+                                                    'background': 'midnightblue',
+                                                    'border-color': 'midnightblue'
+                                                });
+                                                $("#statis-event-m")
+                                                    .text("획득하지 못한 업적입니다");
+                                            }
+                                        });
+                                /*
+                                                            $("#address").click(function(){
+                                                                var dummy = document.createElement("textarea");
+                                                                document.body.appendChild(dummy);
+                                                                dummy.value = add;
+                                                                dummy.select();
+                                                                document.execCommand('Copy');
+                                                                document.body.removeChild(dummy);
+                                                                alert('주소가 복사되었습니다.');
+                                                            });*/
+
+
+                                $("#address").click(function () {
+                                    $('#myModal3').modal('show');
+                                });
+
+                                $("#close_popup3").click(function () {
+
+                                    $('#myModal3').modal('hide');
+                                });
+                                $("#myModal3").on("shown.bs.modal", function () {
+
+                                    var myLatLng = { lat: latX, lng: longY };
+
+                                    if (latX == null || longY == null || latX == "" || longY == "") {
+
+                                    } else {
+                                        var map_options = {
+                                            center: { lat: latX, lng: longY },
+                                            zoom: 17,
+                                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                                        };
+                                        var map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+
+                                        var defaultBounds = new google.maps.LatLngBounds(
+                                            new google.maps.LatLng(myLatLng.lat),
+                                            new google.maps.LatLng(myLatLng.lng)
+                                        );
+
+                                        var marker = new google.maps.Marker({
+                                            position: myLatLng,
+                                            map: map,
+                                            title: 'Hello World!'
+                                        });
+                                    }
+
+                                });
+                                $("#myModal3").on("hidden.bs.modal", function () { $("#googleMap").empty(); });
+
+
+                                $.ajax({
+                                    url: "/tourlist/getcategory",
+                                    async: false,
+                                    type: "get",
+                                    success: function (data) {
+                                        $.each(data.rows, function (index, item) {
+
+                                            var cate = "<div id=\"catesection\">" +
+                                                "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"cateBtn" + item.SEQ + "\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" + item.IMG + ");\">"
+                                                + item.CATEGORY + "</button></div>";
+                                            restCategoryCode.push(item.CODE);
+                                            restCategoryTitle.push(item.CATEGORY);
+                                            $("#cateForm").append(cate);
+
+                                            $("#cateBtn" + item.SEQ).click(function () {
+                                                $('#cateText').text(item.CATEGORY);
+                                                $('#myModal2').modal('hide');
+                                                category = item.CATEGORY;
+                                                categorycode = item.CODE;
+                                                count = 1;
+                                                if (areacode != null) {
+                                                }
+
+                                                searchTourlist();
+                                            });
+
+                                        });
+
+                                    },
+                                    beforeSend: function () {
+                                    },
+                                    complete: function () {
+
+                                    }
+                                });
+
+                                $.ajax({
+                                    url: "/tourlist/getneartour",
+                                    data: {
+                                        "latX": latX,
+                                        "longY": longY
+                                    },
+                                    async: false,
+                                    type: "get",
+                                    success: function (data) {
+                                        var obj = JSON.parse(data);
+                                        $.each(obj.response.body.items.item,
+                                            function (index, item) {
+                                                if (item.firstimage == null || item.firstimage == "")
+                                                    item.firstimage = 'https://static.thenounproject.com/png/220984-200.png';
+
+                                                $("#tourboardform").append(
+                                                    "<div class=\"row tourlistDiv\" id = \"tourlistDiv" + item.contentid + "\">"
+                                                    + "<div class = \"col-3\" id = \"tourImgDiv\">"
+                                                    + "<img src=\"" + item.firstimage + "\" id=\"profileImage\"></div>"
+                                                    + "<div class = \"col-9\" id=\"tourInfoDiv\"><div id=\"boardLine1\">"
+                                                    + "<a><span>" + item.title + "</span><span class=\"text-right\" id=\"profileAge\">" + getRestCategoryTitle(item.contenttypeid) + "</span></a></div>"
+                                                    + "<div id=\"boardLine2\" class=\"row\">"
+                                                    + "<a class=\"col-12\"><span>" + item.addr1 + "</span></a>"
+                                                    + "<a class=\"col-12\"><span>별점 : </span></a>"
+                                                    + "</div></div></div><hr>"
+                                                    + "");
+
+
+                                                $("#tourlistDiv" + item.contentid).click(function () {
+                                                    location.href = "/tourlist/detail?no=" + item.contentid;
+                                                });
+
+
+
+                                            });
+                                        function getRestCategoryTitle(code) {
+                                            var i = restCategoryCode.indexOf(String(code));
+                                            return restCategoryTitle[i];
+                                        }
+                                    },
+                                    beforeSend: function () {
+                                    },
+                                    complete: function () {
+                                    }
+                                });
+
+                            },
+                            beforeSend: function () {
+                                $('.spinner-border').removeClass(
+                                    'display-none');
+                                $('.wrap-loading').removeClass(
+                                    'display-none');
+                            },
+                            complete: function () {
+
+                                $('.spinner-border').addClass(
+                                    'display-none');
+                                $('.wrap-loading').addClass('display-none');
+                            }
+                        });
+
+                    $("#close_popup").click(function () {
+                        $('#myModal').modal('hide');
+                    });
+                });
+
+        function openTransport() {
+            $('#transportModal').modal('show');
+        }
+
+        function openLink() {
+            if (href_link != null) {
+                location.href = href_link;
+            }
+        }
+        // maxLengthCheck
+        function maxLengthCheck(object) {
+            if (object.value.length > object.maxLength) {
+                object.value = object.value.slice(0, object.maxLength);
+            }
+        }
+
+
+    </script>
+
+</html>

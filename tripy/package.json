@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "cross-env PASSWORD=YOURPASSOWRD nodemon ./bin/www"
+    "build": "cross-env PASSWORD=YOURPASSWORD nodemon ./bin/www"
   },
   "dependencies": {
     "@azerion/phaser-spine": "^3.0.9",

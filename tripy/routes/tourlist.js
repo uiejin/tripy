@@ -181,4 +181,24 @@ router.get('/getdetailimg', function (req, res) {
       res.send(body);
     });
 });
+
+
+router.get('/getneartour', function (req, res) {
+  var queryParams = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?";
+
+  queryParams += "ServiceKey=" + apiKey + "&contentTypeId=&mapX=" + req.query.longY +
+  "&mapY=" + req.query.latX + "&radius=2000&listYN=Y"+
+  "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&imageYN=Y"+
+  "&_type=json";
+
+  console.log(queryParams);
+
+  request(
+    {
+      url: queryParams, 
+      method: 'GET'
+    }, function (error, response, body) {
+      res.send(body);
+    });
+});
 module.exports = router;

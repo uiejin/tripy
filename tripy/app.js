@@ -18,7 +18,10 @@ var tourlistRouter = require('./routes/tourlist');
 var loginRouter = require('./routes/login');
 var profileRouter = require('./routes/profile');
 var noticeRouter = require('./routes/notice');
+var myHistoryRouter = require('./routes/myhistory');
 var adminRouter = require('./routes/admin');
+
+var achievementsRouter = require('./routes/achievements');
 
 var seventeenRouter = require('./routes/seventeen');
 
@@ -35,8 +38,8 @@ var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 
 var options = {
-  host: 'localhost',
-  user: 'root',
+  host: '3.38.116.153',
+  user: 'rabbit234',
   password: process.env.PASSWORD,
   database: 'party'
 };
@@ -92,6 +95,8 @@ app.use('/test', testforphotoRouter);
 app.use('/upload', uploadRouter);
 app.use('/notice', noticeRouter);
 app.use('/admin', adminRouter);
+app.use('/achievements', achievementsRouter);
+app.use('/myhistory', myHistoryRouter);
 
 //phaser 사용으로 임시 경로 변경
 app.use('/login', loginRouter);

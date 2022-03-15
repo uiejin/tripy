@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+    <% include ../css/default %>
+        <link rel="stylesheet" href="/css/views/myplan.css">
+        <link rel="stylesheet" href="/css/views/myhistory.css">
+
+
+
+</head>
+
+<body>
+
+    <div class="site-wrap">
+        <% include ../head/cover %>
+
+
+            <!--커버에 들어갈 버튼 및 텍스트  -->
+
+            <div class="site-blocks-cover overlay" id="title_img" data-aos="fade" data-stellar-background-ratio="0.5">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+
+                        <div id="navprofileDiv" class="col-3">
+                            <img src="" class="rounded-circle" id="profileImageHistory">
+                        </div>
+                        <div id="navProfileDiv" class="col-6">
+                            <div id="navProfileLine">
+                                <span id="navProfileName" style="color:white;">
+                                    <%=username%>
+                                </span>
+                            </div>
+                            <div id="navProfileLine2">
+                                <span id="navProfileSpan">LV. 8</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="navProfileLine3">
+                                <span id="navProfileSpan">P 450</span>
+                            </div>
+                        </div>
+                        <div id="navProfileDiv" class="col-3">
+                            <div id="navProfileLine">
+                                <span id="navProfileSpan" style="color:white;">
+                                    획득업적 64개
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--모임글  -->
+            <div class="site-section col-md-12" id="nowAchiveDiv">
+                <div class="container" id=boardForm>
+                    <div class="row col-md-12" id="post">
+                        <div>
+                            <a class="text-uppercase boardText">
+                                <%=nowAchive%>
+                            </a>
+                        </div>
+
+
+                        <!--게시판 커스텀 -->
+
+                        <a class="text-uppercase boardAchiveText">
+                            <%=partyAcive%>
+                        </a>
+                        <div class="ajaxboardForm" id="nowForm">
+                        </div>
+
+                        <a class="text-uppercase boardAchiveText">
+                            <%=secretAcive%>
+                        </a>
+                        <div class="ajaxboardForm" id="nowForm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--모임글  -->
+            <div class="site-section col-md-12" id="secretAchiveDiv">
+                <div class="container" id=boardForm>
+                    <div class="row col-md-12" id="post">
+                        <div>
+                            <a class="text-uppercase boardText">
+                                <%=secretAcive%>
+                            </a>
+                        </div>
+
+
+                        <!--게시판 커스텀 -->
+                        <div class="ajaxboardForm" id="nextForm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--모임글  -->
+            <div class="site-section col-md-12" id="tourAchiveDiv">
+                <div class="container" id=boardForm>
+                    <div class="row col-md-12" id="post">
+                        <div>
+                            <a class="text-uppercase boardText">
+                                <%=tourAcive%>
+                            </a>
+                        </div>
+
+
+                        <!--게시판 커스텀 -->
+                        <div class="ajaxboardForm" id="prevForm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--모임글  -->
+            <div class="site-section col-md-12" id="getAciveDiv">
+                <div class="container" id=boardForm>
+                    <div class="row col-md-12" id="post">
+                        <div>
+                            <a class="text-uppercase boardText">
+                                <%=getAcive%>
+                            </a>
+                        </div>
+
+
+                        <!--게시판 커스텀 -->
+                        <div class="ajaxboardForm" id="getAciveForm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="s_id" data-prodnumber="${sessionScope.id}" />
+            <div id="s_auth" data-prodnumber="${sessionScope.authority}" />
+
+    </div>
+
+
+</body>
+
+<% include ../script/default %>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var loginStatus = "<%=loginStatus %>";
+            var userId = "<%=userId%>";
+
+            if (loginStatus == "true") {
+
+                $("#navProfileName").text("<%=username%>");
+                $("#profileImageNav").attr("src", "<%=userImg%>");
+                $("#title_subject").text("<%=username%>");
+                $("#profileImageHistory").attr("src", "<%=userImg%>");
+            } else {
+                $("#nav").load("/html/nav_nologin.html");
+      /*  var loginMessage = "<%=loginMessage%>";
+      alert(loginMessage);
+      history.back();
+    */}
+
+            $("#nowtext").hide(); $("#prevtext").hide(); $("#nexttext").hide();
+
+            var latitude;
+            var longitude;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    latitude = position.coords.latitude;
+                    longitude = position.coords.longitude;
+                    var allData = {
+                        "userLat": latitude,
+                        "userLong": longitude
+                    }
+
+                    $.ajax({
+                        url: "/myhistory/getmyacivetop",
+                        async: false,
+                        data: allData,
+                        type: "get",
+                        success: function (data) {
+                            $.each(data.rows, function (index, item) {
+                                /*var source = "<div id=\"form-board" + item.SEQ + "\"><div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span></div>" +
+                                    "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nowBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" +
+                                    item.EXP + "</span></div><hr class=\"lineEvent\"></div>";
+                                $("#getAciveForm").append(source);*/
+                                var source =
+                                    "<div class=\"row achievementsItemDiv\" id = \"form-board" + item.SEQ + "\">"
+                                    + "<div id = \"achievementItem\">"
+                                    + "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                                    + "<div id=\"achievementItemDiv2\">"
+                                    + "<div id=\"boardLine2\" class=\"row\">"
+                                    + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + item.AREA_NAME + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
+                                    + "<a class=\"col-12\"><span>거리 : " + roundToTwo(item.DISTANCE) + " Km<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-dollar\"></span>" + item.POINT + "</span></span></a>"
+                                    + "<a class=\"col-12\"><span>" + item.COMPLETE_DATE + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>"
+                                    + "</div></div></div><hr>"
+                                    + "";
+                                $("#getAciveForm").append(source);
+                                $("#form-board" + item.SEQ).click(function () {
+                                    location.href = "./achievements/view?no=" + item.SEQ;
+                                });
+                            });
+
+                        },
+                        beforeSend: function () {
+                        },
+                        complete: function () {
+                        }
+                    });
+
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/myhistory/getmyacivetopnotusedgps",
+                    async: false,
+                    type: "get",
+                    success: function (data) {
+                        $.each(data.rows, function (index, item) {
+                            /*var source = "<div id=\"form-board" + item.SEQ + "\"><div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span></div>" +
+                                "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nowBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" +
+                                item.EXP + "</span></div><hr class=\"lineEvent\"></div>";
+                            $("#getAciveForm").append(source);*/
+                            var source =
+
+                                "<div class=\"row achievementsItemDiv\" id = \"form-board" + item.SEQ + "\">"
+                                + "<div id = \"achievementItem\">"
+                                + "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                                + "<div id=\"achievementItemDiv2\">"
+                                + "<div id=\"boardLine2\" class=\"row\">"
+                                + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + item.AREA_NAME + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
+                                + "<a class=\"col-12\"><span>GPS가 꺼져있습니다.<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-dollar\"></span>" + item.POINT + "</span></span></a>"
+                                + "<a class=\"col-12\"><span>" + item.COMPLETE_DATE + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>"
+                                + "</div></div></div><hr>"
+                                + "";
+                            $("#getAciveForm").append(source);
+                            $("#form-board" + item.SEQ).click(function () {
+                                location.href = "./achievements/view?no=" + item.SEQ;
+                            });
+                        });
+
+                    },
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    }
+                });
+            }
+
+        });
+
+        function roundToTwo(num) {
+            return +(Math.round(num + "e+2")  + "e-2");
+        }
+    </script>
+
+
+
+</html>

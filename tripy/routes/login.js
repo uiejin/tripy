@@ -49,7 +49,7 @@ passport.use(
         const NewUserPassword = crypto.createHash('sha256').update(NewUserId).digest('base64');
         
         //해당 id를 가진 user가 존재하는지 찾아본다.
-        const sql = "select ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
+        const sql = "select SEQ,ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
         const post = [NewUserId];
         con.connection.query(sql, post, (err, results, fields) => {
           if (err) {
@@ -70,7 +70,7 @@ passport.use(
                 done(err);
               }
               //가입이 되었다면 해당 유저로 바로 로그인시켜줌
-              const sql = "SELECT ID, NAME, IMG, GENDER, BIRTHDAY, ISADMIN FROM PT_USER where ID =?";
+              const sql = "SELECT SEQ, ID, NAME, IMG, GENDER, BIRTHDAY, ISADMIN FROM PT_USER where ID =?";
               const post = [NewUserId];
               con.connection.query(sql, post, (err, results, fields) => {
                 if (err) {
@@ -104,7 +104,7 @@ passport.use(
       const NewUserPassword = crypto.createHash('sha256').update(NewUserId).digest('base64');
       
       //해당 id를 가진 user가 존재하는지 찾아본다.
-      const sql = "select ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
+      const sql = "select SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
       const post = [NewUserId];
       con.connection.query(sql, post, (err, results, fields) => {
         if (err) {
@@ -122,7 +122,7 @@ passport.use(
               done(err);
             }
             //가입이 되었다면 해당 유저로 바로 로그인시켜줌
-            const sql = "SELECT ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN FROM PT_USER where ID =?";
+            const sql = "SELECT SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN FROM PT_USER where ID =?";
             const post = [NewUserId];
             con.connection.query(sql, post, (err, results, fields) => {
               if (err) {
@@ -257,7 +257,7 @@ passport.use('local-login',
   passwordField: 'password', //default 속성값
   passReqToCallback: true}, function (req, id, password, done) {
       //해당 id를 가진 user가 존재하는지 찾아본다.
-      const sql = "select ID, PASSWORD, NAME,ISADMIN,SALT, IS_CREATE, IS_BLOCKED, GENDER, IMG, BIRTHDAY  from PT_USER where ID = ?";
+      const sql = "select SEQ, ID, PASSWORD, NAME,ISADMIN,SALT, IS_CREATE, IS_BLOCKED, GENDER, IMG, BIRTHDAY  from PT_USER where ID = ?";
       const post = [id];
       con.connection.query(sql, post, (err, results, fields) => {
         if (err) {
@@ -289,6 +289,7 @@ passport.use('local-login',
                     });
                   }
                 done(null, {
+                  'SEQ' : user.SEQ,
                   'ID': user.ID,
                   'NAME' : user.NAME,
                   'ISADMIN' : user.ISADMIN,
