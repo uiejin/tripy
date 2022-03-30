@@ -4,12 +4,12 @@ const mysql = require("mysql");
 
 const password = process.env.PASSWORD;
 
-const host = "3.38.116.153";
+const host = "localhost";
 
 module.exports = {
   connection: mysql.createConnection({
-    host: "3.38.116.153",
-    user: "rabbit234",
+    host: "localhost",
+    user: "root",
     password: password,
     database: "party",
   }),
