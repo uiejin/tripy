@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+    <% include ../css/default %>
+
+        <link rel="stylesheet"
+            href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+
+        <link rel="stylesheet" href="/css/views/noncover.css">
+        <link rel="stylesheet" href="/css/views/writepost.css">
+        <link rel="stylesheet" href="/css/views/search.css">
+        <link rel="stylesheet" href="/css/views/calendar.css">
+        <link rel="stylesheet" href="/css/views/myplan.css">
+        <link rel="stylesheet" href="/css/views/mytour.css">
+        <link rel="stylesheet" href="/css/views/myhistory.css">
+
+</head>
+
+<body>
+
+    <div class="site-wrap">
+
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-settings js-menu-toggle"></span>
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div> <!-- .site-mobile-menu -->
+
+        <!--상단바-->
+        <div class="site-navbar-wrap js-site-navbar bg-white">
+
+            <div class="container">
+                <div class="site-navbar bg-light">
+                    <div class="py-1">
+                        <div class="row align-items-center" id="site-navbar-line">
+                            <div class="col-10">
+                                <h2 class="mb-0 site-logo"></h2><a id="nav-title">
+                                    <%= title %>
+                                </a></h2>
+                            </div>
+                            <div class="col-2">
+                                <nav class="site-navigation text-right" role="navigation">
+                                    <div class="container">
+                                        <!-- d-lg-none -->
+                                        <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                                                class="site-menu-toggle js-menu-toggle"><span
+                                                    class="icon-menu h3"></span></a></div>
+                                        <!-- d-lg-block -->
+                                        <ul class="site-menu js-clone-nav d-none" id="nav">
+                                            <% include ../nav/nav_case %>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section col-md-12" id="getAciveDiv">
+        <div class="container" id=boardForm>
+            <div class="row col-md-12" id="post">
+                <div>
+                    <a class="text-uppercase boardText">
+                        <%= title %>
+                    </a>
+                </div>
+
+
+                <!--게시판 커스텀 -->
+                <div class="ajaxboardForm" id="getAciveForm">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<% include ../script/default %>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var loginStatus = "<%=loginStatus %>";
+            var userId = "<%=userId%>";
+
+            var country = ['대한민국'];
+
+            var countrycode = null;
+            var areacode = null;
+            var category = null;
+            var categorycode = null;
+
+            var imgsrc = "<%=userImg%>";
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+
+            if (loginStatus == "true") {
+
+                $("#navProfileName").text("<%=username%>");
+                $("#profileImageNav").attr("src", "<%=userImg%>");
+            } else {
+                $("#nav").load("/html/nav_nologin.html");
+            }
+            searchParty();
+
+            function searchParty() {
+
+                $("#getAciveForm *").remove();
+                var no = location.href.substr(location.href.lastIndexOf('=') + 1);
+                if(no == null)
+                {
+                    no = 1;
+                }
+                var latitude;
+                var longitude;
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        latitude = position.coords.latitude;
+                        longitude = position.coords.longitude;
+                        var allData = {
+                            "no":no,
+                            "userLat": latitude,
+                            "userLong": longitude
+                        }
+
+                        $.ajax({
+                            url: "/achievements/searchachievementlist",
+                            async: false,
+                            data: allData,
+                            type: "get",
+                            success: function (data) {
+                                $.each(data.rows, function (index, item) {
+                                    /*var source = "<div id=\"form-board" + item.SEQ + "\"><div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span></div>" +
+                                        "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nowBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" +
+                                        item.EXP + "</span></div><hr class=\"lineEvent\"></div>";
+                                    $("#getAciveForm").append(source);*/
+                                    var source =
+                                        "<div class=\"row achievementsItemDiv\" id = \"form-board" + item.SEQ + "\">"
+                                        + "<div id = \"achievementItem\">"
+                                        + "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                                        + "<div id=\"achievementItemDiv2\">"
+                                        + "<div id=\"boardLine2\" class=\"row\">"
+                                        + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + item.AREA_NAME + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
+                                        + "<a class=\"col-12\"><span>거리 : " + roundToTwo(item.DISTANCE) + " <span class=\"text-right\" id=\"profileAge\"><span class=\"icon-dollar\"></span>" + item.POINT + "</span></span></a>";
+                                        if(item.ISCOMPLETE)
+                                        {
+                                            source +="<a class=\"col-12\"><span>" + "업적 획득" + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>";
+                                        }
+                                        else
+                                        {
+                                            source +="<a class=\"col-12\" style=\"color : red; \"><span>" + "업적 미 획득" + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>";
+                                        }
+                                        source +=  "</div></div></div><hr>";
+                                    $("#getAciveForm").append(source);
+                                    $("#form-board" + item.SEQ).click(function () {
+                                        location.href = "./view?no=" + item.SEQ;
+                                    });
+                                });
+
+                            },
+                            beforeSend: function () {
+                            },
+                            complete: function () {
+                            }
+                        });
+
+                    });
+                }
+                else {
+                    $.ajax({
+                        url: "/achievements/searchachievementlistnotusedgps",
+                        async: false,
+                        type: "get",
+                        success: function (data) {
+                            $.each(data.rows, function (index, item) {
+                                /*var source = "<div id=\"form-board" + item.SEQ + "\"><div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span></div>" +
+                                    "<div id=\"boardLine2\"><span id=\"boardHidden\">hi</span><span id=\"nowBoardDate\" class=\"btn btn-primary px-4 py-3 text-uppercase\">" +
+                                    item.EXP + "</span></div><hr class=\"lineEvent\"></div>";
+                                $("#getAciveForm").append(source);*/
+                                var source =
+
+                                    "<div class=\"row achievementsItemDiv\" id = \"form-board" + item.SEQ + "\">"
+                                    + "<div id = \"achievementItem\">"
+                                    + "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                                    + "<div id=\"achievementItemDiv2\">"
+                                    + "<div id=\"boardLine2\" class=\"row\">"
+                                    + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + item.AREA_NAME + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
+                                    + "<a class=\"col-12\"><span>GPS가 꺼져있습니다.<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-dollar\"></span>" + item.POINT + "</span></span></a>"
+                                    + "<a class=\"col-12\"><span>" + item.COMPLETE_DATE + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>"
+                                    + "</div></div></div><hr>"
+                                    + "";
+                                $("#getAciveForm").append(source);
+                                $("#form-board" + item.SEQ).click(function () {
+                                    location.href = "./view?no=" + item.SEQ;
+                                });
+                            });
+
+                        },
+                        beforeSend: function () {
+                        },
+                        complete: function () {
+                        }
+                    });
+
+
+
+                }
+            }
+
+            
+        function roundToTwo(num) {
+            if(num ==='비밀업적입니다')
+                return '비밀업적입니다';
+            else
+                return +(Math.round(num + "e+2")  + "e-2") + " Km";
+        }
+    });
+    </script>
+
+
+
+</html>

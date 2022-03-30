@@ -39,7 +39,7 @@ router.get('/getmyacivetop', function (req, res) {
         '(SELECT (6371*acos(cos(radians(?))*cos(radians(T1.LATITUDE))*cos(radians(T1.LONGITUDE) ' +
         '-radians(?))+sin(radians(?))*sin(radians(T1.LATITUDE))))) AS DISTANCE ' +
         'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2, PT_ACHIEVEMENT_USER_SUCCESS T3 ' +
-        'WHERE T3.USER_SEQ = ? AND T2.SEQ = T1.TYPE ' +
+        'WHERE T3.USER_SEQ = ? AND T2.SEQ = T1.TYPE AND T1.SEQ = T3.ACHIEVEMENT_SEQ ' +
         'ORDER BY T3.SEQ DESC LIMIT 0, 5;';
 
     var params = [req.query.userLat, req.query.userLong, req.query.userLat, req.user.SEQ];

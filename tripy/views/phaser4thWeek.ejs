@@ -84,21 +84,32 @@
    <div id="phaser-example">
     <div style="font-family:font1; position:absolute; left:-1000px; visibility:hidden;">.</div>
    </div>
-
-   <script src="/phasergame/js/phaser.min.js"></script>
    
-  <script src ="/phasergame/js/givetype.js"></script>
-  <script src="/phasergame/js/game.js"></script>
-  <script src="/phasergame/js/CreateMapScene.js"></script>
-  <script src="/phasergame/js/FixMapScene.js"></script>
-  <script src="/phasergame/js/MainUIScene.js"></script>
-  <script src="/phasergame/js/select.js"></script>
-  <script src="/phasergame/js/MoneyShop.js"></script>
-  <script src="/phasergame/js/Guestbook.js"></script>
-  <script src ="/phasergame/js/variable.js"></script>
-  <script src ="/phasergame/js/Demo.js"></script>
-  <script src ="/phasergame/js/InputBox.js"></script>
-  <script src ="/phasergame/js/config.js"></script>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">1</h5>
+        <button type="button" class="close" id="close_popup" data-dimiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>					
+      </div>
+      <div class="row form-group" id="modal-form">
+      <div class="form-group" id="modal-info">
+      </div>
+      <div class="col-md-12">
+        <div id="areaForm"></div>
+        <img class="rounded-circle" id="profileImageNavs">
+        </div>
+      </div>								
+    </div>
+  </div>
+</div>
+   
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
  
 </body>
 
@@ -121,16 +132,72 @@
 </html>
 
 <script>
-  userImage = "<%=userImg%>";
+  var userImage = "<%=userImg%>";
   loginStatus  = "<%=loginStatus %>";
   userId = "<%=userId%>";
 
   if(loginStatus  == "true"){
       $("#navProfileName").text("<%=username%>");
       $("#profileImageNav").attr("src", "<%=userImg%>");
+      $("#profileImageNavs").attr("src", "<%=userImg%>");
       
     }else{
       $("#profileForm").css("display", "none");
     }
+
+    $("#close_popup").click(function() {
+  			
+        $('#myModal').modal('hide');
+      });
+    
+    $.ajax({
+        url: "/writepost/getarea",
+        data: allData,
+        async: false,
+        type: "get",
+        success: function (data) {
+          $.each(data.rows, function (index, item) {
+  
+            var addarea = "<div id=\"locationSectionFirst\">" +
+            "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"locationBtn"+item.AREA_CODE+"\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">" 
+             +item.AREA +"</button></div>";
+  
+             $("#areaForm").append(addarea);
+  
+             $("#locationBtn"+item.AREA_CODE).click(function(){
+                $('#locationText').text(item.AREA);
+                areacode = item.AREA_CODE;
+                countrycode = item.COUNTRY_CODE;
+                $('#myModal').modal('hide');
+                searchParty();
+              });
+  
+          });
+          
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+      });
+
   </script>
+  
+  <script src="/phasergame/js/phaser.min.js"></script>
+   
+  <script src ="/phasergame/js/givetype.js"></script>
+  <script src="/phasergame/js/game.js"></script>
+  <script src="/phasergame/js/CreateMapScene.js"></script>
+  <script src="/phasergame/js/FixMapScene.js"></script>
+  <script src="/phasergame/js/MainUIScene.js"></script>
+  <script src="/phasergame/js/select.js"></script>
+  <script src="/phasergame/js/MoneyShop.js"></script>
+  <script src="/phasergame/js/Guestbook.js"></script>
+  <script src ="/phasergame/js/variable.js"></script>
+  <script src ="/phasergame/js/Demo.js"></script>
+  <script src ="/phasergame/js/InputBox.js"></script>
+  <script src ="/phasergame/js/Friend.js"></script>
+  <script src ="/phasergame/js/FriendMap.js"></script>
+
+  <script src ="/phasergame/js/config.js"></script>
 </html>

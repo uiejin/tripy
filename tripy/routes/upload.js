@@ -40,6 +40,20 @@ let uploadNotice = multer({
 
 })
 
+
+let uploadachievementpic = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: "tripy-develop/achievementpic-img",
+        key: function (req, file, cb) {
+             let extension = path.extname(file.originalname);
+             cb(null, Date.now().toString() + extension)
+        },
+        acl: 'public-read-write',
+    })
+
+})
+
 let uploadVideo = multer({
     storage: multerS3({
         s3: s3,
@@ -149,6 +163,16 @@ router.post('/upload3', uploadNotice.single("img_val3"), function(req, res, next
 
     res.send({result:req.file.location});
 })
+
+
+router.post('/uploadachievementpic', uploadachievementpic.fields([{name : "img_main", maxCount: 1}]), 
+function(req, res, next){
+    var contentType = req.headers['content-type'];
+    console.log('contentType: ', req.files);
+
+    res.send({result:req.files});
+})
+
 
 
 

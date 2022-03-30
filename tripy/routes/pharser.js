@@ -53,10 +53,10 @@ router.get('/phaser4thWeek', function (req, res, next) {
       userId: req.user.ID,
       loginStatus: true,
       username: req.user.NAME,
+      isAdmin: req.user.ISADMIN,
       //userAge : getAge(req.user.BIRTHDAY) + "세",
       //userGender : req.user.GENDER,
-      userImg: req.user.IMG,
-      isAdmin : req.user.ISADMIN,
+      userImg: req.user.IMG
     });
   } else {
     res.redirect('/login/login');
@@ -90,11 +90,11 @@ router.get('/saveStageMode', function (req, res) {
   var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
 
-  var query = 'INSERT INTO PHASER (ID, HP, STAGE, COIN,' +
+  var query = 'INSERT INTO PHASER (ID, HP, STAGE, COIN, S_COIN, T_COIN,' +
     'DAMAGE, SPEED, STAGEMODE, PETENABLE, WATERGAUGEMAX, UPDATETIME, SCORE) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
-  var params = [req.query.id, req.query.hp, req.query.stageLevel, req.query.playerMoney, req.query.playerDamage
-    , req.query.playerSpeed,
+  var params = [req.query.id, req.query.hp, req.query.stageLevel, req.query.playerMoney, req.query.playerSMoney, req.query.playerTMoney,
+    req.query.playerDamage, req.query.playerSpeed,
   req.query.stageMode, req.query.petEnable, req.query.waterGaugeMax, nowTime, req.query.score];
 
   con.connection.query(query, params, function (err, rows, fields) {
@@ -135,12 +135,12 @@ router.get('/saveInfiniteMode', function (req, res) {
   var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
 
-  var query = 'INSERT INTO PHASER (ID, HP, STAGE, COIN,' +
+  var query = 'INSERT INTO PHASER (ID, HP, STAGE, COIN, S_COIN, T_COIN,' +
     'DAMAGE, SPEED, STAGEMODE, PETENABLE, WATERGAUGEMAX, UPDATETIME, SCORE) ' +
     'VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
-  var params = [req.query.id, req.query.hp, req.query.stageLevel, req.query.playerMoney, req.query.playerDamage
-    , req.query.playerSpeed,
+    var params = [req.query.id, req.query.hp, req.query.stageLevel, req.query.playerMoney, req.query.playerSMoney, req.query.playerTMoney,
+      req.query.playerDamage, req.query.playerSpeed,
   req.query.stageMode, req.query.petEnable, req.query.waterGaugeMax, nowTime, req.query.score];
 
   con.connection.query(query, params, function (err, rows, fields) {
@@ -197,10 +197,10 @@ router.get('/getScore', function (req, res) {
 router.post('/savemap', function (req, res) {
 
   var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-  var query = 'INSERT INTO PT_PHASER (ID, MAP_DATA, REG_DATE, MAP_ID) ' +
-  'VALUES (?,?,?,?)';
+  var query = 'INSERT INTO PT_PHASER (ID, MAP_DATA, REG_DATE, COIN, S_COIN, T_COIN, MAP_ID) ' +
+  'VALUES (?,?,?,?,?,?,?)';
 
-  var params = [req.body.id, req.body.mappos,nowTime,req.body.map_id];
+  var params = [req.body.id, req.body.mappos,nowTime,req.body.coin, req.body.s_coin, req.body.t_coin, req.body.map_id];
 
   con.connection.query(query,params, function (err, rows, fields) {
     if (err) {
@@ -218,10 +218,10 @@ router.post('/savemap', function (req, res) {
 router.post('/savemap_tower', function (req, res) {
 
   var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-  var query = 'INSERT INTO PT_PHASER_TOWER (ID, MAP_DATA, REG_DATE, MAP_ID) ' +
-  'VALUES (?,?,?,?)';
+  var query = 'INSERT INTO PT_PHASER_TOWER (ID, MAP_DATA, TREE_DATA, HOUSE_DATA, REG_DATE, MAP_ID) ' +
+  'VALUES (?,?,?,?,?,?)';
 
-  var params = [req.body.id, req.body.mappos,nowTime,req.body.map_id];
+  var params = [req.body.id, req.body.mappos,req.body.treepos,req.body.housepos, nowTime,req.body.map_id];
 
   con.connection.query(query,params, function (err, rows, fields) {
     if (err) {
@@ -277,6 +277,7 @@ router.post('/getusermapcreate', function(req, res) {
 router.post('/getusermapcreate_tower', function(req, res) {
   var query = 
   'SELECT EXISTS (SELECT * FROM PT_PHASER_TOWER WHERE ID=? AND MAP_ID=?) AS SUCCESS';
+  
   var params =[req.body.id,req.body.map_id];
 
   con.connection.query(query, params, function(err, rows, fields) {
@@ -309,9 +310,9 @@ router.post('/getusermapcreate_tower_count', function(req, res) {
 router.post('/updatesavemap', function(req, res) {
 
   var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-  var query = 'UPDATE PT_PHASER SET MAP_DATA = ?, MODIFY_DATE = ? WHERE ID = ? AND MAP_ID= ?';
+  var query = 'UPDATE PT_PHASER SET MAP_DATA = ?, MODIFY_DATE = ?, COIN = ?, S_COIN = ?, T_COIN = ? WHERE ID = ? AND MAP_ID= ?';
   
-  var params = [req.body.mappos,nowTime,req.body.id,req.body.map_id];
+  var params = [req.body.mappos,nowTime,req.body.coin, req.body.s_coin, req.body.t_coin,req.body.id,req.body.map_id];
 
   con.connection.query(query, params, function(err, rows, fields) {
       if(err){
@@ -327,9 +328,9 @@ router.post('/updatesavemap', function(req, res) {
 router.post('/updatesavemap_tower', function(req, res) {
 
   var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-  var query = 'UPDATE PT_PHASER_TOWER SET MAP_DATA = ?, MODIFY_DATE = ? WHERE ID = ? AND MAP_ID= ?';
+  var query = 'UPDATE PT_PHASER_TOWER SET MAP_DATA = ?, TREE_DATA = ?, HOUSE_DATA = ?, MODIFY_DATE = ? WHERE ID = ? AND MAP_ID= ?';
   
-  var params = [req.body.mappos,nowTime,req.body.id,req.body.map_id];
+  var params = [req.body.mappos,req.body.treepos,req.body.housepos,nowTime,req.body.id,req.body.map_id];
 
   con.connection.query(query, params, function(err, rows, fields) {
       if(err){
@@ -377,6 +378,35 @@ router.post('/getusermap', function(req, res) {
 router.post('/getusermap_tower', function(req, res) {
   var query = 
   'SELECT MAP_DATA FROM PT_PHASER_TOWER WHERE ID=? AND MAP_ID=?';
+
+  var params =[req.body.id,req.body.map_id];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/getusermap_tree', function(req, res) {
+  var query = 
+  'SELECT TREE_DATA FROM PT_PHASER_TOWER WHERE ID=? AND MAP_ID=?';
+  var params =[req.body.id,req.body.map_id];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/getusermap_house', function(req, res) {
+  var query = 
+  'SELECT HOUSE_DATA FROM PT_PHASER_TOWER WHERE ID=? AND MAP_ID=?';
   var params =[req.body.id,req.body.map_id];
 
   con.connection.query(query, params, function(err, rows, fields) {
@@ -393,6 +423,135 @@ router.post('/getusermap_tower_count', function(req, res) {
   var query = 
   'SELECT COUNT FROM PT_PHASER_TOWER_COUNT WHERE ID=? AND MAP_ID=?';
   var params =[req.body.id,req.body.map_id];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/getuser_coins', function(req, res) {
+
+  var query = 
+  'SELECT COIN, S_COIN, T_COIN FROM PT_PHASER WHERE ID=? AND MAP_ID=?';
+  var params =[req.body.id,req.body.map_id];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+//친구 추가 저장.
+router.post('/savefriend', function (req, res) {
+
+  var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+  var query = 'INSERT INTO PT_PHASER_FRIEND (P1, P2, REGISTER_DATE, CON) ' +
+  'VALUES (?,?,?,?)';
+
+  var params = [req.body.p1, req.body.p2,nowTime,req.body.con];
+
+  con.connection.query(query,params, function (err, rows, fields) {
+    if (err) {
+      console.log(err);
+      res.send({ result: false });
+    } else {
+      console.log(rows.inster);
+      res.send({ rows, result: true });
+    }
+  });
+});
+
+router.post('/getmyfriend1', function(req, res) {
+  var query = 
+  'SELECT P2 FROM PT_PHASER_FRIEND WHERE CON = ? AND P1 = ?';
+  var params =[req.body.con, req.body.id];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/getmyfriend2', function(req, res) {
+  var query = 
+  'SELECT P1 FROM PT_PHASER_FRIEND WHERE CON = ? AND P2 = ?';
+  var params =[req.body.con, req.body.id];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/getgofriendmap', function(req, res) {
+  var query = 
+  'SELECT MAP_DATA, TREE_DATA, HOUSE_DATA FROM PT_PHASER_TOWER WHERE ID=? AND MAP_ID=?';
+  var params =[req.body.id, req.body.map_id];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+
+// 방명록 저장.
+router.post('/saveguestbook', function (req, res) {
+
+  var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+  var query = 'INSERT INTO PT_PHASER_GUESTBOOK (WRITER_ID, DEAR_ID, CONTENT, REGISTER_DATE, DEL) ' +
+  'VALUES (?,?,?,?,?)';
+
+  var params = [req.body.writer_id, req.body.dear_id,req.body.content,nowTime,req.body.del];
+
+  con.connection.query(query,params, function (err, rows, fields) {
+    if (err) {
+      console.log(err);
+      res.send({ result: false });
+    } else {
+      console.log(rows.inster);
+      res.send({ rows, result: true });
+    }
+  });
+});
+
+router.post('/getguestbook', function(req, res) {
+  var query = 
+  'SELECT NAME, REGISTER_DATE, CONTENT FROM PT_PHASER_GUESTBOOK, PT_USER WHERE ID = DEAR_ID AND DEAR_ID=? AND DEL=?';
+  var params =[req.body.id,req.body.del];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+
+
+// 작성자를 받아오자!
+router.post('/getnickname', function(req, res) {
+  var query = 
+  'SELECT NAME, IMG FROM PT_USER WHERE ID = ?';
+  var params =[req.body.id];
 
   con.connection.query(query, params, function(err, rows, fields) {
       if(err){

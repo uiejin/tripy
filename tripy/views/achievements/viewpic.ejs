@@ -138,14 +138,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4 col-sm-4 col-xs-4 text-center">
-                                        <div class="ico-m">
-                                            <span class="icon-map text-white h2 d-block"></span>
-                                            <h3 class="table-h3">제한 시간</h3>
-                                            <a id="limit-time" class="ico-a"></a>
-                                        </div>
-                                    </div>
+                                </div>
 
+                                <div class="col-12" id="button-div">
+                                    <a id="get-achievement-button"
+                                        class="col-12 btn btn-primary px-4 py-2 board-button">
+                                        <% if (loginStatus){ %>
+                                            <%=applyBtnText%>
+                                                <% }else { %>
+                                                    <%=applyBtnText%>
+                                                        <% } %>
+                                    </a>
                                 </div>
 
                                 <div class="form-content">
@@ -171,8 +174,6 @@
 
                                     <div id="tourboardform"></div>
                                 </div>
-
-                                
                             </div>
                         </div>
 
@@ -217,11 +218,60 @@
     </div>
 
 
+    <div class="modal fade" id="photomodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="cate-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle2">사진 업로드</h5>
+                    <button type="button" class="close" id="close_popup_photo" data-dimiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row form-group">
+                    <div class="main-img-modal-div">
+                        <label for="main_img_label">사진 첨부</label>
+                        <input type="file" id="img_main" name="img_main" filestyle input="" type="file"
+                            data-class-button="btn btn-default" data-class-input="form-control" data-button-text=""
+                            data-icon-name="fa fa-upload" class="form-control" tabindex="-1" accept="image/*" />
+                    </div>
+
+                    <div class="col-12" id="upload-div">
+                        <a id="upload-btn" class="col-12 btn btn-primary px-4 py-2">
+                            전송
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="photosuccessmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="cate-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle2">사진</h5>
+                    <button type="button" class="close" id="close_popup_photo_success" data-dimiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row form-group">
+                    <img id="getmyimg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 <% include ../script/default %>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr-r448ruHCKvwugrHq9nH2-SXqkj4u9M&libraries=places"
         async defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 
 
     <script type="text/javascript">
@@ -248,8 +298,8 @@
         var title;
         var id_session;
         var href_link = null;
-        var latX = null;
-        var longY = null;
+        var achievement_latX = null;
+        var achievement_longY = null;
         var restCategoryTitle = [];
         var restCategoryCode = [];
 
@@ -295,16 +345,8 @@
                                             $("#point").text(item.POINT);
                                             $("#exp").text(item.EXP);
                                             $("#usertotal").text(item.USERTOTAL);
-                                            latX = parseFloat(item.LATITUDE);
-                                            longY = parseFloat(item.LONGITUDE);
-                                            if(item.START_DATE != null && item.END_DATE != null)
-                                            {
-                                                $("#limit-time").html(item.START_DATE + "<br> ~ <br>" + item.END_DATE);
-                                            }
-                                            else if(item.START_TIME && item.END_TIME)
-                                            {
-                                                $("#limit-time").html(item.START_TIME + "<br> ~ <br>" + item.END_TIME);
-                                            }
+                                            achievement_latX = parseFloat(item.LATITUDE);
+                                            achievement_longY = parseFloat(item.LONGITUDE);
                                             if (item.ISCOMPLETE) {
                                                 $("#status-event").css({
                                                     'background': '#f23a2e',
@@ -316,40 +358,35 @@
                                                     'border-color': '#f23a2e'
                                                 });
                                                 $("#statis-event-m").text("획득한 업적 입니다");
+
+
+                                                $("#get-achievement-button").text("획득한 업적 입니다");
+                                                $("#get-achievement-button").click(function () {
+                                                    $('#photosuccessmodal').modal('show');
+                                                    $.ajax({
+                                                        url: "/achievements/getachievementspic",
+                                                        data: { no: no },
+                                                        async: false,
+                                                        type: "get",
+                                                        success: function (data) {
+                                                            var add = null;
+                                                            $.each(data.rows,function (index, item) {
+                                                            
+                                                                $("#getmyimg").attr("src", item.IMG);
+                                                                
+                                                            });
+                                                        },
+                                                        beforeSend: function () {
+                                                        },
+                                                        complete: function () {
+                                                        }
+                                                    });
+
+                                                });
                                             }
                                             else {
-                                                var latitude;
-                                                var longitude;
-                                                if (navigator.geolocation) {
-                                                    navigator.geolocation.getCurrentPosition(function (position) {
-                                                        latitude = position.coords.latitude;
-                                                        longitude = position.coords.longitude;
-                                                        alert(position.coords.accuracy);
-                                                        var allData = {
-                                                            "userLat": latitude,
-                                                            "userLong": longitude,
-                                                            "no": no
-                                                        }
-                                                        $.ajax({
-                                                            url: "/achievements/isachievementsuccess",
-                                                            data: allData,
-                                                            async: false,
-                                                            type: "get",
-                                                            success: function (data) {
-                                                                if (data.result == true) {
-                                                                    alert("현재 도전과제 위치에 있습니다.");
-                                                                    alert(data.distance + "만큼 차이나는 위치에 있습니다.");
-                                                                    alert("도전과제 업적을 획득했습니다.");
-                                                                    location.reload();
-                                                                };
-                                                            },
-                                                            beforeSend: function () {
-                                                            },
-                                                            complete: function () {
-                                                            }
-                                                        });
-                                                    });
-                                                }
+                                                $("#tourboardDiv").remove();
+
                                                 $("#status-event").css({
                                                     'background': 'midnightblue',
                                                     'border-color': 'midnightblue'
@@ -361,18 +398,106 @@
                                                 });
                                                 $("#statis-event-m")
                                                     .text("획득하지 못한 업적입니다");
+
+                                                $("#get-achievement-button").click(function () {
+                                                    $('#photomodal').modal('show');
+                                                });
+
+                                                $("#upload-btn").click(function () {
+                                                    if ($("#img_main").val() == null || $("#img_main").val() == "") {
+                                                        alert("사진을 첨부해 주세요");
+                                                    }
+                                                    else {
+                                                        var formData = new FormData();
+
+                                                        formData.append("img_main", $("#img_main")[0].files[0]);
+                                                        var img_main_url;
+                                                        var img_main_val1 = false;
+
+                                                        var uploadImgCount = 0;
+                                                        var imgElem = document.getElementById("img_main").files[0];
+                                                        imgElem.exifdata = null; // 같은 페이지 안에서 이미지가 바뀌는 경우 이전의 메타데이터 정보를 지워주어야 함.
+                                                        EXIF.getData(imgElem, function () {
+                                                            var allMetaData = EXIF.getAllTags(this); //모든 EXIF정보
+                                                            var exifLong = EXIF.getTag(this, "GPSLongitude");
+                                                            console.log(exifLong);
+                                                            var exifLat = EXIF.getTag(this, "GPSLatitude");
+                                                            var exifLongRef = EXIF.getTag(this, "GPSLongitudeRef");
+                                                            var exifLatRef = EXIF.getTag(this, "GPSLatitudeRef");
+                                                            //계산식 적용이유는 해당라이브러리가 위도경도를 도분초 단위로 출력하기 때문
+                                                            if (exifLatRef == "S") {
+                                                                var latitude = (exifLat[0] * -1) + (((exifLat[1] * -60) + (exifLat[2] * -1)) / 3600);
+                                                            } else {
+                                                                var latitude = exifLat[0] + (((exifLat[1] * 60) + exifLat[2]) / 3600);
+                                                            }
+
+                                                            if (exifLongRef == "W") {
+                                                                var longitude = (exifLong[0] * -1) + (((exifLong[1] * -60) + (exifLong[2] * -1)) / 3600);
+                                                            } else {
+                                                                var longitude = exifLong[0] + (((exifLong[1] * 60) + exifLong[2]) / 3600);
+                                                            }
+
+                                                            var latX = latitude;
+                                                            var longY = longitude;
+
+                                                            var myLatLng = { lat: latX, lng: longY };
+
+                                                            if (latX == null || longY == null || latX == "" || longY == "") {
+                                                                alert('사진에 위치 데이터가 없습니다.');
+
+                                                            } else {
+                                                                var distance = getDistanceFromLatLonInKm(latX, longY, achievement_latX, achievement_longY);
+                                                                if (distance < 0.1 && distance > 0) {
+                                                                    alert("해당 업적 획득 위치의 사진입니다. 거리는 " + distance + "km 입니다");
+                                                                    $.ajax({
+                                                                        url: '/upload/uploadachievementpic',
+                                                                        type: 'POST',
+                                                                        contentType: false,
+                                                                        processData: false,
+                                                                        cache: false,
+                                                                        data: formData,
+                                                                        success: function (res) {
+                                                                            var allData = {
+                                                                                "no": no,
+                                                                                "img1": res['result']['img_main'][0].location
+                                                                            };
+
+                                                                            $.ajax({
+                                                                                url: "/achievements/isachievementsuccesspic",
+                                                                                data: allData,
+                                                                                async: false,
+                                                                                type: "post",
+                                                                                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                                                                                success: function (data) {
+                                                                                    if (data['result'] == 'null') {
+                                                                                        alert("오류가 발생하였습니다.");
+                                                                                    } else {
+                                                                                        alert("업적 달성에 성공하였습니다.");
+                                                                                        location.reload();
+                                                                                    }
+                                                                                },
+                                                                                beforeSend: function () {
+                                                                                },
+                                                                                complete: function () {
+                                                                                }
+                                                                            });
+                                                                        },
+                                                                        error: function () {
+                                                                            alert('오류가 발생하였습니다. 관리자에게 문의해 주세요');
+                                                                        }
+                                                                    });
+
+                                                                }
+                                                                else {
+                                                                    alert("해당 업적 획득 위치와 맞지않는 사진 입니다. 거리는 " + distance + "km 입니다");
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                });
                                             }
                                         });
-                                /*
-                                                            $("#address").click(function(){
-                                                                var dummy = document.createElement("textarea");
-                                                                document.body.appendChild(dummy);
-                                                                dummy.value = add;
-                                                                dummy.select();
-                                                                document.execCommand('Copy');
-                                                                document.body.removeChild(dummy);
-                                                                alert('주소가 복사되었습니다.');
-                                                            });*/
+
 
 
                                 $("#address").click(function () {
@@ -452,8 +577,8 @@
                                 $.ajax({
                                     url: "/tourlist/getneartour",
                                     data: {
-                                        "latX": latX,
-                                        "longY": longY
+                                        "latX": achievement_latX,
+                                        "longY": achievement_longY
                                     },
                                     async: false,
                                     type: "get",
@@ -509,9 +634,16 @@
                                 $('.wrap-loading').addClass('display-none');
                             }
                         });
-
                     $("#close_popup").click(function () {
                         $('#myModal').modal('hide');
+                    });
+
+                    $("#close_popup_photo").click(function () {
+                        $('#photomodal').modal('hide');
+                    });
+
+                    $("#close_popup_photo_success").click(function () {
+                        $('#photosuccessmodal').modal('hide');
                     });
                 });
 
@@ -530,6 +662,20 @@
                 object.value = object.value.slice(0, object.maxLength);
             }
         }
+
+        function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+            function deg2rad(deg) {
+                return deg * (Math.PI / 180)
+            }
+            var R = 6371;
+            var dLat = deg2rad(lat2 - lat1);
+            var dLon = deg2rad(lng2 - lng1);
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; // Distance in km 
+            return d;
+        }
+
 
 
     </script>
