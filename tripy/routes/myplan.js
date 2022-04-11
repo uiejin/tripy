@@ -50,7 +50,7 @@ router.get('/getmyallplan', function(req, res) {
 
 router.get('/getmyplannow', function(req, res) {
 
-  var query = 'SELECT T1.SEQ, T1.WRITER, T1.AREA_CODE, T1.START_DATE, T1.END_DATE,T2.AREA, T2.IMG  FROM PT_USER_TOUR T1, PT_AREA T2 WHERE T1.WRITER = ? AND T1.START_DATE <= ? AND T1.END_DATE >= ? AND T1.AREA_CODE = T2.AREA_CODE';
+  var query = 'SELECT T1.SEQ, T1.WRITER, T1.AREA_CODE, T1.START_DATE, T1.END_DATE, T2.AREA, T2.IMG  FROM PT_USER_TOUR T1, PT_AREA T2 WHERE T1.WRITER = ? AND T1.START_DATE <= ? AND T1.END_DATE >= ? AND T1.AREA_CODE = T2.AREA_CODE';
 
   var params =[req.query.id, req.query.nowDate, req.query.nowDate];
 

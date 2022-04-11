@@ -379,9 +379,13 @@ function searchParty(){
 			type: "get",
 			success: function (data) {
         $.each(data.rows, function (index, item) {
-          var source = "<div id=\"form-board" +item.NO+"\">" +
-                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+item.AREA+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
-                  if(item.LIMIT_GENDER == "male"){
+          var source = "<div id=\"form-board" + item.NO + "\">" +
+                        "<div id=\"boardLine1\"><a><span id=\"boardArea\">" + "[" + item.AREA + "]";
+                      if (item.ACHIEVENENTSEQ) {
+                        source += " [" + item.ACHIEVEMENT_TITLE + "]";
+                      }
+                      source += "</span><span class=\"text-right\" id=\"boardCategory" + item.SEQ + "\">";
+          if(item.LIMIT_GENDER == "male"){
                     source = source + "[<%=maleText%>]";
                   }else if(item.LIMIT_GENDER == "female"){
 

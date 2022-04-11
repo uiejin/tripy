@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="/css/views/noncover.css">
   <link rel="stylesheet" href="/css/views/writepost.css">
   <link rel="stylesheet" href="/css/views/read.css">
+  <link rel="stylesheet" href="/css/views/myhistory.css">
 </head>
 
 <body>
@@ -85,28 +86,43 @@
             </div>
             <!--입력 폼-->
             <div class="col-12" id="readItem">
-              <div class="readDiv1"><%=cateText%></div>
+              <div class="readDiv1">
+                <%=cateText%>
+              </div>
               <div class="readDiv2" id="cateText"></div>
             </div>
             <div class="col-12" id="readItem">
-              <div class="readDiv1"><%=dateText%></div>
+              <div class="readDiv1">
+                <%=dateText%>
+              </div>
               <div class="readDiv2" id="dateText"></div>
             </div>
             <div class="col-12" id="readItem">
-              <div class="readDiv1"><%=timeText%></div>
+              <div class="readDiv1">
+                <%=timeText%>
+              </div>
               <div class="readDiv2" id="timeText"></div>
             </div>
             <div class="col-12" id="readItem">
-              <div class="readDiv1"><%=headCountText%></div>
+              <div class="readDiv1">
+                <%=headCountText%>
+              </div>
               <div class="readDiv2" id="headCountText"></div>
             </div>
             <div class="col-12" id="readItem">
-              <div class="readDiv1"><%=areaText%></div>
+              <div class="readDiv1">
+                <%=areaText%>
+              </div>
               <div class="readDiv2" id="areaText"></div>
             </div>
+            <div class="col-12" id="achievementReadDiv">
+            </div>
+
 
             <div class="col-12" id="button-div">
-              <a id="headcount-button" class="btn btn-primary px-4 py-2"><%=headCountBtnText%></a>
+              <a id="headcount-button" class="btn btn-primary px-4 py-2">
+                <%=headCountBtnText%>
+              </a>
             </div>
 
           </div>
@@ -141,7 +157,9 @@
       <div class="row col-md-12" id="post">
         <div class="site-section col-md-12" id="profileContainer">
           <div class="col-12" id="readItem">
-            <div class="readDiv1"><%=profileText%></div>
+            <div class="readDiv1">
+              <%=profileText%>
+            </div>
           </div>
           <div class="row" id="writerDiv">
             <div id="profileDiv">
@@ -179,7 +197,9 @@
         <!--댓글 작성시 여기 div 추가-->
         <div class="site-section col-md-12" id="replyContainer">
           <div class="col-12" id="readItem">
-            <div class="readDiv1"><%=replyText%></div>
+            <div class="readDiv1">
+              <%=replyText%>
+            </div>
           </div>
 
           <!--댓글 Form-->
@@ -193,7 +213,9 @@
       </div>
 
       <div class="col-12" id="button-div">
-        <a id="reply-button" class="btn btn-primary px-4 py-2"><%=replyBtnText1%></a>
+        <a id="reply-button" class="btn btn-primary px-4 py-2">
+          <%=replyBtnText1%>
+        </a>
 
       </div>
 
@@ -204,8 +226,12 @@
     <div class="container" id="readForm">
       <div class="row" id="readRow">
         <div class="col-12" id="button-div">
-          <a id="modyfy-button" class="btn btn-primary px-4 py-2"><%=modifyBtnText%></a>
-          <a id="delete-button" class="btn btn-primary px-4 py-2"><%=deleteBtnText%></a>
+          <a id="modyfy-button" class="btn btn-primary px-4 py-2">
+            <%=modifyBtnText%>
+          </a>
+          <a id="delete-button" class="btn btn-primary px-4 py-2">
+            <%=deleteBtnText%>
+          </a>
         </div>
       </div>
     </div>
@@ -232,22 +258,22 @@
 
 <script type="text/javascript">
 
-var loginuserId = "<%=userId%>";
-var loginStatus  = "<%=loginStatus %>";
+  var loginuserId = "<%=userId%>";
+  var loginStatus = "<%=loginStatus %>";
 
   $(document).ready(function () {
 
     $("#navProfileName").text("<%=username%>");
-        $("#profileImageNav").attr("src", "<%=userImg%>");
+    $("#profileImageNav").attr("src", "<%=userImg%>");
     $("#replyBtnForm").hide();
 
     replyStatus = false;
 
-   
+
 
     var no = location.href
       .substr(location.href.lastIndexOf('=') + 1);
-    
+
     var writer = null;
     var attendState = null;
     var userAttendState = null;
@@ -256,7 +282,7 @@ var loginStatus  = "<%=loginStatus %>";
     var headCountMax = null;
 
     var partyTime = null;
-    var nowDate= new Date();
+    var nowDate = new Date();
 
     var allData = {
       "no": no,
@@ -269,11 +295,11 @@ var loginStatus  = "<%=loginStatus %>";
       dataType: "json",
       success: function (data) {
         if (data['result'] == true) {
-          if(data.rows.length == 0){
+          if (data.rows.length == 0) {
             alert("<%=errorMessage%>");
             history.back();
           }
-          else{
+          else {
             // var boardData = JSON.stringify(data);
             $.each(data.rows, function (index, item) {
 
@@ -282,18 +308,59 @@ var loginStatus  = "<%=loginStatus %>";
               $("#timeText").text(item.MEET_TIME);
               $("#headCountText").text(item.HEADCOUNT_NOW + " / " + item.HEADCOUNT);
               $("#contentItem").html(item.CONTENTS);
-              $("#cateText").text(item.CATEGORY)
-              
+              $("#cateText").text(item.CATEGORY);
+              if (item.ACHIEVENENTSEQ) {
+                $.ajax({
+                  url: "/board/searchachievementitem",
+                  data: { "no": item.ACHIEVENENTSEQ },
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    if (data['result'] == true) {
+                      $.each(data.rows, function (index, item) {
+                        var source =
+                          "<div class=\"row achievementReadItem\" id = \"form-board" + item.SEQ + "\">"
+                          + "<div id = \"achievementItem\">"
+                          + "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                          + "<div id=\"achievementItemDiv2\">"
+                          + "<div id=\"boardLine2\" class=\"row\">"
+                          + "<a class=\"col-12\"><span class=\"achievementReadTitle\">" + item.TITLE + "<span class=\"text-right\" id=\"pointItem\"><span class=\"icon-dollar\"></span>" + item.EXP + "</span></a>";
+                        if (item.ISCOMPLETE) {
+                          source += "<a class=\"col-12\"><span>" + "업적 획득" + "<span class=\"text-right\" id=\"pointItem\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>";
+                        }
+                        else {
+                          source += "<a class=\"col-12\" style=\"color : red; \"><span>" + "업적 미 획득" + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>";
+                        }
+                        source += "</div></div></div>";
+
+                        $("#achievementReadDiv").append(source);
+
+                        $("#form-board" + item.SEQ).click(function () {
+                          location.href = "/achievements/view?no=" + item.SEQ;
+                        });
+                      });
+                    };
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+              }
+              else {
+                $("#achievementReadDiv").remove();
+              }
+
               partyTime = item.MEET_DATE + " " + item.MEET_TIME;
               partyTime = new Date(partyTime);
-              
+
               writer = item.WRITER;
               attendState = item.AUTOPARTION;
               headCount = item.HEADCOUNT;
               headCountMax = item.HEADCOUNT_NOW;
 
               var allData = {
-                "writer" : item.WRITER
+                "writer": item.WRITER
               }
 
               $.ajax({
@@ -302,15 +369,15 @@ var loginStatus  = "<%=loginStatus %>";
                 async: false,
                 type: "get",
                 success: function (data) {
-                  if(data['result'] == true){
+                  if (data['result'] == true) {
                     $.each(data.rows, function (index, item) {
                       $("#profileName").text(item.NAME);
                       $("#profileImage").attr("src", item.IMG);
-                      $("#profileAge").text(getAge(item.BIRTHDAY) +"세 "+ getGender(item.GENDER));
+                      $("#profileAge").text(getAge(item.BIRTHDAY) + "세 " + getGender(item.GENDER));
 
-                      $("#writerDiv").click(function(){
-                          location.href = "../users/profile?id="+item.SEQ;
-                        });
+                      $("#writerDiv").click(function () {
+                        location.href = "../users/profile?id=" + item.SEQ;
+                      });
                     });
                   };
                 },
@@ -322,11 +389,11 @@ var loginStatus  = "<%=loginStatus %>";
 
               $.ajax({
                 url: "/board/getpostarea",
-                data: {areacode : item.AREA_CODE},
+                data: { areacode: item.AREA_CODE },
                 async: false,
                 type: "get",
                 success: function (data) {
-                  if(data['result'] == true){
+                  if (data['result'] == true) {
                     $.each(data.rows, function (index, item) {
                       $("#areaText").text(item.COUNTRY + " " + item.AREA);
                     });
@@ -345,12 +412,12 @@ var loginStatus  = "<%=loginStatus %>";
                 $("#modyfy-button").remove();
                 $("#delete-button").remove();
 
-                if(loginStatus  == "false"){
+                if (loginStatus == "false") {
                   $("#headcount-button").remove();
                 }
-                else{
+                else {
                   $("#headcount-button").text("<%=headCountBtnState%>");
-                  if(headCount == headCountMax){
+                  if (headCount == headCountMax) {
                     $("#headcount-button").text("<%=headCountBtnStateMax%>");
                   }
                 }
@@ -360,51 +427,51 @@ var loginStatus  = "<%=loginStatus %>";
 
             $("#headcount-button").click(function () {
               if (loginuserId == writer || userAttendState == "1") {
-                $(location).attr('href','./managiment?no='+no);
-              }else if(userAttendState == "0"){
+                $(location).attr('href', './managiment?no=' + no);
+              } else if (userAttendState == "0") {
                 $("#headcount-button").text("<%=headCountBtnState2%>");
-              }else if(userAttendState == "3"){
+              } else if (userAttendState == "3") {
                 $("#headcount-button").text("<%=headCountBtnState4%>");
-              }else if(headCount == headCountMax){
+              } else if (headCount == headCountMax) {
                 $("#headcount-button").text("<%=headCountBtnStateMax%>");
               }
-              else{
-                if(loginStatus  == "false"){
+              else {
+                if (loginStatus == "false") {
                   alert("err");
                 }
-                else{
-                  if (confirm("<%=headCountBtnConfirm%>") == true){
-                    if(nowDate.getTime() < partyTime.getTime()){
-                    var allData = {
-                      "boardId" : no,
-                      "userId" : "<%=userId%>",
-                      "attendState" : attendState
+                else {
+                  if (confirm("<%=headCountBtnConfirm%>") == true) {
+                    if (nowDate.getTime() < partyTime.getTime()) {
+                      var allData = {
+                        "boardId": no,
+                        "userId": "<%=userId%>",
+                        "attendState": attendState
+                      }
+
+                      $.ajax({
+                        url: "/board/attendparty",
+                        data: allData,
+                        async: false,
+                        type: "get",
+                        success: function (data) {
+                          if (data['result'] == true) {
+                            alert("<%=headCountBtnConfirm2%>");
+                            location.reload();
+                          };
+                        },
+                        beforeSend: function () {
+                        },
+                        complete: function () {
+                        }
+                      });
+                    } else {
+                      alert("모집시간이 초과되었습니다.");
                     }
 
-                  $.ajax({
-                    url: "/board/attendparty",
-                    data: allData,
-                    async: false,
-                    type: "get",
-                    success: function (data) {
-                      if(data['result'] == true){
-                          alert("<%=headCountBtnConfirm2%>");
-                          location.reload();
-                      };
-                    },
-                    beforeSend: function () {
-                    },
-                    complete: function () {
-                    }
-                  });
-                }else{
-                    alert("모집시간이 초과되었습니다.");
-                  }
 
+                  } else {
 
-                  }else{   
-
-                  return false;
+                    return false;
 
                   }
                 }
@@ -412,43 +479,43 @@ var loginStatus  = "<%=loginStatus %>";
 
             });
 
-            if (loginStatus  == "false") {
+            if (loginStatus == "false") {
               $("#reply-button").remove();
             } else {
 
               var allData = {
-                      "boardId" : no,
-                      "userId" : "<%=userId%>"
-                    }
+                "boardId": no,
+                "userId": "<%=userId%>"
+              }
 
-                  $.ajax({
-                    url: "/board/attenduserstate",
-                    data: allData,
-                    async: false,
-                    type: "get",
-                    success: function (data) {
-                      if(data['result'] == true){
-                        $.each(data.rows, function (index, item) {
-                        userAttendState = item.ATTEND_STATE;
+              $.ajax({
+                url: "/board/attenduserstate",
+                data: allData,
+                async: false,
+                type: "get",
+                success: function (data) {
+                  if (data['result'] == true) {
+                    $.each(data.rows, function (index, item) {
+                      userAttendState = item.ATTEND_STATE;
 
-                        if(userAttendState == "0"){
-                          $("#headcount-button").text("<%=headCountBtnState2%>");
-                        }else if(userAttendState == "1"){
-                          $("#headcount-button").text("<%=headCountBtnState3%>");
-                        }else if(userAttendState == "3"){
-                          $("#headcount-button").text("<%=headCountBtnState4%>");
-                        }else {
-                          $("#headcount-button").text("<%=headCountBtnState%>");
-                        }
-
-                        });
+                      if (userAttendState == "0") {
+                        $("#headcount-button").text("<%=headCountBtnState2%>");
+                      } else if (userAttendState == "1") {
+                        $("#headcount-button").text("<%=headCountBtnState3%>");
+                      } else if (userAttendState == "3") {
+                        $("#headcount-button").text("<%=headCountBtnState4%>");
+                      } else {
+                        $("#headcount-button").text("<%=headCountBtnState%>");
                       }
-                    },
-                    beforeSend: function () {
-                    },
-                    complete: function () {
-                    }
-                  });
+
+                    });
+                  }
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
 
 
 
@@ -468,7 +535,7 @@ var loginStatus  = "<%=loginStatus %>";
                         if (item.BUNDLE_ID == null) {
 
                           var replySource = "<div class=\"row\" id=\"form-location2\"><div id=\"replyDiv\">" +
-                            "<img src=\""+item.IMG+"\" class=\"rounded-circle\" id=\"replyImage\">" +
+                            "<img src=\"" + item.IMG + "\" class=\"rounded-circle\" id=\"replyImage\">" +
                             "</div>" +
                             "<div id=\"replyDiv2\">" +
                             "<div id=\"replyLine1\">" +
@@ -491,7 +558,7 @@ var loginStatus  = "<%=loginStatus %>";
 
                         } else {
                           var replySource = "<div class=\"row\" id=\"form-location2\"><div id=\"rereplyDiv\">" +
-                            "<img src=\""+item.IMG+"\" class=\"rounded-circle\" id=\"replyImage\">" +
+                            "<img src=\"" + item.IMG + "\" class=\"rounded-circle\" id=\"replyImage\">" +
                             "</div>" +
                             "<div id=\"rereplyDiv2\">" +
                             "<div id=\"replyLine1\">" +
@@ -572,14 +639,14 @@ var loginStatus  = "<%=loginStatus %>";
     });
 
     $("#modyfy-button").click(function () {
-      location.href="/writepost/updatepost?no="+no;
+      location.href = "/writepost/updatepost?no=" + no;
     });
 
     $("#delete-button").click(function () {
-      if (confirm("<%=deleteBtnConfirm%>") == true){
+      if (confirm("<%=deleteBtnConfirm%>") == true) {
         $.ajax({
           url: "/writepost/deletepost",
-          data: {"no" : no, "id" : loginuserId},
+          data: { "no": no, "id": loginuserId },
           async: false,
           type: "get",
           success: function (data) {
@@ -598,7 +665,7 @@ var loginStatus  = "<%=loginStatus %>";
           complete: function () {
           }
         });
-      }else{
+      } else {
 
       }
     });
@@ -606,25 +673,25 @@ var loginStatus  = "<%=loginStatus %>";
 
   });
 
-  function getAge(userAge){
-      var nowDay = new Date();
-      var birthday = new Date(userAge);
-    
-    
-      var age = nowDay.getFullYear() - birthday.getFullYear();
-      var month = nowDay.getMonth() - birthday.getMonth();
-    
-      return month < 0 || (month === 0 && nowDay.getDate() < birthday.getDate()) ?
-        age : age +1
-    }
+  function getAge(userAge) {
+    var nowDay = new Date();
+    var birthday = new Date(userAge);
 
-    function getGender(userGender){
-      if(userGender == "male"){
+
+    var age = nowDay.getFullYear() - birthday.getFullYear();
+    var month = nowDay.getMonth() - birthday.getMonth();
+
+    return month < 0 || (month === 0 && nowDay.getDate() < birthday.getDate()) ?
+      age : age + 1
+  }
+
+  function getGender(userGender) {
+    if (userGender == "male") {
       return "남";
-      }else if(userGender == "female"){
-        return "여";
-      }
+    } else if (userGender == "female") {
+      return "여";
     }
+  }
 
   function rereplyonClick(board_id) {
     $(document).ready(function () {

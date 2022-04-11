@@ -182,11 +182,14 @@
                 meetdate = new Date(meetdate);
 
                 var source = "<div id=\"newform-board" +item.NO+"\">" +
-                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+item.AREA+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
+                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+item.AREA+"]";
+                  if(item.ACHIEVENENTSEQ){
+                    source +=" [" + item.ACHIEVEMENT_TITLE + "]";
+                  }
+                  source +="</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
                   if(item.LIMIT_GENDER == "male"){
                     source = source + "[<%=maleText%>]";
                   }else if(item.LIMIT_GENDER == "female"){
-
                     source = source + "[<%=femaleText%>]";
                   }
                   source = source + "["+item.CATEGORY+"]</span></div>" +

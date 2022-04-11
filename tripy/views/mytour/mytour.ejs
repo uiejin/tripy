@@ -2,13 +2,15 @@
 <html>
 
 <head>
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
   <% include ../css/default %>
-  <link rel="stylesheet" href="/css/views/myplan.css">
-  <link rel="stylesheet" href="/css/views/mytour.css">
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+    <link rel="stylesheet" href="/css/views/myplan.css">
+    <link rel="stylesheet" href="/css/views/mytour.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
 
 
 
@@ -21,150 +23,172 @@
 
     <% include ../head/cover %>
 
-<!--커버에 들어갈 버튼 및 텍스트  -->
+      <!--커버에 들어갈 버튼 및 텍스트  -->
 
-  <div class="site-blocks-cover full-cover overlay" id="title_img" data-aos="fade" data-stellar-background-ratio="0.5">
-    <video muted autoplay loop id="bgvid">
-      <source src="video/test.mp4" type="video/mp4">
-      <strong>Your browser does not support the video tag.</strong>
-    </video>
-    <div class="container">
-      <div class="row align-items-center justify-content-center full-cover">
-        <div class="col-md-12 text-center" data-aos="fade">
-          <h1 id="title_subject"><%=title%></h1>
-          <p id="coverDate" class=" btn btn-primary px-4 py-3 text-uppercase"></p>
-          <p class="regular-font-size" id="coverBottom">
-            <a id="find_button" class="btn btn-primary px-4 py-3 text-uppercase"><%=findButton%></a>
-            <a id="search_button"><%=searchButton %></a>
-          </p>
-          
-          <div class="row ico">
-            <div class="col-md-4 col-sm-4 col-xs-4 text-center">
-                <div class="ico-m">
+      <div class="site-blocks-cover full-cover overlay" id="title_img" data-aos="fade"
+        data-stellar-background-ratio="0.5">
+        <video muted autoplay loop id="bgvid">
+          <source src="video/test.mp4" type="video/mp4">
+          <strong>Your browser does not support the video tag.</strong>
+        </video>
+        <div class="container">
+          <div class="row align-items-center justify-content-center full-cover">
+            <div class="col-md-12 text-center" data-aos="fade">
+              <h1 id="title_subject">
+                <%=title%>
+              </h1>
+              <p id="coverDate" class=" btn btn-primary px-4 py-3 text-uppercase"></p>
+              <p class="regular-font-size" id="coverBottom">
+                <a id="find_button" class="btn btn-primary px-4 py-3 text-uppercase">
+                  <%=findButton%>
+                </a>
+                <a id="search_button">
+                  <%=searchButton %>
+                </a>
+              </p>
+
+              <div class="row ico">
+                <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                  <div class="ico-m">
                     <span class="icon-date_range text-white h4 d-block"></span>
                     <h5 class="table-h5 cover-h5">참가한 모임글</h5>
                     <a id="expiration-date" class="ico-a"></a>
+                  </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-4 text-center">
-                <div class="ico-m">
+                <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                  <div class="ico-m">
                     <span class="icon-clock-o text-white h4 d-block"></span>
                     <h5 class="table-h5 cover-h5">업적상황</h5>
                     <a id="times" class="ico-a"></a>
+                  </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-4 text-center">
-                <div class="ico-m">
+                <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                  <div class="ico-m">
                     <span class="icon-map text-white h4 d-block"></span>
                     <h5 class="table-h5 cover-h5">꾸미기 방문</h5>
                     <a id="address" class="ico-a"></a>
+                  </div>
                 </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="nav-scroller bg-white box-shadow">
-    <nav class="nav nav-underline">
-      <!--<a class="nav-link active" href="#">Dashboard</a>
+      <div class="nav-scroller bg-white box-shadow">
+        <nav class="nav nav-underline">
+          <!--<a class="nav-link active" href="#">Dashboard</a>
       <a class="nav-link" href="#">
         Friends
         <span class="badge badge-pill bg-light align-text-bottom">27</span>
       </a>-->
-      <a class="nav-link" href="#">안내</a>
-      <a class="nav-link" href="#">모임글</a>
-      <a class="nav-link" href="#">업적</a>
-      <a class="nav-link" href="#">꾸미기</a>
-    </nav>
-  </div>
-<!--모임글  -->
-<div class="site-section col-md-12"  id="attendboardcontainer">
-  <div class="container boardForm">
-    <div class="row col-md-12" id="post">
-      <div>
-        <a class="text-uppercase boardText" id="boardText"><%=attendBoard%></a>
+          <a class="nav-link" href="#">안내</a>
+          <a class="nav-link" href="#">모임글</a>
+          <a class="nav-link" href="#">업적</a>
+          <a class="nav-link" href="#">꾸미기</a>
+        </nav>
       </div>
+      <!--모임글  -->
+      <div class="site-section col-md-12" id="attendboardcontainer">
+        <div class="container boardForm">
+          <div class="row col-md-12" id="post">
+            <div>
+              <a class="text-uppercase boardText" id="boardText">
+                <%=attendBoard%>
+              </a>
+            </div>
 
 
-<!--게시판 커스텀 -->
-    <div class = "ajaxboardForm" id = "attendboardform">
-    </div>
-    </div>
-  </div>
-</div>
-
-<!--모임글  -->
-<div class="site-section col-md-12"  id="writerboardcontainer">
-  <div class="container boardForm">
-    <div class="row col-md-12" id="post">
-      <div>
-        <a class="text-uppercase boardText" id="boardText"><%=writeBoard%></a>
-      </div>
-
-      <div class = "ajaxboardForm" id = "writerboardform">
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-  <!--모임글  -->
-  <div class="site-section col-md-12" id="newboardcontainer">
-    <div class="container boardForm">
-      <div class="row col-md-12" id="post">
-        <div id="boardNameDiv">
-          <a class="text-uppercase boardText" id="newBoardText"><%=newBoard%></a><a class="text-right" id="moreboardText"><%=moreBoard%></a>
-        </div>
-
-
-    <!--게시판 커스텀 -->
-    <div class = "ajaxboardForm" id = "newboardform">
-    </div>
-      </div>
-    </div>
-  </div>
-
-
-    <!--카테고리-->
-  <div class="site-section col-md-12" id = "cateContainer">
-    <div class="row col-md-12" id="form-category">
-    </div>
-</div>
-
-<!--모임글  -->
-  <div class="site-section col-md-12" id="prevBoardcontainer">
-    <div class="container boardForm" id=boardForm>
-      <div class="row col-md-12">
-        <div>
-          <a class="text-uppercase boardText" id="prevBoardText"><%=prevBoard%></a>
-        </div>
-
-
-      <!--게시판 커스텀 -->
-      <div class = "ajaxboardForm" id = "attendboardformPrev">
-      </div>
+            <!--게시판 커스텀 -->
+            <div class="ajaxboardForm" id="attendboardform">
+            </div>
+          </div>
         </div>
       </div>
+
+      <!--모임글  -->
+      <div class="site-section col-md-12" id="writerboardcontainer">
+        <div class="container boardForm">
+          <div class="row col-md-12" id="post">
+            <div>
+              <a class="text-uppercase boardText" id="boardText">
+                <%=writeBoard%>
+              </a>
+            </div>
+
+            <div class="ajaxboardForm" id="writerboardform">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!--모임글  -->
+      <div class="site-section col-md-12" id="newboardcontainer">
+        <div class="container boardForm">
+          <div class="row col-md-12" id="post">
+            <div id="boardNameDiv">
+              <a class="text-uppercase boardText" id="newBoardText">
+                <%=newBoard%>
+              </a><a class="text-right" id="moreboardText">
+                <%=moreBoard%>
+              </a>
+            </div>
+
+
+            <!--게시판 커스텀 -->
+            <div class="ajaxboardForm" id="newboardform">
+            </div>
+          </div>
+        </div>
       </div>
 
 
       <!--카테고리-->
-      <div class="site-section col-md-12" id = "cateContainer">
-      <div class="row col-md-12" id="form-category">
+      <div class="site-section col-md-12" id="cateContainer">
+        <div class="row col-md-12" id="form-category">
+        </div>
       </div>
+
+      <!--모임글  -->
+      <div class="site-section col-md-12" id="prevBoardcontainer">
+        <div class="container boardForm" id=boardForm>
+          <div class="row col-md-12">
+            <div>
+              <a class="text-uppercase boardText" id="prevBoardText">
+                <%=prevBoard%>
+              </a>
+            </div>
+
+
+            <!--게시판 커스텀 -->
+            <div class="ajaxboardForm" id="attendboardformPrev">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--카테고리-->
+      <div class="site-section col-md-12" id="cateContainer">
+        <div class="row col-md-12" id="form-category">
+        </div>
       </div>
   </div>
 
-  
+
   <div class="site-section">
     <div class="container">
       <div class="row col-md-12" id="button-div">
-        <a id="update-button" class="btn btn-primary px-4 py-2"><%=updateText%></a>
-		<a id="delete-button" class="btn btn-primary px-4 py-2"><%=deleteText%></a>
+        <!--추후 구현-->
+        <!--<a id="update-button" class="btn btn-primary px-4 py-2">
+          <%=updateText%>
+        </a>
+        <a id="delete-button" class="btn btn-primary px-4 py-2">
+          <%=deleteText%>-->
+        </a>
       </div>
     </div>
   </div>
@@ -173,324 +197,339 @@
 </body>
 <% include ../script/default %>
 
-<script type="text/javascript">   
-  $(document).ready( function() {
+  <script type="text/javascript">
+    $(document).ready(function () {
 
-    var loginStatus  = "<%=loginStatus %>";
-    var userId = "<%=userId%>";
+      var loginStatus = "<%=loginStatus %>";
+      var userId = "<%=userId%>";
 
-    var area = null;
-    var areacode = null;
-    var enddate = null;
-    var startdate = null;
+      var area = null;
+      var areacode = null;
+      var enddate = null;
+      var startdate = null;
 
-    if(loginStatus  == "true"){
+      if (loginStatus == "true") {
 
-      $("#navProfileName").text("<%=username%>");
+        $("#navProfileName").text("<%=username%>");
         $("#profileImageNav").attr("src", "<%=userImg%>");
-      }else{
-      $("#nav").load("/html/nav_nologin.html");
+      } else {
+        $("#nav").load("/html/nav_nologin.html");
       /*  var loginMessage = "<%=loginMessage%>";
       alert(loginMessage);
       history.back();
     */}
 
-    var no = location.href
-      .substr(location.href.lastIndexOf('=') + 1);
+      var no = location.href
+        .substr(location.href.lastIndexOf('=') + 1);
 
-    $.ajax({
-      url: "/mytour/getmytour?no=" + no,
-			async: false,
-			type: "get",
-			success: function (data) {
-        
-        if (data['result'] == true) {
-          if(data.rows.length == 0){
-            alert("<%=errorMessage%>");
-            history.back();
+      $.ajax({
+        url: "/mytour/getmytour?no=" + no,
+        async: false,
+        type: "get",
+        success: function (data) {
+
+          if (data['result'] == true) {
+            if (data.rows.length == 0) {
+              alert("<%=errorMessage%>");
+              history.back();
+            }
+            else {
+              $.each(data.rows, function (index, item) {
+                $("#coverDate").text(item.START_DATE + " ~ " + item.END_DATE);
+
+                areacode = item.AREA_CODE;
+                enddate = item.END_DATE;
+                startdate = item.START_DATE;
+
+                $.ajax({
+                  url: "/mytour/getareainfo",
+                  data: { areacode: item.AREA_CODE },
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    $.each(data.rows, function (index, item) {
+                      $("#nav-title").text(item.AREA);
+                      area = item.AREA;
+                      $("#title_subject").text(item.AREA);
+                      $("#title_img").css("background-image", "url(" + item.IMG + ")");
+                      $("#newBoardText").text(item.AREA + "<%=newBoard%>");
+
+                    });
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+
+                $.ajax({
+                  url: "/writepost/getcategory",
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    $.each(data.rows, function (index, item) {
+                      if (index == 0) {
+                        var source = "<div class=\"cateSectionFirst\"\ id=\"cateSection" + item.SEQ + "\"><button class=\"btn btn-primary\" type=\"submit\" id=\"cateBtn\"" +
+                          "style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" + item.IMG + ");\">" + item.CATEGORY + "</button></div>";
+                        $("#form-category").append(source);
+                      } else {
+                        var source = "<div class=\"cateSection\"\ id=\"cateSection" + item.SEQ + "\"><button class=\"btn btn-primary\" type=\"submit\" id=\"cateBtn\"" +
+                          "style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" + item.IMG + ");\">" + item.CATEGORY + "</button></div>";
+                        $("#form-category").append(source);
+                      }
+                      $("#cateSection" + item.SEQ).click(function () {
+                        location.href = "/board/searchpost?areacode=" + areacode + "&categorycode=" + item.SEQ + "&enddate=" + enddate;
+                      });
+
+                    });
+
+                    var source = "<div id=\"cateSectionEnd\"></div>";
+                    $("#form-category").append(source);
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+
+                var allData = {
+                  "areacode": item.AREA_CODE,
+                  "userId": userId,
+                  "startdate": item.START_DATE,
+                  "enddate": item.END_DATE
+                };
+
+                $.ajax({
+                  url: "/mytour/getmyparty",
+                  data: allData,
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    $.each(data.rows, function (index, item) {
+                      var source = "<div id=\"myform-board" + item.NO + "\">" +
+                        "<div id=\"boardLine1\"><a><span id=\"boardArea\">" + "[" + area + "]";
+                      if (item.ACHIEVENENTSEQ) {
+                        source += " [" + item.ACHIEVEMENT_TITLE + "]";
+                      }
+                      source += "</span><span class=\"text-right\" id=\"boardCategory" + item.SEQ + "\">";
+                      if (item.LIMIT_GENDER == "male") {
+                        source = source + "[<%=maleText%>]";
+                      } else if (item.LIMIT_GENDER == "female") {
+
+                        source = source + "[<%=femaleText%>]";
+                      }
+                      source = source + "[" + item.CATEGORY + "]</span></div>" +
+                        "<div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span>";
+
+                      if (item.ATTEND_STATE == "0") {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount0\">" + "<%=headCountBtnState2%>" + "</span></span></div>";
+                      } else if (item.ATTEND_STATE == "1") {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount1\">" + "<%=headCountBtnState3%>" + "</span></span></div>";
+                      } else if (item.ATTEND_STATE == "3") {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount3\">" + "<%=headCountBtnState4%>" + "</span></span></div>";
+
+                      }
+                      source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">" + item.NAME + "</span><span id=\"boardDate" + item.SEQ + "\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
+                        item.MEET_DATE + " " + item.MEET_TIME + "</span></a></div><hr class=\"lineEvent\"></div>";
+                      $("#attendboardform").append(source);
+                      $("#myform-board" + item.NO).click(function () {
+                        location.href = "/board/read?no=" + item.NO;
+                      });
+
+                    });
+
+                    if (data.rows.length == 0) {
+                      $("#attendboardcontainer").css("display", "none");
+                    }
+
+
+
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+
+                var allData = {
+                  "areacode": item.AREA_CODE,
+                  "userId": userId,
+                  "startdate": item.START_DATE,
+                  "enddate": item.END_DATE
+                };
+
+                $.ajax({
+                  url: "/mytour/getmypartyprev",
+                  data: allData,
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    $.each(data.rows, function (index, item) {
+                      var source = "<div id=\"prevform-board" + item.NO + "\">" +
+                        "<div id=\"boardLine1\"><a><span id=\"boardArea\">" + "[" + area + "]";
+                      if (item.ACHIEVENENTSEQ) {
+                        source += " [" + item.ACHIEVEMENT_TITLE + "]";
+                      }
+                      source += "</span><span class=\"text-right\" id=\"boardCategory" + item.SEQ + "\">";
+                      if (item.LIMIT_GENDER == "male") {
+                        source = source + "[<%=maleText%>]";
+                      } else if (item.LIMIT_GENDER == "female") {
+
+                        source = source + "[<%=femaleText%>]";
+                      }
+                      source = source + "[" + item.CATEGORY + "]</span></div>" +
+                        "<div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span>";
+
+                      if (item.ATTEND_STATE == "0") {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount0\">" + "<%=headCountBtnState2%>" + "</span></span></div>";
+                      } else if (item.ATTEND_STATE == "1") {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount1\">" + "<%=headCountBtnState3%>" + "</span></span></div>";
+                      } else if (item.ATTEND_STATE == "3") {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount3\">" + "<%=headCountBtnState4%>" + "</span></span></div>";
+
+                      }
+                      source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">" + item.NAME + "</span><span id=\"boardDate" + item.SEQ + "\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
+                        item.MEET_DATE + " " + item.MEET_TIME + "</span></a></div><hr class=\"lineEvent\"></div>";
+                      $("#attendboardformPrev").append(source);
+                      $("#prevform-board" + item.NO).click(function () {
+                        location.href = "/board/read?no=" + item.NO;
+                      });
+                    });
+
+                    if (data.rows.length == 0) {
+                      $("#prevBoardcontainer").css("display", "none");
+                    }
+
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+
+                var allData = {
+                  "writer": item.WRITER,
+                  "areacode": item.AREA_CODE,
+                  "startdate": item.START_DATE,
+                  "enddate": item.END_DATE
+                };
+
+                $.ajax({
+                  url: "/mytour/getmypost",
+                  data: allData,
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    $.each(data.rows, function (index, item) {
+                      var source = "<div id=\"writerform-board" + item.NO + "\">" +
+                        "<div id=\"boardLine1\"><a><span id=\"boardArea\">" + "[" + area + "]";
+                      if (item.ACHIEVENENTSEQ) {
+                        source += " [" + item.ACHIEVEMENT_TITLE + "]";
+                      }
+                      source += "</span><span class=\"text-right\" id=\"boardCategory" + item.SEQ + "\">";
+                      if (item.LIMIT_GENDER == "male") {
+                        source = source + "[<%=maleText%>]";
+                      } else if (item.LIMIT_GENDER == "female") {
+
+                        source = source + "[<%=femaleText%>]";
+                      }
+                      source = source + "[" + item.CATEGORY + "]</span></div>" +
+                        "<div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span>";
+
+                      if (item.HEADCOUNT == item.HEADCOUNT_NOW) {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount\">" + "<%=fillHeadCountText%>" + "</span></span></div>";
+                      } else {
+                        source = source + "<span class=\"text-right\" id=\"boardHeadCount\">" + item.HEADCOUNT_NOW + "/" + item.HEADCOUNT + "명</span></span></div>";
+                      }
+                      source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">" + item.NAME + "</span><span id=\"boardDate" + item.SEQ + "\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
+                        item.MEET_DATE + " " + item.MEET_TIME + "</span></a></div><hr class=\"lineEvent\"></div>";
+                      $("#writerboardform").append(source);
+                      $("#writerform-board" + item.NO).click(function () {
+                        location.href = "/board/read?no=" + item.NO;
+                      });
+                    });
+                    if (data.rows.length == 0) {
+                      $("#writerboardcontainer").css("display", "none");
+                    }
+
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+
+                var allData = {
+                  "areacode": item.AREA_CODE,
+                  "startdate": item.START_DATE,
+                  "enddate": item.END_DATE
+                };
+
+                $.ajax({
+                  url: "/mytour/getnewpost",
+                  data: allData,
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    $.each(data.rows, function (index, item) {
+                      var source = "<div id=\"newform-board" + item.NO + "\">" +
+                        "<div id=\"boardLine1\"><a><span id=\"boardArea\">" + "[" + area + "]";
+                      if (item.ACHIEVENENTSEQ) {
+                        source += " [" + item.ACHIEVEMENT_TITLE + "]";
+                      }
+                      source += "</span><span class=\"text-right\" id=\"boardCategory" + item.SEQ + "\">";
+                      if (item.LIMIT_GENDER == "male") {
+                        source = source + "[<%=maleText%>]";
+                      } else if (item.LIMIT_GENDER == "female") {
+
+                        source = source + "[<%=femaleText%>]";
+                      }
+                      source = source + "[" + item.CATEGORY + "]</span></div>" +
+                        "<div id=\"boardLine1\"><span id=\"boardTitle\">" + item.TITLE + "</span>";
+
+                      if (item.HEADCOUNT == item.HEADCOUNT_NOW) {
+                        source = source + "<span class=\"text-right\" id=\"boardFillHeadCount\">" + "<%=fillHeadCountText%>" + "</span></span></div>";
+                      } else {
+                        source = source + "<span class=\"text-right\" id=\"boardHeadCount\">" + item.HEADCOUNT_NOW + "/" + item.HEADCOUNT + "명</span></span></div>";
+                      }
+                      source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">" + item.NAME + "</span><span id=\"boardDate" + item.SEQ + "\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
+                        item.MEET_DATE + " " + item.MEET_TIME + "</span></a></div><hr class=\"lineEvent\"></div>";
+                      $("#newboardform").append(source);
+
+                      $("#newform-board" + item.NO).click(function () {
+                        location.href = "/board/read?no=" + item.NO;
+                      });
+                    });
+                    if (data.rows.length == 0) {
+                      $("#newboardcontainer").css("display", "none");
+                    }
+
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+
+              });
+
+            }
           }
-          else
-          {
-        $.each(data.rows, function (index, item) {
-          $("#coverDate").text(item.START_DATE + " ~ " + item.END_DATE);
-          
-        areacode = item.AREA_CODE;
-        enddate = item.END_DATE;
-        startdate = item.START_DATE;
 
-          $.ajax({
-            url: "/mytour/getareainfo",
-            data : {areacode : item.AREA_CODE},
-            async: false,
-            type: "get",
-            success: function (data) {
-              $.each(data.rows, function (index, item) {
-                $("#nav-title").text(item.AREA);
-                area = item.AREA;
-                $("#title_subject").text(item.AREA);
-                $("#title_img").css("background-image","url("+item.IMG+")");
-                $("#newBoardText").text(item.AREA + "<%=newBoard%>");
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+      });
 
-              });
-            },
-            beforeSend: function () {
-            },
-            complete: function () {
-            }
-          });
+      $("#moreboardText").click(function () {
+        location.href = "/board/searchpost?areacode=" + areacode + "&enddate=" + enddate;
+      })
 
-          $.ajax({
-            url: "/writepost/getcategory",
-            async: false,
-            type: "get",
-            success: function (data) {
-              $.each(data.rows, function (index, item) {
-                if(index == 0){
-                  var source = "<div class=\"cateSectionFirst\"\ id=\"cateSection"+item.SEQ+"\"><button class=\"btn btn-primary\" type=\"submit\" id=\"cateBtn\"" +
-                    "style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">"+item.CATEGORY+"</button></div>";
-                  $("#form-category").append(source);
-                }else{
-                  var source = "<div class=\"cateSection\"\ id=\"cateSection"+item.SEQ+"\"><button class=\"btn btn-primary\" type=\"submit\" id=\"cateBtn\"" +
-                    "style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">"+item.CATEGORY+"</button></div>";
-                  $("#form-category").append(source);
-                }
-                $("#cateSection"+item.SEQ).click(function(){
-                  location.href = "/board/searchpost?areacode="+areacode+"&categorycode="+item.SEQ+"&enddate="+enddate;
-                });
-
-              });
-
-              var source = "<div id=\"cateSectionEnd\"></div>";
-              $("#form-category").append(source);
-            },
-            beforeSend: function () {
-            },
-            complete: function () {
-            }
-          });
-
-          var allData = {
-            "areacode" : item.AREA_CODE,
-            "userId" : userId,
-            "startdate" : item.START_DATE,
-            "enddate" : item.END_DATE
-          };
-
-          $.ajax({
-            url: "/mytour/getmyparty",
-            data: allData,
-            async: false,
-            type: "get",
-            success: function (data) {
-              $.each(data.rows, function (index, item) {
-                var source = "<div id=\"myform-board" +item.NO+"\">" +
-                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+area+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
-                  if(item.LIMIT_GENDER == "male"){
-                    source = source + "[<%=maleText%>]";
-                  }else if(item.LIMIT_GENDER == "female"){
-
-                    source = source + "[<%=femaleText%>]";
-                  }
-                  source = source + "["+item.CATEGORY+"]</span></div>" +
-                  "<div id=\"boardLine1\"><span id=\"boardTitle\">"+item.TITLE+"</span>";
-
-                  if(item.ATTEND_STATE == "0"){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount0\">"+"<%=headCountBtnState2%>"+"</span></span></div>";
-                  }else if(item.ATTEND_STATE == "1"){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount1\">"+"<%=headCountBtnState3%>"+"</span></span></div>";
-                  }else if(item.ATTEND_STATE == "3"){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount3\">"+"<%=headCountBtnState4%>"+"</span></span></div>";
-
-                  }
-                  source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">"+item.NAME+"</span><span id=\"boardDate"+item.SEQ+"\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
-                  item.MEET_DATE + " " + item.MEET_TIME+ "</span></a></div><hr class=\"lineEvent\"></div>";
-              $("#attendboardform").append(source);
-              $("#myform-board"+item.NO).click(function(){
-                  location.href = "/board/read?no="+item.NO;
-                });
-
-              });
-
-              if(data.rows.length == 0){
-                $("#attendboardcontainer").css("display", "none");
-              }
-
-              
-              
-            },
-            beforeSend: function () {
-            },
-            complete: function () {
-            }
-          });
-
-          var allData = {
-            "areacode" : item.AREA_CODE,
-            "userId" : userId,
-            "startdate" : item.START_DATE,
-            "enddate" : item.END_DATE
-          };
-
-          $.ajax({
-            url: "/mytour/getmypartyprev",
-            data: allData,
-            async: false,
-            type: "get",
-            success: function (data) {
-              $.each(data.rows, function (index, item) {
-                var source = "<div id=\"prevform-board" +item.NO+"\">" +
-                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+area+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
-                  if(item.LIMIT_GENDER == "male"){
-                    source = source + "[<%=maleText%>]";
-                  }else if(item.LIMIT_GENDER == "female"){
-
-                    source = source + "[<%=femaleText%>]";
-                  }
-                  source = source + "["+item.CATEGORY+"]</span></div>" +
-                  "<div id=\"boardLine1\"><span id=\"boardTitle\">"+item.TITLE+"</span>";
-
-                  if(item.ATTEND_STATE == "0"){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount0\">"+"<%=headCountBtnState2%>"+"</span></span></div>";
-                  }else if(item.ATTEND_STATE == "1"){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount1\">"+"<%=headCountBtnState3%>"+"</span></span></div>";
-                  }else if(item.ATTEND_STATE == "3"){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount3\">"+"<%=headCountBtnState4%>"+"</span></span></div>";
-
-                  }
-                  source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">"+item.NAME+"</span><span id=\"boardDate"+item.SEQ+"\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
-                  item.MEET_DATE + " " + item.MEET_TIME+ "</span></a></div><hr class=\"lineEvent\"></div>";
-              $("#attendboardformPrev").append(source);
-              $("#prevform-board"+item.NO).click(function(){
-                  location.href = "/board/read?no="+item.NO;
-                });
-              });
-
-              if(data.rows.length == 0){
-                $("#prevBoardcontainer").css("display", "none");
-              }
-              
-            },
-            beforeSend: function () {
-            },
-            complete: function () {
-            }
-          });
-
-          var allData = {
-            "writer" : item.WRITER,
-            "areacode" : item.AREA_CODE,
-            "startdate" : item.START_DATE,
-            "enddate" : item.END_DATE
-          };
-
-          $.ajax({
-            url: "/mytour/getmypost",
-            data: allData,
-            async: false,
-            type: "get",
-            success: function (data) {
-              $.each(data.rows, function (index, item) {
-                var source = "<div id=\"writerform-board" +item.NO+"\">" +
-                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+area+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
-                  if(item.LIMIT_GENDER == "male"){
-                    source = source + "[<%=maleText%>]";
-                  }else if(item.LIMIT_GENDER == "female"){
-
-                    source = source + "[<%=femaleText%>]";
-                  }
-                  source = source + "["+item.CATEGORY+"]</span></div>" +
-                  "<div id=\"boardLine1\"><span id=\"boardTitle\">"+item.TITLE+"</span>";
-
-                  if(item.HEADCOUNT == item.HEADCOUNT_NOW){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount\">"+"<%=fillHeadCountText%>"+"</span></span></div>";
-                  }else{
-                    source = source + "<span class=\"text-right\" id=\"boardHeadCount\">"+item.HEADCOUNT_NOW+"/"+item.HEADCOUNT+"명</span></span></div>";
-                  }
-                  source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">"+item.NAME+"</span><span id=\"boardDate"+item.SEQ+"\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
-                  item.MEET_DATE + " " + item.MEET_TIME+ "</span></a></div><hr class=\"lineEvent\"></div>";
-              $("#writerboardform").append(source);
-              $("#writerform-board"+item.NO).click(function(){
-                  location.href = "/board/read?no="+item.NO;
-                });
-              });
-              if(data.rows.length == 0){
-                $("#writerboardcontainer").css("display", "none");
-              }
-              
-            },
-            beforeSend: function () {
-            },
-            complete: function () {
-            }
-          });
-
-          var allData = {
-            "areacode" : item.AREA_CODE,
-            "startdate" : item.START_DATE,
-            "enddate" : item.END_DATE
-          };
-
-          $.ajax({
-            url: "/mytour/getnewpost",
-            data: allData,
-            async: false,
-            type: "get",
-            success: function (data) {
-              $.each(data.rows, function (index, item) {
-                var source = "<div id=\"newform-board" +item.NO+"\">" +
-                "<div id=\"boardLine1\"><a><span id=\"boardArea\">"+ "["+area+"]</span><span class=\"text-right\" id=\"boardCategory"+item.SEQ+"\">";
-                  if(item.LIMIT_GENDER == "male"){
-                    source = source + "[<%=maleText%>]";
-                  }else if(item.LIMIT_GENDER == "female"){
-
-                    source = source + "[<%=femaleText%>]";
-                  }
-                  source = source + "["+item.CATEGORY+"]</span></div>" +
-                  "<div id=\"boardLine1\"><span id=\"boardTitle\">"+item.TITLE+"</span>";
-
-                  if(item.HEADCOUNT == item.HEADCOUNT_NOW){
-                    source = source + "<span class=\"text-right\" id=\"boardFillHeadCount\">"+"<%=fillHeadCountText%>"+"</span></span></div>";
-                  }else{
-                    source = source + "<span class=\"text-right\" id=\"boardHeadCount\">"+item.HEADCOUNT_NOW+"/"+item.HEADCOUNT+"명</span></span></div>";
-                  }
-                  source = source + "<div id=\"boardLine2\"><a><span id=\"boardWriter\">"+item.NAME+"</span><span id=\"boardDate"+item.SEQ+"\" class=\"btn btn-primary px-4 py-3 text-uppercase boardDate\">" +
-                  item.MEET_DATE + " " + item.MEET_TIME+ "</span></a></div><hr class=\"lineEvent\"></div>";
-              $("#newboardform").append(source);
-              
-              $("#newform-board"+item.NO).click(function(){
-                  location.href = "/board/read?no="+item.NO;
-                });
-              });
-              if(data.rows.length == 0){
-                $("#newboardcontainer").css("display", "none");
-              }
-              
-            },
-            beforeSend: function () {
-            },
-            complete: function () {
-            }
-          });
-
-        });
-
-      }
-    }
-        
-			},
-			beforeSend: function () {
-			},
-			complete: function () {
-			}
     });
-
-    $("#moreboardText").click(function(){
-      location.href = "/board/searchpost?areacode="+areacode+"&enddate="+enddate;
-    })
-  
-  });
   </script>
-  
-  
+
+
 
 </html>

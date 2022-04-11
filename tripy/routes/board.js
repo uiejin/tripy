@@ -205,7 +205,8 @@ function getAge(userAge){
   
     var no = req.query.no;
   
-    var query = 'SELECT T1.*, T2.AREA FROM PT_ACCOMPANYBOARD_POST T1, PT_AREA T2 WHERE T1.NO = ? AND T1.IS_DELETE = 0 AND T1.AREA_CODE = T2.AREA_CODE';
+    var query = 'SELECT T1.*, (SELECT TITLE FROM PT_ACHIEVEMENT WHERE SEQ = T1.ACHIEVENENTSEQ) AS ACHIEVEMENT_TITLE,' +
+    'T2.AREA FROM PT_ACCOMPANYBOARD_POST T1, PT_AREA T2 WHERE T1.NO = ? AND T1.IS_DELETE = 0 AND T1.AREA_CODE = T2.AREA_CODE';
   
     var params =[no];
   
@@ -231,7 +232,8 @@ function getAge(userAge){
   
     var query = 'SELECT T1.WRITER, T1.REG_DATE, T1.MODIFY_DATE, T1.WRITER_COUNTRY, T1.COUNTRY_CODE, T1.AREA_CODE, T1.MEET_DATE, T1.MEET_TIME, T1.HEADCOUNT,' +
     ' T1.HEADCOUNT_NOW, T1.SOURCE, T1.CONTACT, T1.TITLE, T1.CONTENTS, T1.LIMIT_AGE_MIN,'+
-    ' T1.LIMIT_AGE_MAX, T1.LIMIT_GENDER, T1.AUTOPARTION, T2.AREA, T3.CATEGORY FROM PT_ACCOMPANYBOARD_POST T1, PT_AREA T2, PT_CATEGORY T3 WHERE T1.NO = ? AND T1.IS_DELETE = 0 AND T1.AREA_CODE = T2.AREA_CODE AND T1.CATEGORY = T3.SEQ';
+    '(SELECT TITLE FROM PT_ACHIEVEMENT WHERE SEQ = T1.ACHIEVENENTSEQ) AS ACHIEVEMENT_TITLE, ' +  
+    ' T1.LIMIT_AGE_MAX, T1.LIMIT_GENDER, T1.AUTOPARTION, T1.ACHIEVENENTSEQ, T2.AREA, T3.CATEGORY FROM PT_ACCOMPANYBOARD_POST T1, PT_AREA T2, PT_CATEGORY T3 WHERE T1.NO = ? AND T1.IS_DELETE = 0 AND T1.AREA_CODE = T2.AREA_CODE AND T1.CATEGORY = T3.SEQ';
   
     var params =[no];
   
@@ -258,7 +260,8 @@ function getAge(userAge){
   
     var query = 'SELECT T1.WRITER, T1.REG_DATE, T1.MODIFY_DATE, T1.WRITER_COUNTRY, T1.COUNTRY_CODE, T1.AREA_CODE, T1.MEET_DATE, T1.MEET_TIME, T1.HEADCOUNT,' +
     ' T1.HEADCOUNT_NOW, T1.SOURCE, T1.CONTACT, T1.TITLE, T1.CONTENTS, T1.LIMIT_AGE_MIN,'+
-    ' T1.LIMIT_AGE_MAX, T1.LIMIT_GENDER, T1.AUTOPARTION, T2.AREA, T3.CATEGORY FROM PT_ACCOMPANYBOARD_POST T1, PT_AREA T2, PT_CATEGORY T3 WHERE T1.NO = ? AND T1.IS_DELETE = 0 AND T1.AREA_CODE = T2.AREA_CODE AND T1.CATEGORY = T3.SEQ';
+    '(SELECT TITLE FROM PT_ACHIEVEMENT WHERE SEQ = T1.ACHIEVENENTSEQ) AS ACHIEVEMENT_TITLE, ' +  
+    ' T1.LIMIT_AGE_MAX, T1.LIMIT_GENDER, T1.AUTOPARTION, T1.ACHIEVENENTSEQ, T2.AREA, T3.CATEGORY FROM PT_ACCOMPANYBOARD_POST T1, PT_AREA T2, PT_CATEGORY T3 WHERE T1.NO = ? AND T1.IS_DELETE = 0 AND T1.AREA_CODE = T2.AREA_CODE AND T1.CATEGORY = T3.SEQ';
   
     var params =[no];
   
@@ -424,6 +427,30 @@ function getAge(userAge){
   
   });
 
+  
+  router.get('/getwriterinfono', function(req, res) {
+    var writer = req.query.no;
+
+    var query = 'SELECT T1.SEQ, T1.NAME, T1.IMG, T1.BIRTHDAY, T1.GENDER FROM PT_USER T1, PT_ACCOMPANYBOARD_POST T2 WHERE T1.ID = T2.WRITER AND T2.NO = ?';
+  
+    var params =[writer];
+    con.connection.query(query, params, function(err, rows, fields) {
+        if(err){
+          console.log(err);
+          console.log(rows);
+          res.send({rows,result:false});
+
+  
+        }else{
+          console.log(rows.inster);
+          console.log(rows);
+          res.send({rows,result:true});
+  
+        }
+      });
+  
+  });
+
   router.get('/getreply', function(req, res) {
     var no = req.query.no;
 
@@ -459,7 +486,8 @@ function getAge(userAge){
     var gender = req.query.gender;
 
 
-    var query = "SELECT T1.WRITER,T1.NO,T1.MEET_DATE,T1.MEET_TIME,T1.HEADCOUNT,T1.HEADCOUNT_NOW, T1.TITLE, T1.LIMIT_GENDER, T3.AREA,T4.CATEGORY,T4.SEQ, " +
+    var query = "SELECT T1.WRITER,T1.NO,T1.MEET_DATE,T1.MEET_TIME,T1.HEADCOUNT,T1.HEADCOUNT_NOW, T1.TITLE, T1.LIMIT_GENDER, T1.ACHIEVENENTSEQ, T3.AREA,T4.CATEGORY,T4.SEQ, " +
+    '(SELECT TITLE FROM PT_ACHIEVEMENT WHERE SEQ = T1.ACHIEVENENTSEQ) AS ACHIEVEMENT_TITLE, ' +  
      "T2.NAME FROM PT_ACCOMPANYBOARD_POST T1, PT_USER T2, PT_AREA T3, PT_CATEGORY T4 WHERE T1.WRITER = T2.ID AND T1.AREA_CODE = T3.AREA_CODE AND T1.CATEGORY = T4.SEQ AND T1.IS_DELETE = 0";
     
      var params = new Array;
@@ -680,6 +708,39 @@ function getAge(userAge){
       });
   
   });
+
+  
+router.get('/searchachievementitem', function (req, res) {
+
+  var query;
+  var params;
+  var userSEQ;
+  
+  if (req.isAuthenticated()) {
+    userSEQ = req.user.SEQ;
+  }
+  else{
+    userSEQ = 0;
+  }
+      query = 'SELECT T1.SEQ, T1.TITLE, T1.POINT, T1.EXP, T1.MAIN_IMG, ' +
+          '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = ?)) AS ISCOMPLETE ' + 
+          'FROM PT_ACHIEVEMENT T1 ' +
+          'WHERE T1.SEQ = ? '
+      params = [userSEQ, req.query.no];
+  
+  con.connection.query(query, params, function (err, rows, fields) {
+      if (err) {
+          console.log(err);
+          console.log(rows);
+          res.send({ rows, result: false });
+      } else {
+          res.send({ rows, result: true });
+
+      }
+  });
+
+});
+
   
 
 

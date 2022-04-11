@@ -27,10 +27,12 @@ router.get('/', function (req, res, next) {
       writeText9: "제목",
       writeText10: "내용을 입력하세요",
       writeText11: "# 태그를 입력하세요. 쉼표로 구분 가능합니다",
+      writeText12: "모임업적",
       locationText: "여행지를 선택하세요",
       cateText: "모임 주제를 선택하세요",
       placeText: "모임 장소를 선택하세요",
       dateText: "모임 일정을 선택하세요",
+      achievementText: "모임 업적을 선택하세요",
       hideformText: "숨기기",
       openformText: "열기",
       backBtnText: "뒤로 이동",
@@ -84,10 +86,12 @@ router.get('/updatepost', function (req, res, next) {
       writeText9: "제목",
       writeText10: "내용을 입력하세요",
       writeText11: "# 태그를 입력하세요. 쉼표로 구분 가능합니다",
+      writeText12: "모임업적",
       locationText: "여행지를 선택하세요",
       cateText: "모임 주제를 선택하세요",
       placeText: "모임 장소를 선택하세요",
       dateText: "모임 일정을 선택하세요",
+      achievementText: "모임 업적을 선택하세요",
       hideformText: "숨기기",
       openformText: "열기",
       backBtnText: "뒤로 이동",
@@ -150,22 +154,40 @@ router.get('/writepost', function (req, res) {
   var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
   var placeText = req.query.placeText;
 
-
-  var query = 'INSERT INTO PT_ACCOMPANYBOARD_POST (WRITER, REG_DATE, WRITER_COUNTRY,' +
+  var insertSeq = null;
+  var query = "";
+  var params = ""
+  if((req.query.achievementSEQ.length > 0 && req.query.isachievement) || (req.query.achievementSEQ != "" && req.query.isachievement)){
+    query = 'INSERT INTO PT_ACCOMPANYBOARD_POST (WRITER, REG_DATE, WRITER_COUNTRY,' +
     'COUNTRY_CODE, AREA_CODE, CATEGORY, MEET_DATE, MEET_TIME, HEADCOUNT,' +
     'PLACE, SOURCE, CONTACT, TITLE, CONTENTS, LIMIT_AGE_MIN, LIMIT_AGE_MAX, LIMIT_GENDER,' +
-    ' AUTOPARTION, LATITUDE, LONGITUDE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+    ' AUTOPARTION, LATITUDE, LONGITUDE, ACHIEVENENTSEQ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
-  var params = [req.query.id, nowTime, req.query.writerCountry, req.query.locationText, req.query.locationText2, req.query.cateText,
-  req.query.meetDateText, req.query.meetTimeText, req.query.headCountText, placeText, req.query.sourceText,
-  req.query.contactText, req.query.titleText, req.query.contentText,
-  req.query.limitAgeMin, req.query.limitAgeMax, req.query.limitGender,
-  req.query.autoparticipation, req.query.latitude, req.query.longitude];
+    params = [req.query.id, nowTime, req.query.writerCountry, req.query.locationText, req.query.locationText2, req.query.cateText,
+    req.query.meetDateText, req.query.meetTimeText, req.query.headCountText, placeText, req.query.sourceText,
+    req.query.contactText, req.query.titleText, req.query.contentText,
+    req.query.limitAgeMin, req.query.limitAgeMax, req.query.limitGender,
+    req.query.autoparticipation, req.query.latitude, req.query.longitude, req.query.achievementSEQ];
+  }
+  else
+  {
+    query = 'INSERT INTO PT_ACCOMPANYBOARD_POST (WRITER, REG_DATE, WRITER_COUNTRY,' +
+    'COUNTRY_CODE, AREA_CODE, CATEGORY, MEET_DATE, MEET_TIME, HEADCOUNT,' +
+    'PLACE, SOURCE, CONTACT, TITLE, CONTENTS, LIMIT_AGE_MIN, LIMIT_AGE_MAX, LIMIT_GENDER,' +
+    ' AUTOPARTION, LATITUDE, LONGITUDE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
+    params = [req.query.id, nowTime, req.query.writerCountry, req.query.locationText, req.query.locationText2, req.query.cateText,
+    req.query.meetDateText, req.query.meetTimeText, req.query.headCountText, placeText, req.query.sourceText,
+    req.query.contactText, req.query.titleText, req.query.contentText,
+    req.query.limitAgeMin, req.query.limitAgeMax, req.query.limitGender,
+    req.query.autoparticipation, req.query.latitude, req.query.longitude];
+  }
   con.connection.query(query, params, function (err, rows, fields) {
     if (err) {
       console.log(err);
+      res.send({ result: false });
     } else {
+      insertSeq = rows.insertId;
       console.log(rows.inster);
     }
   });
@@ -246,6 +268,32 @@ router.get('/getcategory', function (req, res) {
 
   var query = 'SELECT * FROM PT_CATEGORY';
   con.connection.query(query, function (err, rows, fields) {
+    if (err) {
+      console.log(err);
+      res.send({ result: false });
+    } else {
+      console.log(rows.inster);
+      res.send({ rows, result: true });
+    }
+  });
+});
+
+
+router.get('/getareaachievements', function (req, res) {
+
+  var query = 'SELECT T1.SEQ, T1.TITLE, T1.POINT, T1.EXP, T1.MAIN_IMG, T2.TYPE_NAME, ' +
+  '(SELECT AREA FROM PT_AREA  WHERE T1.AREA_TYPE = SEQ) AS AREA_NAME, ' +
+  '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = ?)) AS ISCOMPLETE, ' +
+  '(SELECT (6371*acos(cos(radians(?))*cos(radians(T1.LATITUDE))*cos(radians(T1.LONGITUDE) ' +
+  '-radians(?))+sin(radians(?))*sin(radians(T1.LATITUDE))))) AS DISTANCE ' +
+  'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2, PT_AREA T3 ' +
+  'WHERE T2.SEQ = T1.TYPE AND T1.TYPE = 3 AND T1.AREA_TYPE = T3.SEQ AND T3.AREA_CODE = ? ' +
+  'ORDER BY DISTANCE' ;
+
+  params = [req.user.SEQ, req.query.latX, req.query.longY, req.query.latX, req.query.areacode];
+    
+
+  con.connection.query(query, params, function (err, rows, fields) {
     if (err) {
       console.log(err);
       res.send({ result: false });

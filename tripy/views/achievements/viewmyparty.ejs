@@ -150,9 +150,6 @@
                                 </div>
 
                                 <div class="col-12" id="button-div">
-                                    <a id="get-achievement-button"
-                                        class="col-12 btn btn-primary px-4 py-2 board-button">
-                                    </a>
                                 </div>
 
                                 <div class="form-content">
@@ -179,7 +176,32 @@
                                     <div id="getSubListForm"></div>
                                 </div>
 
-                                <div class="form-content" id="tourboardDiv">
+                                <div class="form-content">
+
+                                    <div class="text-center form-info">
+                                        <h5 class="mb-5 text-uppercase" id="content-info"><a class="first-a">모</a><a
+                                                class="second-a">임원</a>
+                                            <hr class="line-event">
+                                        </h5>
+                                    </div>
+
+                                    <div class="site-section bg-light" id="profileForm">
+                                        <div class="container" id=boardForm>
+                                            <div class="row col-md-12" id="post">
+                                                <div class="site-section col-md-12 profileContainer" id="partyRow">
+                                                    <div class="col-12" id="readItem">
+                                                        <div class="readDiv3">
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-content">
 
                                     <div class="text-center form-info">
                                         <h5 class="mb-5 text-uppercase" id="content-info"><a class="first-a">가</a><a
@@ -190,6 +212,8 @@
 
                                     <div id="tourboardform"></div>
                                 </div>
+
+
                             </div>
                         </div>
 
@@ -198,7 +222,7 @@
 
                     <div class="submit_div">
                         <div>
-                            <a id="board-button" class="btn btn-primary px-4 py-2 board-button" href="/tourlist/">목록</a>
+                            <a id="board-button" class="btn btn-primary px-4 py-2" href="/tourlist/">목록</a>
                         </div>
                     </div>
                 </div>
@@ -240,10 +264,13 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr-r448ruHCKvwugrHq9nH2-SXqkj4u9M&libraries=places"
         async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
+
     <script type="text/javascript">
 
         var loginStatus = "<%=loginStatus%>";
         var userId = "<%=userId%>";
+        var userSEQ = "<%=userSeq%>";
 
         if (loginStatus == "true") {
 
@@ -252,6 +279,7 @@
         } else {
         }
         var no = "";
+        var partyno = "<%=partyno%>";
         var content = "";
         var img_main = null;
         var img_thumnail = null;
@@ -268,13 +296,12 @@
         var longY = null;
         var restCategoryTitle = [];
         var restCategoryCode = [];
-        var is_complete = false;
-        var area = "";
 
         var scrapState = 0;
 
         var startD = "";
         var endD = "";
+        var area = "";
 
         var addressSum = "";
 
@@ -285,7 +312,7 @@
                         .substr(location.href.lastIndexOf('=') + 1);
                     $
                         .ajax({
-                            url: "/achievements/getachievements",
+                            url: "/achievements/getmypartyachievements",
                             data: { no: no },
                             dataType: "json",
                             type: "get",
@@ -302,6 +329,7 @@
                                                 .getElementById("address").innerHTML = item.AREA;
                                             document
                                                 .getElementById("location_div").innerHTML = item.AREA;
+
                                             add = item.AREA;
                                             addressSum = item.AREA;
                                             area = item.AREA;
@@ -339,9 +367,12 @@
                                                             count = 1;
                                                             if (areacode != null) {
                                                             }
+
                                                             searchTourlist();
                                                         });
+
                                                     });
+
                                                 },
                                                 beforeSend: function () {
                                                 },
@@ -349,6 +380,7 @@
 
                                                 }
                                             });
+
                                             $.ajax({
                                                 url: "/tourlist/getneartour",
                                                 data: {
@@ -380,6 +412,9 @@
                                                             $("#tourlistDiv" + item.contentid).click(function () {
                                                                 location.href = "/tourlist/detail?no=" + item.contentid;
                                                             });
+
+
+
                                                         });
                                                     function getRestCategoryTitle(code) {
                                                         var i = restCategoryCode.indexOf(String(code));
@@ -393,23 +428,67 @@
                                             });
 
                                             $.ajax({
-                                                url: "/achievements/getachievementsublist",
-                                                data: { no: no },
+                                                url: "/achievements/getachievementsubpartylist",
+                                                data: { no: no, boardno: partyno },
                                                 async: false,
                                                 type: "get",
                                                 success: function (data) {
+
+                                                    var source = "<a id=\"get-achievement-button\" class=\"col-12 btn btn-primary px-4 py-2 board-button\"></a>";
+
+                                                    $("#button-div").append(source);
+
+                                                    //alert(data.TOTALCOUNT + " " + data.USERCOUNT);
 
                                                     if (data.TOTALCOUNT > data.USERCOUNT && data.USERCOUNT > 0) {
                                                         $("#get-achievement-button").text("도전 진행중");
                                                     }
                                                     else if (data.USERCOUNT == 0) {
                                                         $("#get-achievement-button").text("미획득");
+
                                                     }
-                                                    else if (data.TOTALCOUNT == data.USERCOUNT) {
+                                                    else if (data.USERCOUNT >= data.TOTALCOUNT) {
                                                         $("#get-achievement-button").text("획득완료");
+                                                        if (userSEQ == data.writer) {
+                                                            alert("모든 도전을 진행하였습니다. 업적 획득 버튼을 눌러 업적을 획득하세요");
+                                                            $("#get-achievement-button").text("업적 획득 하기");
+
+                                                            $("#get-achievement-button").click(function () {
+                                                                if (confirm("해당 도전을 획득하시겠습니까?") == true) {
+
+                                                                    var allData = {
+                                                                        "boardno": partyno,
+                                                                        "no": no
+                                                                    }
+                                                                    $.ajax({
+                                                                        url: "/achievements/insertsubpartyachievementsuccess",
+                                                                        data: allData,
+                                                                        async: false,
+                                                                        type: "post",
+                                                                        success: function (data) {
+                                                                            if (data.result == true) {
+                                                                                alert("해당 도전과제를 획득하였습니다.");
+                                                                                location.reload();
+                                                                            }
+                                                                            else {
+                                                                                alert("도전과제 달성에 실패 했습니다.");
+                                                                            }
+                                                                        },
+                                                                        beforeSend: function () {
+                                                                        },
+                                                                        complete: function () {
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                        else{
+                                                        $("#get-achievement-button").text("도전 획득 대기");
+
+                                                        };
                                                     }
 
-                                                    
+
                                                     $("#clearnumber").text(data.USERCOUNT + "/" + data.TOTALCOUNT);
 
                                                     $.each(data.queryresult, function (index, item) {
@@ -419,16 +498,16 @@
                                                             source =
                                                                 "<div class=\"row achievementsSubSuccessItemDiv\" id = \"form-board" + item.SEQ + "\">"
                                                                 + "<div id = \"achievementItem\">";
-                                                                if(item.IMG != null){
-                                                                    source += "<img src=\"" + item.IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
-                                                                }
-                                                                else{
+                                                            if (item.IMG != null) {
+                                                                source += "<img src=\"" + item.IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                                                            }
+                                                            else {
                                                                 source += "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>";
-                                                                }
-                                                                source +=
-                                                                 "<div id=\"achievementItemDiv2\">" 
+                                                            }
+                                                            source +=
+                                                                "<div id=\"achievementItemDiv2\">"
                                                                 + "<div id=\"boardLine2\" class=\"row\">"
-                                                                + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + area + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
+                                                                + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"badge badge-danger\">" + item.MYCOMPLETEUSERCOUNT + "/" + item.LIMIT_USER + "</span><span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + area + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
                                                                 + "<a class=\"col-12\"><span>" + item.SECRET_CONTENTS + "</a>";
                                                         }
                                                         else {
@@ -438,7 +517,7 @@
                                                                 + "<img src=\"" + "https://cdn4.iconfinder.com/data/icons/notifications-1/32/343-01-512.png" + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
                                                                 + "<div id=\"achievementItemDiv2\">"
                                                                 + "<div id=\"boardLine2\" class=\"row\">"
-                                                                + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + area + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
+                                                                + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"badge badge-danger\">" + item.MYCOMPLETEUSERCOUNT + "/" + item.LIMIT_USER + "</span><span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + area + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
                                                                 + "<a class=\"col-12\"><span>" + item.SECRET_CONTENTS + "</a>";
                                                         }
                                                         source += "</div></div></div>";
@@ -449,29 +528,30 @@
                                                             "<div class=\"modal-dialog modal-lg sub-modal\">" +
                                                             "<div class=\"modal-content\">" +
                                                             "<div class=\"modal-header\">" +
-                                                            "<h5 class=\"modal-title\" id=\"modalTitle2\">" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + area + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></h5>" +
-                                                            "<button type=\"button\" class=\"close\" id=\"close_subpop" + item.SEQ + "\" data-dimiss=\"modal\" aria-label=\"Close\">" +
+                                                            "<h5 class=\"modal-title\" id=\"modalTitle2\">" + item.TITLE + "<span class=\"badge badge-danger\">" + item.MYCOMPLETEUSERCOUNT + "/" + item.LIMIT_USER + "</span><span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + area + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></a>"
+                                                        "<button type=\"button\" class=\"close\" id=\"close_subpop" + item.SEQ + "\" data-dimiss=\"modal\" aria-label=\"Close\">" +
                                                             "<span aria-hidden=\"true\">&times;</span></button></div>" +
                                                             "<div class=\"row form-group\">" +
                                                             "<div class=\"form-group\" id=\"modal-info\"></div>";
-                                                        if (!item.ISCOMPLETE && item.TYPE == 1) {
+                                                        if ((!item.ISCOMPLETE && item.TYPE == 1) && (item.LIMIT_USER > item.MYCOMPLETEUSERCOUNT)) {
                                                             modal_source +=
                                                                 "<div class = \"col-12\"><img class =\"modal-sub-img\" src=\"" + "https://cdn4.iconfinder.com/data/icons/notifications-1/32/343-01-512.png" + "\"></div>" +
                                                                 "<div class = \"col-12\"><h5 id=\"location_div\">" + item.SECRET_CONTENTS + "</h5> </div>" +
                                                                 "<div class=\"col-12\"><a id=\"achievement-sub-button" + item.SEQ + "\" class=\"col-12 btn btn-primary px-4 py-2 get-achievement-button\">도전하기</a></div>";
                                                         }
-                                                        else if (!item.ISCOMPLETE && item.TYPE == 5) {
+                                                        else if ((!item.ISCOMPLETE && item.TYPE == 5) && (item.LIMIT_USER > item.MYCOMPLETEUSERCOUNT)) {
+
                                                             modal_source +=
                                                                 "<div class = \"col-12\"><img class =\"modal-sub-img\" src=\"" + "https://cdn4.iconfinder.com/data/icons/notifications-1/32/343-01-512.png" + "\"></div>" +
                                                                 "<div class = \"col-12\"><h5 id=\"location_div\">" + item.SECRET_CONTENTS + "</h5> </div>" +
                                                                 "<div class=\"main-img-modal-div col-12\">" +
                                                                 "<label for=\"main_img_label\">사진 첨부</label>" +
-                                                                "<input type=\"file\" id=\"img_main" + item.SEQ +"\" name=\"img_main\" filestyle input=\"\" type=\"file\"" +
+                                                                "<input type=\"file\" id=\"img_main" + item.SEQ + "\" name=\"img_main\" filestyle input=\"\" type=\"file\"" +
                                                                 "data-class-button=\"btn btn-default\" data-class-input=\"form-control\" data-button-text=\"\"" +
                                                                 "data-icon-name=\"fa fa-upload\" class=\"form-control\" tabindex=\"-1\" accept=\"image/*\" /></div>" +
                                                                 "<div class=\"col-12\"><a id=\"achievement-sub-button" + item.SEQ + "\" class=\"col-12 btn btn-primary px-4 py-2 get-achievement-button\">사진 업로드</a></div>";
                                                         }
-                                                        else if(item.ISCOMPLETE && item.TYPE ==5 && item.IMG != null){
+                                                        else if ((item.ISCOMPLETE && item.TYPE == 5 && item.IMG != null) || (item.LIMIT_USER <= item.MYCOMPLETEUSERCOUNT && item.IMG != null)) {
                                                             modal_source +=
                                                                 "<div class = \"col-12\"><img class =\"modal-sub-img\" src=\"" + item.IMG + "\"></div>" +
                                                                 "<div class = \"col-12\"><h5 id=\"location_div\">" + item.CONTENTS + "</h5> </div>";
@@ -482,8 +562,36 @@
                                                                 "<div class = \"col-12\"><h5 id=\"location_div\">" + item.CONTENTS + "</h5> </div>";
                                                         }
                                                         modal_source +=
-                                                            "<div id=\"map_canvas\"></div>" +
-                                                            "</div></div></div></div>";
+                                                            "<div id=\"usercompletedata\"><div class = \"successsublistusermodal\">도전 완료 모임원 <br></div>";
+
+                                                        for (var i = 0; i < data.userresult.length; i++) {
+                                                            if (data.userresult[i].SUB_ACHIEVEMENT_SEQ == item.SEQ) {
+                                                                modal_source += "<div class=\"row miniprofileclass\" id=\"profile" + data.userresult[i].USER_SEQ + "\">" +
+                                                                    "<div class=\"profileDiv\">" +
+                                                                    "<img src=\"" + data.userresult[i].IMG + "\" class=\"rounded-circle miniprofileImage\">" +
+                                                                    "</div>" +
+                                                                    "<div class=\"miniprofileDiv2\">" +
+                                                                    "<div id=\"boardLine1\">" +
+                                                                    "<a><span class=\"profileName\">" + data.userresult[i].NAME + "</span></a>" +
+                                                                    "</div></div></div>";
+                                                            }
+
+                                                        }
+
+                                                        modal_source += "</div>";
+
+
+                                                        for (var i = 0; i < data.photoresult.length; i++) {
+                                                            if (data.photoresult[i].SUB_ACHIEVEMENT_SEQ == item.SEQ) {
+                                                                modal_source +=
+                                                                    "<div class=\"col-12\">" +
+                                                                    "<img class = \"submodalimglist\" src=\"" + data.photoresult[i].IMG +
+                                                                    "\"></div>";
+                                                            }
+                                                        }
+
+
+                                                        modal_source += "</div></div></div>";
 
                                                         $("#bodyForm").append(modal_source);
 
@@ -510,10 +618,11 @@
                                                                                 "userLat": latitude,
                                                                                 "userLong": longitude,
                                                                                 "no": no,
-                                                                                "subNo": item.SEQ
+                                                                                "subNo": item.SEQ,
+                                                                                "boardno": partyno
                                                                             }
                                                                             $.ajax({
-                                                                                url: "/achievements/issubachievementsuccess",
+                                                                                url: "/achievements/issubpartyachievementsuccess",
                                                                                 data: allData,
                                                                                 async: false,
                                                                                 type: "get",
@@ -540,18 +649,18 @@
                                                                     }
                                                                 }
                                                                 else if (item.TYPE == 5) {
-                                                                    if ($("#img_main"+ item.SEQ).val() == null || $("#img_main"+ item.SEQ).val() == "") {
+                                                                    if ($("#img_main" + item.SEQ).val() == null || $("#img_main" + item.SEQ).val() == "") {
                                                                         alert("사진을 첨부해 주세요");
                                                                     }
                                                                     else {
                                                                         var formData = new FormData();
 
-                                                                        formData.append("img_main", $("#img_main"+ item.SEQ)[0].files[0]);
+                                                                        formData.append("img_main", $("#img_main" + item.SEQ)[0].files[0]);
                                                                         var img_main_url;
                                                                         var img_main_val1 = false;
 
                                                                         var uploadImgCount = 0;
-                                                                        var imgElem = document.getElementById("img_main"+ item.SEQ).files[0];
+                                                                        var imgElem = document.getElementById("img_main" + item.SEQ).files[0];
                                                                         imgElem.exifdata = null; // 같은 페이지 안에서 이미지가 바뀌는 경우 이전의 메타데이터 정보를 지워주어야 함.
                                                                         EXIF.getData(imgElem, function () {
                                                                             var allMetaData = EXIF.getAllTags(this); //모든 EXIF정보
@@ -586,10 +695,11 @@
                                                                                     "userLat": latX,
                                                                                     "userLong": longY,
                                                                                     "no": no,
-                                                                                    "subNo": item.SEQ
+                                                                                    "subNo": item.SEQ,
+                                                                                    "boardno": partyno
                                                                                 }
                                                                                 $.ajax({
-                                                                                    url: "/achievements/checksubachievementpicsuccess",
+                                                                                    url: "/achievements/checksubpartyachievementpicsuccess",
                                                                                     data: allData,
                                                                                     async: false,
                                                                                     type: "get",
@@ -609,11 +719,12 @@
                                                                                                     var allData = {
                                                                                                         "no": no,
                                                                                                         "subNo": item.SEQ,
-                                                                                                        "img1": res['result']['img_main'][0].location
+                                                                                                        "img1": res['result']['img_main'][0].location,
+                                                                                                        "boardno": partyno
                                                                                                     };
 
                                                                                                     $.ajax({
-                                                                                                        url: "/achievements/issubachievementsuccesspic",
+                                                                                                        url: "/achievements/issubpartyachievementsuccesspic",
                                                                                                         data: allData,
                                                                                                         async: false,
                                                                                                         type: "post",
@@ -623,7 +734,7 @@
                                                                                                                 alert("오류가 발생하였습니다.");
                                                                                                             } else {
                                                                                                                 alert("해당 도전을 성공하였습니다.");
-                                                                                                                location.reload();
+                                                                                                                //location.reload();
                                                                                                             }
                                                                                                         },
                                                                                                         beforeSend: function () {
@@ -658,147 +769,126 @@
                                             });
 
 
-                                            if (item.ISCOMPLETE) {
-                                                $("#status-event").css({
-                                                    'background': '#f23a2e',
-                                                    'border-color': '#f23a2e'
-                                                });
-                                                $("#status-event").text("획득완료");
-                                                $("#statis-event-m").css({
-                                                    'background': '#f23a2e',
-                                                    'border-color': '#f23a2e'
-                                                });
-                                                $("#get-achievement-button").css({
-                                                    'background': '#f23a2e',
-                                                    'border-color': '#f23a2e'
-                                                });
-                                                $("#get-achievement-button").css({
-                                                    'background': '#f23a2e',
-                                                    'border-color': '#f23a2e'
-                                                });
-                                                $("#get-achievement-button").text("획득한 업적 입니다");
-                                                $("#statis-event-m").text("획득한 업적 입니다");
+                                            $.ajax({
+                                                url: "/board/getwriterinfono",
+                                                data: { "no": partyno },
+                                                async: false,
+                                                type: "get",
+                                                success: function (data) {
+                                                    if (data['result'] == true) {
+                                                        $.each(data.rows, function (index, item) {
 
-                                                $("#myModal3").on("shown.bs.modal", function () {
+                                                            var profileSource = "<div class=\"row miniprofileclass\" id=\"profile" + item.SEQ + "\">" +
+                                                                "<div class=\"profileDiv\">" +
+                                                                "<img src=" + item.IMG + " class=\"rounded-circle miniprofileImage\">" +
+                                                                "</div>" +
+                                                                "<div class=\"miniprofileDiv2\">" +
+                                                                "<div id=\"boardLine1\">" +
+                                                                "<a><span class=\"profileName\">" + item.NAME + "</span><span class=\"text-right badge bg-info \" id=\"writerspan\">작성자</a>" +
+                                                                "<a><span class=\"profileAge\">" + getAge(item.BIRTHDAY) + "세 " + getGender(item.GENDER) + "</span></a>"
+                                                            "</div></div></div>";
+                                                            $("#partyRow").append(profileSource);
 
-                                                    var myLatLng = { lat: latX, lng: longY };
-
-                                                    if (latX == null || longY == null || latX == "" || longY == "") {
-
-                                                    } else {
-                                                        var map_options = {
-                                                            center: { lat: latX, lng: longY },
-                                                            zoom: 17,
-                                                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                                                        };
-                                                        var map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
-
-                                                        var defaultBounds = new google.maps.LatLngBounds(
-                                                            new google.maps.LatLng(myLatLng.lat),
-                                                            new google.maps.LatLng(myLatLng.lng)
-                                                        );
-
-                                                        var marker = new google.maps.Marker({
-                                                            position: myLatLng,
-                                                            map: map,
-                                                            title: 'Hello World!'
+                                                            $("#profile" + item.SEQ).click(function () {
+                                                                location.href = "../users/profile?id=" + item.SEQ;
+                                                            });
                                                         });
                                                     }
 
-                                                });
+                                                },
+                                                beforeSend: function () {
+                                                },
+                                                complete: function () {
+                                                }
+                                            });
 
-                                                $("#address").click(function () {
-                                                    $('#myModal3').modal('show');
-                                                });
+                                            $.ajax({
+                                                url: "/board/getallattenduserstate",
+                                                data: { "boardId": partyno },
+                                                async: false,
+                                                type: "get",
+                                                success: function (data) {
+                                                    if (data['result'] == true) {
+                                                        $.each(data.rows, function (index, item) {
+                                                            if (item.ATTEND_STATE == 1) {
 
+                                                                var profileSource = "<div class=\"row miniprofileclass\" id=\"profile" + item.SEQ + "\">" +
+                                                                    "<div class=\"profileDiv\">" +
+                                                                    "<img src=" + item.IMG + " class=\"rounded-circle miniprofileImage\">" +
+                                                                    "</div>" +
+                                                                    "<div class=\"miniprofileDiv2\">" +
+                                                                    "<div id=\"boardLine1\">" +
+                                                                    "<a><span class=\"profileName\">" + item.NAME + "</span></a>" +
+                                                                    "<a><span class=\"profileAge\">" + getAge(item.BIRTHDAY) + "세 " + getGender(item.GENDER) + "</span></a>"
+                                                                "</div></div></div>";
+                                                                $("#partyRow").append(profileSource);
 
-                                                $("#myModal3").on("hidden.bs.modal", function () { $("#googleMap").empty(); });
-
-                                            }
-                                            else {
-                                                $("#status-event").css({
-                                                    'background': 'midnightblue',
-                                                    'border-color': 'midnightblue'
-                                                });
-                                                $("#status-event").text("미획득");
-                                                $("#statis-event-m").css({
-                                                    'background': 'midnightblue',
-                                                    'border-color': 'midnightblue'
-                                                });
-                                                $("#statis-event-m")
-                                                    .text("획득하지 못한 업적입니다");
-
-                                                $("#get-achievement-button").click(function () {
-
-                                                    var latitude;
-                                                    var longitude;
-                                                    if (navigator.geolocation) {
-                                                        navigator.geolocation.getCurrentPosition(function (position) {
-                                                            latitude = position.coords.latitude;
-                                                            longitude = position.coords.longitude;
-                                                            var allData = {
-                                                                "userLat": latitude,
-                                                                "userLong": longitude,
-                                                                "no": no
+                                                                $("#profile" + item.SEQ).click(function () {
+                                                                    location.href = "../users/profile?id=" + item.SEQ;
+                                                                });
                                                             }
                                                         });
-                                                    }
-                                                });
-                                            }
+                                                    };
+                                                },
+                                                beforeSend: function () {
+                                                },
+                                                complete: function () {
+                                                }
+                                            });
 
-                                            $("#close_popup3").click(function () {
-                                                $('#myModal3').modal('hide');
+                                            $("#close_popup").click(function () {
+                                                $('#myModal').modal('hide');
                                             });
                                         });
                             },
                             beforeSend: function () {
-                                $('.spinner-border').removeClass(
-                                    'display-none');
-                                $('.wrap-loading').removeClass(
-                                    'display-none');
                             },
                             complete: function () {
-
-                                $('.spinner-border').addClass(
-                                    'display-none');
-                                $('.wrap-loading').addClass('display-none');
                             }
                         });
 
-                    $("#close_popup").click(function () {
-                        $('#myModal').modal('hide');
-                    });
+
+                    function openTransport() {
+                        $('#transportModal').modal('show');
+                    }
+
+                    function openLink() {
+                        if (href_link != null) {
+                            location.href = href_link;
+                        }
+                    }
+                    // maxLengthCheck
+                    function maxLengthCheck(object) {
+                        if (object.value.length > object.maxLength) {
+                            object.value = object.value.slice(0, object.maxLength);
+                        }
+                    }
+
+
+                    function getAge(userAge) {
+                        var nowDay = new Date();
+                        var birthday = new Date(userAge);
+
+
+                        var age = nowDay.getFullYear() - birthday.getFullYear();
+                        var month = nowDay.getMonth() - birthday.getMonth();
+
+                        return month < 0 || (month === 0 && nowDay.getDate() < birthday.getDate()) ?
+                            age : age + 1
+                    }
+
+                    function getGender(userGender) {
+                        if (userGender == "male") {
+                            return "남";
+                        } else if (userGender == "female") {
+                            return "여";
+                        } else {
+                            return "미상";
+                        }
+                    }
                 });
 
-        function openTransport() {
-            $('#transportModal').modal('show');
-        }
 
-        function openLink() {
-            if (href_link != null) {
-                location.href = href_link;
-            }
-        }
-        // maxLengthCheck
-        function maxLengthCheck(object) {
-            if (object.value.length > object.maxLength) {
-                object.value = object.value.slice(0, object.maxLength);
-            }
-        }
-
-
-        function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
-            function deg2rad(deg) {
-                return deg * (Math.PI / 180)
-            }
-            var R = 6371;
-            var dLat = deg2rad(lat2 - lat1);
-            var dLon = deg2rad(lng2 - lng1);
-            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c; // Distance in km 
-            return d;
-        }
 
     </script>
 

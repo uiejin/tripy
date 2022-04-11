@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="/css/views/calendar.css">
   <link rel="stylesheet" href="/css/views/slider.css">
   <link rel="stylesheet" href="/css/views/maps.css">
+  <link rel="stylesheet" href="/css/views/myhistory.css">
 </head>
 
 <body>
@@ -108,6 +109,11 @@
               <div class="readDiv1"><%=areaText%></div>
               <div class="readDiv2" id="areaText"></div>
             </div>
+
+            <div class="col-12" id="achievementReadDiv">
+            </div>
+
+            
 
             <div class="col-12" id="writerprofileContainer">
                 <div class="row" id="writerDiv">
@@ -239,6 +245,9 @@ var writer = null;
       "no": no,
     };
 
+    var partyno = no;
+    var achievementno = null;
+
     $.ajax({
       url: "/board/getpost?no=" + no,
       async: false,
@@ -261,6 +270,48 @@ var writer = null;
               $("#headCountText").text(item.HEADCOUNT);
               $("#placeText").text(item.PLACE);
               $("#contentItem").html(item.CONTENTS);
+              if (item.ACHIEVENENTSEQ) {
+                achievementno = item.ACHIEVENENTSEQ;
+                $.ajax({
+                  url: "/board/searchachievementitem",
+                  data: { "no": item.ACHIEVENENTSEQ },
+                  async: false,
+                  type: "get",
+                  success: function (data) {
+                    if (data['result'] == true) {
+                      $.each(data.rows, function (index, item) {
+                        var source =
+                          "<div class=\"row achievementReadItem\" id = \"form-board" + item.SEQ + "\">"
+                          + "<div id = \"achievementItem\">"
+                          + "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                          + "<div id=\"achievementItemDiv2\">"
+                          + "<div id=\"boardLine2\" class=\"row\">"
+                          + "<a class=\"col-12\"><span class=\"achievementReadTitle\">" + item.TITLE + "<span class=\"text-right\" id=\"pointItem\"><span class=\"icon-dollar\"></span>" + item.EXP + "</span></a>";
+                        if (item.ISCOMPLETE) {
+                          source += "<a class=\"col-12\"><span>" + "업적 획득" + "<span class=\"text-right\" id=\"pointItem\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>";
+                        }
+                        else {
+                          source += "<a class=\"col-12\" style=\"color : red; \"><span>" + "업적 미 획득" + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>";
+                        }
+                        source += "</div></div></div>";
+
+                        $("#achievementReadDiv").append(source);
+
+                        $("#form-board" + item.SEQ).click(function () {
+                          location.href = "/achievements/viewmyparty?no=" + partyno + "&postno=" + achievementno;
+                        });
+                      });
+                    };
+                  },
+                  beforeSend: function () {
+                  },
+                  complete: function () {
+                  }
+                });
+              }
+              else {
+                $("#achievementReadDiv").remove();
+              }
               writer = item.WRITER;
 
               headCount = item.HEADCOUNT;
@@ -502,6 +553,8 @@ var writer = null;
       return "남";
       }else if(userGender == "female"){
         return "여";
+      }else {
+          return "미상";
       }
     }
 

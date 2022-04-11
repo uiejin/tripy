@@ -2,7 +2,9 @@
 <html>
 
 <head>
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
 
@@ -21,7 +23,8 @@
   <link rel="stylesheet" href="/css/flaticon.css">
   <link rel="stylesheet" href="/css/icomoon.css">
 
-  <link rel="stylesheet" href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+  <link rel="stylesheet"
+    href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
 
   <link rel="stylesheet" href="/css/views/style.css">
   <link rel="stylesheet" href="/css/views/main.css">
@@ -30,6 +33,7 @@
   <link rel="stylesheet" href="/css/views/calendar.css">
   <link rel="stylesheet" href="/css/views/slider.css">
   <link rel="stylesheet" href="/css/views/maps.css">
+  <link rel="stylesheet" href="/css/views/myhistory.css">
 </head>
 
 <body>
@@ -48,252 +52,309 @@
 
     <!--상단바-->
     <div class="site-navbar-wrap js-site-navbar bg-white">
-      
+
       <div class="container">
         <div class="site-navbar bg-light">
           <div class="py-1">
             <div class="row align-items-center">
               <div class="col-10">
                 <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
-                  class="site-menu-toggle js-menu-toggle"><span class="icon-arrow_back h3" id="nav-back"></span></a><h2 class="mb-0 site-logo"></h2><a id="none-nav-title"><%= title %></a></h2></div>
-                  
+                    class="site-menu-toggle js-menu-toggle"><span class="icon-arrow_back h3" id="nav-back"></span></a>
+                  <h2 class="mb-0 site-logo"></h2><a id="none-nav-title">
+                    <%= title %>
+                  </a></h2>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
+  </div>
   </div>
 
   <div class="site-section bg-light">
     <div class="container" id="writeForm">
       <div class="row" id="writeRow">
         <div id="write-form" class="col-lg-12">
-            <!--자동수락 선택 버튼-->
-            <a id="attendCetion" class="col-12"><%=attendText%></a>
-            <div class="col-12">
+          <!--자동수락 선택 버튼-->
+          <a id="attendCetion" class="col-12">
+            <%=attendText%>
+          </a>
+          <div class="col-12">
             <div class="btn-group btn-group-toggle" data-toggle="buttons" id="attend-div">
               <label class="btn btn-danger">
-                <input type="radio" name="autoparticipation" id="re-radio1" value="1"><%=attendText1%>
+                <input type="radio" name="autoparticipation" id="re-radio1" value="1">
+                <%=attendText1%>
               </label>
               <label class="btn btn-danger">
-                <input type="radio" name="autoparticipation" id="re-radio2" value="0"><%=attendText2%>
+                <input type="radio" name="autoparticipation" id="re-radio2" value="0">
+                <%=attendText2%>
               </label>
             </div>
-            </div>
-            <hr>
+          </div>
+          <hr>
 
-        
+
           <div class="form-group">
             <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText9%></div>
-              <div class="writeDiv2"><input type="text" id="titleText" class="writeInput" maxlength="64" onblur="inputLengthCheck(this);"></div>
+              <div class="writeDiv1">
+                <%=writeText9%>
+              </div>
+              <div class="writeDiv2"><input type="text" id="titleText" class="writeInput" maxlength="64"
+                  onblur="inputLengthCheck(this);"></div>
             </div>
             <hr>
             <div class="col-12" id="writeContent">
-              <textarea class="form-control" id="contentText" placeholder="<%=writeText10%>" maxlength="5000" onblur="inputLengthCheck(this);"></textarea>
+              <textarea class="form-control" id="contentText" placeholder="<%=writeText10%>" maxlength="5000"
+                onblur="inputLengthCheck(this);"></textarea>
             </div>
             <hr>
-          <div class="col-12 dropdownIconDiv" id="infoDiv1">
-            <a id="attendCetion" class="col-12"><%=moreinfoText%></a>
-            <img class="dropdownIcon text-center" id="hide-writeform" src = "<%=dropdown%>">
-          </div>
-          <hr>
-          <div class="form-group" id="write-form-tag">
-            <!--입력 폼-->
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText1%></div>
-              <div class="writeDiv2" id="locationText"><%=locationText%></div>
+            <div class="col-12 dropdownIconDiv" id="infoDiv1">
+              <a id="attendCetion" class="col-12">
+                <%=moreinfoText%>
+              </a>
+              <img class="dropdownIcon text-center" id="hide-writeform" src="<%=dropdown%>">
             </div>
             <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText2%></div>
-              <div class="writeDiv2" id="cateText"><%=cateText%></div>
-            </div>
-            <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText3%></div>
-              <div class="writeDiv2"><input type="text" id="meetDateText" class="writeInput"></div>
-            </div>
-            <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText4%></div>
-              <div class="writeDiv2"><input type="text" id="meetTimeText" class="writeInput"></div>
-            </div>
-            <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText5%></div>
-              <div class="writeDiv2"><input type="number" id="headCountText" class="writeInput" onblur="numberLengthCheck(this)"></div>
-            </div>
-            <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText6%></div>
-              <div class="writeDiv2" id="placeText"><%=placeText%></div>
-            </div>
-            <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText7%></div>
-              <div class="writeDiv2"><input type="text" id="sourceText" class="writeInput" maxlength="600" onblur="inputLengthCheck(this);"></div>
-            </div>
-            <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=writeText8%></div>
-              <div class="writeDiv2"><input type="text" id="contactText" class="writeInput" maxlength="128" onblur="inputLengthCheck(this);"></div>
-            </div>
-            <hr>
-            
-          </div>
-          <div class="col-12 dropdownIconDiv" id="infoDiv2">
-            <a id="attendCetion" class="col-12"><%=filterText%></a>
-            <img class="dropdownIcon text-center" id="hide-writeform2" src = "<%=dropdown%>">
-          </div>
-          <hr>
-          <div class="form-group" id="write-form-tag2">
-            <!--입력 폼-->
-            <div class="col-12 writeItem" id="genderSelectDiv">
-              <div class="writeDiv1"><%=genderText%></div>
-              <div class="writeDiv2" id="locationText">
-                <label class="switch" id="genderSwitch">
-                  <input type="checkbox" id="genderCheckbox">
-                  <span class="slider round"></span>
-                </label></div>
-            </div>
-            <div class="col-12" id="genderDiv">
-              <div class="btn-group btn-group-toggle" data-toggle="buttons" id="attend-div">
-                <label class="btn btn-danger" id="maleBtn">
-                  <input type="radio" name="genderSelect" value="male"><%=maleText%>
-                </label>
-                <label class="btn btn-danger"  id="femaleBtn">
-                  <input type="radio" name="genderSelect"value="female"><%=femaleText%>
-                </label>
+            <div class="form-group" id="write-form-tag">
+              <!--입력 폼-->
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText1%>
+                </div>
+                <div class="writeDiv2" id="locationText">
+                  <%=locationText%>
+                </div>
               </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText6%>
+                </div>
+                <div class="writeDiv2" id="placeText">
+                  <%=placeText%>
+                </div>
               </div>
-            <hr>
-            <div class="col-12" id="writeItem">
-              <div class="writeDiv1"><%=ageText%></div>
-              <div class="writeDiv2" id="locationText">
-                <label class="switch" id="ageSwitch">
-                  <input type="checkbox" id="ageCheckbox">
-                  <span class="slider round"></span>
-                </label></div>
-            </div>
-            <div class="col-12" id="ageDiv">
-               
-              <div id="slider-range"><div id="custom-handle" class="ui-slider-handle"></div><div id="custom-handle2" class="ui-slider-handle"></div></div>
-  
-            </div>
-            <hr>
-          </div>
-        </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText2%>
+                </div>
+                <div class="writeDiv2" id="cateText">
+                  <%=cateText%>
+                </div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText12%>
+                </div>
+                <div class="writeDiv2" id="achievementText">
+                  <%=achievementText%>
+                </div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText3%>
+                </div>
+                <div class="writeDiv2"><input type="text" id="meetDateText" class="writeInput"></div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText4%>
+                </div>
+                <div class="writeDiv2"><input type="text" id="meetTimeText" class="writeInput"></div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText5%>
+                </div>
+                <div class="writeDiv2"><input type="number" id="headCountText" class="writeInput"
+                    onblur="numberLengthCheck(this)"></div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText7%>
+                </div>
+                <div class="writeDiv2"><input type="text" id="sourceText" class="writeInput" maxlength="600"
+                    onblur="inputLengthCheck(this);"></div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=writeText8%>
+                </div>
+                <div class="writeDiv2"><input type="text" id="contactText" class="writeInput" maxlength="128"
+                    onblur="inputLengthCheck(this);"></div>
+              </div>
+              <hr>
 
+            </div>
+            <div class="col-12 dropdownIconDiv" id="infoDiv2">
+              <a id="attendCetion" class="col-12">
+                <%=filterText%>
+              </a>
+              <img class="dropdownIcon text-center" id="hide-writeform2" src="<%=dropdown%>">
+            </div>
+            <hr>
+            <div class="form-group" id="write-form-tag2">
+              <!--입력 폼-->
+              <div class="col-12 writeItem" id="genderSelectDiv">
+                <div class="writeDiv1">
+                  <%=genderText%>
+                </div>
+                <div class="writeDiv2" id="locationText">
+                  <label class="switch" id="genderSwitch">
+                    <input type="checkbox" id="genderCheckbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-12" id="genderDiv">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="attend-div">
+                  <label class="btn btn-danger" id="maleBtn">
+                    <input type="radio" name="genderSelect" value="male">
+                    <%=maleText%>
+                  </label>
+                  <label class="btn btn-danger" id="femaleBtn">
+                    <input type="radio" name="genderSelect" value="female">
+                    <%=femaleText%>
+                  </label>
+                </div>
+              </div>
+              <hr>
+              <div class="col-12" id="writeItem">
+                <div class="writeDiv1">
+                  <%=ageText%>
+                </div>
+                <div class="writeDiv2" id="locationText">
+                  <label class="switch" id="ageSwitch">
+                    <input type="checkbox" id="ageCheckbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-12" id="ageDiv">
+
+                <div id="slider-range">
+                  <div id="custom-handle" class="ui-slider-handle"></div>
+                  <div id="custom-handle2" class="ui-slider-handle"></div>
+                </div>
+
+              </div>
+              <hr>
+            </div>
+          </div>
+
+        </div>
       </div>
-
-        </div>
-        <!--<div class="form-group">
-          <h3 class="h5 text-black mb-3">사진첨부</h3>
-          <form id="form" enctype="multipart/form-data">
-            <div class="main-img-div">
-              <label for="main_img_label">사진 1</label>
-              <input type="file" id="img_main" name="img_main" filestyle input="" type="file"
-                data-class-button="btn btn-default" data-class-input="form-control" data-button-text=""
-                data-icon-name="fa fa-upload" class="form-control" tabindex="-1" accept="image/*"/>
-            </div>
-            <div class="main-img-div2">
-              <label for="main_img_label">사진 2</label>
-              <input type="file" id="img_val1" name="img_val1" filestyle input="" type="file"
-                data-class-button="btn btn-default" data-class-input="form-control" data-button-text=""
-                data-icon-name="fa fa-upload" class="form-control" tabindex="-1" accept="image/*">
-            </div>
-            <div class="main-img-div3">
-              <label for="main_img_label">사진 3</label>
-              <input type="file" id="img_val2" name="img_val2" filestyle input="" type="file"
-                data-class-button="btn btn-default" data-class-input="form-control" data-button-text=""
-                data-icon-name="fa fa-upload" class="form-control" tabindex="-1" accept="image/*">
-            </div>
-            <div class="main-img-div4">
-              <label for="main_img_label">사진 4</label>
-              <input type="file" id="img_val3" name="img_val3" filestyle input="" type="file"
-                data-class-button="btn btn-default" data-class-input="form-control" data-button-text=""
-                data-icon-name="fa fa-upload" class="form-control" tabindex="-1" accept="image/*">
-            </div>
-          </form>
-        </div>-->
-
-          <div class="col-12 " id="button-div">
-            <a id="write-button" class="col-12 btn btn-primary px-4 py-2"><%=applyBtnText%></a>
-          </div>
+      <div class="col-12 " id="button-div">
+        <a id="write-button" class="col-12 btn btn-primary px-4 py-2">
+          <%=applyBtnText%>
+        </a>
       </div>
     </div>
+  </div>
 
   </div>
 
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modalTitle"><%=modalTitle%></h5>
-					<button type="button" class="close" id="close_popup" data-dimiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>					
-				</div>
-				<div class="row form-group" id="modal-form">
-				<div class="form-group" id="modal-info">
-				</div>
-        <div class="col-md-12">
-          <div id="areaForm"></div>
-					</div>
-				</div>								
-			</div>
-		</div>
-  </div>
-  
-  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content" id="cate-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modalTitle2"><%=modalTitle2%></h5>
-					<button type="button" class="close" id="close_popup2" data-dimiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>					
-				</div>
-				<div class="row form-group" id="modal-form">
-				<div class="form-group" id="modal-info">
-				</div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div id="cateForm"></div>
-					</div>
-				</div>								
-			</div>
-		</div>
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">
+            <%=modalTitle%>
+          </h5>
+          <button type="button" class="close" id="close_popup" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="row form-group" id="modal-form">
+          <div class="form-group" id="modal-info">
+          </div>
+          <div class="col-md-12">
+            <div id="areaForm"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  
-  
-  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content" id="cate-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="modalTitle2"><%=mapSearchText%></h5>
-					<button type="button" class="close" id="close_popup3" data-dimiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>					
-				</div>
-				<div class="row form-group" id="google-modal-form">
-				<div class="form-group" id="modal-info">
-				</div>
-        <div class="col-12 " id="div-keyword">
-          <input type="text" class="span6" name="keyword" id="keyword" placeholder="<%=mapSearchText%>">
-          <hr>
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="cate-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle2">
+            <%=modalTitle2%>
+          </h5>
+          <button type="button" class="close" id="close_popup2" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div id="map_canvas"></div>
-					</div>
-				</div>								
-			</div>
-		</div>
+        <div class="row form-group" id="modal-form">
+          <div class="form-group" id="modal-info">
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div id="cateForm"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="cate-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle2">
+            <%=mapSearchText%>
+          </h5>
+          <button type="button" class="close" id="close_popup3" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="row form-group" id="google-modal-form">
+          <div class="form-group" id="modal-info">
+          </div>
+          <div class="col-12 " id="div-keyword">
+            <input type="text" class="span6" name="keyword" id="keyword" placeholder="<%=mapSearchText%>">
+            <hr>
+          </div>
+          <div id="map_canvas"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="cate-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle2">여행업적을 선택하세요</h5>
+          <button type="button" class="close" id="close_popup4" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="row form-group" id="google-modal-form">
+          <div class="form-group" id="modal-info">
+          </div>
+
+          <div class="col-12 ajaxboardForm" id="getAciveForm">
+          </div>
+        </div>
+      </div>
 
 
 </body>
@@ -315,9 +376,11 @@
 
 
 <script src="/js/lib/mediaelement-and-player.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript"
+  src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr-r448ruHCKvwugrHq9nH2-SXqkj4u9M&libraries=places"async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr-r448ruHCKvwugrHq9nH2-SXqkj4u9M&libraries=places" async
+  defer></script>
 
 
 <script src="/js/views/main.js"></script>
@@ -326,14 +389,14 @@
 <script type="text/javascript">
 
   $(document).ready(function () {
-    
 
-    var loginStatus  = "<%=loginStatus %>";
+
+    var loginStatus = "<%=loginStatus %>";
     var userId = "<%=userId%>";
     var userGender = "<%=userGender%>";
     alert(userGender);
-alert("<%=userAge%>");
-    var country =['대한민국', 'Test1','Test1','Test1','Test1','Test1','Test1'];
+    alert("<%=userAge%>");
+    var country = ['대한민국', 'Test1', 'Test1', 'Test1', 'Test1', 'Test1', 'Test1'];
 
     var countrycode = null;
     var areacode = null;
@@ -342,436 +405,502 @@ alert("<%=userAge%>");
     var latX = null;
     var longY = null;
 
+    var achievementSEQ = null;
+    var isachievement = false;
+
     var date = new Date();
-    date.setDate(date.getDate()-1);
-    
+    date.setDate(date.getDate() - 1);
+
     var genderCheckboxStatus = Boolean(false);
     var ageCheckboxStatus = Boolean(false);
 
     var limitAge_min = null;
     var limitAge_max = null;
 
-/*
-map.addListener( "click", function (event) {
-    var latitude = event.latLng.lat();
-    var longitude = event.latLng.lng();
-    alert(latitude);
-    alert(longitude);
-}); //end addListener
-*/
+    /*
+    map.addListener( "click", function (event) {
+        var latitude = event.latLng.lat();
+        var longitude = event.latLng.lng();
+        alert(latitude);
+        alert(longitude);
+    }); //end addListener
+    */
 
 
     $('#myModal').modal('show');
-    if("<%=userGender%>" == "male") {
+    if ("<%=userGender%>" == "male") {
       $("#femaleBtn").css("display", "none");
-    }else if("<%=userGender%>" == "female") {
+    } else if ("<%=userGender%>" == "female") {
       $("#maleBtn").css("display", "none");
-  }else{
+    } else {
       $("#genderSelectDiv").css("display", "none");
     }
 
-    $("#close_popup").click(function() {
-  			
-  		$('#myModal').modal('hide');
+    $("#close_popup").click(function () {
+
+      $('#myModal').modal('hide');
     });
 
-    $('input[id="genderCheckbox"]').click(function(){
-      if(genderCheckboxStatus){
+    $('input[id="genderCheckbox"]').click(function () {
+      if (genderCheckboxStatus) {
         genderCheckboxStatus = false;
         $("#genderDiv").css("display", "none");
-      }else{
-        $("#genderDiv").css("display", "block"); 
+      } else {
+        $("#genderDiv").css("display", "block");
         genderCheckboxStatus = true;
       }
     });
 
-    $('input[id="ageCheckbox"]').click(function(){
-      if(ageCheckboxStatus){
+    $('input[id="ageCheckbox"]').click(function () {
+      if (ageCheckboxStatus) {
         ageCheckboxStatus = false;
         $("#ageDiv").css("display", "none");
-      }else{
-        $("#ageDiv").css("display", "block"); 
+      } else {
+        $("#ageDiv").css("display", "block");
         ageCheckboxStatus = true;
       }
     });
-    var handle = $( "#custom-handle" );
-    
-    var handle2 = $( "#custom-handle2" );
+    var handle = $("#custom-handle");
 
-    $( "#slider-range" ).slider({
+    var handle2 = $("#custom-handle2");
+
+    $("#slider-range").slider({
       range: true,
       min: 20,
       max: 80,
-      values: [ 20, 80 ],
-      create: function() {
-        handle.text( "20"+"<%=selectage%>");
-        handle2.text( "80"+"<%=selectage%>");
+      values: [20, 80],
+      create: function () {
+        handle.text("20" + "<%=selectage%>");
+        handle2.text("80" + "<%=selectage%>");
       },
-      slide: function( event, ui ) {
-        handle.text( ui.values[ 0 ]+"<%=selectage%>");
-        handle2.text( ui.values[ 1 ]+"<%=selectage%>");
+      slide: function (event, ui) {
+        handle.text(ui.values[0] + "<%=selectage%>");
+        handle2.text(ui.values[1] + "<%=selectage%>");
         limitAge_min = ui.values[0];
         limitAge_max = ui.values[1];
       }
     });
 
-    $("#infoDiv1").click(function() {
-      if($("#write-form-tag").css("display") == "none"){  
-        $("#write-form-tag").css("display", "block"); 
+    $("#infoDiv1").click(function () {
+      if ($("#write-form-tag").css("display") == "none") {
+        $("#write-form-tag").css("display", "block");
         $("#hide-writeform").attr("src", "<%=dropdown%>");
-      }else{
+      } else {
         $("#write-form-tag").css("display", "none");
         $("#hide-writeform").attr("src", "<%=dropup%>");
       }
     });
 
-    $("#infoDiv2").click(function() {
-      if($("#write-form-tag2").css("display") == "none"){  
-        $("#write-form-tag2").css("display", "block"); 
+    $("#infoDiv2").click(function () {
+      if ($("#write-form-tag2").css("display") == "none") {
+        $("#write-form-tag2").css("display", "block");
         $("#hide-writeform2").attr("src", "<%=dropdown%>");
-      }else{
+      } else {
         $("#write-form-tag2").css("display", "none");
         $("#hide-writeform2").attr("src", "<%=dropup%>");
       }
     });
-    
+
 
     $("#contentText").on('keydown keyup', function () {
-      $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+      $(this).height(1).height($(this).prop('scrollHeight') + 12);
     });
 
-    $("#close_popup2").click(function() {
-  			
-        $('#myModal2').modal('hide');
+    $("#close_popup2").click(function () {
+
+      $('#myModal2').modal('hide');
     });
-    $("#close_popup3").click(function() {
-  			
-        $('#myModal3').modal('hide');
+    $("#close_popup3").click(function () {
+
+      $('#myModal3').modal('hide');
+    });
+    $("#close_popup4").click(function () {
+      $('#myModal4').modal('hide');
     });
 
-    
 
 
-    for(i=0; i<country.length; i++){
 
-      var addarea = "<div><a class=\"text-uppercase\" id=\"locationText\">"+country[i]+"</a></div>";
+    for (i = 0; i < country.length; i++) {
+
+      var addarea = "<div><a class=\"text-uppercase\" id=\"locationText\">" + country[i] + "</a></div>";
 
       $("#areaForm").append(addarea);
 
       var allData = {
-        country : country[i]
+        country: country[i]
       }
 
       $.ajax({
-      url: "/writepost/getarea",
-      data: allData,
-			async: false,
-			type: "get",
-			success: function (data) {
-        $.each(data.rows, function (index, item) {
+        url: "/writepost/getarea",
+        data: allData,
+        async: false,
+        type: "get",
+        success: function (data) {
+          $.each(data.rows, function (index, item) {
 
 
-          var addarea = "<div id=\"locationSectionFirst\">" +
-          "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"locationBtn"+item.AREA_CODE+"\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">" 
-           +item.AREA +"</button></div>";
+            var addarea = "<div id=\"locationSectionFirst\">" +
+              "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"locationBtn" + item.AREA_CODE + "\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" + item.IMG + ");\">"
+              + item.AREA + "</button></div>";
 
-           $("#areaForm").append(addarea);
+            $("#areaForm").append(addarea);
 
-           $("#locationBtn"+item.AREA_CODE).click(function(){
+            $("#locationBtn" + item.AREA_CODE).click(function () {
               $('#locationText').text(item.AREA);
               areacode = item.AREA_CODE;
               countrycode = item.COUNTRY_CODE;
               $('#myModal').modal('hide');
             });
 
-        });
-        
-			},
-			beforeSend: function () {
-			},
-			complete: function () {
-			}
-    });
+          });
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+      });
     }
 
     $.ajax({
       url: "/writepost/getcategory",
-			async: false,
-			type: "get",
-			success: function (data) {
+      async: false,
+      type: "get",
+      success: function (data) {
         $.each(data.rows, function (index, item) {
 
           var cate = "<div id=\"catesection\">" +
-          "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"cateBtn"+item.SEQ+"\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">" 
-           +item.CATEGORY +"</button></div>";
+            "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"cateBtn" + item.SEQ + "\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" + item.IMG + ");\">"
+            + item.CATEGORY + "</button></div>";
 
-           $("#cateForm").append(cate);
+          $("#cateForm").append(cate);
 
-           $("#cateBtn"+item.SEQ).click(function(){
-              $('#cateText').text(item.CATEGORY);
-              $('#myModal2').modal('hide');
-              category = item.SEQ;
-            });
+          $("#cateBtn" + item.SEQ).click(function () {
+            $('#cateText').text(item.CATEGORY);
+            $('#myModal2').modal('hide');
+            category = item.SEQ;
+          });
 
         });
-        
-			},
-			beforeSend: function () {
-			},
-			complete: function () {
-			}
+
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
     });
 
-    $("#locationText").click(function(){
-      $('#myModal').modal('show');
+    $("#locationText").click(function () {
       $('#myModal').modal('show');
     });
-    $("#cateText").click(function(){
+    $("#cateText").click(function () {
       $('#myModal2').modal('show');
     });
-    $("#placeText").click(function(){
+    $("#placeText").click(function () {
       $('#myModal3').modal('show');
     });
-    $("#myModal3").on("shown.bs.modal", function() {
-        var pos = {latitude: 37.34093317195989, longitude: 126.73370071903697};
-        var keyword = null;
+    $("#achievementText").click(function () {
+      if (areacode != null && latX != null & longY != null) {
+        $('#myModal4').modal('show');
+        $.ajax({
+          url: "/writepost/getareaachievements",
+          data: {
+            "areacode": areacode,
+            "latX": latX,
+            "longY": longY
+          },
+          async: false,
+          type: "get",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {
+            if (data['result'] == true) {
+              $("#getAciveForm *").remove();
+              $.each(data.rows, function (index, item) {
+                var source =
+                  "<div class=\"row achievementsItemDiv\" id = \"form-board" + item.SEQ + "\">"
+                  + "<div id = \"achievementItem\">"
+                  + "<img src=\"" + item.MAIN_IMG + "\" class=\"rounded-circle\" id=\"achievementsItemImage\"></img></div>"
+                  + "<div id=\"achievementItemDiv2\">"
+                  + "<div id=\"boardLine2\" class=\"row\">"
+                  + "<a class=\"col-12\"><span>" + item.TITLE + "<span class=\"text-right badge bg-info \" id=\"boardAchiveType\">" + item.AREA_NAME + "</span><span class=\"text-right badge bg-success\" id=\"boardAchiveType\">" + item.TYPE_NAME + "</span></span></a>"
+                  + "<a class=\"col-12\"><span>거리 : " + roundToTwo(item.DISTANCE) + " <span class=\"text-right\" id=\"profileAge\"><span class=\"icon-dollar\"></span>" + item.POINT + "</span></span></a>";
+                if (item.ISCOMPLETE) {
+                }
+                else {
+                  source += "<a class=\"col-12\" style=\"color : red; \"><span>" + "" + "<span class=\"text-right\" id=\"profileAge\"><span class=\"icon-plus\"></span>" + item.POINT + "</span></span></a>";
+                }
+                source += "</div></div></div><hr>";
+                $("#getAciveForm").append(source);
+                $("#form-board" + item.SEQ).click(function () {
+                  if (confirm("해당 업적을 선택하겠습니까?") == true) {
+                    $("#achievementText").text(item.TITLE);
+                    achievementSEQ = item.SEQ;
+                    isachievement = true;
+                    $("#myModal4").modal('hide');
+                  }
+                });
+              });
+            }
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
+      }
+      else {
+        alert("여행지와 모임장소를 먼저 선택해주세요");
+      }
+    });
+    $("#myModal3").on("shown.bs.modal", function () {
+      var pos = { latitude: 37.34093317195989, longitude: 126.73370071903697 };
+      var keyword = null;
 
       //if (navigator.geolocation) {
-          //navigator.geolocation.getCurrentPosition(function(position) {
-            // pos.latitude =  position.coords.latitude;
-            // pos.longitude = position.coords.longitude;
+      //navigator.geolocation.getCurrentPosition(function(position) {
+      // pos.latitude =  position.coords.latitude;
+      // pos.longitude = position.coords.longitude;
 
-             var map_options = {
+      var map_options = {
         center: new google.maps.LatLng(pos.latitude, pos.longitude),
         zoom: 17,
         mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+      };
 
-    var map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+      var map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
 
-    var defaultBounds = new google.maps.LatLngBounds(
+      var defaultBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(pos.latitude),
         new google.maps.LatLng(pos.longitude)
-    );
+      );
 
-    var input = document.getElementById("keyword");
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.bindTo("bounds", map);
+      var input = document.getElementById("keyword");
+      var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.bindTo("bounds", map);
 
-    var marker = new google.maps.Marker({map: map});
+      var marker = new google.maps.Marker({ map: map });
 
-    google.maps.event.addListener(autocomplete, "place_changed", function(event)
-    {
+      google.maps.event.addListener(autocomplete, "place_changed", function (event) {
         var place = autocomplete.getPlace();
 
         keyword = $("#keyword").val();
 
-        
+
         if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
+          map.fitBounds(place.geometry.viewport);
         } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);
         }
 
         marker.setPosition(place.geometry.location);
         var latitude = marker.getPosition().lat();
-    var longitude = marker.getPosition().lng();
-    
-    });
+        var longitude = marker.getPosition().lng();
 
-    google.maps.event.addListener(map, "click", function(event)
-    {
+      });
+
+      google.maps.event.addListener(map, "click", function (event) {
         marker.setPosition(event.latLng);
         var latitude = event.latLng.lat();
-    var longitude = event.latLng.lng();
-    
-    if (confirm("<%=mapAlertText%>") == true){
-      $("#placeText").text(keyword);
-      latX = latitude;
-      longY = longitude;
-      $("#myModal3").modal('hide');
-      }
-    });
+        var longitude = event.latLng.lng();
 
-    marker.addListener('click', function() {
-      var latitude = marker.getPosition().lat();
-      var longitude = marker.getPosition().lng();
-      if (confirm("<%=mapAlertText%>") == true){
-      $("#placeText").text(keyword);
-      latX = latitude;
-      longY = longitude;
-      $("#myModal3").modal('hide');
-      }
-    });
-
-         // }, function() {
-        //  });
-        //} 
-        //else {
-          // Browser doesn't support Geolocation
-        //}
-
-      
-    });
-
-$("#myModal3").on("hidden.bs.modal", function() {$("#googleMap").empty();});
-
-    
-/*
-    $('#meetTimeText').timeDropper({
-        format : "HH:mm",
-        mousewheel : true,
+        if (confirm("<%=mapAlertText%>") == true) {
+          $("#placeText").text(keyword);
+          latX = latitude;
+          longY = longitude;
+          $("#myModal3").modal('hide');
         }
-      );
-*/
-$('#meetTimeText').bootstrapMaterialDatePicker({
-				date: false,
-				shortTime: false,
-				format: 'HH:mm'
-			});;
+      });
 
-    $('#meetDateText').click(function(){
+      marker.addListener('click', function () {
+        var latitude = marker.getPosition().lat();
+        var longitude = marker.getPosition().lng();
+        if (confirm("<%=mapAlertText%>") == true) {
+          $("#placeText").text(keyword);
+          latX = latitude;
+          longY = longitude;
+          $("#myModal3").modal('hide');
+          $("#placeText").text(latX + " , " + longY);
+        }
+      });
+
+      // }, function() {
+      //  });
+      //} 
+      //else {
+      // Browser doesn't support Geolocation
+      //}
+
+
+    });
+
+    $("#myModal3").on("hidden.bs.modal", function () { $("#googleMap").empty(); });
+
+
+    /*
+        $('#meetTimeText').timeDropper({
+            format : "HH:mm",
+            mousewheel : true,
+            }
+          );
+    */
+    $('#meetTimeText').bootstrapMaterialDatePicker({
+      date: false,
+      shortTime: false,
+      format: 'HH:mm'
+    });;
+
+    $('#meetDateText').click(function () {
       $("#nav-back").css("display", "block");
       $("#none-nav-title").css("display", "none");
-        $('#meetDateText').datepicker({
+      $('#meetDateText').datepicker({
         startDate: new Date,
-        endDate : new Date(new Date().setDate(new Date().getDate() + 180)),
+        endDate: new Date(new Date().setDate(new Date().getDate() + 180)),
         format: "yyyy-mm-dd",
         autoclose: true,
         onSelect: function (dateText, inst) {
         }
-      }).datepicker('show').on('hide', function(ev) { // <-----------
-        
-      $("#nav-back").css("display", "none");
-      $("#none-nav-title").css("display", "block");
+      }).datepicker('show').on('hide', function (ev) { // <-----------
+
+        $("#nav-back").css("display", "none");
+        $("#none-nav-title").css("display", "block");
+
+      });
 
     });
-      
-    });
 
 
-    $("#write-button").click(function(){
+    $("#write-button").click(function () {
 
-        var locationText = countrycode;
-        var locationText2 = areacode;
-        var cateText = category;
-        var meetDateText = $("#meetDateText").val();
-        var meetTimeText = $("#meetTimeText").val();
-        var headCountText= $("#headCountText").val();
-        var placeText = $("#placeText").text();
-        var sourceText = $("#sourceText").val();
-        var contactText = $("#contactText").val();
-        var titleText = $("#titleText").val();
-        var contentText = $("#contentText").val();
-        var contentText2 = contentText.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      var locationText = countrycode;
+      var locationText2 = areacode;
+      var cateText = category;
+      var meetDateText = $("#meetDateText").val();
+      var meetTimeText = $("#meetTimeText").val();
+      var headCountText = $("#headCountText").val();
+      var placeText = $("#placeText").text();
+      var sourceText = $("#sourceText").val();
+      var contactText = $("#contactText").val();
+      var titleText = $("#titleText").val();
+      var contentText = $("#contentText").val();
+      var contentText2 = contentText.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-        var id = userId;
-        var writerCountry = "korea";
-        var autoparticipation = $('input[name=autoparticipation]:checked').val();
-        var limitGender = "nothing";
+      var id = userId;
+      var writerCountry = "korea";
+      var autoparticipation = $('input[name=autoparticipation]:checked').val();
+      var limitGender = "nothing";
 
-       
-      if(genderCheckboxStatus)
+
+      if (genderCheckboxStatus)
         limitGender = $('input[name=genderSelect]:checked').val();
 
-      if(!ageCheckboxStatus){
+      if (!ageCheckboxStatus) {
         limitAge_max = 80;
         limitAge_min = 20;
-      }else if(limitAge_min > "<%=userAge%>" || limitAge_max < "<%=userAge%>"){
+      } else if (limitAge_min > "<%=userAge%>" || limitAge_max < "<%=userAge%>") {
         alert("<%=ageErrorMessage%>");
         return;
       }
-      if(headCountText < 2 || headCountText > 128){
+      if (headCountText < 2 || headCountText > 128) {
         alert("<%=heaCountAlerText%>");
         return;
       }
 
-      if(locationText == null || locationText2 == null || cateText == null || meetDateText == null || meetTimeText == null || headCountText ==null
-      || titleText == null || contentText == null){
+      if (locationText == null || locationText2 == null || cateText == null || meetDateText == null || meetTimeText == null || headCountText == null
+        || titleText == null || contentText == null) {
         alert("<%=writeErrorText%>");
-      }else{
-      var allData = {
-      "locationText": locationText,
-      "locationText2": locationText2,
-			"cateText": cateText,
-			"meetDateText": meetDateText,
-			"meetTimeText": meetTimeText,
-			"headCountText": headCountText,
-			"placeText": placeText,
-			"sourceText": sourceText,
-			"contactText": contactText,
-			"titleText": titleText,
-			"contentText": contentText2,
-			"id": id,
-			"writerCountry": writerCountry,
-      "limitAgeMin": limitAge_min,
-      "limitAgeMax" : limitAge_max,
-      "limitGender" : limitGender,
-      "autoparticipation": autoparticipation,
-      "latitude" : latX,
-      "longitude" : longY
-    };
-    
-		$.ajax({
-			url: "/writepost/writepost",
-			data: allData,
-			async: false,
-      type: "get",
-      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			success: function (data) {
-        if(data['result'] == true){
-          alert("작성에 성공하였습니다");
-          history.back();
+      } else {
+        var allData = {
+          "locationText": locationText,
+          "locationText2": locationText2,
+          "cateText": cateText,
+          "meetDateText": meetDateText,
+          "meetTimeText": meetTimeText,
+          "headCountText": headCountText,
+          "placeText": placeText,
+          "sourceText": sourceText,
+          "contactText": contactText,
+          "titleText": titleText,
+          "contentText": contentText2,
+          "id": id,
+          "writerCountry": writerCountry,
+          "limitAgeMin": limitAge_min,
+          "limitAgeMax": limitAge_max,
+          "limitGender": limitGender,
+          "autoparticipation": autoparticipation,
+          "latitude": latX,
+          "longitude": longY,
+          "achievementSEQ" : achievementSEQ,
+          "isachievement" : isachievement
         };
-			},
-			beforeSend: function () {
-			},
-			complete: function () {
-			}
-		});
+        $.ajax({
+          url: "/writepost/writepost",
+          data: allData,
+          async: false,
+          type: "get",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {
+            if (data['result'] == true) {
+              alert("작성에 성공하였습니다");
+              history.back();
+            };
+          },
+          beforeSend: function () {
+          },
+          complete: function () {
+          }
+        });
 
       }
 
     });
 
-    
+
   });
 
-  function numberLengthCheck(eventInput){
+  function numberLengthCheck(eventInput) {
     var inputText = $(eventInput).val();
-    if(inputText.replace(/[0-9]/g, "").length > 0) {
+    if (inputText.replace(/[0-9]/g, "").length > 0) {
       $(eventInput).val('');
     }
 
-    if(inputText < 2) {
+    if (inputText < 2) {
       $(eventInput).val(2);
     }
-    if(inputText > 100){
+    if (inputText > 100) {
       $(eventInput).val(100);
     }
   }
 
-  function inputLengthCheck(eventInput){
+  function inputLengthCheck(eventInput) {
     var inputText = $(eventInput).val();
     var inputMaxLength = $(eventInput).prop("maxlength");
 
     var j = 0;
     var count = 0;
 
-  for(var i = 0;i < inputText.length;i++) { 
-    val = escape(inputText.charAt(i)).length; 
-  if(val == 6){
-    j++;
+    for (var i = 0; i < inputText.length; i++) {
+      val = escape(inputText.charAt(i)).length;
+      if (val == 6) {
+        j++;
+      }
+      j++;
+      if (j <= inputMaxLength) {
+        count++;
+      }
+    }
+    if (j > inputMaxLength) {
+      $(eventInput).val(inputText.substr(0, count));
+    }
   }
-    j++;
-    if(j <= inputMaxLength){
-    count++;
-    }
-    }
-    if(j > inputMaxLength){
-    $(eventInput).val(inputText.substr(0, count));
-    }
+
+  
+  function roundToTwo(num) {
+            if(num ==='비밀업적입니다')
+                return '비밀업적입니다';
+            else
+                return +(Math.round(num + "e+2")  + "e-2") + " Km";
   }
 
 
