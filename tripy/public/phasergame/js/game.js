@@ -12,7 +12,6 @@ var mappos = [];
 var page = 0;
 var playing = false;
 
-
 var towercount = 3;
 
 //여기에다가 넣어주세요.aa
@@ -23,6 +22,19 @@ var DBMAP_HOUSE = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -
 
 //var DBMAP=[];
 //var DBMAP_TOWER=[];
+
+//DB관련
+
+var isCreate = false;
+var isLoading = false;
+var tempDBMAP = [];
+var tempDBMAP_TOWER = [];
+var tempDBMAP_TREE = [];
+var tempDBMAP_HOUSE = [];
+
+//플레이어 관련
+var nickname;
+var playerIMG;
 
 class MainScene extends Phaser.Scene {
 
@@ -49,7 +61,30 @@ class MainScene extends Phaser.Scene {
     this.scene.launch('MapScene');
 
     this.scene.launch('MapScene2');
-    
+
+    //this.scene.launch('Demo');
+
+    $.ajax({
+      url: "/pharser/getnickname",
+      async: false,
+      data: {
+          "id": userId
+      },
+      type: "post",
+      success: function (data) {
+        console.log(data)
+          $.each(data.rows, function (index, item) {
+              
+              nickname = item.NAME
+              playerIMG = item.IMG
+          });
+      },
+      beforeSend: function () {
+      },
+      complete: function () {
+      }
+  });
+  console.log(playerIMG)
     // this.scene.add('CreateMap2', MapScene, true);
     // this.scene.add('CreateMap3', MapScene2, true);
     

@@ -1,117 +1,402 @@
 <!doctype html>
 <html>
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
-  
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/magnific-popup.css">
-    <link rel="stylesheet" href="/css/jquery-ui.css">
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/css/animate.css">
-  
-    <link rel="stylesheet" href="/css/aos.css">
-  
-    <link rel="stylesheet" href="/css/flaticon.css">
-    <link rel="stylesheet" href="/css/icomoon.css">
-    
-    <link rel="stylesheet" href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
-  
-    <link rel="stylesheet" href="/css/views/style.css">
-    <link rel="stylesheet" href="/css/views/main.css">
-    <link rel="stylesheet" href="/css/views/noncover.css">
-    <link rel="stylesheet" href="/css/views/writepost.css">
-    <link rel="stylesheet" href="/css/views/search.css">
-    <link rel="stylesheet" href="/css/views/calendar.css">
-    <link rel="stylesheet" href="/css/views/myplan.css">
-    <link rel="stylesheet" href="/css/views/mytour.css">
-    <link rel="preload" as="font" href="/font/NanumSquare_acL.ttf" type="font/ttf" />
-    <style media='screen' type='text/css'>
-      @font-face {
-        font-family: font1;
-        src : url("/font/NanumSquare_acL.ttf");
-      }
-    </style>
-    <title>TRIPY</title>
- 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, shrink-to-fit=no user-scalable=0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet"
+    href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+
+  <link rel="stylesheet" href="/css/views/style.css">
+  <link rel="stylesheet" href="/css/views/main.css">
+  <link rel="stylesheet" href="/css/views/noncover.css">
+  <link rel="stylesheet" href="/css/views/writepost.css">
+  <link rel="stylesheet" href="/css/views/search.css">
+  <link rel="stylesheet" href="/css/views/calendar.css">
+  <link rel="stylesheet" href="/css/views/myplan.css">
+  <link rel="stylesheet" href="/css/views/mytour.css">
+  <link rel="preload" as="font" href="/font/NanumSquare_acL.ttf" type="font/ttf" />
+  <style media='screen' type='text/css'>
+    @font-face {
+      font-family: font1;
+      src: url("/font/NanumSquare_acL.ttf");
+    }
+  </style>
+  <title>TRIPY</title>
+
 </head>
+
 <body>
 
-   <div class="site-wrap">
+  <div class="site-wrap">
 
-      <div class="site-mobile-menu">
-        <div class="site-mobile-menu-header">
-          <div class="site-mobile-menu-close mt-3">
-            <span class="icon-settings js-menu-toggle"></span>
-            <span class="icon-close2 js-menu-toggle"></span>
-          </div>
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-settings js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle"></span>
         </div>
-        <div class="site-mobile-menu-body"></div>
-      </div> <!-- .site-mobile-menu -->
-  
-      <!--상단바-->
-      <div class="site-navbar-wrap js-site-navbar bg-white">
-  
-        <div class="container">
-          <div class="site-navbar bg-light">
-            <div class="py-1">
-              <div class="row align-items-center" id="site-navbar-line">
-                <div class="col-2">
-                  <h2 class="mb-0 site-logo"></h2><a id="nav-title">Phaser</a></h2>
-                </div>
-                <div class="col-10">
-                  <nav class="site-navigation text-right" role="navigation">
-                    <div class="container">
-                      <!-- d-lg-none -->
-                      <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
-                          class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
-                      <!-- d-lg-block -->
-                      <ul class="site-menu js-clone-nav d-none" id="nav">
-                        <% include ./nav/nav_case %>
-                      </ul>
-                    </div>
-                  </nav>
-                </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+    <!--상단바-->
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center" id="site-navbar-line">
+              <div class="col-2">
+                <h2 class="mb-0 site-logo"></h2><a id="nav-title">Phaser</a></h2>
+              </div>
+              <div class="col-10">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <!-- d-lg-none -->
+                    <div class="d-inline-block  ml-md-0 mr-auto py-3"><a href="#"
+                        class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <!-- d-lg-block -->
+                    <ul class="site-menu js-clone-nav d-none" id="nav">
+                      <% include ./nav/nav_case %>
+                    </ul>
+                  </div>
+                </nav>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-   <div id="phaser-example">
+  </div>
+
+  <div id="phaser-example">
     <div style="font-family:font1; position:absolute; left:-1000px; visibility:hidden;">.</div>
-   </div>
-   
+  </div>
+
+  <!-- 모달이름 -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle">1</h5>
-        <button type="button" class="close" id="close_popup" data-dimiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>					
-      </div>
-      <div class="row form-group" id="modal-form">
-      <div class="form-group" id="modal-info">
-      </div>
-      <div class="col-md-12">
-        <div id="areaForm"></div>
-        <img class="rounded-circle" id="profileImageNavs">
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">방명록22</h5>
+          <button type="button" class="close" id="close_popup" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>								
+        <div class="row form-group" id="modal-form">
+          <div class="form-group" id="modal-info">
+          </div>
+          <div class="col-md-12">
+            <div id="areaForm"></div>
+            <img class="rounded-circle" id="profileImageNavs">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-   
-   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   
- 
+
+  <!-- 갤러리 모달 -->
+
+  <div class="modal fade" id="myGalleryfeed" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">사진첩1</h5>
+          <!-- <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5> -->
+          <button type="button" class="close" id="gallery_feed_close1" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <div id="example_gallery" class="item" style="display: none;">
+            <img class="gallery-img" width="300" height="300"></img>
+            <div class="box">
+              <div class="gallery-title">예시1</div>
+              <div class="gallery-date">예시2</div>
+            </div>
+          </div>
+
+          <div id="gallery_list"></div>
+
+          <!-- <div class="gallery">
+            <img src="/phasergame/images/gallery/1.png" id="feed1" alt="Cinque Terre" width="300" height="300">
+            <div class="desc">거북섬 여행 2022.04.13 </div>
+          </div> -->
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second
+            modal</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal fade" id="myGallerylist" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle2">사진첩</h5>
+          <!-- <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5> -->
+          <button type="button" class="close" id="gallery_total_close2" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+          <div id="myPhoto" class="carousel carousel-dark slide" data-ride="carousel" data-interval="false">
+
+            <ol class="carousel-indicators" id="carousel-li">
+              <!-- <li data-target="#myPhoto" data-slide-to="0" class="active"></li> -->
+            </ol>
+
+            <div id="example_photo" class="item" style="display: none;">
+              <div class="carousel-item">
+                <img class="d-block w-100" id="testt" src="/phasergame/images/gallery/1-2.png"
+                  alt="Firstss slide"></img>
+                <div class="box">
+                  <div class="photo-title">예시1</div>
+                  <div class="photo-date">예시2</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-inner" id="carousel-in">
+              <!-- <div id="photo_list"></div> -->
+
+              <!-- <div class="carousel-item active">
+                <img class="d-block w-100" src="https://tripy-develop.s3.ap-northeast-2.amazonaws.com/test-img/1632987744824.jpg" alt="First slide">
+              </div> -->
+              <!-- <div class="carousel-item">
+                <img class="d-block w-100" src="/phasergame/images/gallery/1-2.png" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="/phasergame/images/gallery/1-3.png" alt="Third slide">
+              </div> -->
+            </div>
+
+            <a class="carousel-control-prev" href="#myPhoto" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myPhoto" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="Modifing" data-bs-target="#Upload_Photo"
+              data-bs-toggle="modal">Modify</button>
+            <button class="btn btn-primary" id="Uploading" data-bs-target="#Upload_Photo"
+              data-bs-toggle="modal">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사진 업로드하기 -->
+  <div class="modal fade" id="Upload_Photo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle2">사진 업로드하기</h5>
+          <button type="button" class="close" id="gallery_total_close2" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="site-section bg-light">
+            <div class="container" id="writeForm">
+              <div class="row" id="writeRow">
+                <div id="write-form" class="col-lg-12">
+
+                  <div class="form-group">
+                    <h3 class="h5 text-black mb-3">사진첨부</h3>
+                    <!--
+                            <video id="webcam" autoplay playsinline width="640" height="480"></video>
+                            <canvas id="canvas" class="d-none"></canvas>
+                            <form id="form" enctype="multipart/form-data">
+                                -->
+                    <h7> *총 1장의 사진을 첨부할 수 있습니다.</h7><br>
+                    <h7> *이미지 파일외 첨부가 불가능 합니다.</h7>
+                    <div class="main-img-div">
+                      <label for="main_img_label">사진 첨부</label>
+                      <input type="file" id="img_main" name="img_main" filestyle input="" type="file"
+                        data-class-button="btn btn-default" data-class-input="form-control" data-button-text=""
+                        data-icon-name="fa fa-upload" class="form-control" tabindex="-1" accept="image/*" />
+                    </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-12" id="button-div">
+                <a id="placeText" class="col-12 btn btn-primary px-4 py-2">
+                  전송
+                </a>
+              </div>
+            </div>
+
+            </form>
+
+            <div class="col-12" id="readItem">
+              <div class="map_wrap" style="width:100%;height:50vh;">
+                <div id="map" style="width:100%;height:100%;"></div>
+                <!-- 지도타입 컨트롤 div 입니다 -->
+                <div class="custom_typecontrol radius_border">
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 수정하기 -->
+  <div class="modal fade" id="Modify_Photo" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">사진 수정하기</h5>
+          <!-- <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5> -->
+          <button type="button" class="close" id="gallery_feed_close1" data-dimiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          ...
+          <div id="modifing_gallery" class="item" style="display: none;">
+            <div id = "hi">
+              <img class="gallery-img" id="m_photo" width="100" height="100"></img>
+              <div class="box">
+                <button type="button" class="btn btn-outline-primary">#</button>
+                <button type="button" class="btn btn-outline-success">^</button>
+                <button id = "del_photo">hiX</button>
+              </div>
+            </div>
+            <br>
+          </div>
+
+          <div id="m_gallery_list"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second
+            modal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script>
+   $.ajax({
+                url: "/board/getpostarea",
+                data: {areacode : item.AREA_CODE},
+                async: false,
+                type: "get",
+                success: function (data) {
+                  if(data['result'] == true){
+                    $.each(data.rows, function (index, item) {
+                      $("#modalTitle").text(item.COUNTRY + " " + item.AREA);
+                    });
+                  };
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+              });
+</script> -->
+
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script src="/phasergame/js/phaser.min.js"></script>
+
+  <script src="/phasergame/js/givetype.js"></script>
+  <script src="/phasergame/js/game.js"></script>
+  <script src="/phasergame/js/CreateMapScene.js"></script>
+  <script src="/phasergame/js/FixMapScene.js"></script>
+  <script src="/phasergame/js/MainUIScene.js"></script>
+  <script src="/phasergame/js/select.js"></script>
+  <script src="/phasergame/js/MoneyShop.js"></script>
+  <script src="/phasergame/js/Guestbook.js"></script>
+  <script src="/phasergame/js/variable.js"></script>
+
+  <script src="/phasergame/js/InputBox.js"></script>
+  <script src="/phasergame/js/Friend.js"></script>
+  <script src="/phasergame/js/FriendMap.js"></script>
+  <script src="/phasergame/js/FriendUI.js"></script>
+
+
+
+  <script type="text/babel" src="/phasergame/js/Modals.js"></script>
+
+
+
+  <script src="/phasergame/js/config.js"></script>
+
 </body>
+
+
+
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -128,76 +413,63 @@
 <script src="/js/lib/mediaelement-and-player.min.js"></script>
 
 <script src="/js/views/main.js"></script>
+<script src="/phasergame/js/Demo.js"></script>
 
 </html>
+<script>
+
+</script>
 
 <script>
-  var userImage = "<%=userImg%>";
-  loginStatus  = "<%=loginStatus %>";
+  //console.log(1111111111111)
+  userImage = "<%=userImg%>";
+  loginStatus = "<%=loginStatus %>";
   userId = "<%=userId%>";
 
-  if(loginStatus  == "true"){
-      $("#navProfileName").text("<%=username%>");
-      $("#profileImageNav").attr("src", "<%=userImg%>");
-      $("#profileImageNavs").attr("src", "<%=userImg%>");
-      
-    }else{
-      $("#profileForm").css("display", "none");
-    }
+  if (loginStatus == "true") {
+    $("#navProfileName").text("<%=username%>");
+    $("#profileImageNav").attr("src", "<%=userImg%>");
+    $("#profileImageNavs").attr("src", "<%=userImg%>");
 
-    $("#close_popup").click(function() {
-  			
-        $('#myModal').modal('hide');
-      });
-    
-    $.ajax({
-        url: "/writepost/getarea",
-        data: allData,
-        async: false,
-        type: "get",
-        success: function (data) {
-          $.each(data.rows, function (index, item) {
-  
-            var addarea = "<div id=\"locationSectionFirst\">" +
-            "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"locationBtn"+item.AREA_CODE+"\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("+item.IMG+");\">" 
-             +item.AREA +"</button></div>";
-  
-             $("#areaForm").append(addarea);
-  
-             $("#locationBtn"+item.AREA_CODE).click(function(){
-                $('#locationText').text(item.AREA);
-                areacode = item.AREA_CODE;
-                countrycode = item.COUNTRY_CODE;
-                $('#myModal').modal('hide');
-                searchParty();
-              });
-  
-          });
-          
-        },
-        beforeSend: function () {
-        },
-        complete: function () {
-        }
-      });
+  } else {
+    $("#profileForm").css("display", "none");
+  }
 
-  </script>
-  
-  <script src="/phasergame/js/phaser.min.js"></script>
-   
-  <script src ="/phasergame/js/givetype.js"></script>
-  <script src="/phasergame/js/game.js"></script>
-  <script src="/phasergame/js/CreateMapScene.js"></script>
-  <script src="/phasergame/js/FixMapScene.js"></script>
-  <script src="/phasergame/js/MainUIScene.js"></script>
-  <script src="/phasergame/js/select.js"></script>
-  <script src="/phasergame/js/MoneyShop.js"></script>
-  <script src="/phasergame/js/Guestbook.js"></script>
-  <script src ="/phasergame/js/variable.js"></script>
-  <script src ="/phasergame/js/Demo.js"></script>
-  <script src ="/phasergame/js/InputBox.js"></script>
-  <script src ="/phasergame/js/Friend.js"></script>
-  <script src ="/phasergame/js/FriendMap.js"></script>
+  $("#close_popup").click(function () {
 
-  <script src ="/phasergame/js/config.js"></script>
+    $('#myModal').modal('hide');
+  });
+
+  // $.ajax({
+  //   url: "/writepost/getarea",
+  //   data: allData,
+  //   async: false,
+  //   type: "get",
+  //   success: function (data) {
+  //     $.each(data.rows, function (index, item) {
+
+  //       var addarea = "<div id=\"locationSectionFirst\">" +
+  //         "<button class=\"btn btn-primary locationBtn\" type=\"submit\" id=\"locationBtn" + item.AREA_CODE +
+  //         "\" style=\"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(" +
+  //         item.IMG + ");\">" +
+  //         item.AREA + "</button></div>";
+
+  //       $("#areaForm").append(addarea);
+
+  //       $("#locationBtn" + item.AREA_CODE).click(function () {
+  //         $('#locationText').text(item.AREA);
+  //         areacode = item.AREA_CODE;
+  //         countrycode = item.COUNTRY_CODE;
+  //         $('#myModal').modal('hide');
+  //         searchParty();
+  //       });
+
+  //     });
+
+  //   },
+  //   beforeSend: function () {},
+  //   complete: function () {}
+  // });
+</script>
+
 </html>

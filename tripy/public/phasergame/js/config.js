@@ -1,4 +1,3 @@
-
 var ratios = 1
 var config = {
   type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
@@ -17,7 +16,9 @@ var config = {
         debug: false
       }
   },
-  scene: [ MainScene, SelectScene, MapScene, MapScene2,MoneyShopScene, MainUIScene, GuestbookScene, GuestbookWrite, Inputbox]
+  scene: [ MainScene, SelectScene, MapScene, MapScene2,MoneyShopScene, MainUIScene, GuestbookScene, 
+    GuestbookWrite, FriendScene, FriendMapScene, Inputbox, myFriendbox, preFriendbox,
+    FriendUIScene]
 };
 
 var game = new Phaser.Game(config);

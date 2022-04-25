@@ -260,7 +260,7 @@ router.post('/savemap_tower_count', function (req, res) {
 router.post('/getusermapcreate', function(req, res) {
   var query = 
   'SELECT EXISTS (SELECT * FROM PT_PHASER WHERE ID=? AND MAP_ID=?) AS SUCCESS';
-  var params =[req.body.id,req.body.map_id];
+  var params =[req.body.id, req.body.map_id];
 
   con.connection.query(query, params, function(err, rows, fields) {
       if(err){
@@ -496,6 +496,22 @@ router.post('/getmyfriend2', function(req, res) {
     });
 });
 
+router.post('/updatefriendstate', function(req, res) {
+  var query = 'UPDATE PT_PHASER_FRIEND SET CON = ? WHERE P1 = ? AND P2 = ?';
+  
+  var params = [req.body.con, req.body.p1,req.body.p2];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        console.log(err);
+        res.send({result:false});
+      }else{
+        res.send({result:true});
+      }
+    });
+});
+
+
 router.post('/getgofriendmap', function(req, res) {
   var query = 
   'SELECT MAP_DATA, TREE_DATA, HOUSE_DATA FROM PT_PHASER_TOWER WHERE ID=? AND MAP_ID=?';
@@ -545,7 +561,66 @@ router.post('/getguestbook', function(req, res) {
     });
 });
 
+// 사진 내용을 받아오자!
+router.post('/getleadgallery', function(req, res) {
+  var query = 
+  'SELECT IMG, NAME, REG_DATE, GROUP_NUM FROM PT_PHASER_GALLERY WHERE ID=? AND OD=?';
+  var params =[req.body.id, req.body.od];
 
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        console.log(err);
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/getleadphoto', function(req, res) {
+  var query = 
+  'SELECT IMG, NAME, REG_DATE, TURN FROM PT_PHASER_GALLERY WHERE ID=? AND GROUP_NUM=? AND STATE = ? ORDER BY TURN';
+  var params =[req.body.id, req.body.g_n, req.body.state];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        console.log(err);
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/getmodifyphoto', function(req, res) {
+  var query = 
+  'SELECT IMG, NAME, REG_DATE, TURN FROM PT_PHASER_GALLERY WHERE ID=? AND GROUP_NUM=? AND STATE = ? ORDER BY TURN';
+  var params =[req.body.id, req.body.g_n, req.body.state];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        console.log(err);
+        res.send({result:false});
+      }else{
+        res.send({rows, result:true});
+      }
+    });
+});
+
+router.post('/updatedelphoto', function(req, res) {
+  var query = 'UPDATE PT_PHASER_GALLERY SET STATE = ? WHERE ID = ? AND IMG = ?';
+  
+  var params = [req.body.state, req.body.id,req.body.img];
+
+  con.connection.query(query, params, function(err, rows, fields) {
+      if(err){
+        console.log(err);
+        res.send({result:false});
+      }else{
+        res.send({result:true});
+      }
+    });
+});
 
 // 작성자를 받아오자!
 router.post('/getnickname', function(req, res) {

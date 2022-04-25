@@ -1,13 +1,15 @@
-var ttt = false;
 
+var ttt = false;
+var ks = 'http://k.kakaocdn.net/dn/PZbgG/btq17H0kEjd/eV9nkpnBdBW84LdHup83K1/img_110x110.jpg';
 class MainUIScene extends Phaser.Scene {
-  MainUIScene ()
-  {
-      Phaser.Scene.call(this, { key: 'MainUIScene' });
+  MainUIScene() {
+    Phaser.Scene.call(this, {
+      key: 'MainUIScene'
+    });
   }
-  constructor ()
-  {
-      super({ key: 'MainUIScene'
+  constructor() {
+    super({
+      key: 'MainUIScene'
       // plugins: {
       //   global: [{
       //     key: 'WebFontLoader',
@@ -23,8 +25,11 @@ class MainUIScene extends Phaser.Scene {
     //this.load.image('background2', '/phasergame/images/background.png');
     //this.load.image('man', '/phasergame/images/man.png');
     //this.load.image('block', '/phasergame/images/maps2.png');
-    
+    //this.load.crossOrigin = true
+    //this.load.crossOrigin = 'http://k.kakaocdn.net/dn/PZbgG/btq17H0kEjd/eV9nkpnBdBW84LdHup83K1/img_110x110.jpg'
+    //console.log(userImg);
     //자기 정보창
+    //this.load.image('playerimg', ks);
     this.load.image('player_picture', '/phasergame/images/UI/status/statuspic.png');
     this.load.image('levelbar', '/phasergame/images/UI/status/levelbar.png')
     this.load.image('s_0', '/phasergame/images/UI/status/s_s.png')
@@ -56,7 +61,8 @@ class MainUIScene extends Phaser.Scene {
   }
   create() {
     // var Scenemoneyshop = this.scene.add('MoneyShop', MoneyShopScene, false);
-    
+    //var imgss = this.add.sprite(550, 100 + 80, 'playerimg')
+    console.log(playerIMG)
     // if(check){
     // this.scene.start('MoneyShop');}
     //Scenemoneyshop.scene.events.on("start", function(){});
@@ -66,14 +72,14 @@ class MainUIScene extends Phaser.Scene {
     //this.add.text(10, 10, "this is a text", { } );
     var statusbars = this.add.sprite(450, 100 + 80, 'statusbar')
     var todaybars = this.add.sprite(270, 300 + 80, 'todaybar')
-    
+
     var player_pic = this.add.sprite(150, 100 + 80, 'player_picture');
     var levelbar = this.add.sprite(560, 160 + 80, 'levelbar')
 
     var level_ui = new Array();
     for (var i = 0; i < 3; i++) {
       //console.log('s_'+'i')
-      level_ui[i] = this.add.sprite(75* i + 400, 235, 's_'+ i) // 버튼 로드
+      level_ui[i] = this.add.sprite(75 * i + 400, 235, 's_' + i) // 버튼 로드
     }
     var Player_name = this.add.text(320, 70, "홍길동", {
       font: "80px TheFont",
@@ -112,7 +118,7 @@ class MainUIScene extends Phaser.Scene {
 
     //Gold_Text.setTint(0xffffff);
 
-   
+
 
     // 위쪽 UI
     var up_uilst = ['moneybar', 'fishbar', 'ticketbar'];
@@ -131,7 +137,7 @@ class MainUIScene extends Phaser.Scene {
 
       up_btn[i].on('pointermove', function (pointer) {
         this.setScale(1.2);
-        
+
       });
 
       up_btn[i].on('pointerout', function (pointer) {
@@ -147,7 +153,7 @@ class MainUIScene extends Phaser.Scene {
       //alert(up_btnlist[0] + "(으)로 이동합니다.");
       //this.scene.launch('Inputbox');
     });
-    
+
     //this.scene.launch('MoneyShopScene')
     up_btn[1].on('pointerup', function (pointer) {
       // 때면~
@@ -158,13 +164,16 @@ class MainUIScene extends Phaser.Scene {
 
     up_btn[2].on('pointerup', function (pointer) {
       // 때면~
-      
+
       this.scene.launch('GuestbookScene')
       this.scene.moveUp('GuestbookScene');
+
+      
+      $('#myModal').modal('show');
     }, this);
 
     // 아래쪽 버튼
-    var down_btnlist = ['carrier', 'passport',  'saw', 'achievebook', 'handle'];
+    var down_btnlist = ['carrier', 'passport', 'saw', 'achievebook', 'handle'];
     var down_btn = new Array();
 
     down_btn[0] = this.add.sprite(250 * 0 + 155, 2690, down_btnlist[0]).setInteractive(); // 버튼 로드
@@ -183,20 +192,22 @@ class MainUIScene extends Phaser.Scene {
         this.setScale(1.0);
       });
     }
-    
+
     down_btn[0].on('pointerup', function (pointer) {
-      this.scene.scene.start('SelectScene')
+      //this.scene.scene.start('SelectScene')
+      $('#myGalleryfeed').modal('show');
       //alert(down_btnlist[0] + "(으)로 이동합니다.");a
       // 때면~
     });
     down_btn[1].on('pointerup', function (pointer) {
-      alert(down_btnlist[1] + "(으)로 이동합니다.");
+      $('#myGallerylist').modal('show');
+      //alert(down_btnlist[1] + "(으)로 이동합니다.");
       // 때면~
     });
 
     // 건설하기
     down_btn[2].on('pointerup', function (pointer) {
-     
+      console.log(1);
       for (var i = 0; i < 3; i++) {
         fixbtn[i].visible = !fixbtn[i].visible;
       }
@@ -220,28 +231,145 @@ class MainUIScene extends Phaser.Scene {
       //alert(down_btnlist[2] + "(으)로 이동합니다.");
       // 때면~
     });
-    
+
     down_btn[3].on('pointerup', function (pointer) {
+      
+      //alert(down_btnlist[3] + "(으)로 이동합니다.");
+      alert("해당 타일맵을 저장합니다");
 
-      alert(down_btnlist[3] + "(으)로 이동합니다.");
+      var count = 0;
+      for (var i = 0; i < 40; i++) {
+        for (var j = 0; j < 40; j++) {
+          tempDBMAP[count] = map1["layers"][0]['data'][i][j]['index'];
+          tempDBMAP_TOWER[count] = map1["layers"][1]['data'][i][j]['index'];
+          tempDBMAP_TREE[count] = map2["layers"][0]['data'][i][j]['index'];
+          tempDBMAP_HOUSE[count] = map3["layers"][0]['data'][i][j]['index'];
+          count++;
+          //console.log('hi');
+        }
+      }
+      alert("해당 타일맵을 저장합니다");
 
+      if (isCreate == false) {
+        console.log("isCreate = false")
+        $.ajax({
+          url: "/pharser/savemap",
+          data: {
+            "id": userId,
+            'mappos': tempDBMAP.toString(),
+            'coin' : Player_Gold,
+            's_coin' : Player_Coin,
+            't_coin' : Player_Ticket,
+            'map_id': 1
+          },
+          async: false,
+          type: "post",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {},
+          beforeSend: function () {},
+          complete: function () {}
+        });
+        $.ajax({
+          url: "/pharser/savemap_tower",
+          data: {
+            "id": userId,
+            'mappos': tempDBMAP_TOWER.toString(),
+            'treepos': tempDBMAP_TREE.toString(),
+            'housepos':tempDBMAP_HOUSE.toString(),
+            'map_id': 1
+          },
+          async: false,
+          type: "post",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {},
+          beforeSend: function () {},
+          complete: function () {}
+        });
+        $.ajax({
+          url: "/pharser/savemap_tower_count",
+          data: {
+            "id": userId,
+            'count': towercount,
+            'map_id': 1
+          },
+          async: false,
+          type: "post",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {},
+          beforeSend: function () {},
+          complete: function () {}
+        });
+      } else if (isCreate == true) {
+        console.log("isCreate")
+        $.ajax({
+          url: "/pharser/updatesavemap",
+          data: {
+            "id": userId,
+            'mappos': tempDBMAP.toString(),
+            'coin' : Player_Gold,
+            's_coin' : Player_Coin,
+            't_coin' : Player_Ticket,
+            'map_id': 1
+          },
+          async: false,
+          type: "post",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {},
+          beforeSend: function () {},
+          complete: function () {}
+        });
+
+        $.ajax({
+          url: "/pharser/updatesavemap_tower",
+          data: {
+            "id": userId,
+            'mappos': tempDBMAP_TOWER.toString(),
+            'treepos': tempDBMAP_TREE.toString(),
+            'housepos':tempDBMAP_HOUSE.toString(),
+            'map_id': 1
+          },
+          async: false,
+          type: "post",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {},
+          beforeSend: function () {},
+          complete: function () {}
+        });
+
+        $.ajax({
+          url: "/pharser/updatesavemap_tower_count",
+          data: {
+            "id": userId,
+            'count': towercount,
+            'map_id': 1
+          },
+          async: false,
+          type: "post",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          success: function (data) {},
+          beforeSend: function () {},
+          complete: function () {}
+        });
+      }
 
     });
 
+    down_btn[4].on('pointerup', function (pointer) {
+      this.scene.scene.launch('FriendScene')
+      this.scene.scene.moveUp('FriendScene');
+      // 때면~
+    });
     //this.input.on('gameobjectup', this.clickHandler, this);
     //layer = map.create('level1', 40, 30, 32, 32);
 
-
     cointimer = this.time.addEvent({
-      delay: 100000, // ms
+      delay: 10000, // ms
       callback: GetCoin,
       loop: true
     });
 
-   
   }
-  update() {
-  }
+  update() {}
 }
 
 function GetCoin() {
@@ -249,9 +377,8 @@ function GetCoin() {
   Gold_Text.setText(Player_Gold);
 }
 
-function UpdateMoney()
-{
-    Gold_Text.setText(Player_Gold);
-    Ticket_Text.setText(Player_Ticket);
-    Coin_Text.setText(Player_Coin);
+function UpdateMoney() {
+  Gold_Text.setText(Player_Gold);
+  Ticket_Text.setText(Player_Ticket);
+  Coin_Text.setText(Player_Coin);
 }
