@@ -1,0 +1,37 @@
+cx cy = 카메라 좌표
+
+sx sy = 화면 좌표
+
+px py = 월드 좌푬
+
+https://phaser.discourse.group/t/solved-trying-to-create-a-sprite-from-tilemap-frame-of-tilesetimage/3186
+
+//비어 있는 레이어 만들기
+        //var layer = map.createBlankLayer(layerID, tileset);
+        // var layer = map.createBlankLayer(layerID, tileset, x, y, width, height, tileWidth, tileHeight); // x, y : offset in pixels
+
+
+ //이벤트 만들기
+        var emitter = new Phaser.Events.EventEmitter();
+        emitter.on('addImage', this.maketree1, this);
+//emitter.emit('addImage', markerXY.x+40, markerXY.y-20, 'tower1');
+    maketree1(x, y, towertype)
+    {
+        var b = this.add.image(x, y, towertype).setName('t'+ pointerTileXY.x + pointerTileXY.y);
+        console.log("이름 = ", b.name);
+        b.depth = y;
+        console.log(this, b.depth);
+
+        //둘 다 더해서 건물을 생성하면 아예 관련 없어지고
+        //한가지만 하면 방향으로 가는 거에 관련이 없어진다.
+    }
+
+
+
+layer정리
+map1
+- layer1 : 바닥 타일 레이어
+- layer2 : 건물들이 설치되어 있는지 확인하는 레이어
+
+map2
+- treelayer1 : 나무들 관련 레이어

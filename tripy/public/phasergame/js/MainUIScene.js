@@ -129,10 +129,10 @@ class MainUIScene extends Phaser.Scene {
 
     // 위쪽 버튼
     var i;
-    var up_btnlist = ['spanner', 'calculater', 'pen'];
+    var up_btnlist = ['spanner', 'calculater', 'pen', 'pen'];
     var up_btn = new Array();
     var thisUI = this.scene;
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 4; i++) {
       up_btn[i] = this.add.sprite(1330, 200 * i + 450, up_btnlist[i]).setInteractive(); // 버튼 로드
 
       up_btn[i].on('pointermove', function (pointer) {
@@ -170,6 +170,29 @@ class MainUIScene extends Phaser.Scene {
 
       
       $('#myModal').modal('show');
+    }, this);
+
+    up_btn[3].on('pointerup', function (pointer) {
+      // 때면~
+      $.ajax({
+        url: "/pharser_user/updatemygoods",
+        async: false,
+        type: "post",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function (data) {
+          if (data.result == true) {
+            if(data.isLevelUp) {
+              alert(data.level +"레벨에 달성 했습니다.");
+            }
+            alert("경험치 " + data.addExp + "\n 골드 " + data.addGold + "\n 별 " + data.addStar +
+            "\n 을 획득하셨습니다.");
+            //location.reload();
+        };
+        },
+        beforeSend: function () {},
+        complete: function () {}
+      });
+
     }, this);
 
     // 아래쪽 버튼

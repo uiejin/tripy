@@ -36,6 +36,9 @@ router.get('/', function(req, res, next) {
       userGender : req.user.GENDER,
       userAge : getAge(req.user.BIRTHDAY),
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 주시길 바랍니다."
   });
   }else{
@@ -61,6 +64,9 @@ router.get('/registermytour', function(req, res, next) {
       userImg : req.user.IMG,
       username : req.user.NAME,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 주시길 바랍니다."
   });
   }else{

@@ -233,6 +233,8 @@
 
             $("#navProfileName").text("<%=username%>");
             $("#profileImageNav").attr("src", "<%=userImg%>");
+            $("#navProfileLevel").text("LEVEL : " +"<%=userLevel%>");
+            $("#navProfileGold").text("GOLD : " +"<%=userGold%>");
         } else {
         }
         var no = "";
@@ -324,7 +326,6 @@
                                                     navigator.geolocation.getCurrentPosition(function (position) {
                                                         latitude = position.coords.latitude;
                                                         longitude = position.coords.longitude;
-                                                        alert(position.coords.accuracy);
                                                         var allData = {
                                                             "userLat": latitude,
                                                             "userLong": longitude,
@@ -340,6 +341,9 @@
                                                                     alert("현재 도전과제 위치에 있습니다.");
                                                                     alert(data.distance + "만큼 차이나는 위치에 있습니다.");
                                                                     alert("도전과제 업적을 획득했습니다.");
+                                                                    if(data.isLevelUp){
+                                                                        alert("레벨업에 성공하였습니다.");
+                                                                    }
                                                                     location.reload();
                                                                 };
                                                             },

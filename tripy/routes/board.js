@@ -41,6 +41,9 @@ router.get('/partyboard', function(req, res, next) {
       userAge : getAge(req.user.BIRTHDAY),
       userGender : req.user.GENDER,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 주시길 바랍니다.",
     });
   }else{
@@ -69,11 +72,17 @@ router.get('/partyboard', function(req, res, next) {
       nullparty : "모집글이 없습니다",
       userId : null,
       loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
       userAge : null,
       userGender : null,
       username : null,
       userImg : null,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 주시길 바랍니다.",
     });
   }
@@ -91,6 +100,9 @@ router.get('/searchpost', function(req, res, next) {
       userAge : getAge(req.user.BIRTHDAY),
       userGender : req.user.GENDER,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 주시길 바랍니다.",
     });
   }else{
@@ -103,6 +115,9 @@ router.get('/searchpost', function(req, res, next) {
       nullparty : "모집글이 없습니다",
       userId : null,
       loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
       userAge : null,
       userGender : null,
       isAdmin : false,
@@ -146,6 +161,9 @@ router.get('/searchpost', function(req, res, next) {
         loginStatus  : true,
         userGender : req.user.GENDER,
         isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
         userAge : getAge(req.user.BIRTHDAY),
       });
     }else{
@@ -180,6 +198,9 @@ router.get('/searchpost', function(req, res, next) {
         username : null,
         userImg : null,
         loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
         userGender : "nothing",
         userAge : null,
         isAdmin : false

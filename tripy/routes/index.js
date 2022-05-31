@@ -30,7 +30,10 @@ router.get('/', function(req, res, next) {
       userAge : getAge(req.user.BIRTHDAY) + "세",
       userGender : req.user.GENDER,
       userImg : req.user.IMG,
-      isAdmin : req.user.ISADMIN
+      isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
      });
     
   } else {
@@ -52,6 +55,9 @@ router.get('/', function(req, res, next) {
       femaleText : "여자만",
       userId : null,
       loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
       isAdmin : false,
       username : "user",
       userAge : "",

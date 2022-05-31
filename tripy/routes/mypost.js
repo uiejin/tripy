@@ -24,6 +24,9 @@ router.get('/', function(req, res, next) {
     username : req.user.NAME,
     loginStatus  : true,
     isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
     });
   }else{
     res.redirect('/');

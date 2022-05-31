@@ -26,6 +26,9 @@ router.get('/', function(req, res, next) {
       username : req.user.NAME,
       loginStatus  : true,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 접속해주시길 바랍니다."
       });
     }else{
@@ -61,6 +64,9 @@ router.get('/otherinformation', function(req, res, next) {
     userId : req.user.ID,
     loginStatus  : true,
     isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
     loginMessage : "로그인후 작성해 접속해주시길 바랍니다."
     });
   }else{
@@ -80,6 +86,9 @@ router.get('/otherinformation', function(req, res, next) {
       userName : req.user.NAME,
       loginStatus  : true,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 접속해주시길 바랍니다."
       });
     }else{

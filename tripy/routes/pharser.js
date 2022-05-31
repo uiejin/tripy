@@ -53,7 +53,11 @@ router.get('/phaser4thWeek', function (req, res, next) {
       userId: req.user.ID,
       loginStatus: true,
       username: req.user.NAME,
-      isAdmin: req.user.ISADMIN,
+      isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
+      userStar : req.user.STAR,
       //userAge : getAge(req.user.BIRTHDAY) + "세",
       //userGender : req.user.GENDER,
       userImg: req.user.IMG

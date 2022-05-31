@@ -31,6 +31,7 @@ var uploadRouter = require('./routes/upload');
 //phaser router
 
 var phaserRouter = require('./routes/pharser');
+var phaserUserRouter = require('./routes/pharser_user');
 
 var passport = require('passport');
 
@@ -112,6 +113,7 @@ app.use('/users/profile', profileRouter);
 
 //다비수 디지털 페이저 예제 201221
 app.use('/pharser', phaserRouter);
+app.use('/pharser_user', phaserUserRouter);
 app.use('/seventeen', seventeenRouter);
 
 

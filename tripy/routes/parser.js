@@ -30,11 +30,17 @@ router.get('/phaser3rdweek', function(req, res, next) {
       //userGender : req.user.GENDER,
       userImg : req.user.IMG,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
   });
   }else{
     res.render('phaser3rdWeek', {
         userId : null,
         loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
         username : "user",
         //userAge : "",
         //userGender : "",
@@ -56,11 +62,17 @@ router.get('/phaser4thWeek', function(req, res, next) {
       //userGender : req.user.GENDER,
       userImg : req.user.IMG,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
   });
   }else{
     res.render('phaser4thWeek', {
       userId : null,
         loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
         username : "user",
         //userAge : "",
         //userGender : "",

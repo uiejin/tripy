@@ -27,6 +27,9 @@ router.get('/', function (req, res, next) {
       errorMessage: "잘못된 접근입니다.",
       userId: req.user.ID,
       loginStatus: true,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       isAdmin: req.user.ISADMIN,
       username: req.user.NAME,
       userAge: getAge(req.user.BIRTHDAY) + "세",
@@ -57,6 +60,9 @@ router.get('/', function (req, res, next) {
       userId: null,
       username: null,
       isAdmin: false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
       loginStatus: false,
       isAdmin: false,
       userImg: null,
@@ -83,6 +89,9 @@ router.get('/write', function (req, res, next) {
         loginStatus: true,
         username: req.user.NAME,
         isAdmin: req.user.ISADMIN,
+        userLevel : req.user.LEVEL,
+        userExp : req.user.EXP,
+        userGold : req.user.GOLD,
         userAge: getAge(req.user.BIRTHDAY) + "세",
         userGender: req.user.GENDER,
         userImg: req.user.IMG,
@@ -117,6 +126,9 @@ router.get('/update', function (req, res, next) {
         userGender: req.user.GENDER,
         userImg: req.user.IMG,
         isAdmin: req.user.ISADMIN,
+        userLevel : req.user.LEVEL,
+        userExp : req.user.EXP,
+        userGold : req.user.GOLD,
         noticeNo: req.session.noticeNo,
         loginMessage: "로그인후 작성해 주시길 바랍니다.",
         writeErrorText: "누락된 항목이 있습니다. 작성후 입력해주세요.",
@@ -166,6 +178,9 @@ router.get('/view', function (req, res, next) {
       userImg: req.user.IMG,
       loginStatus: true,
       isAdmin: req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
     });
   } else {
     res.render('notice/view', {
@@ -199,6 +214,9 @@ router.get('/view', function (req, res, next) {
       userId: null,
       loginStatus: false,
       isAdmin: false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
     });
   }
 });

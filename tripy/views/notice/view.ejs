@@ -188,6 +188,18 @@
         var userId = "<%=userId%>";
         var isAdmin = "<%=isAdmin%>";
 
+        if (loginStatus == "true") {
+      $("#navProfileName").text("<%=username%>");
+      $("#profileImageNav").attr("src", "<%=userImg%>");
+      $("#navProfileLevel").text("LEVEL : " +"<%=userLevel%>");
+      $("#navProfileGold").text("GOLD : " +"<%=userGold%>");
+      if ("<%=userGender%>" == "" || "<%=userAge%>" == "") {
+      }
+    } else {
+      $("#profileForm").css("display", "none");
+    }
+
+
         if (loginStatus == "true" && isAdmin == '1') {
             $("#modyfy-button").click(function () {
                 var allData = {

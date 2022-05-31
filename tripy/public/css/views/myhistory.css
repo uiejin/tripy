@@ -37,10 +37,36 @@ a.boardAchiveText {
 }
 
 div.achievementsItemDiv {
-  height: 100px;
+  height: 120px;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-left: 5px;
+  width: 95%;
+}
+
+div.achievementsSubSuccessItemDiv {
+  height: 140px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 5px;
+  width: 95%;
+  border: 3px solid #198754;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+
+div.achievementsSubFailedItemDiv {
+  height: 140px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 5px;
+  width: 95%;
+  border: 3px solid #dc3545;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 img#achievementsItemImage {
@@ -61,7 +87,7 @@ span#profileAge {
 div#achievementItemDiv2 {
   padding-left: 5px;
   padding-right: 0px;
-  margin-left: 120px;
+  margin-left: 105px;
   font-weight: 100;
   width: 100%;
 }
@@ -70,4 +96,22 @@ div#profileDiv3 {
   padding-right: 0px;
   margin-left: 95px;
   font-weight: 100;
+}
+
+.achievementReadItem{
+  height: 100px;
+}
+
+span#pointItem {
+  float: right;
+}
+
+span.achievementReadTitle{
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+span#writerspan {
+  margin-left: 5px;
+  color: white;
 }

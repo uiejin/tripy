@@ -182,6 +182,8 @@
 
       $("#navProfileName").text("<%=username%>");
         $("#profileImageNav").attr("src", "<%=userImg%>");
+      $("#navProfileLevel").text("LEVEL : " +"<%=userLevel%>");
+      $("#navProfileGold").text("GOLD : " +"<%=userGold%>");
       }else{
       $("#nav").load("/html/nav_nologin.html");
       /*  var loginMessage = "<%=loginMessage%>";

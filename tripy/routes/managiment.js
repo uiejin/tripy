@@ -35,6 +35,9 @@ router.get('/', function(req, res, next) {
         userImg : req.user.IMG,
         username : req.user.NAME,
         isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
         loginStatus  : true
       });
     }else{
@@ -55,6 +58,9 @@ router.get('/', function(req, res, next) {
       loginStatus  : true,
       saveText : "인원 변경 하기",
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 접속해주시길 바랍니다."
       });
     }else{
@@ -75,6 +81,9 @@ router.get('/', function(req, res, next) {
       userName : req.user.NAME,
       loginStatus  : true,
       isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       loginMessage : "로그인후 작성해 접속해주시길 바랍니다."
       });
     }else{
@@ -177,7 +186,6 @@ router.get('/', function(req, res, next) {
           }
         });
     });
-
 
 
 module.exports = router;

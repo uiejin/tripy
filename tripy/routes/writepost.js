@@ -59,7 +59,10 @@ router.get('/', function (req, res, next) {
       modalTitle2: "동행 목적을 선택해주세요",
       ageErrorMessage: "나이제한을 할때 자신의 나이를 포함한 범위로 선택해주세요",
       mapSearchText: "모임장소 검색",
-      isAdmin: req.user.ISADMIN,
+      isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
       mapAlertText: "이 장소로 선택하시겟습니까?"
     });
   } else {
@@ -120,7 +123,10 @@ router.get('/updatepost', function (req, res, next) {
       ageErrorMessage: "나이제한을 할때 자신의 나이를 포함한 범위로 선택해주세요",
       mapSearchText: "모임장소 검색",
       mapAlertText: "이 장소로 선택하시겟습니까?",
-      isAdmin: req.user.ISADMIN,
+      isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
     });
   } else {
     res.redirect('/login/login');

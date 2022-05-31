@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
-
+var async = require('async');
 var mysql = require('mysql');
 
 var passport = require('passport');
 
 var moment = require('moment');
 
-var con = require("../db/index.js")
+var con = require("../db/index.js");
+const { Callbacks } = require('jquery');
 /* GET home page. */
 router.get('/view', function (req, res, next) {
     var query = 'SELECT TYPE ' +
@@ -20,7 +21,7 @@ router.get('/view', function (req, res, next) {
         if (err) {
             res.redirect('/login/login');
         } else {
-            if(rows[0].TYPE == 3){
+            if (rows[0].TYPE == 3) {
                 if (req.isAuthenticated()) {
                     res.render('achievements/viewparty', {
                         title: '여행일지',
@@ -38,13 +39,16 @@ router.get('/view', function (req, res, next) {
                         username: req.user.NAME,
                         loginStatus: true,
                         isAdmin: req.user.ISADMIN,
+                        userLevel: req.user.LEVEL,
+                        userExp: req.user.EXP,
+                        userGold: req.user.GOLD,
                         loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
                     });
                 } else {
                     res.redirect('/login/login');
                 }
             }
-            else if(rows[0].TYPE == 4){
+            else if (rows[0].TYPE == 4) {
                 if (req.isAuthenticated()) {
                     res.render('achievements/viewsecret', {
                         title: '여행일지',
@@ -62,13 +66,16 @@ router.get('/view', function (req, res, next) {
                         username: req.user.NAME,
                         loginStatus: true,
                         isAdmin: req.user.ISADMIN,
+                        userLevel: req.user.LEVEL,
+                        userExp: req.user.EXP,
+                        userGold: req.user.GOLD,
                         loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
                     });
                 } else {
                     res.redirect('/login/login');
                 }
             }
-            else if(rows[0].TYPE == 5){
+            else if (rows[0].TYPE == 5) {
                 if (req.isAuthenticated()) {
                     res.render('achievements/viewpic', {
                         title: '여행일지',
@@ -87,13 +94,16 @@ router.get('/view', function (req, res, next) {
                         username: req.user.NAME,
                         loginStatus: true,
                         isAdmin: req.user.ISADMIN,
+                        userLevel: req.user.LEVEL,
+                        userExp: req.user.EXP,
+                        userGold: req.user.GOLD,
                         loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
                     });
                 } else {
                     res.redirect('/login/login');
                 }
             }
-            else if(rows[0].TYPE == 6){
+            else if (rows[0].TYPE == 6) {
                 if (req.isAuthenticated()) {
                     res.render('achievements/viewsecretlist', {
                         title: '여행일지',
@@ -112,6 +122,9 @@ router.get('/view', function (req, res, next) {
                         username: req.user.NAME,
                         loginStatus: true,
                         isAdmin: req.user.ISADMIN,
+                        userLevel: req.user.LEVEL,
+                        userExp: req.user.EXP,
+                        userGold: req.user.GOLD,
                         loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
                     });
                 } else {
@@ -135,6 +148,9 @@ router.get('/view', function (req, res, next) {
                         username: req.user.NAME,
                         loginStatus: true,
                         isAdmin: req.user.ISADMIN,
+                        userLevel: req.user.LEVEL,
+                        userExp: req.user.EXP,
+                        userGold: req.user.GOLD,
                         loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
                     });
                 } else {
@@ -148,7 +164,7 @@ router.get('/view', function (req, res, next) {
 });
 
 router.get('/list', function (req, res, next) {
-    
+
     if (req.isAuthenticated()) {
         res.render('achievements/list', {
             title: '업적 리스트',
@@ -165,6 +181,9 @@ router.get('/list', function (req, res, next) {
             username: req.user.NAME,
             loginStatus: true,
             isAdmin: req.user.ISADMIN,
+            userLevel: req.user.LEVEL,
+            userExp: req.user.EXP,
+            userGold: req.user.GOLD,
             loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
         });
     } else {
@@ -194,32 +213,35 @@ router.get('/list', function (req, res, next) {
 
 router.get('/viewmyparty', function (req, res, next) {
     if (req.isAuthenticated()) {
-    console.log("no :" +req.query.no);
-    console.log("postno :" +req.query.postno);
-    if(req.query.no && req.query.postno){
-        res.render('achievements/viewmyparty', {
-            title: '업적 리스트',
-            nameText: '',
-            registerButton: '일정 등록하기',
-            nowAchive: '진행중인 업적',
-            secretAcive: '비밀 업적',
-            tourAcive: '여행 업적',
-            partyAcive: '모임 업적',
-            getAcive: '획득한 업적',
-            calendarText: '일정을 추가해보세요.',
-            userSeq: req.user.SEQ,
-            userId: req.user.ID,
-            userImg: req.user.IMG,
-            username: req.user.NAME,
-            loginStatus: true,
-            isAdmin: req.user.ISADMIN,
-            partyno : req.query.no,
-            loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
-        });
-    }
-    else {
-        res.redirect('/');
-    }
+        console.log("no :" + req.query.no);
+        console.log("postno :" + req.query.postno);
+        if (req.query.no && req.query.postno) {
+            res.render('achievements/viewmyparty', {
+                title: '업적 리스트',
+                nameText: '',
+                registerButton: '일정 등록하기',
+                nowAchive: '진행중인 업적',
+                secretAcive: '비밀 업적',
+                tourAcive: '여행 업적',
+                partyAcive: '모임 업적',
+                getAcive: '획득한 업적',
+                calendarText: '일정을 추가해보세요.',
+                userSeq: req.user.SEQ,
+                userId: req.user.ID,
+                userImg: req.user.IMG,
+                username: req.user.NAME,
+                loginStatus: true,
+                isAdmin: req.user.ISADMIN,
+                userLevel: req.user.LEVEL,
+                userExp: req.user.EXP,
+                userGold: req.user.GOLD,
+                partyno: req.query.no,
+                loginMessage: "로그인후 작성해 접속해주시길 바랍니다."
+            });
+        }
+        else {
+            res.redirect('/');
+        }
     } else {
         res.redirect('/login/login');
     }
@@ -253,73 +275,176 @@ router.get('/getachievements', function (req, res) {
 });
 
 router.get('/isachievementsuccess', function (req, res) {
-    var query = 'SELECT SEQ, ALTITUDE, START_DATE, END_DATE, START_TIME, END_TIME, (6371*acos(cos(radians(?))*cos(radians(LATITUDE))*cos(radians(LONGITUDE) ' +
-        '-radians(?))+sin(radians(?))*sin(radians(LATITUDE)))) AS distance ' +
-        'FROM PT_ACHIEVEMENT WHERE SEQ = ? HAVING DISTANCE <= 0.8 ORDER BY distance LIMIT 0,800';
+    
+    var isSuccess = false;
+    var distance = 0;
+    async.waterfall([
+        function(cd) {
+            var query = 'SELECT SEQ, ALTITUDE, START_DATE, END_DATE, START_TIME, END_TIME, (6371*acos(cos(radians(?))*cos(radians(LATITUDE))*cos(radians(LONGITUDE) ' +
+            '-radians(?))+sin(radians(?))*sin(radians(LATITUDE)))) AS distance ' +
+            'FROM PT_ACHIEVEMENT WHERE SEQ = ? HAVING DISTANCE <= 10.8 ORDER BY distance LIMIT 0,10800';
+    
+            var params = [req.query.userLat, req.query.userLong, req.query.userLat, req.query.no];
+    
+            con.connection.query(query, params, function(err, rows, fields){
+            
+                    if (err) {
+                        console.log(err);
+                        cd("error");
+                    } else if (rows.length > 0) {
+                        var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
-    var params = [req.query.userLat, req.query.userLong, req.query.userLat, req.query.no];
-
-
-    con.connection.query(query, params, function (err, rows, fields) {
-        if (err) {
-            console.log(err);
-            res.send({ rows, result: false });
-        } else if(rows.length > 0){
-            var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-            var isSuccess = false;
-            if(rows[0].START_DATE != "" && rows[0].END_DATE != "" && rows[0].START_TIME != "" && rows[0].END_TIME != "")
-            {
-                var nowOnlyTime = moment().format('HH:mm:ss');
-                if(nowTime < rows[0].END_DATE && nowTime > rows[0].START_DATE && nowOnlyTime < rows[0].END_TIME && nowOnlyTime > rows[0].START_TIME)
-                {
-                    isSuccess = true;
+                        if (rows[0].START_DATE != "" && rows[0].END_DATE != "" && rows[0].START_TIME != "" && rows[0].END_TIME != "") {
+                            var nowOnlyTime = moment().format('HH:mm:ss');
+                            if (nowTime < rows[0].END_DATE && nowTime > rows[0].START_DATE && nowOnlyTime < rows[0].END_TIME && nowOnlyTime > rows[0].START_TIME) {
+                                isSuccess = true;
+                                distance = rows[0].distance;
+                            }
+                        }
+                        else if (rows[0].START_DATE != "" && rows[0].END_DATE != "") {
+                            if (nowTime < rows[0].END_DATE && nowTime > rows[0].START_DATE) {
+                                isSuccess = true;
+                                distance = rows[0].distance;
+                            }
+                        }
+                        else if (rows[0].START_DATE == "" && rows[0].END_DATE == "" && rows[0].START_TIME != "" && rows[0].END_TIME != "") {
+                            var nowOnlyTime = moment().format('HH:mm:ss');
+                            if (nowOnlyTime < rows[0].END_TIME && nowOnlyTime > rows[0].START_TIME) {
+                                isSuccess = true;
+                                distance = rows[0].distance;
+                            }
+                        }
+                        else {
+                            isSuccess = true;
+                            distance = rows[0].distance;
+                        }
+                        
+                        cd(null,isSuccess,distance);
+                }else{
+                    cd("error");
                 }
-
-            }
-            else if(rows[0].START_DATE != "" && rows[0].END_DATE != "")
-            {
-                if(nowTime < rows[0].END_DATE && nowTime > rows[0].START_DATE)
-                {
-                    isSuccess = true;
-                }
-
-            }
-            else if(rows[0].START_DATE == "" && rows[0].END_DATE == "" && rows[0].START_TIME != "" && rows[0].END_TIME != "")
-            {
-                var nowOnlyTime = moment().format('HH:mm:ss');
-                if(nowOnlyTime < rows[0].END_TIME && nowOnlyTime > rows[0].START_TIME)
-                {
-                    isSuccess = true;
-                }
-            }
-            else
-            {
-                isSuccess = true;
-            }
-            if(isSuccess)
-            {
-                var query = 'INSERT INTO PT_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, COMPLETE_DATE) VALUES ' +
+                
+            });
+    },
+    function(isSuccess, distance, cd){
+        console.log('isSuccess' + isSuccess);
+        console.log(distance);
+        if (isSuccess) {
+            isSuccess = false;
+            var query = 'INSERT INTO PT_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, COMPLETE_DATE) VALUES ' +
                 '(?,?,?)';
+                
+            var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+            var params = [req.user.SEQ, req.query.no, nowTime];
 
-                var distance = rows[0].distance;
-                var params = [req.user.SEQ, req.query.no, nowTime];
-
+//            await insertUserAchievementsResult(req.query.no, req.user.SEQ);
                 con.connection.query(query, params, function (err, rows, fields) {
                     if (err) {
                         console.log(err);
-                        res.send({ rows, result: false });
+                        cd("error");
                     } else {
-                        res.send({ rows, result: true, distance: distance });
+                        isSuccess = true;
+                        console.log(2);
+                        cd(null, isSuccess, distance);
+                    }
+                });
+        }
+        else {
+            //res.send({ distance : distance, result: false });
+                        cd("error");
+        }
+    },
+    function(isSuccess, distance, cd){
+        var query = 'SELECT SEQ, POINT, EXP FROM PT_ACHIEVEMENT WHERE SEQ = ?';
+
+        var params = [req.query.no];
+
+        con.connection.query(query, params, function (err, rows, fields) {
+            if (err) {
+                console.log(err);
+            } else {
+
+                var query = 'UPDATE PT_USER SET EXP = EXP + ?, GOLD= GOLD + ? WHERE SEQ = ?';
+                var params = [rows[0].EXP, rows[0].POINT, req.user.SEQ];
+                con.connection.query(query, params, function (err, rows, fields) {
+                    if (err) {
+                        console.log(err);
+                        cd("error");
+                    } else {
+                        
+                        var query = 'SELECT T1.LEVEL, T1.GOLD, T1.EXP, T2.EXP AS LEVEL_UP_EXP FROM PT_USER T1, PT_LEVEL_TABLE T2 WHERE SEQ = ? AND T1.LEVEL = T2.LEVEL';
+
+                        var params = [req.user.SEQ];
+
+                        con.connection.query(query, params, function (err, rows, fields) {
+                            if (err) {
+                                console.log(err);
+                                cd("error");
+                            } else {
+
+                                if(rows[0].EXP >= rows[0].LEVEL_UP_EXP){
+                                    var leftover = rows[0].EXP - rows[0].LEVEL_UP_EXP;
+
+                                    var query = 'UPDATE PT_USER SET LEVEL = LEVEL + 1, EXP= ? WHERE SEQ = ?';
+                                    var params = [leftover, req.user.SEQ];
+                                    con.connection.query(query, params, function (err, rows, fields) {
+                                        if (err) {
+                                            console.log(err);
+                                            cd("error");
+                                        } else {
+                                        }
+                                    });
+                                }
+                                cd(null, isSuccess, distance);
+                            }
+                        });
                     }
                 });
             }
-            else{
-            res.send({ rows, result: false });
-            }
+        });
+    },
+    function(isSuccess, distance,cd){
+        console.log(3);
+        var isLevelUp = false;
+        if(isSuccess){
+            var query = 'SELECT GOLD, LEVEL, EXP FROM PT_USER WHERE SEQ = ?';
+            var params = [req.user.SEQ];
+            con.connection.query(query, params, function (err, expRows, fields) {
+                if (err) {
+                    console.log(err);
+                    cd("error");
+                } else {
+                    console.log(expRows);
+                    if(req.user.LEVEL < expRows[0].LEVEL){
+                        req.user.EXP = expRows[0].EXP;
+                        req.user.LEVEL = expRows[0].LEVEL;
+                        req.user.GOLD = expRows[0].GOLD;
+                        isLevelUp = true;
+                    }
+                    else{
+                        req.user.EXP = expRows[0].EXP;
+                        req.user.LEVEL = expRows[0].LEVEL;
+                        req.user.GOLD = expRows[0].GOLD;
+                    }
+                    cd(null, isLevelUp, distance);
+                }
+            });
         }
         else {
-            res.send({ rows, result: false });
+            cd("error");
         }
+    }
+    ], function(err, isLevelUp, distance) {
+        if(err){
+            res.send({ result: false });
+        }
+        else{
+            console.log(4);
+            res.send({ isLevelUp : isLevelUp, result: true, distance: distance });
+            //res.send({ isLevelUp : isLevelUp, result: true, distance: distance });
+            //res.send({ result: true });
+        }
+
     });
 
 });
@@ -330,7 +455,7 @@ router.post('/isachievementsuccesspic', function (req, res) {
     var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
     var query = 'INSERT INTO PT_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, COMPLETE_DATE) VALUES ' +
         '(?,?,?)';
-        
+
     var params = [req.user.SEQ, req.body.no, nowTime];
 
     con.connection.query(query, params, function (err, rows, fields) {
@@ -360,8 +485,8 @@ router.get('/getachievementspic', function (req, res) {
 
     var no = req.query.no;
     var query = 'SELECT T1.IMG ' +
-    'FROM PT_ACHIEVEMENT_USER_SUCCESS_PHOTO T1, PT_ACHIEVEMENT_USER_SUCCESS T2 ' +
-    'WHERE T2.ACHIEVEMENT_SEQ = ? AND T2.USER_SEQ = ? AND T2.SEQ = T1.SUCCESS_SEQ;';
+        'FROM PT_ACHIEVEMENT_USER_SUCCESS_PHOTO T1, PT_ACHIEVEMENT_USER_SUCCESS T2 ' +
+        'WHERE T2.ACHIEVEMENT_SEQ = ? AND T2.USER_SEQ = ? AND T2.SEQ = T1.SUCCESS_SEQ;';
 
     var params = [no, req.user.SEQ];
 
@@ -391,20 +516,20 @@ router.get('/searchachievementlist', function (req, res) {
             '-radians(?))+sin(radians(?))*sin(radians(T1.LATITUDE))))) AS DISTANCE ' +
             'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2 ' +
             'WHERE T2.SEQ = T1.TYPE AND T1.AREA_TYPE = ? ' +
-            'ORDER BY DISTANCE' ;
+            'ORDER BY DISTANCE';
 
 
         params = [req.user.SEQ, req.query.userLat, req.query.userLong, req.query.userLat, req.query.no];
     }
-    else{
+    else {
         query = 'SELECT T1.SEQ, T1.TITLE, T1.POINT, T1.EXP, T1.MAIN_IMG, T2.TYPE_NAME, ' +
-        '(SELECT AREA FROM PT_AREA  WHERE T1.AREA_TYPE = SEQ) AS AREA_NAME, ' +
-        '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = 0)) AS ISCOMPLETE, ' +
-        '(SELECT (6371*acos(cos(radians(?))*cos(radians(T1.LATITUDE))*cos(radians(T1.LONGITUDE) ' +
-        '-radians(?))+sin(radians(?))*sin(radians(T1.LATITUDE))))) AS DISTANCE ' +
-        'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2 ' +
-        'WHERE T2.SEQ = T1.TYPE AND T1.AREA_TYPE = ? ' +
-        'ORDER BY DISTANCE' ;
+            '(SELECT AREA FROM PT_AREA  WHERE T1.AREA_TYPE = SEQ) AS AREA_NAME, ' +
+            '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = 0)) AS ISCOMPLETE, ' +
+            '(SELECT (6371*acos(cos(radians(?))*cos(radians(T1.LATITUDE))*cos(radians(T1.LONGITUDE) ' +
+            '-radians(?))+sin(radians(?))*sin(radians(T1.LATITUDE))))) AS DISTANCE ' +
+            'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2 ' +
+            'WHERE T2.SEQ = T1.TYPE AND T1.AREA_TYPE = ? ' +
+            'ORDER BY DISTANCE';
 
 
         params = [req.query.userLat, req.query.userLong, req.query.userLat, req.query.no];
@@ -415,8 +540,8 @@ router.get('/searchachievementlist', function (req, res) {
             console.log(rows);
             res.send({ rows, result: false });
         } else {
-            for(var i=0; i< rows.length; i++){
-                if(rows[i].TYPE_NAME =='비밀' || rows[i].TYPE_NAME == '비밀목록'){
+            for (var i = 0; i < rows.length; i++) {
+                if (rows[i].TYPE_NAME == '비밀' || rows[i].TYPE_NAME == '비밀목록') {
                     rows[i].DISTANCE = '비밀업적입니다';
                 }
             }
@@ -435,34 +560,34 @@ router.get('/searchachievementlistnotusedgps', function (req, res) {
     if (req.isAuthenticated()) {
 
         query = 'SELECT T1.SEQ, T1.TITLE, T1.POINT, T1.EXP, T1.MAIN_IMG, T2.TYPE_NAME, ' +
-        '(SELECT AREA FROM PT_AREA  WHERE T1.AREA_TYPE = SEQ) AS AREA_NAME, ' +
-        '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = ?)) AS ISCOMPLETE, ' +
-        'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2, ' +
-        'WHERE T2.SEQ = T1.TYPE AND T1.AREA_TYPE = ? ' +
-        'ORDER BY DISTANCE' ;
+            '(SELECT AREA FROM PT_AREA  WHERE T1.AREA_TYPE = SEQ) AS AREA_NAME, ' +
+            '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = ?)) AS ISCOMPLETE, ' +
+            'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2, ' +
+            'WHERE T2.SEQ = T1.TYPE AND T1.AREA_TYPE = ? ' +
+            'ORDER BY DISTANCE';
 
         params = [req.user.SEQ, req.query.no];
     }
-    else{
+    else {
         query = 'SELECT T1.SEQ, T1.TITLE, T1.POINT, T1.EXP, T1.MAIN_IMG, T2.TYPE_NAME, ' +
-        '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = 0)) AS ISCOMPLETE, ' +
-        '(SELECT AREA FROM PT_AREA  WHERE T1.AREA_TYPE = SEQ) AS AREA_NAME, ' +
-        'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2, ' +
-        'WHERE T2.SEQ = T1.TYPE AND T1.AREA_TYPE = ? ' +
-        'ORDER BY DISTANCE' ;
+            '(SELECT EXISTS (SELECT SEQ FROM PT_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = 0)) AS ISCOMPLETE, ' +
+            '(SELECT AREA FROM PT_AREA  WHERE T1.AREA_TYPE = SEQ) AS AREA_NAME, ' +
+            'FROM PT_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2, ' +
+            'WHERE T2.SEQ = T1.TYPE AND T1.AREA_TYPE = ? ' +
+            'ORDER BY DISTANCE';
 
         params = [req.query.no];
     }
 
-    
+
     con.connection.query(query, params, function (err, rows, fields) {
         if (err) {
             console.log(err);
             console.log(rows);
             res.send({ rows, result: false });
         } else {
-            for(var i=0; i< rows.length; i++){
-                if(rows[i].TYPE_NAME =='비밀' || rows[i].TYPE_NAME == '비밀목록'){
+            for (var i = 0; i < rows.length; i++) {
+                if (rows[i].TYPE_NAME == '비밀' || rows[i].TYPE_NAME == '비밀목록') {
                     rows[i].DISTANCE = '비밀업적입니다';
                 }
             }
@@ -472,7 +597,6 @@ router.get('/searchachievementlistnotusedgps', function (req, res) {
     });
 
 });
-0
 
 router.get('/getachievementsublist', function (req, res) {
 
@@ -494,16 +618,16 @@ router.get('/getachievementsublist', function (req, res) {
             console.log(rows);
             res.send({ rows, result: false });
         } else {
-            for(var i=0; i< rows.length; i++){
-                if(!rows[i].ISCOMPLETE){
+            for (var i = 0; i < rows.length; i++) {
+                if (!rows[i].ISCOMPLETE) {
                     rows[i].CONTENTS = rows[i].SECRET_CONTENTS;
                 }
             }
             queryresult = rows;
         }
     });
-    var query = 'SELECT (SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT WHERE PARENT_SEQ = ? ) AS TOTALCOUNT, ' + 
-    '(SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND USER_SEQ = ? ) AS USERCOUNT';
+    var query = 'SELECT (SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT WHERE PARENT_SEQ = ? ) AS TOTALCOUNT, ' +
+        '(SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND USER_SEQ = ? ) AS USERCOUNT';
 
     var params = [req.query.no, req.query.no, req.user.SEQ];
 
@@ -513,8 +637,8 @@ router.get('/getachievementsublist', function (req, res) {
             console.log(rows);
             res.send({ rows, result: false });
         } else {
-            
-            res.send({ TOTALCOUNT: rows[0].TOTALCOUNT, imgsrc, USERCOUNT : rows[0].USERCOUNT, queryresult, result: true });
+
+            res.send({ TOTALCOUNT: rows[0].TOTALCOUNT, imgsrc, USERCOUNT: rows[0].USERCOUNT, queryresult, result: true });
         }
     });
 });
@@ -532,29 +656,28 @@ router.get('/issubachievementsuccess', function (req, res) {
         if (err) {
             console.log(err);
             res.send({ rows, result: false });
-        } else if(rows.length > 0){
+        } else if (rows.length > 0) {
             var isSuccess = true;
-            if(isSuccess)
-            {
+            if (isSuccess) {
                 var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
                 var query = 'INSERT INTO PT_SUB_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, SUB_ACHIEVEMENT_SEQ, COMPLETE_DATE) VALUES ' +
-                '(?,?,?,?)';
+                    '(?,?,?,?)';
 
                 var distance = rows[0].distance;
-                var params = [req.user.SEQ, req.query.no,  req.query.subNo, nowTime];
+                var params = [req.user.SEQ, req.query.no, req.query.subNo, nowTime];
 
                 con.connection.query(query, params, function (err, rows, fields) {
                     if (err) {
                         console.log(err);
                         res.send({ rows, result: false });
                     } else {
-                        checkachievementallComplete(req.query.no, req.user.SEQ);
+                        //checkachievementallComplete(req.query.no, req.user.SEQ);
                         res.send({ rows, result: true, distance: distance });
                     }
                 });
             }
-            else{
-            res.send({ rows, result: false });
+            else {
+                res.send({ rows, result: false });
             }
         }
         else {
@@ -577,7 +700,7 @@ router.get('/checksubachievementpicsuccess', function (req, res) {
         if (err) {
             console.log(err);
             res.send({ rows, result: false });
-        } else if(rows.length > 0){
+        } else if (rows.length > 0) {
             res.send({ rows, result: true });
         }
         else {
@@ -593,7 +716,7 @@ router.post('/issubachievementsuccesspic', function (req, res) {
     var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
     var query = 'INSERT INTO PT_SUB_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, SUB_ACHIEVEMENT_SEQ, COMPLETE_DATE) VALUES ' +
         '(?,?,?,?)';
-        
+
     var params = [req.user.SEQ, req.body.no, req.body.subNo, nowTime];
 
     con.connection.query(query, params, function (err, rows, fields) {
@@ -610,7 +733,7 @@ router.post('/issubachievementsuccesspic', function (req, res) {
                     console.log(err);
                     res.send({ rows, result: false });
                 } else {
-                    checkachievementallComplete(req.body.no, req.user.SEQ);
+                    //checkachievementallComplete(req.body.no, req.user.SEQ);
                     res.send({ rows, result: true });
                 }
             });
@@ -620,10 +743,10 @@ router.post('/issubachievementsuccesspic', function (req, res) {
 });
 
 
-function checkachievementallComplete(no, userSEQ){
-    
-    var query = 'SELECT (SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT WHERE PARENT_SEQ = ? ) AS TOTALCOUNT, ' + 
-    '(SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND USER_SEQ = ? ) AS USERCOUNT';
+function checkachievementallComplete(no, userSEQ) {
+
+    var query = 'SELECT (SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT WHERE PARENT_SEQ = ? ) AS TOTALCOUNT, ' +
+        '(SELECT COUNT(SEQ) FROM PT_SUB_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND USER_SEQ = ? ) AS USERCOUNT';
 
     var params = [no, no, userSEQ];
 
@@ -633,8 +756,8 @@ function checkachievementallComplete(no, userSEQ){
             console.log(rows);
             res.send({ rows, result: false });
         } else {
-            if(rows[0].TOTALCOUNT == rows[0].USERCOUNT && rows[0].TOTALCOUNT > 0 && rows[0].USERCOUNT){
-                
+            if (rows[0].TOTALCOUNT == rows[0].USERCOUNT && rows[0].TOTALCOUNT > 0 && rows[0].USERCOUNT) {
+
                 var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
                 var query = 'INSERT INTO PT_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, COMPLETE_DATE) VALUES ' +
                     '(?,?,?)';
@@ -694,12 +817,12 @@ router.get('/getachievementsubpartylist', function (req, res) {
     var query = 'SELECT T1.SEQ, T1.TITLE, T1.SECRET_CONTENTS, T1.CONTENTS, T1.LIMIT_USER, ' +
         'T1.MAIN_IMG, T1.TYPE, T2.TYPE_NAME,' +
         '(SELECT T3.IMG FROM PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS_PHOTO T3, PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS T4 WHERE T3.SUCCESS_SEQ = T4.SEQ AND T4.ACHIEVEMENT_SEQ = ? AND T4.SUB_ACHIEVEMENT_SEQ = T1.SEQ AND T4.USER_SEQ = ? ) AS IMG, ' +
-        '(SELECT EXISTS (SELECT SEQ FROM PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND SUB_ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = ? AND BOARD_SEQ = ?)) AS ISCOMPLETE, ' +        
+        '(SELECT EXISTS (SELECT SEQ FROM PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND SUB_ACHIEVEMENT_SEQ = T1.SEQ AND USER_SEQ = ? AND BOARD_SEQ = ?)) AS ISCOMPLETE, ' +
         '(SELECT COUNT(SEQ) FROM PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS WHERE SUB_ACHIEVEMENT_SEQ = T1.SEQ AND ACHIEVEMENT_SEQ = ? AND BOARD_SEQ = ?) AS MYCOMPLETEUSERCOUNT ' +
         'FROM PT_SUB_PARTY_ACHIEVEMENT T1, PT_ACHIEVEMENT_TYPE T2 ' +
         'WHERE T1.PARENT_SEQ = ? AND T1.TYPE = T2.SEQ ORDER BY T1.ORDER_SEQ;';
 
-    var params = [req.query.no, req.user.SEQ, req.query.no, req.user.SEQ, req.query.boardno, req.query.no,req.query.boardno, req.query.no];
+    var params = [req.query.no, req.user.SEQ, req.query.no, req.user.SEQ, req.query.boardno, req.query.no, req.query.boardno, req.query.no];
     var imgsrc = {};
 
     con.connection.query(query, params, function (err, rows, fields) {
@@ -708,16 +831,15 @@ router.get('/getachievementsubpartylist', function (req, res) {
             console.log(rows);
             res.send({ rows, result: false });
         } else {
-            for(var i=0; i< rows.length; i++){
-                if(!rows[i].ISCOMPLETE){
+            for (var i = 0; i < rows.length; i++) {
+                if (!rows[i].ISCOMPLETE) {
                     rows[i].CONTENTS = rows[i].SECRET_CONTENTS;
                 }
                 attachmenttotal += rows[i].LIMIT_USER;
                 successtotal += rows[i].MYCOMPLETEUSERCOUNT;
 
                 console.log("total : " + attachmenttotal + " now : " + successtotal);
-                if(rows[i].LIMIT_USER > rows[i].MYCOMPLETEUSERCOUNT)
-                {
+                if (rows[i].LIMIT_USER > rows[i].MYCOMPLETEUSERCOUNT) {
                     issuccess = false;
                 }
             }
@@ -726,7 +848,7 @@ router.get('/getachievementsubpartylist', function (req, res) {
     });
 
     var query = "SELECT T2.ACHIEVEMENT_SEQ, T2.SUB_ACHIEVEMENT_SEQ, T1.SEQ AS USER_SEQ, T1.NAME, T1.IMG FROM PT_USER T1, PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS T2 " +
-    " WHERE T1.SEQ = T2.USER_SEQ AND T2.ACHIEVEMENT_SEQ = ? AND T2.BOARD_SEQ = ? "
+        " WHERE T1.SEQ = T2.USER_SEQ AND T2.ACHIEVEMENT_SEQ = ? AND T2.BOARD_SEQ = ? "
 
     var params = [req.query.no, req.query.boardno];
 
@@ -741,8 +863,8 @@ router.get('/getachievementsubpartylist', function (req, res) {
     });
 
     var query = 'SELECT T2.USER_SEQ, T2.SUB_ACHIEVEMENT_SEQ, T1.SUCCESS_SEQ, T1.IMG FROM PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS_PHOTO T1, ' +
-    'PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS T2 ' +
-    'WHERE T2.BOARD_SEQ = ? AND T2.SEQ = T1.SUCCESS_SEQ';
+        'PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS T2 ' +
+        'WHERE T2.BOARD_SEQ = ? AND T2.SEQ = T1.SUCCESS_SEQ';
 
     var params = [req.query.boardno];
 
@@ -760,22 +882,22 @@ router.get('/getachievementsubpartylist', function (req, res) {
 
     var params = [req.query.boardno];
 
-    con.connection.query(query, params, function(err, rows, fields) {
-        if(err){
-          console.log(err);
-          console.log(rows);
-          res.send({rows,result:false});
+    con.connection.query(query, params, function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+            console.log(rows);
+            res.send({ rows, result: false });
 
-  
-        }else{
-            if(rows.length > 0){
+
+        } else {
+            if (rows.length > 0) {
                 writer = rows[0].SEQ;
             }
         }
-      });
+    });
 
-    var query = 'SELECT (SELECT COUNT(SEQ) FROM PT_SUB_PARTY_ACHIEVEMENT WHERE PARENT_SEQ = ? ) AS TOTALCOUNT, ' + 
-    '(SELECT COUNT(SEQ) FROM PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND BOARD_SEQ = ? ) AS USERCOUNT';
+    var query = 'SELECT (SELECT COUNT(SEQ) FROM PT_SUB_PARTY_ACHIEVEMENT WHERE PARENT_SEQ = ? ) AS TOTALCOUNT, ' +
+        '(SELECT COUNT(SEQ) FROM PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS WHERE ACHIEVEMENT_SEQ = ? AND BOARD_SEQ = ? ) AS USERCOUNT';
 
     var params = [req.query.no, req.query.no, req.query.boardno];
 
@@ -785,8 +907,8 @@ router.get('/getachievementsubpartylist', function (req, res) {
             console.log(rows);
             res.send({ rows, result: false });
         } else {
-            
-            res.send({ TOTALCOUNT: rows[0].TOTALCOUNT, imgsrc, writer, userresult, photoresult, USERCOUNT : rows[0].USERCOUNT, queryresult, result: true, ISSUCCESS : issuccess });
+
+            res.send({ TOTALCOUNT: rows[0].TOTALCOUNT, imgsrc, writer, userresult, photoresult, USERCOUNT: rows[0].USERCOUNT, queryresult, result: true, ISSUCCESS: issuccess });
         }
     });
 });
@@ -804,13 +926,12 @@ router.get('/issubpartyachievementsuccess', function (req, res) {
         if (err) {
             console.log(err);
             res.send({ rows, result: false });
-        } else if(rows.length > 0){
+        } else if (rows.length > 0) {
             var isSuccess = true;
-            if(isSuccess)
-            {
+            if (isSuccess) {
                 var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
                 var query = 'INSERT INTO PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, SUB_ACHIEVEMENT_SEQ, BOARD_SEQ, COMPLETE_DATE) VALUES ' +
-                '(?,?,?,?,?)';
+                    '(?,?,?,?,?)';
 
                 var distance = rows[0].distance;
                 var params = [req.user.SEQ, req.query.no, req.query.subNo, req.query.boardno, nowTime];
@@ -825,8 +946,8 @@ router.get('/issubpartyachievementsuccess', function (req, res) {
                     }
                 });
             }
-            else{
-            res.send({ rows, result: false });
+            else {
+                res.send({ rows, result: false });
             }
         }
         else {
@@ -849,7 +970,7 @@ router.get('/checksubpartyachievementpicsuccess', function (req, res) {
         if (err) {
             console.log(err);
             res.send({ rows, result: false });
-        } else if(rows.length > 0){
+        } else if (rows.length > 0) {
             res.send({ rows, result: true });
         }
         else {
@@ -865,7 +986,7 @@ router.post('/issubpartyachievementsuccesspic', function (req, res) {
     var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
     var query = 'INSERT INTO PT_SUB_PARTY_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, SUB_ACHIEVEMENT_SEQ, BOARD_SEQ, COMPLETE_DATE) VALUES ' +
         '(?,?,?,?,?)';
-        
+
     var params = [req.user.SEQ, req.body.no, req.body.subNo, req.body.boardno, nowTime];
 
     con.connection.query(query, params, function (err, rows, fields) {
@@ -895,9 +1016,9 @@ router.post('/insertsubpartyachievementsuccess', function (req, res) {
 
     var nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
     var query = 'INSERT INTO PT_ACHIEVEMENT_USER_SUCCESS (USER_SEQ, ACHIEVEMENT_SEQ, COMPLETE_DATE) ' +
-    'SELECT T1.SEQ, T3.ACHIEVENENTSEQ, NOW() FROM PT_USER T1, PT_ACCOMPANYBOARD_ATTEND T2, PT_ACCOMPANYBOARD_POST T3 ' +
-    'WHERE T1.ID = T2.ID AND T2.BOARD_ID = ? AND T3.NO = ? AND T2.ATTEND_STATE = 1;';
-        
+        'SELECT T1.SEQ, T3.ACHIEVENENTSEQ, NOW() FROM PT_USER T1, PT_ACCOMPANYBOARD_ATTEND T2, PT_ACCOMPANYBOARD_POST T3 ' +
+        'WHERE T1.ID = T2.ID AND T2.BOARD_ID = ? AND T3.NO = ? AND T2.ATTEND_STATE = 1;';
+
     var params = [req.body.boardno, req.body.boardno];
 
     con.connection.query(query, params, function (err, rows, fields) {
@@ -921,5 +1042,53 @@ router.post('/insertsubpartyachievementsuccess', function (req, res) {
     });
 
 });
+
+
+async function insertUserAchievementsResult(achievementsSeq, userSeq){
+
+    var query = 'SELECT SEQ, POINT, EXP FROM PT_ACHIEVEMENT WHERE SEQ = ?';
+
+    var params = [achievementsSeq];
+
+    con.connection.query(query, params, function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+
+            var query = 'UPDATE PT_USER SET EXP = EXP + ?, GOLD= GOLD + ? WHERE SEQ = ?';
+            var params = [rows[0].EXP, rows[0].POINT, userSeq];
+            con.connection.query(query, params, function (err, rows, fields) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    
+                    var query = 'SELECT T1.LEVEL, T1.GOLD, T1.EXP, T2.EXP AS LEVEL_UP_EXP FROM PT_USER T1, PT_LEVEL_TABLE T2 WHERE SEQ = ? AND T1.LEVEL = T2.LEVEL';
+
+                    var params = [userSeq];
+
+                    con.connection.query(query, params, function (err, rows, fields) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+
+                            if(rows[0].EXP >= rows[0].LEVEL_UP_EXP){
+                                var leftover = rows[0].EXP - rows[0].LEVEL_UP_EXP;
+
+                                var query = 'UPDATE PT_USER SET LEVEL = LEVEL + 1, EXP= ? WHERE SEQ = ?';
+                                var params = [leftover, userSeq];
+                                con.connection.query(query, params, function (err, rows, fields) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+  }
 
 module.exports = router;

@@ -49,7 +49,7 @@ passport.use(
         const NewUserPassword = crypto.createHash('sha256').update(NewUserId).digest('base64');
         
         //해당 id를 가진 user가 존재하는지 찾아본다.
-        const sql = "select SEQ,ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
+            const sql = "SELECT SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN,LEVEL,EXP,GOLD,STAR FROM PT_USER where ID =?";
         const post = [NewUserId];
         con.connection.query(sql, post, (err, results, fields) => {
           if (err) {
@@ -70,7 +70,7 @@ passport.use(
                 done(err);
               }
               //가입이 되었다면 해당 유저로 바로 로그인시켜줌
-              const sql = "SELECT SEQ, ID, NAME, IMG, GENDER, BIRTHDAY, ISADMIN FROM PT_USER where ID =?";
+            const sql = "SELECT SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN,LEVEL,EXP,GOLD,STAR FROM PT_USER where ID =?";
               const post = [NewUserId];
               con.connection.query(sql, post, (err, results, fields) => {
                 if (err) {
@@ -104,7 +104,7 @@ passport.use(
       const NewUserPassword = crypto.createHash('sha256').update(NewUserId).digest('base64');
       
       //해당 id를 가진 user가 존재하는지 찾아본다.
-      const sql = "select SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN from PT_USER where ID = ?";
+      const sql = "SELECT SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN,LEVEL,EXP,GOLD,STAR FROM PT_USER where ID =?";
       const post = [NewUserId];
       con.connection.query(sql, post, (err, results, fields) => {
         if (err) {
@@ -122,7 +122,7 @@ passport.use(
               done(err);
             }
             //가입이 되었다면 해당 유저로 바로 로그인시켜줌
-            const sql = "SELECT SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN FROM PT_USER where ID =?";
+            const sql = "SELECT SEQ, ID,IMG,BIRTHDAY,NAME,GENDER,ISADMIN,LEVEL,EXP,GOLD,STAR FROM PT_USER where ID =?";
             const post = [NewUserId];
             con.connection.query(sql, post, (err, results, fields) => {
               if (err) {
@@ -158,6 +158,9 @@ router.get('/', function(req, res, next) {
     title: "로그인",
     kakaoBtn : "카카오 로그인",
     loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
     isAdmin : false,
     });
   }
@@ -171,6 +174,9 @@ router.get('/login', function(req, res, next) {
     title: "로그인후 이용이 가능합니다.",
     kakaoBtn : "카카오 로그인",
     loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
     isAdmin : false,
     
     });
@@ -185,6 +191,9 @@ router.get('/register', function(req, res, next) {
     res.render('login/register', {
     title: "회원가입",
     loginStatus  : false,
+      userLevel : null,
+      userExp :  null,
+      userGold : null,
     isAdmin : false,
     
     });
@@ -200,6 +209,9 @@ router.get('/password', function(req, res, next) {
         userId : req.user.ID,
         loginStatus : true,
         isAdmin : req.user.ISADMIN,
+      userLevel : req.user.LEVEL,
+      userExp : req.user.EXP,
+      userGold : req.user.GOLD,
     });
   }else{
     res.redirect('/login/login');
@@ -257,7 +269,7 @@ passport.use('local-login',
   passwordField: 'password', //default 속성값
   passReqToCallback: true}, function (req, id, password, done) {
       //해당 id를 가진 user가 존재하는지 찾아본다.
-      const sql = "select SEQ, ID, PASSWORD, NAME,ISADMIN,SALT, IS_CREATE, IS_BLOCKED, GENDER, IMG, BIRTHDAY  from PT_USER where ID = ?";
+      const sql = "select SEQ, ID, PASSWORD, NAME,ISADMIN,SALT, IS_CREATE, IS_BLOCKED, GENDER, IMG, BIRTHDAY, LEVEL, EXP, GOLD,STAR  from PT_USER where ID = ?";
       const post = [id];
       con.connection.query(sql, post, (err, results, fields) => {
         if (err) {
@@ -296,7 +308,11 @@ passport.use('local-login',
                   'IS_CREATE' : user.IS_CREATE,
                   'GENDER' : user.GENDER,
                   'IMG' : user.IMG,
-                  'BIRTHDAY' : user.BIRTHDAY
+                  'BIRTHDAY' : user.BIRTHDAY,
+                  'LEVEL' : user.LEVEL,
+                  'EXP' : user.EXP,
+                  'GOLD' : user.GOLD,
+                  'STAR' : user.STAR
                 });
                }); });
             }

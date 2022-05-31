@@ -167,6 +167,18 @@
 
         var no = "<%=noticeNo %>";
 
+        if (loginStatus == "true") {
+      $("#navProfileName").text("<%=username%>");
+      $("#profileImageNav").attr("src", "<%=userImg%>");
+      $("#navProfileLevel").text("LEVEL : " +"<%=userLevel%>");
+      $("#navProfileGold").text("GOLD : " +"<%=userGold%>");
+      if ("<%=userGender%>" == "" || "<%=userAge%>" == "") {
+      }
+    } else {
+      $("#profileForm").css("display", "none");
+    }
+
+
         $('#summernote').summernote({
             minHeight: 500,
             maxHeight: 1200,

@@ -164,6 +164,8 @@
       var pageNo2 = 0;
       $("#navProfileName").text("<%=username%>");
       $("#profileImageNav").attr("src", "<%=userImg%>");
+      $("#navProfileLevel").text("LEVEL : " +"<%=userLevel%>");
+      $("#navProfileGold").text("GOLD : " +"<%=userGold%>");
 
       $.ajax({
         url: "/admin/getuserall",

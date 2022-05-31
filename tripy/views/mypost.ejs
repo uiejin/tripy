@@ -168,8 +168,10 @@
     var userId = "<%=userId%>";
   
     $("#navProfileName").text("<%=username%>");
-    $("#profileImageNav").attr("src", "<%=userImg%>");  
-
+    $("#profileImageNav").attr("src", "<%=userImg%>"); 
+      $("#navProfileLevel").text("LEVEL : " +"<%=userLevel%>");
+      $("#navProfileGold").text("GOLD : " +"<%=userGold%>");
+    
         $.ajax({
             url: "/mytour/getallmypost",
             data: {"writer" : userId},
