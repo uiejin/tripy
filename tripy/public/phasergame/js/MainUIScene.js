@@ -168,12 +168,13 @@ class MainUIScene extends Phaser.Scene {
       this.scene.launch('GuestbookScene')
       this.scene.moveUp('GuestbookScene');
 
-      
+
       $('#myModal').modal('show');
     }, this);
 
     up_btn[3].on('pointerup', function (pointer) {
       // 때면~
+      /*
       $.ajax({
         url: "/pharser_user/updatemygoods",
         async: false,
@@ -192,9 +193,27 @@ class MainUIScene extends Phaser.Scene {
         beforeSend: function () {},
         complete: function () {}
       });
-
+*/
+      $.ajax({
+        url: "/pharser_user/establishmenttower",
+        async: false,
+        type: "post",
+        data: { no: 1 },
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function (data) {
+          if (data.result == true) {
+            if (data.isLevelUp) {
+              alert(data.level + "레벨에 달성 했습니다.");
+            }
+            alert("경험치 " + data.addExp + "\n 골드 " + data.addGold + "\n 별 " + data.addStar +
+              "\n 을 획득하셨습니다.");
+            //location.reload();
+          };
+        },
+        beforeSend: function () { },
+        complete: function () { }
+      });
     }, this);
-
     // 아래쪽 버튼
     var down_btnlist = ['carrier', 'passport', 'saw', 'achievebook', 'handle'];
     var down_btn = new Array();
@@ -256,7 +275,7 @@ class MainUIScene extends Phaser.Scene {
     });
 
     down_btn[3].on('pointerup', function (pointer) {
-      
+
       //alert(down_btnlist[3] + "(으)로 이동합니다.");
       alert("해당 타일맵을 저장합니다");
 
@@ -280,17 +299,17 @@ class MainUIScene extends Phaser.Scene {
           data: {
             "id": userId,
             'mappos': tempDBMAP.toString(),
-            'coin' : Player_Gold,
-            's_coin' : Player_Coin,
-            't_coin' : Player_Ticket,
+            'coin': Player_Gold,
+            's_coin': Player_Coin,
+            't_coin': Player_Ticket,
             'map_id': 1
           },
           async: false,
           type: "post",
           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          success: function (data) {},
-          beforeSend: function () {},
-          complete: function () {}
+          success: function (data) { },
+          beforeSend: function () { },
+          complete: function () { }
         });
         $.ajax({
           url: "/pharser/savemap_tower",
@@ -298,15 +317,15 @@ class MainUIScene extends Phaser.Scene {
             "id": userId,
             'mappos': tempDBMAP_TOWER.toString(),
             'treepos': tempDBMAP_TREE.toString(),
-            'housepos':tempDBMAP_HOUSE.toString(),
+            'housepos': tempDBMAP_HOUSE.toString(),
             'map_id': 1
           },
           async: false,
           type: "post",
           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          success: function (data) {},
-          beforeSend: function () {},
-          complete: function () {}
+          success: function (data) { },
+          beforeSend: function () { },
+          complete: function () { }
         });
         $.ajax({
           url: "/pharser/savemap_tower_count",
@@ -318,9 +337,9 @@ class MainUIScene extends Phaser.Scene {
           async: false,
           type: "post",
           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          success: function (data) {},
-          beforeSend: function () {},
-          complete: function () {}
+          success: function (data) { },
+          beforeSend: function () { },
+          complete: function () { }
         });
       } else if (isCreate == true) {
         console.log("isCreate")
@@ -329,17 +348,17 @@ class MainUIScene extends Phaser.Scene {
           data: {
             "id": userId,
             'mappos': tempDBMAP.toString(),
-            'coin' : Player_Gold,
-            's_coin' : Player_Coin,
-            't_coin' : Player_Ticket,
+            'coin': Player_Gold,
+            's_coin': Player_Coin,
+            't_coin': Player_Ticket,
             'map_id': 1
           },
           async: false,
           type: "post",
           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          success: function (data) {},
-          beforeSend: function () {},
-          complete: function () {}
+          success: function (data) { },
+          beforeSend: function () { },
+          complete: function () { }
         });
 
         $.ajax({
@@ -348,15 +367,15 @@ class MainUIScene extends Phaser.Scene {
             "id": userId,
             'mappos': tempDBMAP_TOWER.toString(),
             'treepos': tempDBMAP_TREE.toString(),
-            'housepos':tempDBMAP_HOUSE.toString(),
+            'housepos': tempDBMAP_HOUSE.toString(),
             'map_id': 1
           },
           async: false,
           type: "post",
           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          success: function (data) {},
-          beforeSend: function () {},
-          complete: function () {}
+          success: function (data) { },
+          beforeSend: function () { },
+          complete: function () { }
         });
 
         $.ajax({
@@ -369,9 +388,9 @@ class MainUIScene extends Phaser.Scene {
           async: false,
           type: "post",
           contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          success: function (data) {},
-          beforeSend: function () {},
-          complete: function () {}
+          success: function (data) { },
+          beforeSend: function () { },
+          complete: function () { }
         });
       }
 
@@ -392,7 +411,7 @@ class MainUIScene extends Phaser.Scene {
     });
 
   }
-  update() {}
+  update() { }
 }
 
 function GetCoin() {
