@@ -375,4 +375,33 @@ router.post('/cleartower', function (req, res) {
 
 });
 
+
+router.post('/getmypopulary', function (req, res) {
+
+    var isSuccess = false;
+    var nowTimes = moment().format('YYYY-MM-DD HH:mm:ss');
+
+    var query = 'SELECT SUM(T2.POPULARY) AS POPULARY ' +
+        'FROM PT_PHASER_USER_INVENTORY T1, PT_PHASER_TOWER_ITEM T2 ' +
+        'WHERE T1.USER_SEQ = ? AND T1.IS_ESTABLISH = 1 AND T2.NO = T1.TOWER_NO';
+
+    var params = [req.user.SEQ];
+
+    con.connection.query(query, params, function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ result: false });
+        } else {
+            console.log(rows.inster);
+            if (rows.length > 0) {
+                res.send({ rows, result: true, populary: rows[0].POPULARY });
+
+            }
+            else {
+                res.send({ result: false });
+            }
+        }
+    });
+});
+
 module.exports = router;
